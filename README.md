@@ -20,6 +20,11 @@ set. No real personal information anywhere.
 # Optional (the core app is stdlib-only; this adds the Claude layer + tests)
 pip install -r requirements.txt
 
+# The web UI (stdlib only, nothing to install) — open http://localhost:8000
+# In GitHub Codespaces: run it, then click the "Open in Browser" popup
+# (or the PORTS tab -> port 8000 -> globe icon).
+python webapp.py
+
 # The continuous demo run from the PRD (plan upload -> disrupted day ->
 # onboarding capture -> safety escalation -> stubbed agents)
 python demo.py
@@ -115,6 +120,7 @@ data/
   safety_policy.md        the escalation policy the code implements
   scenarios.json          10 evaluation scenarios with expected outcomes
 eval/run_eval.py          metrics: no-skip rate, macro accuracy, escalation precision
+webapp.py                 zero-dependency web UI (plan card, presets, results)
 demo.py                   the continuous PRD demo run
 tests/test_platemate.py   25 unit tests for the deterministic core
 ```
