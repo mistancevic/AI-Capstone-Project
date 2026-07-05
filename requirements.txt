@@ -1,0 +1,7 @@
+# Core app has zero required dependencies (Python 3.10+ stdlib only).
+# Optional: Claude-powered situation parsing and coaching lines.
+anthropic>=0.90.0
+pydantic>=2.0
+
+# Development
+pytest>=8.0

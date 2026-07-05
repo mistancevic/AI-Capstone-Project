@@ -1,0 +1,22 @@
+{
+  "alex": {
+    "name": "Alex",
+    "goal": "lean muscle gain while staying under a calorie ceiling",
+    "restrictions": [],
+    "dislikes": ["lentil"],
+    "likes": ["chicken", "sushi", "wrap"],
+    "training_tomorrow": true,
+    "usual_bedtime": "23:00",
+    "plan_file": "data/plans/alex_plan.md"
+  },
+  "maja": {
+    "name": "Maja",
+    "goal": "fat loss with steady energy through long workdays",
+    "restrictions": ["lactose"],
+    "dislikes": ["jerky"],
+    "likes": ["salmon", "tofu", "poke"],
+    "training_tomorrow": false,
+    "usual_bedtime": "22:30",
+    "plan_file": "data/plans/maja_plan.md"
+  }
+}
