@@ -14,6 +14,18 @@ Built as the capstone project for the PRD in [`PRD.md`](PRD.md). All data is
 synthetic — two invented personas, fake coach plans, and a seeded evaluation
 set. No real personal information anywhere.
 
+## Status
+
+This prototype is an early feasibility spike built after Discovery and
+**before the Design phase** — it proves the core loop works, but it does not
+yet reflect the Design decisions. Discovery is complete and faculty-approved
+(see [`DISCOVERY.md`](DISCOVERY.md)). The Design phase will specify, and the
+code will then be updated to match: the concrete disordered-eating boundary
+(refusal-language patterns, hard stop vs. soft coaching nudge, and an explicit
+never-recommend-compensatory-restriction rule, with matching eval cases) and
+the demo scope (the orchestrator-to-nutrition-agent recompute as the core
+moment, with the sleep consult conditional and stub agents de-emphasized).
+
 ## Quick start
 
 ```bash
