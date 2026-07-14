@@ -215,7 +215,22 @@ deterministic code.
   (Autowrite ran a 180-day experiment) — production patterns are where
   drift, misuse, and real adoption behavior appear.
 
-## 8. Open threads (carried from the Design audit)
+## 8. Naming & competitive watch
+
+- **Mealan** (meal + an, reads as "Milan"): founder-signature name candidate.
+  Web check found no direct collision, but the "Meal-" prefix shelf is
+  crowded (Mealime, Mealo, Meel, MEAL, Mealner), the Milan pun needs spoken
+  explanation, and the name drops PlateMate's table/barbell double meaning.
+  Recommended use: house/company brand ("Mealan, by Milan") over the
+  product, with PlateMate (or Prep & Rep) as the product name. Decision
+  parked; PlateMate stays the capstone working name.
+- **Mealner (mealner.com, "plans your meals, re-plans your day")**: the
+  closest competitor found so far — validates the disrupted-day pain and
+  the white space. Research to-do: what Mealner lacks and what its users
+  complain about (expected gaps: the coach escalation loop, safety tiers,
+  deterministic math, coached-client positioning).
+
+## 9. Open threads (carried from the Design audit)
 
 1. Add the synthetic coach-client agreement document to the demo data
    inventory (born in Design rows 22/26; missing from Discovery row 15's
