@@ -29,7 +29,7 @@ stage, sentiment curve with valleys). Scores are NPS-style estimates
 | Activity | Est. sentiment | Notes |
 |---|---|---|
 | Shop and meal-prep | +15 | Routine effort, manageable |
-| Eat and log daily | +10 | Fine while life cooperates; logging fatigue builds |
+| Eat and log daily | **-12** | **Second valley.** Logging every meal, all day, every day — the well-documented top reason tracking apps get abandoned |
 | **Handle disruptions (day goes off-plan)** | **-25** | **Deepest valley.** Decision paralysis → skip the meal → target missed, energy gone, guilt loop |
 | Eat out, social events, travel | -10 | Uncertainty and guilt; "I'll just start again Monday" |
 
@@ -48,6 +48,13 @@ stage, sentiment curve with valleys). Scores are NPS-style estimates
   disruptions per week). Frequency × severity — the two dimensions the
   lesson weights most — both peak here. This is the after-the-fact proof
   that the capstone workflow choice was right.
+- **Logging fatigue (-12) is the other famous stage-2 pain — and it fails
+  the competition screen as a wedge**: the whole tracker industry attacks
+  it (photo logging, AI estimation, barcode scans), so there is no white
+  space there. But PlateMate eases it structurally as a side effect: the
+  one-tap confirm flow *is* the log — confirming an option keeps the day's
+  math current with no manual entry. Own the unowned moment, absorb the
+  famous pain on the way.
 - **The other valleys are the roadmap, not leftovers**: plan boredom and
   variety (-15), social eating and travel (-10), understand-my-plan (+5,
   the ingestion/"explain my plan" opportunity). Future work is the rest of
