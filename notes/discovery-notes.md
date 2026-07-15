@@ -215,7 +215,44 @@ deterministic code.
   (Autowrite ran a 180-day experiment) — production patterns are where
   drift, misuse, and real adoption behavior appear.
 
-## 8. Naming & competitive watch
+## 8. Design lesson takeaways (Module 5, Lesson 1 — AI Design Patterns)
+
+**Validated:** the design implements all four canonical AI design patterns —
+input prompt (one-message input + scenario presets = Shopify's
+blank-page-anxiety fix), special instructions (plan upload + preferences
+note), output generation (the reviewable card; "detail one tap away" is
+progressive disclosure), and user feedback (the like/dislike icon,
+seamless and immediate). Control model = human-in-the-loop with visible
+math as the "show your work" pattern.
+
+**Named with the lesson's vocabulary:**
+- Autonomy: PlateMate v1 sits at **Sheridan level 4** (AI suggests 2–3
+  options, human chooses). Trust roadmap: higher autonomy (e.g.,
+  auto-logging high-confidence confirmations) only after the no-skip
+  metric proves itself — "earn the right to do more by proving trusted
+  with less."
+- Overton window: AI nutrition advice sits earlier in the acceptance
+  window than AI copywriting (body-related, higher stakes). Counter-design
+  already in place: deterministic math, model never decides, coach in the
+  loop.
+- 3P: prioritization = core loop (high impact, low effort); placement =
+  at the moment of need — phone in hand, one tap to presets, zero
+  navigation; prominence = the stop message must be unmissable when it
+  fires, quiet otherwise.
+
+**Row changes on the sheet:**
+- Row 23 finalized as drafted, plus one line naming presets and structured
+  inputs as deliberate input constraints (validated inputs prevent misuse).
+- Row 25 finalized with three upgrades: "progressive disclosure" wording;
+  a visible line identifying advice as AI-generated with its limits
+  stated; and escalation transparency — the client can always see exactly
+  what was shared with the coach, per the agreement.
+
+**Prototype-anxiety checklist (for the demo):** "is this really within my
+plan?" → math shown; "what does my coach see?" → escalation transparency;
+"is my data private?" → productization/GDPR item.
+
+## 9. Naming & competitive watch
 
 - **Mealan** (meal + an, reads as "Milan"): founder-signature name candidate.
   Web check found no direct collision, but the "Meal-" prefix shelf is
@@ -230,7 +267,7 @@ deterministic code.
   complain about (expected gaps: the coach escalation loop, safety tiers,
   deterministic math, coached-client positioning).
 
-## 9. Open threads (carried from the Design audit)
+## 10. Open threads (carried from the Design audit)
 
 1. Add the synthetic coach-client agreement document to the demo data
    inventory (born in Design rows 22/26; missing from Discovery row 15's
@@ -241,9 +278,8 @@ deterministic code.
    trigger forms") in row 21.
 4. Add a standalone 2-days-skipped-meals eval case (counter-only path, no
    keywords).
-5. Design rows 23 (tools) and 25 (output) are working versions pending the
-   Module 5 Design lesson (the Module 4 AI PRD lesson closes Discovery and
-   does not change them).
+5. RESOLVED — the Module 5 Design lesson unblocked rows 23 and 25; both are
+   finalized with the upgrades listed in section 8.
 6. Awaiting Moe's preference: change-notes as cell notes vs. in-cell update
    markers.
 7. Add the adversarial manipulation eval case (client steering the agent
