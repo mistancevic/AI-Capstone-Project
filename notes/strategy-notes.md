@@ -44,26 +44,30 @@ IS the strategy); the coach becomes a customer too — the coach-side experience
 (digest, triage) is v2 and the moat deepens with it (switching costs once a
 roster runs through the app).
 
-## Independent validation — the Gemini comparison
+## Further positioning insights
 
-Given only the segment description (busy IT/product people, rigid 1–3 month
-plans, life disrupts), Google's Gemini independently proposed: a "dynamic
-pivot engine," a one-click "I missed my meal window, fix it" button, macro
-rebalancing, a 5-minute pantry backup (= the bridge fallback), and selling
-"decision-free resilience" over food. **Two independent analyses converged on
-the same wedge — the concept is where the problem leads, not founder bias.**
-
-Divergences, and why our version holds:
-
-| Gemini suggested | Our design | Why ours |
-|---|---|---|
-| Auto-recalculate the next 3 days | Propose strategy; nothing changes without client confirmation | Sheridan level 4 first; "state changes only when the client confirms" is the trust architecture; earn level 6 later |
-| Delivery-API swaps (UberEats etc.) | Explicitly deferred to v2 | Real-world actions, payments, liability — can't be built safely in a capstone |
-| App detects schedule shifts (calendar) | Manual input + presets in v1 | Privacy surface + integration scope; same feature, sequenced responsibly |
-| Hardware bundles (portable oven, bottles) | Out of scope | Off-strategy for software; note: validates the coach's "keep bridges on hand" practice; possible partnership/affiliate footnote someday |
-| Modular "Lego block" meal system | Food table + swap covers the v1 need | Interesting v2 framing for plan structure; parked |
-
-What Gemini missed entirely — which is exactly the moat: **the coach channel**
-(its strategy is pure consumer app-store warfare) and **safety** (no
-disordered-eating boundary, no escalation, nothing). A competitor following
-that playbook ships without the two things this design leads with.
+- **The coach channel is a zero-CAC distribution model.** Consumer nutrition
+  apps burn capital acquiring users through ads; entering through coaches
+  changes the unit economics — the coach brings a roster of committed,
+  pre-vetted clients, and acquisition cost approaches zero. The coach's own
+  pain, named precisely: **today a coach delivers a 1–3 month plan and then
+  has zero visibility into daily adherence until the client has already
+  failed.** The pitch to coaches writes itself: "stop losing clients to life
+  happening."
+- **A pivot is a success event, not a compliance failure.** When the day
+  breaks and the client uses the app to land it anyway, that is logged and
+  shown as a successful adaptation — momentum preserved, not a red mark.
+  This is the psychological inversion of tracker dashboards, it maps
+  directly onto the no-skip metric, and it is presentation-ready framing:
+  the product turns the moment users quit other apps into its win condition.
+- **Onboarding doubles as a mindset contract.** The upload-plus-agreement
+  flow can carry two or three plain commitments in the client's own
+  interest — "I choose energy over perfection," "I let the app re-plan when
+  work blows up" — setting expectations at the calmest moment. (Wording must
+  pass our own tone rules: no "failure" language.)
+- **"Steady energy" is the segment's language.** For desk professionals the
+  resonant promise is cognitive bandwidth — avoiding the 3 p.m. slump — more
+  than weight or physique. Useful for copy and positioning now; anything
+  implying physiological measurement (glycemic claims, focus scores,
+  calendar-triggered fueling pings) stays out until it can be done honestly,
+  and calendar integration remains v2 regardless.
