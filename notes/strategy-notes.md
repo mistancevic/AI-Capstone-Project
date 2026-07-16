@@ -61,6 +61,45 @@ IS the strategy); the coach becomes a customer too — the coach-side experience
 (digest, triage) is v2 and the moat deepens with it (switching costs once a
 roster runs through the app).
 
+## The red-ocean strategy test (ten answers, one sentence each)
+
+1. **Who are we choosing to win?** Busy desk professionals on a
+   coach-prescribed nutrition plan whose unpredictable work life keeps
+   breaking it — reached through their coaches.
+2. **What urgent situation triggers purchase?** The mid-day disruption: the
+   meeting that ate lunch, the surprise dinner, the ice cream that happened —
+   and no idea what to eat now.
+3. **What outcome matters most?** The meal gets eaten instead of skipped —
+   the day lands on plan and energy holds (the no-skip rate).
+4. **What do customers use today?** Memorized rules of thumb from the coach,
+   tracking apps that log the past, and guesswork — none of which decide the
+   remaining day.
+5. **What compromise do they tolerate?** Logging everything, feeling guilty
+   when life deviates, and being alone at the exact moment the plan breaks.
+6. **What is our decisive advantage?** We own the unowned moment —
+   in-the-moment plan adaptation with the math done — inside a coach
+   relationship no consumer app can enter.
+7. **Why should customers believe us?** Every number and every safety
+   decision is deterministic code over the coach's own plan; the model never
+   guesses, and the coach stays in the loop.
+8. **What will we deliberately not offer?** Plan creation, food ordering,
+   weight-loss gamification, restriction advice, or any guilt mechanics —
+   the plan stays the coach's, and compensation framing is banned in code.
+9. **Which activities make the position difficult to copy?** The
+   coach-agreement escalation loop, the safety-tier architecture, and a
+   per-roster distribution model — trackers can't add these without breaking
+   their engagement-driven business model.
+10. **Where can we reach these customers efficiently?** Through coaches —
+    one relationship delivers a pre-trusted roster at near-zero acquisition
+    cost — starting with the founder's own coaching practice and the
+    ~100-peer cohort.
+
+**The Blue Ocean move in the design:** eliminated — logging burden and guilt
+mechanics (industry givens); reduced — autonomy, to advise-only; raised —
+trust, via deterministic math and escalation transparency; created — the
+coach escalation loop. One corner of the red ocean, owned, where incumbents
+are structurally unable to follow.
+
 ## Further positioning insights
 
 - **The coach channel is a zero-CAC distribution model.** Consumer nutrition
