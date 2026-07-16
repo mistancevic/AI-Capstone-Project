@@ -69,8 +69,9 @@ roster runs through the app).
 2. **What urgent situation triggers purchase?** The mid-day disruption: the
    meeting that ate lunch, the surprise dinner, the ice cream that happened —
    and no idea what to eat now.
-3. **What outcome matters most?** The meal gets eaten instead of skipped —
-   the day lands on plan and energy holds (the no-skip rate).
+3. **What outcome matters most?** The client takes the next plan-consistent
+   action instead of skipping, compensating, guessing, or abandoning the
+   day — safe continuity, not mathematical perfection (the no-skip rate).
 4. **What do customers use today?** Memorized rules of thumb from the coach,
    tracking apps that log the past, and guesswork — none of which decide the
    remaining day.
@@ -85,20 +86,58 @@ roster runs through the app).
 8. **What will we deliberately not offer?** Plan creation, food ordering,
    weight-loss gamification, restriction advice, or any guilt mechanics —
    the plan stays the coach's, and compensation framing is banned in code.
-9. **Which activities make the position difficult to copy?** The
-   coach-agreement escalation loop, the safety-tier architecture, and a
-   per-roster distribution model — trackers can't add these without breaking
-   their engagement-driven business model.
+9. **Which activities make the position difficult to copy?** Assume the
+   feature gets copied; the defense is the combined operating model —
+   coach-owned plans and adaptation rules, safety tiers, escalation
+   agreements, auditability, and roster-level distribution — which
+   incumbents are less motivated and less credible to reproduce, because
+   their revenue depends on the logging-engagement loop this product
+   eliminates.
 10. **Where can we reach these customers efficiently?** Through coaches —
-    one relationship delivers a pre-trusted roster at near-zero acquisition
-    cost — starting with the founder's own coaching practice and the
-    ~100-peer cohort.
+    coach-led distribution can reduce client-level acquisition cost because
+    one trusted relationship can activate an existing roster; this is a
+    testable hypothesis, not a conclusion, starting with the founder's own
+    coaching practice and the ~100-peer cohort.
 
 **The Blue Ocean move in the design:** eliminated — logging burden and guilt
 mechanics (industry givens); reduced — autonomy, to advise-only; raised —
 trust, via deterministic math and escalation transparency; created — the
 coach escalation loop. One corner of the red ocean, owned, where incumbents
 are structurally unable to follow.
+
+## Sharpened positioning language (keep verbatim)
+
+- **Category:** a coach-prescribed nutrition plan adaptation system — not a
+  tracker (records the past), not a generic AI nutritionist (invents advice),
+  not coaching software (absent at the moment of need).
+- **The wedge, in one line:** the first safe action after a nutrition plan
+  is disrupted.
+- **Strategic promise:** the plan does not disappear when the day changes.
+- **Coach-facing promise:** extend your plan into the moments when you are
+  not present — the app is not replacing the coach; it extends the coach's
+  operating reach.
+- **Trust claim, upgraded from mechanism to traceability:** every
+  recommendation can be traced to the coach's plan, the recorded disruption,
+  and predefined adaptation rules — stronger than "the model never guesses,"
+  because it says what the system does instead.
+
+## Business-model refinements
+
+- **Four roles, not two customers:** end user (the client on the plan),
+  buyer (coach, practice, programme, or employer), plan authority (the
+  qualified coach who defines the rules), and distribution partner (the
+  coach who introduces the app to a roster). The coach fills three roles at
+  first, but product and pricing must keep them separate — a practice may
+  buy while employed coaches operate; a client may love the adaptation but
+  lack authority over the plan.
+- **Metric additions for the business layer** (beyond the agent metrics):
+  coach-efficiency — routine disruption questions resolved without coach
+  intervention; retention — clients still following the plan at 4, 8, and
+  12 weeks.
+- **Market-evidence unknowns to test** (the honest gap between strategy and
+  proof): willingness to pay, coach adoption effort, real-world disruption
+  frequency, and whether plan setup stays light enough that coaches actually
+  onboard rosters.
 
 ## Further positioning insights
 
