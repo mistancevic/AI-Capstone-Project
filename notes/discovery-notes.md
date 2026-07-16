@@ -59,9 +59,12 @@ stage, sentiment curve with valleys). Scores are NPS-style estimates
   variety (-15), social eating and travel (-10), understand-my-plan (+5,
   the ingestion/"explain my plan" opportunity). Future work is the rest of
   a mapped landscape.
-- Presentation idea: render this as a sentiment curve over the three
-  stages, Shopify-slide style, with the -25 valley highlighted and
-  "PlateMate v1" pinned to it.
+- Rendered as a slide-style sentiment curve (Shopify-slide format, both
+  stage-2 valleys shown, "PlateMate v1" pinned to -25):
+  [`assets/journey-map.png`](assets/journey-map.png), source
+  [`assets/platemate-journey-map.html`](assets/platemate-journey-map.html) —
+  edit the HTML and re-render when survey data replaces the estimates.
+  Scores are labeled EST throughout: hypotheses, not measured data.
 
 ---
 
