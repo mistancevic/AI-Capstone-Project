@@ -39,6 +39,23 @@ You don't win a red ocean by being better at the thing everyone competes on:
 > Trackers make you feel bad about what happened; PlateMate tells you what to
 > do next.
 
+**Positioning formula, filled (client-facing):**
+> For busy professionals on a coach's nutrition plan who face days that break
+> the plan — the surprise dinner, the meeting that eats lunch, the ice cream
+> that happened — we provide a plan-compliant answer to "what do I eat now?"
+> in under a minute, with the math shown, without the logging burden and the
+> guilt loop that tracking apps make you accept, because every number is
+> computed deterministically from the coach's own plan, and the coach stays
+> in the loop — the app never guesses, never scolds, and never decides alone.
+
+**Positioning formula, filled (coach-facing):**
+> For nutrition coaches who face clients silently falling off carefully built
+> plans between check-ins, we provide clients who stay on plan when life
+> disrupts them — and a flag when they truly need you — without being on call
+> for every emergency or drowning in adherence spreadsheets, because the app
+> handles the routine adaptation deterministically and escalates only on the
+> signals the coach agreed to, through the channel and hours they chose.
+
 Caveats: execute one wedge relentlessly before widening (the Moe-trimmed scope
 IS the strategy); the coach becomes a customer too — the coach-side experience
 (digest, triage) is v2 and the moat deepens with it (switching costs once a
