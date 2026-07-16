@@ -24,6 +24,21 @@ Sequencing: 1 first (cheapest, frames everything) → 2 + 3 in parallel
 about the pain in the wild). Triangulation rule: a valley counts as
 validated when at least three independent channels support it.
 
+## The synthesis artifacts (a separate list)
+
+Data collection gathers evidence; synthesis turns evidence into decisions.
+The investigations above feed the artifacts below — the journey map is not
+an investigation, it is the canvas the investigations' findings land on.
+
+| # | Artifact | Method (official label) | Consumes | Status |
+|---|---|---|---|---|
+| 1 | Client persona | User persona (synthetic) | Coaching experience, segment definition | Done (Discovery) |
+| 2 | **Journey map with sentiment curve** | **User/customer journey mapping — the emotion-curve variant is an experience map; score overlays make it quantified journey mapping** | All six investigations | v1 done (hypothesis, EST-labeled); v2 evidence-annotated planned after investigations return |
+| 3 | Pain-point scorecard | Pain-point prioritization (magnitude / frequency / severity / competition / contrast) | Journey map + evidence | Done (Discovery notes §2) |
+| 4 | Idea ranking | Impact × feasibility prioritization matrix (diverge/converge) | Ideation | Done (Discovery notes §3) |
+| 5 | Competitive gap matrix | Gap analysis | Investigation 4 | Pending |
+| 6 | Positioning set | Positioning statements, category definition, strategy test | Everything above | Done (strategy-notes.md) |
+
 ## Standard output schema (all prompts request this)
 
 1. **Evidence table:** journey activity → finding → source (URL + date) →
