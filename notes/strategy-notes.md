@@ -21,14 +21,23 @@ You don't win a red ocean by being better at the thing everyone competes on:
 1. **The different moment:** trackers compete on logging the past; PlateMate
    owns deciding the remaining day when the plan just broke. Mealner's
    existence proves the moment is real — move with conviction.
-2. **The structural weakness — the guilt loop:** tracker retention is built on
-   daily-logging engagement, which structurally produces the shame spiral.
-   They cannot abandon it. PlateMate rejects it at the architecture level:
-   compensation framing banned in code, multi-day averaging as coaching.
+2. **The structural weakness — the guilt loop, stated carefully:** mainstream
+   tracker retention is built on daily-logging engagement, which produces
+   the shame spiral — but guilt-free design alone is NOT white space
+   (MacroFactor already positions on it). It is table stakes we implement
+   in code (banned compensation language, no red zones). The unclaimed
+   ground is the moment: the in-the-moment decision against a
+   coach-prescribed plan, with the coach loop and safety tiers around it —
+   review mining found zero incumbent complaints there because no product
+   attempts it.
 3. **The channel — the coach:** consumer apps fight for users one download at
    a time; PlateMate enters through coaches — one coach brings a roster,
    pre-trusted, plan already written. The agreement + packages double as a
    B2B2C distribution model. Compete in the coach's toolkit, not the app store.
+   Evidence upgrade: the client-side disruption need is LATENT (no consumer
+   complaint demand to ride), while the coach-side version is FELT (clients
+   falling off between check-ins = coach churn) — so the buyer with the felt
+   pain is the coach. Third independent argument for this channel.
 4. **The segment:** not "people who want to lose weight" but coached clients
    with unpredictable lives who already have a plan and keep falling off it.
 5. **Trust:** "the model never decides; every number and safety check is
