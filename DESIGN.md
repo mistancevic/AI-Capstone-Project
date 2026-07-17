@@ -2,6 +2,8 @@
 
 Agentic AI Capstone, Design phase record. Builds on the approved Discovery PRD (`DISCOVERY.md`). Design happens on paper: nothing in this document is built yet.
 
+Status: **complete and approved to proceed to Develop** (faculty review by Moe Ali, July 2026 — see Faculty Feedback at the end of this document).
+
 ## Header
 
 | Field | Entry |
@@ -268,3 +270,16 @@ Seven cases (five is the floor; the faculty tier-distinction requires the 3/6 pa
 5. One eval case tests the boundary the agent must refuse — **yes** (case 7, plus the case 3/6 tier pair).
 
 **Status: Design complete. Do not proceed to Develop until the Develop guide is issued.**
+
+---
+
+## Faculty Feedback (Design review — Moe Ali, July 2026)
+
+> Milan, this is a seriously well thought out design. The safety architecture is the standout, a deterministic floor the model cannot bypass, an LLM that can only add stops and never clear them, and pre-authored language on every path where a bad sentence could do damage. Rejecting silent preference learning so the coach stays the single source of truth was the right call too. My only caution is build scope, seven cases, four cards, tier logic and a quiet hours clock is a lot of machinery for one prototype. When Develop starts, get case 1 and case 7 running end to end before you touch the tier pair, prove the loop first, then earn the complexity.
+
+**Directive carried into Develop — build order:**
+
+1. **Milestone 1:** Case 1 (happy path) and Case 7 (hard stop) running end to end. This proves the full spine — parse → safety screen → budget math → filter/rank → check gate → options card, and raw-text stop → templated stop message → coach flag with quiet-hours delivery — before anything else exists.
+2. **Milestone 2:** the tier pair (Cases 3 and 6) and the remaining cards/cases, layered in only after Milestone 1 passes.
+
+Nothing in the design changes; only the build sequence is constrained. "Prove the loop first, then earn the complexity."
