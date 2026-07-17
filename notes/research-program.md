@@ -124,7 +124,9 @@ mid-day — surprise meals, meetings eating lunch, and what they did next;
 (b) skipping a meal because they didn't know what fit the plan;
 (c) logging fatigue and quitting trackers; (d) guilt after off-plan
 eating and compensation behavior (eating less to "make up for it");
-(e) plan boredom and drift; (f) travel/social-event struggles. Return:
+(e) plan boredom and drift; (f) travel/social-event struggles; (g) what
+people report actually doing right after breaking the plan mid-day:
+skipping, bingeing, or adapting — I want the split. Return:
 per-theme thread count impression (common / occasional / rare), 10–15
 short verbatim quotes (≤25 words) with links and dates, which journey
 activity each maps to, the mandatory disconfirming-evidence section, and
