@@ -16,15 +16,19 @@ set. No real personal information anywhere.
 
 ## Status
 
-This prototype is an early feasibility spike built after Discovery and
-**before the Design phase** — it proves the core loop works, but it does not
-yet reflect the Design decisions. Discovery is complete and faculty-approved
-(see [`DISCOVERY.md`](DISCOVERY.md)). The Design phase will specify, and the
-code will then be updated to match: the concrete disordered-eating boundary
-(refusal-language patterns, hard stop vs. soft coaching nudge, and an explicit
-never-recommend-compensatory-restriction rule, with matching eval cases) and
-the demo scope (the orchestrator-to-nutrition-agent recompute as the core
-moment, with the sleep consult conditional and stub agents de-emphasized).
+The prototype now implements the approved Design (see
+[`DESIGN.md`](DESIGN.md)): safety screen first on raw text, counter-tiered
+escalation (nudge vs. hard stop), quiet-hours coach-flag delivery, the
+banned-language output screen with a deterministic fallback line, the
+tolerance band as data (`data/tolerance.json`), and labeled output cards.
+The seven Design eval cases run green (`python -m eval.run_eval`, model-off
+deterministic mode — the app runs correctly with the model switched off, by
+design). Built per the faculty build order: the Case 1 + Case 7 spine
+first, then the tier pair and the rest. Discovery and Design are complete
+and faculty-approved ([`DISCOVERY.md`](DISCOVERY.md), [`DESIGN.md`](DESIGN.md));
+this Develop pass ran as a pre-guide hypothesis
+([`notes/develop-prep.md`](notes/develop-prep.md)). Trimmed ambitions are
+parked, not deleted ([`notes/parked-ideas.md`](notes/parked-ideas.md)).
 
 ## Quick start
 

@@ -1,0 +1,10 @@
+{
+  "_comment": "Seeded tracked state per eval case (DESIGN.md §4 file 5). In the demo, watch-state exists only as seeded data. Counters are counts, never message texts — they survive raw-message deletion.",
+  "case1": { "skipped_days": 0, "compensatory_asks_week": 0, "clock": "15:00" },
+  "case2": { "skipped_days": 0, "compensatory_asks_week": 0, "clock": "12:30" },
+  "case3": { "skipped_days": 0, "compensatory_asks_week": 0, "clock": "17:30" },
+  "case4": { "skipped_days": 0, "compensatory_asks_week": 0, "clock": "13:00" },
+  "case5": { "skipped_days": 0, "compensatory_asks_week": 0, "clock": "15:30" },
+  "case6": { "skipped_days": 0, "compensatory_asks_week": 2, "clock": "18:00" },
+  "case7": { "skipped_days": 0, "compensatory_asks_week": 0, "clock": "23:00" }
+}

@@ -24,8 +24,8 @@ from platemate.models import (
 from platemate.plan_parser import capture_targets, parse_plan, parse_plan_file
 
 
-ALEX_PLAN = ROOT / "data" / "plans" / "alex_plan.md"
-MAJA_PLAN = ROOT / "data" / "plans" / "maja_plan.md"
+ALEX_PLAN = ROOT / "data" / "plans" / "plan_alex.md"
+MAJA_PLAN = ROOT / "data" / "plans" / "plan_maja.md"
 
 
 @pytest.fixture()
@@ -172,16 +172,16 @@ def test_math_shown_adds_up(alex_plan, alex, foods):
     "should I change my medication timing around meals?",
 ])
 def test_safety_screen_escalates(message):
-    assert safety.screen(message) is not None
+    assert safety.screen(message).action in ("stop", "decline_oos")
 
 
 def test_safety_screen_repeated_skips():
-    assert safety.screen("nothing special", skipped_days=2) is not None
-    assert safety.screen("nothing special", skipped_days=1) is None
+    assert safety.screen("nothing special", skipped_days=2).action == "stop"
+    assert safety.screen("nothing special", skipped_days=1).action == "continue"
 
 
 def test_safety_screen_passes_normal_requests():
-    assert safety.screen("I ate a burger, what should dinner be?") is None
+    assert safety.screen("I ate a burger, what should dinner be?").action == "continue"
 
 
 # ----------------------------------------------------------- sleep agent --
@@ -217,8 +217,8 @@ def test_orchestrator_requires_targets(foods, alex):
     plan = parse_plan_file(MAJA_PLAN)  # no targets
     orch = Orchestrator(plan, alex, foods, use_llm=False)
     result = orch.handle(Situation(trigger=Trigger.MUST_SKIP))
-    assert result.route == Route.ESCALATE
-    assert "targets" in result.escalation.reasons[0]
+    assert result.route == Route.CLARIFY
+    assert "targets" in result.question.lower()
 
 
 def test_orchestrator_routes_to_sleep_on_late_dinner(alex_plan, alex, foods):
@@ -235,4 +235,4 @@ def test_orchestrator_routes_to_sleep_on_late_dinner(alex_plan, alex, foods):
 def test_orchestrator_out_of_scope_smalltalk(alex_plan, alex, foods):
     orch = Orchestrator(alex_plan, alex, foods, use_llm=False)
     result = orch.handle_text("what's the weather like?")
-    assert result.route == Route.OUT_OF_SCOPE
+    assert result.route == Route.CLARIFY  # unparseable -> ask + presets, never guess

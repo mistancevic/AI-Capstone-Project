@@ -8,11 +8,10 @@ principle (calories average over 3-7 days, protein stays the daily anchor).
 
 from __future__ import annotations
 
+from .. import policy
 from ..food_db import filter_foods
 from ..models import (
     AVERAGING_WINDOW_DAYS,
-    CALORIE_TOLERANCE_KCAL,
-    PROTEIN_TOLERANCE_G,
     BudgetMath,
     ClientProfile,
     FoodItem,
@@ -79,12 +78,13 @@ def _score(food: FoodItem, math: BudgetMath, profile: ClientProfile) -> tuple[fl
     score = abs(protein_gap) * 3.0
     score += (abs(kcal_gap) / 50.0) if kcal_gap >= 0 else (abs(kcal_gap) / 25.0)
 
+    band = policy.tolerance()
     why = []
-    if food.protein_g >= math.remaining_protein_g - PROTEIN_TOLERANCE_G:
+    if food.protein_g >= math.remaining_protein_g - band["protein_g"]:
         why.append("covers the remaining protein")
     else:
         why.append(f"covers {food.protein_g} g of the {max(math.remaining_protein_g, 0)} g still needed")
-    if kcal_gap < -CALORIE_TOLERANCE_KCAL:
+    if kcal_gap < -band["calories_kcal"]:
         why.append(f"runs ~{-kcal_gap} kcal over the remaining budget")
     elif kcal_gap >= 0:
         why.append("fits the calorie budget")
@@ -137,11 +137,12 @@ def recommend(
 
     # A recommendation is "within tolerance" when its best option lands the
     # projected day inside the tolerance band.
+    band = policy.tolerance()  # the band as data (data/tolerance.json), Check 2
     best = meals[0] if meals else bridge
     within = bool(
         best
-        and abs(best.day_end_protein_gap) <= PROTEIN_TOLERANCE_G
-        and abs(best.day_end_kcal_gap) <= CALORIE_TOLERANCE_KCAL
+        and abs(best.day_end_protein_gap) <= band["protein_g"]
+        and abs(best.day_end_kcal_gap) <= band["calories_kcal"]
     )
 
     strategy = ""
