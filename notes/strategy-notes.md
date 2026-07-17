@@ -45,10 +45,22 @@ You don't win a red ocean by being better at the thing everyone competes on:
    a time; PlateMate enters through coaches — one coach brings a roster,
    pre-trusted, plan already written. The agreement + packages double as a
    B2B2C distribution model. Compete in the coach's toolkit, not the app store.
-   Evidence upgrade: the client-side disruption need is LATENT (no consumer
-   complaint demand to ride), while the coach-side version is FELT (clients
-   falling off between check-ins = coach churn) — so the buyer with the felt
-   pain is the coach. Third independent argument for this channel.
+   Evidence position: the client-side disruption need is LATENT (no consumer
+   complaint demand to ride). The coach-side version was hypothesised as FELT
+   (clients falling off between check-ins = coach churn). **Honesty
+   correction after the coach-side desk pass (investigation 5): the FELT
+   claim is UNVALIDATED — there is no coach-attributed churn evidence, no
+   coach time-cost number, and no WTP signal in the desk literature; the
+   supporting number (37% of dropouts exit on competing priorities, Zizzi
+   2016) is client-side, not coach-side.** Worse, a segment of coaches
+   ideologically *reject* mid-week monitoring (usecoached.com, 2026), and
+   some use disruption as a client filter. Treat the coach channel as a
+   testable hypothesis, not an established fact — validation moves to the
+   coach interviews (investigation 5 Part B) and the survey. The design
+   answer to the philosophy conflict already exists: configurable escalation
+   serves both the "I want to know" coach and the "don't make me babysit"
+   coach (set escalation to none → pure client-side adaptation); the
+   filtering coach is simply not our customer.
 4. **The segment:** not "people who want to lose weight" but coached clients
    with unpredictable lives who already have a plan and keep falling off it.
 5. **Trust:** "the model never decides; every number and safety check is
@@ -194,7 +206,11 @@ are structurally unable to follow.
   pain, named precisely: **today a coach delivers a 1–3 month plan and then
   has zero visibility into daily adherence until the client has already
   failed.** The pitch to coaches writes itself: "stop losing clients to life
-  happening."
+  happening." **Caveat (investigation 5): this coach-pain narrative is
+  currently asserted mostly by vendors selling the fix — it is not yet
+  confirmed from coaches' own mouths, and the zero-CAC economics assume
+  coaches want to retain the disrupted clients they currently sometimes
+  filter out. Test before claiming as fact.**
 - **A pivot is a success event, not a compliance failure.** When the day
   breaks and the client uses the app to land it anyway, that is logged and
   shown as a successful adaptation — momentum preserved, not a red mark.
