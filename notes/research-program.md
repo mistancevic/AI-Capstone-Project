@@ -14,7 +14,7 @@ an evidence-annotated v2 of the map.
 | 1 | Published evidence | Secondary / desk research (literature review) | Studies, industry reports | **DONE — see [`evidence-desk-research.md`](evidence-desk-research.md).** Logging valley supported (likely understated); disruption valley: pain supported, mechanism corrected (binge, not just skip); rigidity-as-feature; plateau≠boredom split. |
 | 2 | Tracker complaints | Review mining (Voice of Customer) | App-store reviews | **DONE — see [`evidence-review-mining.md`](evidence-review-mining.md).** Logging valley supported again (understated); disruption need is LATENT (zero complaints — coach side feels it); guilt-free = table stakes (MacroFactor owns it); skip-mechanism contradicted 2nd time. |
 | 3 | Users in their own words | Netnography / social listening | Reddit, forums | **DONE — via Gemini Deep Research (Reddit-capable); see [`evidence-netnography.md`](evidence-netnography.md).** The (g) split answered: binge modal (~45–50%), adapt (~30–35%), skip minority (~15–20%); disruption confirmed deepest via AVE cascade; understand-the-plan gets first verdict (~0); strategic-vs-maladaptive skip split is a new design requirement. Literature fallback retained as [`evidence-lapse-literature.md`](evidence-lapse-literature.md). |
-| 4 | How incumbents serve the journey | Competitive UX audit / teardown → gap analysis | Competitor apps + public materials | Gap matrix: journey activity × competitor |
+| 4 | How incumbents serve the journey | Competitive UX audit / teardown → gap analysis | Competitor apps + public materials | **DONE — see [`evidence-competitive-teardown.md`](evidence-competitive-teardown.md).** Wedge is NOT empty whitespace: MFP shipped a pull-based "what should I eat now?" chatbot (Jun 2026); Mealner claims the identical wedge (waitlist). Surviving ground = initiation + acting on the answer + coach-visible record (nobody owns all three). Social-events is the cleanest empty field. MacroFactor's "do nothing" counter-thesis logged. |
 | 5 | The coach's side | Expert / key-informant research + trade research | Coach forums, interviews | Supply-side view of adherence pain |
 | 6 | Our own numbers | Primary research (survey) | ~100-peer cohort | The only first-party data; validates scores |
 
@@ -36,7 +36,7 @@ an investigation, it is the canvas the investigations' findings land on.
 | 2 | **Journey map with sentiment curve** | **User/customer journey mapping — the emotion-curve variant is an experience map; score overlays make it quantified journey mapping** | All six investigations | v1 done (hypothesis, EST-labeled); v2 evidence-annotated planned after investigations return |
 | 3 | Pain-point scorecard | Pain-point prioritization (magnitude / frequency / severity / competition / contrast) | Journey map + evidence | Done (Discovery notes §2) |
 | 4 | Idea ranking | Impact × feasibility prioritization matrix (diverge/converge) | Ideation | Done (Discovery notes §3) |
-| 5 | Competitive gap matrix | Gap analysis | Investigation 4 | Pending |
+| 5 | Competitive gap matrix | Gap analysis | Investigation 4 | Done (evidence-competitive-teardown.md §gap matrix) |
 | 6 | Positioning set | Positioning statements, category definition, strategy test | Everything above | Done (strategy-notes.md) |
 
 ## Standard output schema (all prompts request this)
