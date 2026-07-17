@@ -13,7 +13,7 @@ an evidence-annotated v2 of the map.
 |---|---|---|---|---|
 | 1 | Published evidence | Secondary / desk research (literature review) | Studies, industry reports | **DONE — see [`evidence-desk-research.md`](evidence-desk-research.md).** Logging valley supported (likely understated); disruption valley: pain supported, mechanism corrected (binge, not just skip); rigidity-as-feature; plateau≠boredom split. |
 | 2 | Tracker complaints | Review mining (Voice of Customer) | App-store reviews | **DONE — see [`evidence-review-mining.md`](evidence-review-mining.md).** Logging valley supported again (understated); disruption need is LATENT (zero complaints — coach side feels it); guilt-free = table stakes (MacroFactor owns it); skip-mechanism contradicted 2nd time. |
-| 3 | Users in their own words | Netnography / social listening | Reddit, forums | Verbatim pain quotes per journey activity |
+| 3 | Users in their own words | Netnography / social listening | Reddit, forums | **ATTEMPTED — channel blocked (no Reddit access); honest fallback filed as [`evidence-lapse-literature.md`](evidence-lapse-literature.md)** (skip is unmeasured not disproven; social valley may be deepest; logging = cliff). **Proper netnography still pending** — needs Reddit-capable search or manual thread collection. |
 | 4 | How incumbents serve the journey | Competitive UX audit / teardown → gap analysis | Competitor apps + public materials | Gap matrix: journey activity × competitor |
 | 5 | The coach's side | Expert / key-informant research + trade research | Coach forums, interviews | Supply-side view of adherence pain |
 | 6 | Our own numbers | Primary research (survey) | ~100-peer cohort | The only first-party data; validates scores |
