@@ -1,0 +1,6 @@
+{
+  "protein_g": 10,
+  "calories_kcal": 150,
+  "averaging_window_days": [3, 7],
+  "_comment": "The compliance band as data, per DESIGN.md: promoted from a code constant so it is visible, auditable, and changeable without touching code. Consumed by Check 2 (enforcement) and Check 3 (gap labeling)."
+}

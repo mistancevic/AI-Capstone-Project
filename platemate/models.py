@@ -101,6 +101,7 @@ class Route(str, Enum):
     NUTRITION_WITH_SLEEP = "nutrition+sleep_recovery"
     ESCALATE = "escalate_to_coach"
     OUT_OF_SCOPE = "out_of_scope"
+    CLARIFY = "clarify"            # missing-data / unparseable → ask, never guess
 
 
 class Trigger(str, Enum):
@@ -198,10 +199,12 @@ class Recommendation:
 
 @dataclass
 class Escalation:
-    """A refusal + hand-off to the human coach."""
+    """A refusal + hand-off to the human coach (the stop path)."""
 
     reasons: list[str]
     message: str
+    tier: str = ""                 # escalation.Tier value when a flag fired
+    get_help_now: bool = False     # medical signal → immediate guidance shown
 
 
 @dataclass
@@ -213,3 +216,8 @@ class AgentResult:
     recommendation: Recommendation | None = None
     escalation: Escalation | None = None
     consulted_agents: list[str] = field(default_factory=list)
+    question: str = ""                              # CLARIFY route: the one question
+    presets: list[str] = field(default_factory=list)  # CLARIFY: guaranteed-parseable picker
+    flag: object | None = None                      # escalation.CoachFlag when one fired
+    counters: dict = field(default_factory=dict)    # updated counts after this run
+    coaching_line_replaced: bool = False            # Check-4 screen fired (aggregate visibility)

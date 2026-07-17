@@ -31,7 +31,6 @@ sys.path.insert(0, str(ROOT))
 from platemate import llm
 from platemate.agents import Orchestrator
 from platemate.agents.nutrition import format_recommendation
-from platemate.agents.stubs import STUB_AGENTS
 from platemate.food_db import load_foods
 from platemate.models import ClientProfile, Situation, Trigger
 from platemate.plan_parser import capture_targets, parse_plan_file, plan_summary
@@ -100,7 +99,7 @@ def main() -> None:
     maja_orch = Orchestrator(maja_plan, maja, foods)
     probe = maja_orch.handle(Situation(raw_text="what should I eat for lunch?",
                                        trigger=Trigger.ON_THE_SPOT_SWAP))
-    print(f"\nPlateMate: {probe.escalation.message}")
+    print(f"\nPlateMate: {probe.question or probe.escalation.message}")
     print('\nMaja: "Coach says 1800 kcal and 120 g protein."')
     capture_targets(maja_plan, 1800, 120)
     print(f"PlateMate: got it — daily targets set to {maja_plan.targets}. ✔")
@@ -118,12 +117,11 @@ def main() -> None:
     print(f"\nPlateMate: {safety_result.escalation.message}")
 
     # ------------------------------------------------------------------ #
-    banner("STEP 5 — Registered (stubbed) future agents")
-    for agent in STUB_AGENTS:
-        print(f"  - {agent.name:<10} [{agent.domain}] — registered, stubbed; "
-              "requests in this domain escalate to the coach")
-    print("\nFuture (noted, not demoed): crafting the initial diet plan, full "
-          "fitness/movement/recovery agents, sleep and activity modeling.")
+    banner("STEP 5 — Future agents (parked, per the no-stubs directive)")
+    print("  Parked initiatives (see notes/parked-ideas.md): sleep & recovery "
+          "as a full agent,\n  fitness/movement/recovery agents, initial plan "
+          "crafting — each returns only\n  when its domain has a real data "
+          "source and a consuming decision.")
     print("\nDemo complete.")
 
 
