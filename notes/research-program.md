@@ -11,7 +11,7 @@ an evidence-annotated v2 of the map.
 
 | # | Investigation | Method (official label) | Channel | Expected output |
 |---|---|---|---|---|
-| 1 | Published evidence | Secondary / desk research (literature review) | Studies, industry reports | Hard percentages under the valleys |
+| 1 | Published evidence | Secondary / desk research (literature review) | Studies, industry reports | **DONE — see [`evidence-desk-research.md`](evidence-desk-research.md).** Logging valley supported (likely understated); disruption valley: pain supported, mechanism corrected (binge, not just skip); rigidity-as-feature; plateau≠boredom split. |
 | 2 | Tracker complaints | Review mining (Voice of Customer) | App-store reviews | Complaint themes ranked by frequency |
 | 3 | Users in their own words | Netnography / social listening | Reddit, forums | Verbatim pain quotes per journey activity |
 | 4 | How incumbents serve the journey | Competitive UX audit / teardown → gap analysis | Competitor apps + public materials | Gap matrix: journey activity × competitor |
