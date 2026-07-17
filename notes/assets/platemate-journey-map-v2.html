@@ -1,0 +1,263 @@
+<title>PlateMate — Journey Map v2 (Evidence-Annotated)</title>
+<style>
+  :root{
+    --page-bg:#ece9f4; --page-ink:#3a3651; --page-muted:#6f6a8a;
+    /* slide-internal tokens (the slide is a fixed light canvas for deck screenshots) */
+    --title-blue:#2b6ce0; --ink:#28243d; --muted:#6b6685;
+    --s1:#b9addf;
+    --s2:#9081d8; --s3:#5b48c2;
+    --curve-top:#6c5ce7; --pain:#e8890c; --pain-deep:#ed8936;
+    --ev:#c2410c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --page-bg:#161421; --page-ink:#d9d5ea; --page-muted:#9b95b8; }
+  }
+  :root[data-theme="dark"]{ --page-bg:#161421; --page-ink:#d9d5ea; --page-muted:#9b95b8; }
+  :root[data-theme="light"]{ --page-bg:#ece9f4; --page-ink:#3a3651; --page-muted:#6f6a8a; }
+
+  *{box-sizing:border-box; margin:0}
+  body{
+    background:var(--page-bg); color:var(--page-ink);
+    font-family:"Avenir Next","Segoe UI",Helvetica,Arial,sans-serif;
+    padding:28px 16px 40px;
+  }
+  .frame{max-width:1320px; margin:0 auto}
+  .pagenote{font-size:12.5px; color:var(--page-muted); margin:14px 4px 0; line-height:1.5}
+  .scroller{overflow-x:auto; border-radius:14px}
+
+  /* ---------- the slide ---------- */
+  .slide{
+    width:1280px; background:#ffffff; border-radius:14px;
+    box-shadow:0 10px 34px rgba(40,30,90,.16);
+    padding:38px 44px 30px; position:relative; color:var(--ink);
+  }
+  .topbar{display:flex; justify-content:space-between; align-items:flex-start; gap:16px}
+  .eyebrow{font-size:11px; letter-spacing:.14em; color:var(--muted); font-weight:600}
+  h1{font-size:29px; font-weight:700; color:var(--ink); margin-top:4px; text-wrap:balance}
+  h1 .blue{color:var(--title-blue)}
+  .rule{width:64px; height:4px; background:var(--title-blue); border-radius:2px; margin:10px 0 6px}
+  .sub{font-size:13.5px; color:var(--muted); max-width:820px; line-height:1.5}
+  .badge4d{
+    flex:none; font-size:10.5px; letter-spacing:.12em; font-weight:700;
+    color:var(--title-blue); border:1.5px solid var(--title-blue);
+    padding:6px 12px; border-radius:999px; margin-top:6px;
+  }
+
+  /* stage pills + chevrons share the chart's 1160px band, offset by the 36px emoji gutter */
+  .band{margin-left:36px; width:1160px}
+  .stages{display:grid; grid-template-columns:3fr 4fr 3fr; gap:6px; margin-top:22px}
+  .stage{
+    text-align:center; font-size:13px; font-weight:700; letter-spacing:.09em;
+    border:2px solid; border-radius:999px; padding:8px 0; background:#fff;
+  }
+  .stage.s1{color:#7a68c9; border-color:#b9addf}
+  .stage.s2{color:#6a56cf; border-color:#9081d8}
+  .stage.s3{color:#4735a8; border-color:#5b48c2}
+
+  .chevrons{display:grid; grid-template-columns:repeat(10,1fr); gap:4px; margin-top:10px}
+  .chev{
+    color:#fff; font-size:11px; font-weight:600; line-height:1.25; text-align:center;
+    padding:9px 14px 9px 16px; min-height:46px; display:flex; align-items:center; justify-content:center;
+    clip-path:polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%);
+  }
+  .chev.c1{background:var(--s1); color:#332566}
+  .chev.c2{background:var(--s2)}
+  .chev.c3{background:var(--s3)}
+
+  /* ---------- chart ---------- */
+  .chartwrap{position:relative; margin-top:6px; height:648px}
+  .gutter-emoji{position:absolute; left:0; width:30px; text-align:center; font-size:22px}
+  .chart{position:absolute; left:36px; top:0; width:1160px; height:330px}
+  svg{display:block}
+
+  .bubble{position:absolute; width:48px; height:48px; margin:-24px 0 0 -24px; border-radius:50%;
+    background:#fff; border:3px solid var(--pain);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-variant-numeric:tabular-nums;
+  }
+  .bubble b{font-size:14px; color:var(--ink); line-height:1}
+  .bubble span{font-size:8px; letter-spacing:.06em; color:var(--muted); margin-top:2px}
+  /* evidence-backed valleys: filled tint + deeper ring */
+  .bubble.ev{background:#fff2e8; border-color:var(--ev); border-width:4px}
+  .bubble.ev span{color:var(--ev); font-weight:700}
+
+  .connector{position:absolute; width:0; border-left:2px dotted var(--pain); margin-left:-1px}
+
+  .callout{
+    position:absolute; top:360px; border-radius:12px; padding:12px 14px;
+    background:linear-gradient(160deg, var(--pain-deep), #f6ad55);
+    color:#fff; font-size:12px; line-height:1.45;
+    box-shadow:0 6px 18px rgba(237,137,54,.35);
+  }
+  .callout .chip{
+    display:inline-block; font-size:9px; font-weight:700; letter-spacing:.1em;
+    background:rgba(255,255,255,.28); border-radius:999px; padding:3px 9px; margin-bottom:7px;
+  }
+  .callout .rev{
+    display:inline-block; font-size:8.5px; font-weight:700; letter-spacing:.08em;
+    background:rgba(0,0,0,.22); border-radius:999px; padding:3px 8px; margin-left:5px;
+  }
+  .callout .pin{
+    display:inline-block; margin-top:8px; background:#fff; color:#4735a8;
+    font-size:10px; font-weight:700; letter-spacing:.1em; border-radius:999px; padding:4px 10px;
+  }
+  .callout .pin::before{content:""; display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:#4735a8; margin-right:6px; vertical-align:1px}
+  .callout .adj{display:block; margin-top:8px; font-size:10.5px; opacity:.95}
+
+  /* ---------- legend ---------- */
+  .legend{
+    margin-left:36px; width:1160px; display:flex; gap:24px; align-items:center;
+    border-top:1px solid #eceafb; padding-top:14px; font-size:11.5px; color:var(--muted);
+    flex-wrap:wrap;
+  }
+  .legend .item{display:flex; align-items:center; gap:8px}
+  .dot{width:10px; height:10px; border-radius:50%; background:var(--pain)}
+  .ring{width:14px; height:14px; border-radius:50%; background:#fff; border:3px solid var(--pain)}
+  .ringev{width:14px; height:14px; border-radius:50%; background:#fff2e8; border:4px solid var(--ev)}
+  .curveswatch{width:44px; height:16px; border-radius:4px;
+    background:linear-gradient(180deg,#6c5ce7 0%, #9b8df0 55%, #f6ad55 100%)}
+  .pinswatch{width:10px; height:10px; border-radius:50%; background:#4735a8}
+  .est{margin-left:auto; font-style:italic}
+</style>
+
+<div class="frame">
+<div class="scroller">
+<div class="slide">
+
+  <div class="topbar">
+    <div>
+      <div class="eyebrow">PLATEMATE &middot; JOURNEY MAP v2 &middot; EVIDENCE-ANNOTATED</div>
+      <h1>Step 4: User <span class="blue">pain-points</span>, validated against research</h1>
+      <div class="rule"></div>
+      <div class="sub">The coached client&rsquo;s emotional journey &mdash; sentiment triangulated across five research channels
+      (desk research, app-store reviews, netnography, competitive teardown, coach-side). Four valleys revised deeper;
+      the disruption <b>mechanism</b> was corrected. Magnitudes stay provisional until the peer survey (n&thinsp;&asymp;&thinsp;100).</div>
+    </div>
+    <div class="badge4d">4D &middot; DISCOVERY</div>
+  </div>
+
+  <div class="band stages">
+    <div class="stage s1">GET MY PLAN</div>
+    <div class="stage s2">LIVE MY PLAN</div>
+    <div class="stage s3">REACH MY GOAL</div>
+  </div>
+
+  <div class="band chevrons">
+    <div class="chev c1">Find Coach<br>or App</div>
+    <div class="chev c1">Onboard &amp;<br>Share Needs</div>
+    <div class="chev c1">Understand<br>the Plan</div>
+    <div class="chev c2">Shop &amp;<br>Meal-Prep</div>
+    <div class="chev c2">Eat &amp; Log<br>Daily</div>
+    <div class="chev c2">Handle<br>Disruptions</div>
+    <div class="chev c2">Social Events<br>&amp; Travel</div>
+    <div class="chev c3">Progress Review<br>with Coach</div>
+    <div class="chev c3">Plateaus &amp;<br>Boredom</div>
+    <div class="chev c3">Adjust Goal /<br>Next Phase</div>
+  </div>
+
+  <div class="chartwrap">
+    <div class="gutter-emoji" style="top:34px">&#128516;</div>
+    <div class="gutter-emoji" style="top:272px">&#128546;</div>
+
+    <div class="chart">
+      <svg viewBox="0 0 1160 330" width="1160" height="330" role="img"
+           aria-label="Sentiment curve across ten activities; deepest valley at Handle Disruptions, revised to minus 30 and triangulated across three channels.">
+        <defs>
+          <linearGradient id="journey" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#6c5ce7" stop-opacity="0.92"/>
+            <stop offset="52%" stop-color="#9b8df0" stop-opacity="0.75"/>
+            <stop offset="82%" stop-color="#f6ad55" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#f39c12" stop-opacity="0.38"/>
+          </linearGradient>
+        </defs>
+
+        <path d="M 0 175
+                 C 19.3 175, 38.7 80.6, 58 80.6
+                 C 96.7 80.6, 135.3 45.3, 174 45.3
+                 C 212.7 45.3, 251.3 186.5, 290 186.5
+                 C 328.7 186.5, 367.3 133.5, 406 133.5
+                 C 444.7 133.5, 483.3 257, 522 257
+                 C 560.7 257, 599.3 292.3, 638 292.3
+                 C 676.7 292.3, 715.3 228.8, 754 228.8
+                 C 792.7 228.8, 831.3 115.9, 870 115.9
+                 C 908.7 115.9, 947.3 239.4, 986 239.4
+                 C 1024.7 239.4, 1063.3 151.2, 1102 151.2
+                 C 1121.3 151.2, 1140.7 305, 1160 305
+                 L 1160 330 L 0 330 Z"
+              fill="url(#journey)"/>
+        <path d="M 0 175
+                 C 19.3 175, 38.7 80.6, 58 80.6
+                 C 96.7 80.6, 135.3 45.3, 174 45.3
+                 C 212.7 45.3, 251.3 186.5, 290 186.5
+                 C 328.7 186.5, 367.3 133.5, 406 133.5
+                 C 444.7 133.5, 483.3 257, 522 257
+                 C 560.7 257, 599.3 292.3, 638 292.3
+                 C 676.7 292.3, 715.3 228.8, 754 228.8
+                 C 792.7 228.8, 831.3 115.9, 870 115.9
+                 C 908.7 115.9, 947.3 239.4, 986 239.4
+                 C 1024.7 239.4, 1063.3 151.2, 1102 151.2
+                 C 1121.3 151.2, 1140.7 305, 1160 305"
+              fill="none" stroke="#5b48c2" stroke-opacity=".55" stroke-width="2.5"/>
+
+        <line x1="0" y1="186.5" x2="1160" y2="186.5"
+              stroke="#f39c12" stroke-width="2" stroke-dasharray="7 7" opacity=".65"/>
+      </svg>
+
+      <div class="bubble" style="left:58px;  top:80px"><b>+30</b><span>EST</span></div>
+      <div class="bubble" style="left:174px; top:45px"><b>+40</b><span>EST</span></div>
+      <div class="bubble ev" style="left:290px; top:186px"><b>0</b><span>1 CH</span></div>
+      <div class="bubble" style="left:406px; top:133px"><b>+15</b><span>EST</span></div>
+      <div class="bubble ev" style="left:522px; top:257px"><b>-20</b><span>3 CH</span></div>
+      <div class="bubble ev" style="left:638px; top:292px"><b>-30</b><span>3 CH</span></div>
+      <div class="bubble ev" style="left:754px; top:229px"><b>-12</b><span>3 CH</span></div>
+      <div class="bubble" style="left:870px; top:116px"><b>+20</b><span>EST</span></div>
+      <div class="bubble ev" style="left:986px; top:239px"><b>-15</b><span>3 CH</span></div>
+      <div class="bubble" style="left:1102px;top:151px"><b>+10</b><span>EST</span></div>
+
+      <div class="connector" style="left:522px; top:283px; height:77px"></div>
+      <div class="connector" style="left:638px; top:318px; height:42px"></div>
+      <div class="connector" style="left:754px; top:255px; height:105px"></div>
+      <div class="connector" style="left:986px; top:266px; height:94px"></div>
+
+      <div class="callout" style="left:404px; width:198px">
+        <span class="chip">STAGE 2 &middot; EAT &amp; LOG DAILY</span><span class="rev">&minus;12 &rarr; &minus;20</span><br>
+        The logging cliff &mdash; where trackers get abandoned (&asymp;70&ndash;86% quit). Confirmed
+        across three channels. v1&rsquo;s one-tap confirmations absorb most of it.
+      </div>
+
+      <div class="callout" style="left:606px; width:262px">
+        <span class="chip">STAGE 2 &middot; HANDLE DISRUPTIONS</span><span class="rev">&minus;25 &rarr; &minus;30</span><br>
+        The modal reaction to a broken day isn&rsquo;t a skipped meal &mdash; it&rsquo;s the
+        <b>&ldquo;what-the-hell&rdquo; binge</b> (one off-plan lunch &rarr; &ldquo;day&rsquo;s ruined&rdquo; &rarr; overeat).
+        A third adapt; a minority skip, often on purpose. PlateMate answers all three: the next
+        plan-consistent bite, math shown, no shame.
+        <span class="pin">PLATEMATE V1 FOCUS</span>
+        <span class="adj">Adjacent &mdash; <b>Social &amp; Travel (&minus;12)</b>: the cleanest competitive whitespace.</span>
+      </div>
+
+      <div class="callout" style="left:880px; width:224px">
+        <span class="chip">STAGE 3 &middot; PLATEAUS &amp; BOREDOM</span><br>
+        Two problems, not one: the physiological plateau (a coaching conversation) and boredom &mdash;
+        which busy professionals often <b>weaponize</b> as cognitive offload
+        (&ldquo;food stops taking up space in my head&rdquo;).
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="item"><span class="dot"></span> Current-state pain point</div>
+    <div class="item"><span class="ringev"></span> Triangulated (&ge;3 channels)</div>
+    <div class="item"><span class="ring"></span> Estimate, not yet measured</div>
+    <div class="item"><span class="curveswatch"></span> Emotional journey of the coached client</div>
+    <div class="item"><span class="pinswatch"></span> PlateMate v1 focus</div>
+    <div class="est">n&thinsp;CH&thinsp;=&thinsp;independent channels supporting the score; magnitudes provisional &mdash; peer survey pending</div>
+  </div>
+
+</div>
+</div>
+<p class="pagenote">v2 of the Discovery journey map: sentiment ordering is now evidence-constrained across five research
+channels (see <code>notes/evidence-*.md</code>); magnitudes remain provisional until the ~100-person peer survey.
+Four valleys were revised deeper and the disruption mechanism was corrected from &ldquo;decision-paralysis skip&rdquo; to the
+abstinence-violation (&ldquo;what-the-hell&rdquo;) binge cascade. For the deck: open at 100% zoom and screenshot the white slide.</p>
+</div>
