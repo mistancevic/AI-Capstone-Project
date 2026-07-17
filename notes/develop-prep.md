@@ -229,9 +229,11 @@ Develop work list. Nothing here is fixed before the Develop guide arrives.**
 - Code — no counters, no clock/quiet-hours, no banned-language screen, no
   one-way LLM safety assist, no coach queue with delivery times, no
   four-card output formats.
-- `platemate/agents/stubs.py` — **violates Moe's no-stubs directive**;
-  delete in Develop. Sleep agent stays only as the conditional one-line
-  note.
+- `platemate/agents/stubs.py` — **violates Moe's no-stubs directive** for
+  the demo: remove from the demo's agent registry and runtime path. The
+  multi-agent intent itself is **parked, not deleted** — see
+  [`parked-ideas.md`](parked-ideas.md). Sleep agent stays only as the
+  conditional one-line note.
 - Eval runner asserts escalation + route only; Develop adds card-schema,
   exact-math, banned-language, and quiet-hours-delivery assertions.
 
