@@ -64,11 +64,9 @@ spot-checked.
 
 ## Program consequences
 
-- **Netnography stays open.** Options: (a) re-run in an environment with
-  Reddit-capable search; (b) manual thread-collection pass (paste thread
-  URLs into a chat for coding); (c) accept the two Reddit-corpus academic
-  studies as partial coverage and lean on survey + interviews for the (g)
-  split. Decision pending.
+- **Netnography resolved:** option (a) executed via Gemini Deep Research —
+  see [`evidence-netnography.md`](evidence-netnography.md), which
+  supersedes this file as the channel-3 verdict.
 - Journey map v2 changes queued: logging deepened (cliff), social deepened,
   disruption re-specified (evening/social framing, skip+binge dual
   mechanism), plateau/boredom split retained.
