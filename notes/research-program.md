@@ -33,7 +33,7 @@ an investigation, it is the canvas the investigations' findings land on.
 | # | Artifact | Method (official label) | Consumes | Status |
 |---|---|---|---|---|
 | 1 | Client persona | User persona (synthetic) | Coaching experience, segment definition | Done (Discovery) |
-| 2 | **Journey map with sentiment curve** | **User/customer journey mapping — the emotion-curve variant is an experience map; score overlays make it quantified journey mapping** | All six investigations | v1 done (hypothesis, EST-labeled); v2 evidence-annotated planned after investigations return |
+| 2 | **Journey map with sentiment curve** | **User/customer journey mapping — the emotion-curve variant is an experience map; score overlays make it quantified journey mapping** | All six investigations | **v2 done** ([`assets/platemate-journey-map-v2.html`](assets/platemate-journey-map-v2.html) / [`assets/journey-map-v2.png`](assets/journey-map-v2.png); artifact https://claude.ai/code/artifact/6f4a88e3-e0f5-41d8-9afa-f2a277fcd7fa). Five channels annotated; four valleys revised deeper, disruption mechanism corrected, triangulated valleys visually distinguished from estimates. Magnitudes provisional pending survey (investigation 6). v1 retained as the Discovery snapshot. |
 | 3 | Pain-point scorecard | Pain-point prioritization (magnitude / frequency / severity / competition / contrast) | Journey map + evidence | Done (Discovery notes §2) |
 | 4 | Idea ranking | Impact × feasibility prioritization matrix (diverge/converge) | Ideation | Done (Discovery notes §3) |
 | 5 | Competitive gap matrix | Gap analysis | Investigation 4 | Done (evidence-competitive-teardown.md §gap matrix) |
@@ -206,3 +206,21 @@ Results from each investigation come back to the main session and are:
 2. rendered into an evidence-annotated v2 of the journey map (same HTML
    format, valleys carrying citation counts and one quote each),
 3. weighed by the triangulation rule (3+ independent channels = validated).
+
+## Journey map v1 → v2 score changes (for reproducibility)
+
+Rendered after investigations 1–5 (survey pending). Positives untouched (no
+channel tested them). Four valleys revised deeper; disruption mechanism
+corrected. Bubble labels: `n CH` = independent channels supporting the
+score (≥3 = triangulated); `EST` = still an estimate.
+
+| Activity | v1 | v2 | Why |
+|---|---|---|---|
+| Understand the plan | +5 | **0** (1 CH) | Netnography: start-motivation counterbalanced by logistical overwhelm; 3× no-signal before. |
+| Eat & log daily | −12 | **−20** (3 CH) | Desk abandonment cliff (86%); confirmed 3 channels; deepened but not to the superseded −30 fallback. |
+| Handle disruptions | −25 | **−30** (3 CH) | Confirmed deepest; **mechanism corrected** from "decision-paralysis skip" to the what-the-hell (AVE) binge cascade; skip a minority, often strategic. |
+| Social events & travel | −10 | **−12** (3 CH) | Minor deepen; proper netnography validated ≈−10, reviews said "possibly deeper"; flagged cleanest competitive whitespace. |
+| Plateaus & boredom | −15 | **−15** (3 CH) | Validated about right; dichotomy annotated (physiological plateau vs boredom-as-cognitive-offload). |
+
+Untouched (EST): find coach +30, onboard +40, shop & meal-prep +15,
+progress review +20, adjust goal +10.
