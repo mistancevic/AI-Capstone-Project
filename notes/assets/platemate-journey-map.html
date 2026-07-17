@@ -1,0 +1,251 @@
+<title>PlateMate — Journey Map (Discovery)</title>
+<style>
+  :root{
+    --page-bg:#ece9f4; --page-ink:#3a3651; --page-muted:#6f6a8a;
+    /* slide-internal tokens (the slide is a fixed light canvas for deck screenshots) */
+    --title-blue:#2b6ce0; --ink:#28243d; --muted:#6b6685;
+    --s1:#b9addf;
+    --s2:#9081d8; --s3:#5b48c2;
+    --curve-top:#6c5ce7; --pain:#e8890c; --pain-deep:#ed8936;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --page-bg:#161421; --page-ink:#d9d5ea; --page-muted:#9b95b8; }
+  }
+  :root[data-theme="dark"]{ --page-bg:#161421; --page-ink:#d9d5ea; --page-muted:#9b95b8; }
+  :root[data-theme="light"]{ --page-bg:#ece9f4; --page-ink:#3a3651; --page-muted:#6f6a8a; }
+
+  *{box-sizing:border-box; margin:0}
+  body{
+    background:var(--page-bg); color:var(--page-ink);
+    font-family:"Avenir Next","Segoe UI",Helvetica,Arial,sans-serif;
+    padding:28px 16px 40px;
+  }
+  .frame{max-width:1320px; margin:0 auto}
+  .pagenote{font-size:12.5px; color:var(--page-muted); margin:14px 4px 0; line-height:1.5}
+  .scroller{overflow-x:auto; border-radius:14px}
+
+  /* ---------- the slide ---------- */
+  .slide{
+    width:1280px; background:#ffffff; border-radius:14px;
+    box-shadow:0 10px 34px rgba(40,30,90,.16);
+    padding:38px 44px 30px; position:relative; color:var(--ink);
+  }
+  .topbar{display:flex; justify-content:space-between; align-items:flex-start; gap:16px}
+  .eyebrow{font-size:11px; letter-spacing:.14em; color:var(--muted); font-weight:600}
+  h1{font-size:29px; font-weight:700; color:var(--ink); margin-top:4px; text-wrap:balance}
+  h1 .blue{color:var(--title-blue)}
+  .rule{width:64px; height:4px; background:var(--title-blue); border-radius:2px; margin:10px 0 6px}
+  .sub{font-size:13.5px; color:var(--muted)}
+  .badge4d{
+    flex:none; font-size:10.5px; letter-spacing:.12em; font-weight:700;
+    color:var(--title-blue); border:1.5px solid var(--title-blue);
+    padding:6px 12px; border-radius:999px; margin-top:6px;
+  }
+
+  /* stage pills + chevrons share the chart's 1160px band, offset by the 36px emoji gutter */
+  .band{margin-left:36px; width:1160px}
+  .stages{display:grid; grid-template-columns:3fr 4fr 3fr; gap:6px; margin-top:26px}
+  .stage{
+    text-align:center; font-size:13px; font-weight:700; letter-spacing:.09em;
+    border:2px solid; border-radius:999px; padding:8px 0; background:#fff;
+  }
+  .stage.s1{color:#7a68c9; border-color:#b9addf}
+  .stage.s2{color:#6a56cf; border-color:#9081d8}
+  .stage.s3{color:#4735a8; border-color:#5b48c2}
+
+  .chevrons{display:grid; grid-template-columns:repeat(10,1fr); gap:4px; margin-top:10px}
+  .chev{
+    color:#fff; font-size:11px; font-weight:600; line-height:1.25; text-align:center;
+    padding:9px 14px 9px 16px; min-height:46px; display:flex; align-items:center; justify-content:center;
+    clip-path:polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%, 12px 50%);
+  }
+  .chev.c1{background:var(--s1); color:#332566}
+  .chev.c2{background:var(--s2)}
+  .chev.c3{background:var(--s3)}
+
+  /* ---------- chart ---------- */
+  .chartwrap{position:relative; margin-top:6px; height:502px}
+  .gutter-emoji{position:absolute; left:0; width:30px; text-align:center; font-size:22px}
+  .chart{position:absolute; left:36px; top:0; width:1160px; height:330px}
+  svg{display:block}
+
+  .bubble{position:absolute; width:48px; height:48px; margin:-24px 0 0 -24px; border-radius:50%;
+    background:#fff; border:3px solid var(--pain);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-variant-numeric:tabular-nums;
+  }
+  .bubble b{font-size:14px; color:var(--ink); line-height:1}
+  .bubble span{font-size:8px; letter-spacing:.08em; color:var(--muted); margin-top:2px}
+
+  .connector{position:absolute; width:0; border-left:2px dotted var(--pain); margin-left:-1px}
+
+  .callout{
+    position:absolute; top:358px; border-radius:12px; padding:12px 14px;
+    background:linear-gradient(160deg, var(--pain-deep), #f6ad55);
+    color:#fff; font-size:12px; line-height:1.45;
+    box-shadow:0 6px 18px rgba(237,137,54,.35);
+  }
+  .callout .chip{
+    display:inline-block; font-size:9px; font-weight:700; letter-spacing:.1em;
+    background:rgba(255,255,255,.28); border-radius:999px; padding:3px 9px; margin-bottom:7px;
+  }
+  .callout .pin{
+    display:inline-block; margin-top:8px; background:#fff; color:#4735a8;
+    font-size:10px; font-weight:700; letter-spacing:.1em; border-radius:999px; padding:4px 10px;
+  }
+  .callout .pin::before{content:""; display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:#4735a8; margin-right:6px; vertical-align:1px}
+
+  /* ---------- legend ---------- */
+  .legend{
+    margin-left:36px; width:1160px; display:flex; gap:30px; align-items:center;
+    border-top:1px solid #eceafb; padding-top:14px; font-size:11.5px; color:var(--muted);
+  }
+  .legend .item{display:flex; align-items:center; gap:8px}
+  .dot{width:10px; height:10px; border-radius:50%; background:var(--pain)}
+  .ring{width:14px; height:14px; border-radius:50%; background:#fff; border:3px solid var(--pain)}
+  .curveswatch{width:44px; height:16px; border-radius:4px;
+    background:linear-gradient(180deg,#6c5ce7 0%, #9b8df0 55%, #f6ad55 100%)}
+  .pinswatch{width:10px; height:10px; border-radius:50%; background:#4735a8}
+  .est{margin-left:auto; font-style:italic}
+</style>
+
+<div class="frame">
+<div class="scroller">
+<div class="slide">
+
+  <div class="topbar">
+    <div>
+      <div class="eyebrow">PLATEMATE &middot; CAPSTONE DISCOVERY</div>
+      <h1>Step 4: Identify user <span class="blue">pain-points</span></h1>
+      <div class="rule"></div>
+      <div class="sub">The coached client&rsquo;s emotional journey &mdash; estimated sentiment from coaching experience (hypotheses, pending peer-survey validation)</div>
+    </div>
+    <div class="badge4d">4D &middot; DISCOVERY</div>
+  </div>
+
+  <div class="band stages">
+    <div class="stage s1">GET MY PLAN</div>
+    <div class="stage s2">LIVE MY PLAN</div>
+    <div class="stage s3">REACH MY GOAL</div>
+  </div>
+
+  <div class="band chevrons">
+    <div class="chev c1">Find Coach<br>or App</div>
+    <div class="chev c1">Onboard &amp;<br>Share Needs</div>
+    <div class="chev c1">Understand<br>the Plan</div>
+    <div class="chev c2">Shop &amp;<br>Meal-Prep</div>
+    <div class="chev c2">Eat &amp; Log<br>Daily</div>
+    <div class="chev c2">Handle<br>Disruptions</div>
+    <div class="chev c2">Social Events<br>&amp; Travel</div>
+    <div class="chev c3">Progress Review<br>with Coach</div>
+    <div class="chev c3">Plateaus &amp;<br>Boredom</div>
+    <div class="chev c3">Adjust Goal /<br>Next Phase</div>
+  </div>
+
+  <div class="chartwrap">
+    <div class="gutter-emoji" style="top:34px">&#128516;</div>
+    <div class="gutter-emoji" style="top:262px">&#128546;</div>
+
+    <div class="chart">
+      <svg viewBox="0 0 1160 330" width="1160" height="330" role="img"
+           aria-label="Sentiment curve across ten activities; deepest valley at Handle Disruptions, estimated minus 25.">
+        <defs>
+          <linearGradient id="journey" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#6c5ce7" stop-opacity="0.92"/>
+            <stop offset="52%" stop-color="#9b8df0" stop-opacity="0.75"/>
+            <stop offset="82%" stop-color="#f6ad55" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#f39c12" stop-opacity="0.38"/>
+          </linearGradient>
+        </defs>
+
+        <path d="M 0 175
+                 C 19.3 175, 38.7 80.6, 58 80.6
+                 C 96.7 80.6, 135.3 45.3, 174 45.3
+                 C 212.7 45.3, 251.3 168.8, 290 168.8
+                 C 328.7 168.8, 367.3 133.5, 406 133.5
+                 C 444.7 133.5, 483.3 228.8, 522 228.8
+                 C 560.7 228.8, 599.3 274.7, 638 274.7
+                 C 676.7 274.7, 715.3 221.8, 754 221.8
+                 C 792.7 221.8, 831.3 115.9, 870 115.9
+                 C 908.7 115.9, 947.3 239.4, 986 239.4
+                 C 1024.7 239.4, 1063.3 151.2, 1102 151.2
+                 C 1121.3 151.2, 1140.7 305, 1160 305
+                 L 1160 330 L 0 330 Z"
+              fill="url(#journey)"/>
+        <path d="M 0 175
+                 C 19.3 175, 38.7 80.6, 58 80.6
+                 C 96.7 80.6, 135.3 45.3, 174 45.3
+                 C 212.7 45.3, 251.3 168.8, 290 168.8
+                 C 328.7 168.8, 367.3 133.5, 406 133.5
+                 C 444.7 133.5, 483.3 228.8, 522 228.8
+                 C 560.7 228.8, 599.3 274.7, 638 274.7
+                 C 676.7 274.7, 715.3 221.8, 754 221.8
+                 C 792.7 221.8, 831.3 115.9, 870 115.9
+                 C 908.7 115.9, 947.3 239.4, 986 239.4
+                 C 1024.7 239.4, 1063.3 151.2, 1102 151.2
+                 C 1121.3 151.2, 1140.7 305, 1160 305"
+              fill="none" stroke="#5b48c2" stroke-opacity=".55" stroke-width="2.5"/>
+
+        <line x1="0" y1="186.5" x2="1160" y2="186.5"
+              stroke="#f39c12" stroke-width="2" stroke-dasharray="7 7" opacity=".65"/>
+      </svg>
+
+      <div class="bubble" style="left:58px;  top:80px"><b>+30</b><span>EST</span></div>
+      <div class="bubble" style="left:174px; top:45px"><b>+40</b><span>EST</span></div>
+      <div class="bubble" style="left:290px; top:169px"><b>+5</b><span>EST</span></div>
+      <div class="bubble" style="left:406px; top:133px"><b>+15</b><span>EST</span></div>
+      <div class="bubble" style="left:522px; top:229px"><b>-12</b><span>EST</span></div>
+      <div class="bubble" style="left:638px; top:275px"><b>-25</b><span>EST</span></div>
+      <div class="bubble" style="left:754px; top:222px"><b>-10</b><span>EST</span></div>
+      <div class="bubble" style="left:870px; top:116px"><b>+20</b><span>EST</span></div>
+      <div class="bubble" style="left:986px; top:239px"><b>-15</b><span>EST</span></div>
+      <div class="bubble" style="left:1102px;top:151px"><b>+10</b><span>EST</span></div>
+
+      <div class="connector" style="left:290px; top:196px; height:162px"></div>
+      <div class="connector" style="left:522px; top:254px; height:104px"></div>
+      <div class="connector" style="left:638px; top:302px; height:56px"></div>
+      <div class="connector" style="left:986px; top:266px; height:92px"></div>
+
+      <div class="callout" style="left:150px; width:210px">
+        <span class="chip">STAGE 1 &middot; UNDERSTAND THE PLAN</span><br>
+        Targets arrive as jargon &mdash; grams, kcal, ratios. Clients start the plan
+        without truly understanding their numbers.
+      </div>
+
+      <div class="callout" style="left:402px; width:206px">
+        <span class="chip">STAGE 2 &middot; EAT &amp; LOG DAILY</span><br>
+        Logging every meal, all day, every day &mdash; the classic reason tracking
+        apps get abandoned. One-tap confirmations in v1 absorb most of it.
+      </div>
+
+      <div class="callout" style="left:618px; width:246px">
+        <span class="chip">STAGE 2 &middot; HANDLE DISRUPTIONS</span><br>
+        Decision paralysis when the day breaks: fuzzy options, no math done. The
+        default becomes <b>skipping the meal</b> &mdash; protein missed, energy
+        gone, guilt loop.<br>
+        <span class="pin">PLATEMATE V1 FOCUS</span>
+      </div>
+
+      <div class="callout" style="left:876px; width:226px">
+        <span class="chip">STAGE 3 &middot; PLATEAUS &amp; BOREDOM</span><br>
+        Rigid, repetitive plans drain motivation; results slow, and clients quietly
+        drift from the plan &mdash; and the coach.
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="item"><span class="dot"></span> Current-state pain point</div>
+    <div class="item"><span class="ring"></span> Estimated sentiment by activity</div>
+    <div class="item"><span class="curveswatch"></span> Current-state emotional journey of the coached client</div>
+    <div class="item"><span class="pinswatch"></span> PlateMate v1 focus</div>
+    <div class="est">Estimates, not measured NPS &mdash; to be validated with the peer survey</div>
+  </div>
+
+</div>
+</div>
+<p class="pagenote">Modeled on the Product Faculty journey-map slide (Shopify case). Scores are sentiment
+hypotheses from direct coaching experience; the ~100-person peer survey converts them to data.
+For the deck: open this page at 100% zoom and screenshot the white slide.</p>
+</div>
