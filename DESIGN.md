@@ -20,6 +20,21 @@ Status: **complete and approved to proceed to Develop** (faculty review by Moe A
 
 ---
 
+## The Blueprint on One Page
+
+Every Design decision for PlateMate — six choices, one or two lines each, plain text. This is the summary; sections 1–8 below carry the full reasoning.
+
+| Design decision | PlateMate answer |
+|---|---|
+| **Agent role** | Turn a disrupted day into 2–3 ranked, plan-compliant meal options with the remaining calorie + protein math shown, for a busy coached client. Advise-only: never overrides the coach's plan, never logs without confirmation, never recommends eating less to compensate. |
+| **Inputs & context** | The disruption message + the coach's plan (`plan_alex.md` / `plan_maja.md`), `personas.json`, `foods.json`, seeded state; policy files `safety_policy.md`, `tolerance.json`, `banned_language.md`, `coach_agreement_*.md`; and 3 example replies (`examples.md`). All synthetic — no real personal data. |
+| **Tools** | All simulated / local: preset picker · parse (LLM) · safety screen (function + one-way LLM assist) · plan parser · macro calculator · food filter/rank · compliance check · coaching line (LLM) · banned-language screen · coach queue (logged only) · clock · confirm-log (**the only write**). Exactly two LLM calls; the app runs correctly with the model off. |
+| **Memory** | Remember what the loop reads (running budget, safety counters, plan, profile, agreement); forget content once the run ends (raw messages; rejected options across days). Never a shadow profile — preferences live only in the coach-visible profile. |
+| **Output** | Four labeled cards, each judged in under 60 seconds: options card (budget · 2–3 options · bridge · coaching line) · imperfect-day card (honest gap + multi-day averaging) · stop message · coach flag. |
+| **Approval + escalation** | Human gate: nothing logs without one-tap client confirmation, and the safety screen runs **first**, before any math. Escalate to the coach (three tiers, quiet-hours aware) on health signals, disordered-eating signals, a 2-day skip counter, or a 3rd compensatory ask. |
+
+---
+
 ## 1. Agent role
 
 The agent is hired to turn a disrupted day into 2–3 ranked, plan-compliant meal options with the remaining calorie-and-protein math shown, for a busy coached client, within advise-only boundaries — the coach's plan stays authoritative, nothing is logged without the client's confirmation, and eating less to compensate is never recommended — escalating when health, disordered-eating, or out-of-scope signals appear.

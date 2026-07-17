@@ -1,0 +1,150 @@
+<title>PlateMate — The Design on One Page</title>
+<style>
+  :root{
+    --page-bg:#ece9f4; --page-ink:#3a3651; --page-muted:#6f6a8a;
+    --title-blue:#2b6ce0; --ink:#28243d; --muted:#6b6685;
+    --s1:#b9addf; --s2:#9081d8; --s3:#5b48c2;
+    --rowline:#ece7fb; --headbg:#f2effc; --headink:#5b48c2; --term:#4735a8;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --page-bg:#161421; --page-ink:#d9d5ea; --page-muted:#9b95b8; }
+  }
+  :root[data-theme="dark"]{ --page-bg:#161421; --page-ink:#d9d5ea; --page-muted:#9b95b8; }
+  :root[data-theme="light"]{ --page-bg:#ece9f4; --page-ink:#3a3651; --page-muted:#6f6a8a; }
+
+  *{box-sizing:border-box; margin:0}
+  body{
+    background:var(--page-bg); color:var(--page-ink);
+    font-family:"Avenir Next","Segoe UI",Helvetica,Arial,sans-serif;
+    padding:28px 16px 40px;
+  }
+  .frame{max-width:1320px; margin:0 auto}
+  .pagenote{font-size:12.5px; color:var(--page-muted); margin:14px 4px 0; line-height:1.5}
+  .scroller{overflow-x:auto; border-radius:14px}
+
+  .slide{
+    width:1280px; background:#ffffff; border-radius:14px;
+    box-shadow:0 10px 34px rgba(40,30,90,.16);
+    padding:40px 48px 34px; position:relative; color:var(--ink);
+  }
+  .topbar{display:flex; justify-content:space-between; align-items:flex-start; gap:16px}
+  .eyebrow{font-size:11px; letter-spacing:.14em; color:var(--muted); font-weight:600}
+  .pillrow{display:flex; gap:9px; margin-top:9px}
+  .pill{font-size:10px; letter-spacing:.1em; font-weight:700; color:var(--muted);
+    border:1.4px solid #e2ddf3; border-radius:999px; padding:5px 11px}
+  .pill.on{color:#fff; background:var(--s3); border-color:var(--s3)}
+  h1{font-size:34px; font-weight:800; color:var(--ink); margin-top:18px; letter-spacing:-.01em}
+  h1 .blue{color:var(--title-blue)}
+  .rule{width:64px; height:4px; background:var(--title-blue); border-radius:2px; margin:12px 0 8px}
+  .sub{font-size:14px; color:var(--muted); max-width:760px}
+  .badge4d{
+    flex:none; font-size:10.5px; letter-spacing:.12em; font-weight:700;
+    color:var(--title-blue); border:1.5px solid var(--title-blue);
+    padding:6px 12px; border-radius:999px; margin-top:6px;
+  }
+
+  table{width:100%; border-collapse:collapse; margin-top:26px; table-layout:fixed}
+  thead th{
+    text-align:left; font-size:10.5px; letter-spacing:.11em; font-weight:700;
+    color:var(--headink); background:var(--headbg);
+    padding:12px 18px; border-bottom:2px solid #e0d8f7;
+  }
+  thead th:first-child{width:250px; border-radius:9px 0 0 0}
+  thead th:last-child{border-radius:0 9px 0 0}
+  tbody td{padding:16px 18px; vertical-align:top; border-bottom:1px solid var(--rowline)}
+  tbody tr:last-child td{border-bottom:none}
+  .dec{font-size:15px; font-weight:700; color:var(--ink)}
+  .dec .k{display:block; font-size:11px; font-weight:700; letter-spacing:.04em; color:var(--s2); margin-top:4px}
+  .ans{font-size:13px; line-height:1.5; color:#403b57}
+  .ans code{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace; font-size:11.5px;
+    background:#f4f1fc; color:var(--term); padding:1px 5px; border-radius:5px}
+  .ans b{color:var(--ink)}
+
+  .foot{display:flex; gap:14px; align-items:center; margin-top:22px; flex-wrap:wrap;
+    border-top:1px solid var(--rowline); padding-top:16px; font-size:12px; color:var(--muted)}
+  .foot .tag{font-weight:700; color:var(--term); letter-spacing:.02em}
+  .foot .sep{color:#cfc7e6}
+</style>
+
+<div class="frame">
+<div class="scroller">
+<div class="slide">
+
+  <div class="topbar">
+    <div>
+      <div class="eyebrow">AGENTIC AI CAPSTONE &middot; DESIGN</div>
+      <div class="pillrow">
+        <span class="pill">WHY</span>
+        <span class="pill">BLUEPRINT</span>
+        <span class="pill">CONTEXT</span>
+        <span class="pill">BOUNDARIES</span>
+        <span class="pill">EVALS</span>
+        <span class="pill on">ONE PAGE</span>
+        <span class="pill">GATE</span>
+      </div>
+    </div>
+    <div class="badge4d">4D &middot; DESIGN</div>
+  </div>
+
+  <h1>The Design, on <span class="blue">One Page</span></h1>
+  <div class="rule"></div>
+  <div class="sub">Every Design decision for PlateMate &mdash; six choices, one or two lines each, plain text.
+  This is what complete looks like.</div>
+
+  <table>
+    <thead>
+      <tr><th>DESIGN DECISION</th><th>PLATEMATE ANSWER</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="dec">Agent role</td>
+        <td class="ans">Turn a disrupted day into <b>2&ndash;3 ranked, plan-compliant meal options</b> with the remaining
+        calorie&nbsp;+&nbsp;protein math shown, for a busy coached client. Advise-only: never overrides the coach&rsquo;s plan,
+        never logs without confirmation, never recommends eating less to compensate.</td>
+      </tr>
+      <tr>
+        <td class="dec">Inputs &amp; context</td>
+        <td class="ans">The disruption message + the coach&rsquo;s plan (<code>plan_alex.md</code> / <code>plan_maja.md</code>),
+        <code>personas.json</code>, <code>foods.json</code>, seeded state; policy files <code>safety_policy.md</code>,
+        <code>tolerance.json</code>, <code>banned_language.md</code>, <code>coach_agreement_*.md</code>; and 3 example
+        replies (<code>examples.md</code>). All synthetic &mdash; no real personal data.</td>
+      </tr>
+      <tr>
+        <td class="dec">Tools</td>
+        <td class="ans">All simulated / local: preset picker &middot; parse <b>(LLM)</b> &middot; safety screen (function + one-way LLM assist)
+        &middot; plan parser &middot; macro calculator &middot; food filter/rank &middot; compliance check &middot; coaching line <b>(LLM)</b>
+        &middot; banned-language screen &middot; coach queue (logged only) &middot; clock &middot; confirm-log (<b>the only write</b>).
+        Exactly two LLM calls; the app runs correctly with the model off.</td>
+      </tr>
+      <tr>
+        <td class="dec">Memory</td>
+        <td class="ans">Remember what the loop reads (running budget, safety counters, plan, profile, agreement);
+        forget content once the run ends (raw messages; rejected options across days).
+        <b>Never a shadow profile</b> &mdash; preferences live only in the coach-visible profile.</td>
+      </tr>
+      <tr>
+        <td class="dec">Output</td>
+        <td class="ans">Four labeled cards, each judged in under 60 seconds: <b>options card</b> (budget &middot; 2&ndash;3 options &middot; bridge
+        &middot; coaching line) &middot; <b>imperfect-day card</b> (honest gap + multi-day averaging) &middot; <b>stop message</b> &middot; <b>coach flag</b>.</td>
+      </tr>
+      <tr>
+        <td class="dec">Approval + escalation</td>
+        <td class="ans">Human gate: nothing logs without one-tap client confirmation, and the safety screen runs <b>first</b>,
+        before any math. Escalate to the coach (three tiers, quiet-hours aware) on health signals, disordered-eating
+        signals, a 2-day skip counter, or a 3rd compensatory ask.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="foot">
+    <span class="tag">SIX DECISIONS</span><span class="sep">|</span>
+    <span>plain text, no diagrams, no tools touched</span><span class="sep">|</span>
+    <span>every question the build tool asks is already answered here</span>
+  </div>
+
+</div>
+</div>
+<p class="pagenote">One-page Design blueprint, in the Product Faculty format (Northstar Home is the lesson example, not this project).
+Condensed from <code>DESIGN.md</code>; the full reasoning for each decision lives in sections 1&ndash;8. For the deck:
+open at 100% zoom and screenshot the white slide.</p>
+</div>
