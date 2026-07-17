@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 from platemate import llm                                    # noqa: E402
+from platemate.escalation import Clock, load_agreement       # noqa: E402
 from platemate.agents import Orchestrator                    # noqa: E402
 from platemate.agents.orchestrator import classify_trigger   # noqa: E402
 from platemate.food_db import load_foods                     # noqa: E402
@@ -82,7 +83,16 @@ def result_payload(result) -> dict:
         "consulted": result.consulted_agents,
         "escalation": None,
         "recommendation": None,
+        "question": getattr(result, "question", ""),
+        "presets": getattr(result, "presets", []),
+        "flag": None,
     }
+    if result.flag:
+        f = result.flag
+        out["flag"] = {"tier": f.tier.value, "reasons": f.reason_codes,
+                       "counters": f.counter_history, "queued_at": f.queued_at,
+                       "delivered_at": f.delivered_at,
+                       "trigger_shared": f.trigger_message_shared}
     if result.escalation:
         out["escalation"] = {"reasons": result.escalation.reasons, "message": result.escalation.message}
     rec = result.recommendation
@@ -116,9 +126,12 @@ def handle_adapt(body: dict) -> dict:
     message = (body.get("message") or "").strip()
     targets = body.get("targets")
     skipped_days = int(body.get("skipped_days") or 0)
+    comp_asks = int(body.get("compensatory_asks_week") or 0)
 
     plan, profile = build_persona(persona, targets)
-    orch = Orchestrator(plan, profile, FOODS)
+    clock = Clock((body.get("clock") or "15:00").strip() or "15:00")
+    orch = Orchestrator(plan, profile, FOODS,
+                        agreement=load_agreement(persona), clock=clock)
 
     sit_data = body.get("situation")
     if sit_data:
@@ -126,9 +139,11 @@ def handle_adapt(body: dict) -> dict:
         situation.raw_text = message or situation.raw_text
         if situation.trigger == Trigger.UNKNOWN:
             situation.trigger = classify_trigger(situation.raw_text)
-        result = orch.handle(situation, skipped_days=skipped_days)
+        result = orch.handle(situation, skipped_days=skipped_days,
+                             compensatory_asks_week=comp_asks)
     else:
-        result = orch.handle_text(message, skipped_days=skipped_days)
+        result = orch.handle_text(message, skipped_days=skipped_days,
+                                  compensatory_asks_week=comp_asks)
     return result_payload(result)
 
 
@@ -324,6 +339,10 @@ INDEX_HTML = r"""<!doctype html>
     <div class="row actions" style="margin-top:14px;justify-content:space-between">
       <label class="sans muted">days of skipped meals lately
         <input type="number" id="skippedDays" value="0" min="0" style="width:60px"></label>
+      <label class="sans muted">compensatory asks this week
+        <input type="number" id="compAsks" value="0" min="0" style="width:60px"></label>
+      <label class="sans muted">clock
+        <input type="text" id="clock" value="15:00" size="5" style="width:60px"></label>
       <button class="primary" id="go">Adapt my day</button>
     </div>
   </section>
@@ -432,6 +451,8 @@ $('go').onclick = async () => {
     message: $('message').value,
     situation,
     skipped_days: +$('skippedDays').value || 0,
+    compensatory_asks_week: +$('compAsks').value || 0,
+    clock: $('clock').value || '15:00',
   };
   if (STATE.needs_targets)
     body.targets = {calories_kcal: +$('capKcal').value, protein_g: +$('capProt').value};
@@ -456,10 +477,25 @@ function render(d){
   for (const a of d.consulted) chips += `<span class="chip indigo">agent: ${a}</span>`;
   $('routeChips').innerHTML = chips;
 
+  if (d.question && !d.recommendation && !d.escalation){
+    let h = `<div class="note"><b>PlateMate asks:</b><br>${d.question}</div>`;
+    if (d.presets && d.presets.length){
+      h += '<ul class="sans" style="font-size:13px">';
+      for (const pr of d.presets) h += `<li>${pr}</li>`;
+      h += '</ul>';
+    }
+    $('resultBody').innerHTML = h;
+    return;
+  }
   if (d.escalation && !d.recommendation){
     let h = '<div class="note red"><strong>Escalated to your coach.</strong><ul>';
     for (const r of d.escalation.reasons) h += `<li>${r}</li>`;
-    h += `</ul>${d.escalation.message}</div>`;
+    h += `</ul>${d.escalation.message.replace(/\n/g,'<br>')}</div>`;
+    if (d.flag){
+      h += `<div class="note red sans" style="font-size:13px"><b>COACH FLAG [${d.flag.tier.toUpperCase()}]</b><br>` +
+           `reasons: ${d.flag.reasons.join('; ')}<br>` +
+           `queued ${d.flag.queued_at} — delivered ${d.flag.delivered_at}</div>`;
+    }
     $('resultBody').innerHTML = h;
     return;
   }
