@@ -21,15 +21,26 @@ You don't win a red ocean by being better at the thing everyone competes on:
 1. **The different moment:** trackers compete on logging the past; PlateMate
    owns deciding the remaining day when the plan just broke. Mealner's
    existence proves the moment is real — move with conviction.
+   **Correction after the teardown (investigation 4): the moment is no
+   longer empty white space.** MyFitnessPal's Nutrition Coach (Jun 2026)
+   already answers "what should I eat right now?" as a pull-based chatbot,
+   and Mealner claims the identical wedge on a waitlist page. Retire the
+   claim "no one serves this moment." The surviving, defensible ground is
+   narrower and truer: **no one *initiates* it, no one *acts* on the answer,
+   and no one leaves the *coach* a record.** MFP's version is pull-only,
+   can't log or adjust for you, and is iOS/Premium/6-country. The wedge is
+   the trigger + the action + the coach handoff, not the calculation.
 2. **The structural weakness — the guilt loop, stated carefully:** mainstream
    tracker retention is built on daily-logging engagement, which produces
    the shame spiral — but guilt-free design alone is NOT white space
    (MacroFactor already positions on it). It is table stakes we implement
    in code (banned compensation language, no red zones). The unclaimed
    ground is the moment: the in-the-moment decision against a
-   coach-prescribed plan, with the coach loop and safety tiers around it —
-   review mining found zero incumbent complaints there because no product
-   attempts it.
+   coach-prescribed plan, with the coach loop and safety tiers around it.
+   A generic chatbot answer to "what should I eat now?" now exists (MFP
+   Coach, Jun 2026), but the *combination* — coach-prescribed plan +
+   initiation + acting on the answer + coach-visible record + safety tiers —
+   is unattempted (teardown, investigation 4).
 3. **The channel — the coach:** consumer apps fight for users one download at
    a time; PlateMate enters through coaches — one coach brings a roster,
    pre-trusted, plan already written. The agreement + packages double as a
@@ -69,6 +80,32 @@ Caveats: execute one wedge relentlessly before widening (the Moe-trimmed scope
 IS the strategy); the coach becomes a customer too — the coach-side experience
 (digest, triage) is v2 and the moat deepens with it (switching costs once a
 roster runs through the app).
+
+**The MacroFactor counter-thesis (the sharpest challenge on record — carry
+into the deck).** MacroFactor deliberately *refuses* intra-day re-planning:
+daily variance is noise, the right response to one off-plan lunch is nothing.
+It attacks the same emotional pain (shame, "day is ruined") by **removing the
+verdict** rather than **issuing a correction** — a credible, evidence-backed
+opposite bet. Our answer, in four legs: (1) **different customer** — a
+*coached* client whose coach *prescribed* adherence and who *opted in* to
+in-the-moment help; the intervention is consented and coach-governed, not
+imposed; (2) **different failure mode** — netnography (investigation 3) shows
+the modal reaction is the AVE binge cascade, which "do nothing" does not
+interrupt; we interrupt the *belief that the day is ruined*, not the calories;
+(3) **we removed the verdict too** — banned compensation language, no red
+zones, pivot-as-success, multi-day averaging; we add *direction* on top of
+*no-shame*; (4) **delivery, not surveillance** — pull-with-consent, quiet
+hours, advise-only autonomy, coach-set escalation; do NOT ship unprompted
+push as a default, make initiation an opt-in the coach and client set (a
+3pm "eat this now" ping imposed on someone would be exactly the nagging the
+persona is fleeing).
+
+**Trainerize is a channel threat, not just a competitor.** It already owns
+the client relationship, the plan, the log, the compliance score, and a
+swap-time macro-warning primitive. For Trainerize a broken-day re-plan is a
+*feature*; for us it is a *company*. This raises the urgency of the coach
+channel: the moat is not the calculation (copyable) but being the
+coach-native adaptation layer before an incumbent coach platform adds it.
 
 ## The red-ocean strategy test (ten answers, one sentence each)
 
