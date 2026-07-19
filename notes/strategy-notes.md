@@ -222,6 +222,24 @@ are structurally unable to follow.
   interest — "I choose energy over perfection," "I let the app re-plan when
   work blows up" — setting expectations at the calmest moment. (Wording must
   pass our own tone rules: no "failure" language.)
+- **The QQRT lens (quantity, quality, regularity, timing — transferred
+  from sleep science's four-determinant model; our framing, not borrowed
+  authority).** Trackers compete entirely on the quantity axis (counting
+  calories and macros) and partially on quality; the research located the
+  pain on the regularity and timing axes, which nobody measures — a
+  disruption is a timing shock (the meeting displaces lunch), and the
+  what-the-hell collapse is a regularity failure. PlateMate's mechanism is
+  absorbing a timing shock so quantity stays acceptable and regularity
+  survives: the no-skip rate is a regularity metric, rigidity-as-feature
+  is regularity-as-feature, and multi-day averaging is "protect the
+  regularity, flex the quantity." Competitive line: *trackers count the
+  quantity axis; PlateMate defends the regularity and timing axes — the
+  two nobody measures and the two where the journey actually breaks.*
+  Discipline: an analogy, not evidence — chrononutrition needs its own
+  desk pass before any timing claim becomes load-bearing; and regularity
+  means consistency with the coach's plan, never a universal meal clock
+  (an IF user's timing is their deliberate structure — the strategic-skip
+  rule applies to timing judgments too).
 - **"Steady energy" is the segment's language.** For desk professionals the
   resonant promise is cognitive bandwidth — avoiding the 3 p.m. slump — more
   than weight or physique. Useful for copy and positioning now; anything
