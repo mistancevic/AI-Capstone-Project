@@ -180,22 +180,33 @@ no mention of my product concept until a final optional section.
 
 ## Investigation 6 — Peer survey (primary research; ours to field)
 
-Instrument (5 questions, ~2 minutes, for the ~100-person cohort):
+Instrument (6 questions, ~2.5 minutes, for the ~100-person cohort):
 
 1. When did you last skip a meal because you didn't know what to eat that
    would fit your plan? (this week / this month / can't remember / never)
 2. In a normal week, how many times does real life (meetings, events,
    travel, cravings) break your planned eating? (0 / 1–2 / 3–5 / 6+)
-3. What do you do when it happens? (open text)
-4. How do you feel about logging food daily? (love it / tolerate it /
+3. How often does each of these happen to you? (per row: never / a few
+   times a year / monthly / weekly / several times a week)
+   a. A day where real life breaks your planned eating
+   b. Logging food feels like a chore you avoid or quit
+   c. A social event or travel day wrecks the plan
+   d. Meal boredom bad enough that you drift off the plan
+   e. Confusion about what your plan actually wants from you
+4. What do you do when it happens? (open text)
+5. How do you feel about logging food daily? (love it / tolerate it /
    avoid it / quit apps because of it)
-5. If an app could tell you, in under a minute, exactly what to eat next
+6. If an app could tell you, in under a minute, exactly what to eat next
    to stay on your plan when the day breaks — would you use it? Would you
    pay? (use: yes/no; pay: yes/no/only if my coach recommends it)
 
-Q1–Q2 validate the -25 valley frequency; Q4 validates -12; Q3 is the
-open-text goldmine; Q5 probes willingness to pay and the coach-channel
-hypothesis in one stroke.
+Q1–Q2 validate the disruption valley's frequency; **Q3 is the frequency
+matrix (faculty feedback): one row per valley, so prioritization becomes
+depth × frequency instead of depth alone** — a −30 that strikes twice a
+week outranks a −30 that strikes quarterly; Q5 validates the logging
+valley; Q4 is the open-text goldmine (the skip/binge/adapt split,
+first-party); Q6 probes willingness to pay and the coach channel in one
+stroke.
 
 ---
 
@@ -224,3 +235,20 @@ score (≥3 = triangulated); `EST` = still an estimate.
 
 Untouched (EST): find coach +30, onboard +40, shop & meal-prep +15,
 progress review +20, adjust goal +10.
+
+**Interpretation rules for v2 (faculty feedback on the map, July 2026):**
+
+1. **Depth alone does not prioritize.** The map ranks valleys by sentiment
+   depth, but a shallower valley that strikes weekly can outrank a deeper
+   one that strikes quarterly — disruptions and plateaus differ hugely in
+   frequency. Real prioritization is **depth × frequency**; survey Q3 (the
+   per-valley frequency matrix) supplies the missing axis. Until it
+   returns, the depth ranking is provisional in *ordering*, not just
+   magnitude.
+2. **Negative magnitudes are ceiling values.** App-store reviews and
+   netnography over-sample the frustrated — people at peace with logging
+   don't write posts about it — so the −20 and −30 read as upper bounds
+   on the population value, not point estimates. The n≈100 survey is the
+   corrective (a cohort sample, not a complaint sample). Until then,
+   interpret v2 conservatively: the *ordering* of valleys is
+   evidence-constrained; the *depths* are worst-case.
