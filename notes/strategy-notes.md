@@ -224,8 +224,14 @@ are structurally unable to follow.
   pass our own tone rules: no "failure" language.)
 - **The QQRT lens (quantity, quality, regularity, timing — transferred
   from sleep science's four-determinant model; our framing, not borrowed
-  authority).** Trackers compete entirely on the quantity axis (counting
-  calories and macros) and partially on quality; the research located the
+  authority).** In the nutrition transfer the quality axis must be
+  completed with a dimension sleep doesn't need: **bioavailability —
+  eaten is not absorbed.** Logged grams are not usable grams (protein
+  digestibility and amino-acid completeness differ across sources; DIAAS/
+  PDCAAS is the scoring literature), so quality = composition +
+  bioavailability. Trackers compete entirely on the quantity axis
+  (counting calories and macros) and partially on quality; the research
+  located the
   pain on the regularity and timing axes, which nobody measures — a
   disruption is a timing shock (the meeting displaces lunch), and the
   what-the-hell collapse is a regularity failure. PlateMate's mechanism is
@@ -235,11 +241,18 @@ are structurally unable to follow.
   regularity, flex the quantity." Competitive line: *trackers count the
   quantity axis; PlateMate defends the regularity and timing axes — the
   two nobody measures and the two where the journey actually breaks.*
-  Discipline: an analogy, not evidence — chrononutrition needs its own
-  desk pass before any timing claim becomes load-bearing; and regularity
-  means consistency with the coach's plan, never a universal meal clock
-  (an IF user's timing is their deliberate structure — the strategic-skip
-  rule applies to timing judgments too).
+  Discipline: an analogy, not evidence — chrononutrition and
+  bioavailability each need their own desk pass before any such claim
+  becomes load-bearing; regularity means consistency with the coach's
+  plan, never a universal meal clock (an IF user's timing is their
+  deliberate structure — the strategic-skip rule applies to timing
+  judgments too); and bioavailability stays OUT of v1 client-facing math —
+  the coach's targets are in grams and stay authoritative (no silent
+  discounting of the coach's numbers), and bioavailability-adjusted
+  tracking is a precision escalation pointed at a segment our evidence
+  describes as orthorexia-adjacent. The product-shaped version is parked:
+  bioavailability-aware option ranking within the coach's plan (see
+  parked-ideas.md).
 - **"Steady energy" is the segment's language.** For desk professionals the
   resonant promise is cognitive bandwidth — avoiding the 3 p.m. slump — more
   than weight or physique. Useful for copy and positioning now; anything
