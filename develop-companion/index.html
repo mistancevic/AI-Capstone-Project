@@ -633,10 +633,11 @@ function gateButtons(caseId){
     <button onclick="escalateCase('${caseId}')">Escalate</button>
     <span id="gatestate-${caseId}"></span><div id="editbox-${caseId}"></div></div>`;
 }
-function setGateState(caseId, s, note){
+function setGateState(caseId, s, note){ /* re-cached below */
   CASE_STATE[caseId] = s;
   document.getElementById('gatestate-' + caseId).innerHTML = ' → <b>' + s.toUpperCase() + '</b>' + (note ? ' - ' + note : '');
   const box = document.getElementById('editbox-' + caseId); if (box) box.innerHTML = '';
+  cacheResult(caseId);
 }
 function approveCase(caseId){
   const top = (window.TOP_OPTION || {})[caseId] || 'option 1';
@@ -673,7 +674,7 @@ async function runCase(caseId){
   const out = document.getElementById('out-' + caseId);
   const { c } = caseContext(d);
   const screen = screenMessage(d);
-  const box = inner => { out.innerHTML = `<div style="border:1px dashed #666;padding:6px;margin:4px 0">` + inner + `</div>`; };
+  const box = inner => { out.innerHTML = `<div style="border:1px dashed #666;padding:6px;margin:4px 0">` + inner + `</div>`; cacheResult(caseId); };
 
   // Deterministic floor FIRST - a stop here means no model call happens at all.
   if (screen.stops.length) {
@@ -729,6 +730,8 @@ async function runAll(){
 
 // ===== prompt 10: console render (tokens-only chrome) =====
 let SELECTED = null;
+const RESULTS = {};   // case_id -> last rendered result HTML (fix: Run All results must persist)
+function cacheResult(id){ const el = document.getElementById('out-' + id); if (el) RESULTS[id] = el.innerHTML; }
 const snip = s => s.length > 64 ? s.slice(0, 61) + '...' : s;
 
 function renderCases(){
@@ -750,7 +753,7 @@ function selectCase(id){
     <div class="msgwell">"${d.message}"</div>
     <div class="meta" style="margin:var(--sp-2) 0">context: plan ${d.client_id} (${c.daily_kcal ? c.daily_kcal + ' kcal / ' + c.daily_protein_g + ' g' : 'targets not stated — capture path'}) · counters: skipped=${st.skipped_days_counter ?? 0}, comp_asks=${st.compensatory_asks_week ?? 0} · policies: adaptation A1–A7, safety S1–S7</div>
     <button class="btn primary" onclick="runCase('${d.case_id}')">Run</button>
-    <div id="out-${d.case_id}" class="resultwell"></div>`;
+    <div id="out-${d.case_id}" class="resultwell">${RESULTS[d.case_id] || ''}</div>`;
   renderCases();
 }
 function renderKeyState(){
