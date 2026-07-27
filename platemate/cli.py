@@ -1,6 +1,6 @@
 """Interactive PlateMate CLI.
 
-Usage:  python -m platemate.cli [--persona alex|maja]
+Usage:  python -m platemate.cli [--persona alex|maya]
 
 Type a disrupted-day message and PlateMate routes it: the safety screen runs
 first, then the nutrition agent answers with the math and ranked options.
@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="PlateMate interactive CLI")
-    parser.add_argument("--persona", choices=["alex", "maja"], default="alex")
+    parser.add_argument("--persona", choices=["alex", "maya"], default="alex")
     args = parser.parse_args()
 
     personas = json.loads((ROOT / "data" / "personas.json").read_text(encoding="utf-8"))

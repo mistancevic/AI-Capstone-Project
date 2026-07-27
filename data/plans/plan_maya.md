@@ -1,6 +1,6 @@
 # Nutrition Plan — synthetic demo document (targets intentionally omitted)
 
-Client: Maja
+Client: Maya
 Coach: Coach Dana (synthetic)
 Goal: fat loss with steady energy through long workdays
 

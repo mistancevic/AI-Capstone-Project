@@ -7,7 +7,7 @@
      routes it, the nutrition agent shows the math and 2-3 ranked options
      plus a bridge fallback, the sleep & recovery agent weighs in on the
      late dinner, and a coaching line closes it out.
-  3. The onboarding-capture path: Maja's plan omits targets, so the app
+  3. The onboarding-capture path: Maya's plan omits targets, so the app
      asks for them before adapting anything.
   4. A seeded safety case (dizzy + three days of skipped meals) shows the
      app refuse and escalate to the coach.
@@ -86,30 +86,30 @@ def main() -> None:
     print(format_recommendation(result.recommendation))
 
     # ------------------------------------------------------------------ #
-    banner("STEP 3 — Onboarding capture (Maja's plan omits targets)")
-    maja_raw = personas["maja"]
-    maja = ClientProfile(
-        name=maja_raw["name"], goal=maja_raw["goal"], restrictions=maja_raw["restrictions"],
-        dislikes=maja_raw["dislikes"], likes=maja_raw["likes"],
-        training_tomorrow=maja_raw["training_tomorrow"], usual_bedtime=maja_raw["usual_bedtime"],
+    banner("STEP 3 — Onboarding capture (Maya's plan omits targets)")
+    maya_raw = personas["maya"]
+    maya = ClientProfile(
+        name=maya_raw["name"], goal=maya_raw["goal"], restrictions=maya_raw["restrictions"],
+        dislikes=maya_raw["dislikes"], likes=maya_raw["likes"],
+        training_tomorrow=maya_raw["training_tomorrow"], usual_bedtime=maya_raw["usual_bedtime"],
     )
-    maja_plan = parse_plan_file(ROOT / maja_raw["plan_file"])
-    print(plan_summary(maja_plan))
+    maya_plan = parse_plan_file(ROOT / maya_raw["plan_file"])
+    print(plan_summary(maya_plan))
 
-    maja_orch = Orchestrator(maja_plan, maja, foods)
-    probe = maja_orch.handle(Situation(raw_text="what should I eat for lunch?",
+    maya_orch = Orchestrator(maya_plan, maya, foods)
+    probe = maya_orch.handle(Situation(raw_text="what should I eat for lunch?",
                                        trigger=Trigger.ON_THE_SPOT_SWAP))
     print(f"\nPlateMate: {probe.question or probe.escalation.message}")
-    print('\nMaja: "Coach says 1800 kcal and 120 g protein."')
-    capture_targets(maja_plan, 1800, 120)
-    print(f"PlateMate: got it — daily targets set to {maja_plan.targets}. ✔")
+    print('\nMaya: "Coach says 1800 kcal and 120 g protein."')
+    capture_targets(maya_plan, 1800, 120)
+    print(f"PlateMate: got it — daily targets set to {maya_plan.targets}. ✔")
 
     # ------------------------------------------------------------------ #
     banner("STEP 4 — Seeded safety case: refuse and escalate")
     safety_msg = ("I've been feeling dizzy today and honestly I've barely eaten "
                   "anything for three days. What should I eat?")
-    print(f'Maja: "{safety_msg}"\n')
-    safety_result = maja_orch.handle_text(safety_msg, skipped_days=3)
+    print(f'Maya: "{safety_msg}"\n')
+    safety_result = maya_orch.handle_text(safety_msg, skipped_days=3)
     print(f"Orchestrator: route '{safety_result.route.value}'")
     print("Signals detected:")
     for reason in safety_result.escalation.reasons:

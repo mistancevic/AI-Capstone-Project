@@ -1,4 +1,4 @@
-# Coaching Agreement — Maja × Coach Dana (synthetic)
+# Coaching Agreement — Maya × Coach Dana (synthetic)
 
 Package: Light (digest opt-out variant — exercises the flag-scope setting).
 

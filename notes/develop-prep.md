@@ -203,9 +203,9 @@ between what exists and what DESIGN.md §4–§7 specifies.
   restriction tags present (vegan/vegetarian/dairy/lactose/fish). Verify at
   eval setup: at least one bridge compatible with each persona's full
   restriction set.
-- `data/plans/maja_plan.md` — already correctly omits daily targets
+- `data/plans/maya_plan.md` — already correctly omits daily targets
   (exercises ask-never-guess). Naming drift only: Design says
-  `plans/plan_maja.md` / `plan_alex.md`.
+  `plans/plan_maya.md` / `plan_alex.md`.
 - `data/personas.json` — exists; check restrictions[] vs intolerances[] vs
   preferences[] split matches Design.
 - Nutrition core — tolerance concept, projected-day check, multi-day
@@ -221,7 +221,7 @@ between what exists and what DESIGN.md §4–§7 specifies.
 | `state_seed.json` | Seeded counters + today's intake per scenario — without it, Cases 3/6/7 cannot run |
 | `tolerance.json` | The band as data (±10 g / ±150 kcal); today it is a code constant, and protein tolerance appears absent |
 | `banned_language.md` | Check-4 screen list + deterministic fallback line |
-| `coach_agreement_alex.md` / `_maja.md` | Quiet hours, channel, flag scope — Case 7's delivery logic reads these |
+| `coach_agreement_alex.md` / `_maya.md` | Quiet hours, channel, flag scope — Case 7's delivery logic reads these |
 | `examples.md` | Few-shot context for both LLM calls |
 
 **Divergent (exists but pre-Design shape):**
@@ -280,14 +280,14 @@ message (safe default plus what was queued to the coach) instead of a card.
 The coach's plan is uploaded once at onboarding.
 
 **Synthetic data used:** All synthetic; no real personal data. Facts:
-plan_alex.md and plan_maja.md (coach plans; the maja variant omits daily
+plan_alex.md and plan_maya.md (coach plans; the maya variant omits daily
 targets to exercise the ask-never-guess path), personas.json (two profiles:
 restrictions, intolerances, preferences), foods.json (~40 items with
 macros, prep time, availability, bridge and restriction flags),
 state_seed.json (seeded intake and safety counters per scenario). Rules:
 safety_policy.md (signals, tiers, thresholds, templated stop wording),
 tolerance.json (±10 g protein / ±150 kcal as data), banned_language.md,
-coach_agreement_alex.md and coach_agreement_maja.md (channel, quiet hours,
+coach_agreement_alex.md and coach_agreement_maya.md (channel, quiet hours,
 flag scope). Examples: examples.md (a happy-path card, an imperfect-day
 card, a stop message). scenarios.json holds the eval cases — test harness,
 not agent input.
@@ -323,7 +323,7 @@ parked initiative with a named revival condition (notes/parked-ideas.md).
 green, all in model-off deterministic mode. Run 1 failed hard, twice, plus
 one crash: the restriction-demand detector fired on innocent calorie
 mentions — "team dinner around 1000 kcal" hard-stopped the happy path and
-Maja's "about 600 kcal" sushi lunch drew an urgent flag (false-positive
+Maya's "about 600 kcal" sushi lunch drew an urgent flag (false-positive
 over-refusal, the exact failure mode Case 3 exists to catch on the
 language side) — and option scoring crashed on a stale constant left
 behind when the tolerance band moved from code into tolerance.json. Run 2
