@@ -529,6 +529,9 @@ const NUDGE_LINE = "I hear that today feels heavy - and eating less now to cover
 const RUN_LOG = [];
 const CASE_STATE = {};
 const RESULTS = {};
+const CASE_OUTCOME = {};   // case_id -> last run outcome, shown as a badge on the case card
+const OUTCOME_BADGE = { 'OK': ['ok','OK'], 'REFUSED': ['danger','REFUSED'], 'CLARIFY': ['warn','CLARIFY'], 'OUT-OF-SCOPE': ['neutral','OUT-OF-SCOPE'], 'ERROR': ['warn','FORMAT'] };
+const HUMAN_BADGE = { approved: ['ok','APPROVED'], edited: ['warn','EDITED'], escalated: ['danger','ESCALATED'], acknowledged: ['neutral','ACKNOWLEDGED'] };
 window.TOP_OPTION = {}; window.LAST_DECISION = {};
 let SELECTED = null;
 
@@ -545,9 +548,13 @@ function fmtOpt(o, tick){
 function renderCases(){
   document.getElementById('cases').innerHTML = DISRUPTIONS.map(d => {
     const c = CLIENTS.find(x => x.client_id === d.client_id);
+    const o = CASE_OUTCOME[d.case_id] ? OUTCOME_BADGE[CASE_OUTCOME[d.case_id]] : null;
+    const hstate = CASE_STATE[d.case_id] ? HUMAN_BADGE[CASE_STATE[d.case_id]] : null;
+    const badges = (o ? badge(o[0], o[1]) : '') + (hstate ? ' ' + badge(hstate[0], hstate[1]) : '');
     return `<div class="case-card${SELECTED === d.case_id ? ' active' : ''}" id="card-${d.case_id}" onclick="selectCase('${d.case_id}')">
       <div class="id">${d.case_id} · ${c.name} · ${d.clock}</div>
-      <div class="title">${esc(d.message.length > 60 ? d.message.slice(0, 57) + '…' : d.message)}</div></div>`;
+      <div class="title">${esc(d.message.length > 60 ? d.message.slice(0, 57) + '…' : d.message)}</div>
+      ${badges ? `<div style="margin-top:var(--sp-1)">${badges}</div>` : ''}</div>`;
   }).join('');
 }
 
@@ -574,16 +581,18 @@ function selectCase(id){
 function gateButtons(caseId){
   return `<div id="gate-${caseId}">
     <div class="metaline">pending review — nothing is logged without one of these:</div>
-    <button class="btn" onclick="approveCase('${caseId}')">Approve</button>
+    <button class="btn approve" onclick="approveCase('${caseId}')">Approve</button>
     <button class="btn" onclick="editCase('${caseId}')">Edit</button>
-    <button class="btn" onclick="escalateCase('${caseId}')">Escalate</button>
-    <span id="gatestate-${caseId}"></span><div id="editbox-${caseId}"></div></div>`;
+    <button class="btn danger" onclick="escalateCase('${caseId}')">Escalate</button>
+    <span id="gatestate-${caseId}"></span><div id="editbox-${caseId}"></div>
+    <div class="boundary-note">Nothing is sent without human approval.</div></div>`;
 }
 function setGateState(caseId, s, note){
   CASE_STATE[caseId] = s;
   document.getElementById('gatestate-' + caseId).innerHTML = ' → <b>' + s.toUpperCase() + '</b>' + (note ? ' — ' + esc(note) : '');
   const box = document.getElementById('editbox-' + caseId); if (box) box.innerHTML = '';
   cacheResult(caseId);
+  renderCases();
 }
 function approveCase(caseId){
   const top = (window.TOP_OPTION || {})[caseId] || 'option 1';
@@ -628,6 +637,7 @@ async function runCase(caseId){
   const out = document.getElementById('out-' + caseId);
   const screen = screenMessage(d);
   const show = html => { out.innerHTML = html; cacheResult(caseId); };
+  const done = s => { CASE_OUTCOME[caseId] = s; renderCases(); return s; };
 
   // Deterministic floor FIRST — a stop here means no model call happens at all.
   if (screen.stops.length) {
@@ -644,21 +654,22 @@ async function runCase(caseId){
         (screen.stops.some(s => s.startsWith('S2b')) ? field('The floor', "I can't build you a day below your plan's baseline — that's a line this app never crosses, no matter how it's asked. (S2b)") : '') +
         (screen.health ? field('GET HELP NOW', 'If you feel unwell — dizzy, faint, or worse — contact a medical professional or someone near you right away. Your coach has been flagged, but they are not an emergency channel. (S1)') : '') +
         field('Coach flag', badge('danger', 'URGENT') + ` queued ${d.clock}, delivered ${deliv} — reason codes above; counters as counts only; trigger shared once per agreement. You see exactly what your coach sees. (S6)`)) +
-      stage(5, 'REVIEW', `<button class="btn" onclick="acknowledgeStop('${caseId}')">Acknowledge</button><span id="gatestate-${caseId}"></span><div id="editbox-${caseId}"></div>`));
+      stage(5, 'REVIEW', `<button class="btn" onclick="acknowledgeStop('${caseId}')">Acknowledge</button><span id="gatestate-${caseId}"></span><div id="editbox-${caseId}"></div>
+        <div class="boundary-note">Nothing is sent without human approval.</div>`));
     logRun(caseId, 'REFUSED-ESCALATE', 'auto-escalate', `URGENT flag queued ${d.clock}, delivered ${deliv}`);
-    return 'REFUSED';
+    return done('REFUSED');
   }
   if (screen.oos) {
     show(stage(3, 'DECISION', badge('neutral', 'OUT-OF-SCOPE') + field('Reason', 'Supplements, medication, and training programming belong to the coach. (S4)')) +
          stage(4, 'OUTPUT', field('Reply', "That's one for your coach, not for me — I only adapt the plan you already have. (S4)")) +
          stage(5, 'REVIEW', `<div class="metaline">digest entry only, per the coaching agreement — nothing to approve</div>`));
-    return 'OUT-OF-SCOPE';
+    return done('OUT-OF-SCOPE');
   }
   if (!c.daily_kcal) {
     show(stage(3, 'DECISION', badge('warn', 'CLARIFY') + field('Reason', 'The plan states no daily targets. (A7)')) +
          stage(4, 'OUTPUT', field('Question', "Your uploaded plan doesn't state daily calorie and protein targets. Tell me the targets (or ask your coach) and I'll take it from there — I won't guess numbers for you.")) +
          stage(5, 'REVIEW', `<div class="metaline">no card to review — the app asks instead of guessing</div>`));
-    return 'CLARIFY';
+    return done('CLARIFY');
   }
 
   out.innerHTML = `<div class="thinking">PlateMate is thinking…</div>`;
@@ -668,7 +679,7 @@ async function runCase(caseId){
     show(stage(3, 'DECISION', badge('warn', 'FORMAT') + ` <span class="metaline">${mode}</span>` + field('Notice', 'agent output did not match format — raw text below, nothing crashed')) +
          stage(4, 'OUTPUT', `<pre style="white-space:pre-wrap;font-family:var(--font-mono);font-size:var(--fs-0)">${esc(parsed.raw || '')}</pre>`) +
          stage(5, 'REVIEW', `<div class="metaline">re-run the case, or escalate to the coach</div>`));
-    return 'ERROR';
+    return done('ERROR');
   }
   const f = parsed.f;
   if (f.STATUS === 'REFUSED-ESCALATE') {   // one-way rule: the model may ADD a stop, never clear one
@@ -677,7 +688,7 @@ async function runCase(caseId){
          stage(4, 'OUTPUT', field('Safe default', 'Eat your planned meal as written. No adjustments today.')) +
          stage(5, 'REVIEW', `<button class="btn" onclick="acknowledgeStop('${caseId}')">Acknowledge</button><span id="gatestate-${caseId}"></span><div id="editbox-${caseId}"></div>`));
     logRun(caseId, 'REFUSED-ESCALATE', 'auto-escalate', 'model-added stop');
-    return 'REFUSED';
+    return done('REFUSED');
   }
   const sit = f.situation || {};
   const noFacts = !((sit.off_plan || []).length || (sit.upcoming_fixed || []).length || (sit.displaced || []).length);
@@ -686,7 +697,7 @@ async function runCase(caseId){
          stage(4, 'OUTPUT', field('Question', "I want to get this right and I'm missing the shape of the day. What happened — something extra, a meal you'll miss, or a big meal coming up? If it's easier, pick a preset:") +
            field('Presets', PRESETS.map(p => `<span class="chip">${p}</span>`).join(' '))) +
          stage(5, 'REVIEW', `<div class="metaline">no card to review — answer the question or tap a preset</div>`));
-    return 'CLARIFY';
+    return done('CLARIFY');
   }
 
   const card = computeCard(d, sit);
@@ -708,7 +719,7 @@ async function runCase(caseId){
       (card.strategy ? field('Strategy', card.strategy + ' ' + chips(['A5'])) : '') +
       field('Coaching line', coach.line + (coach.replaced ? ' <span class="metaline">(replaced by the S7 screen)</span>' : ''))) +
     stage(5, 'REVIEW', gateButtons(caseId)));
-  return 'OK';
+  return done('OK');
 }
 
 async function runAll(){
