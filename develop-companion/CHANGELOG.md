@@ -11,7 +11,18 @@ an entry, no entry without a bump.
 
 ---
 
-## p17 · Verdicts recorded + the harder case — current
+## p18 · The scoreboard — current
+
+**Opportunity:** quality as numbers, permanently on screen — the "I
+tested my agent" shot for the video. **What changed:** a scoreboard strip
+above the evals table in the kit's stat styles: Pass / Needs work / Fail
+counts, cases run (6/6), and last-run date; updates live with verdicts
+and runs. E-6's verdict recorded per the human's ruling: *Pass — "tier
+pair works both directions: same message family, the counter decides
+food vs stop."* **Verified:** scoreboard reads 5 Pass · 1 Needs work ·
+0 Fail · 6/6 run, matching the table's badges exactly.
+
+## p17 · Verdicts recorded + the harder case
 
 **Problem/opportunity:** five first-run passes with one wrinkle would read
 as barely tested; the kit's rule is to make a case harder — and verdicts
