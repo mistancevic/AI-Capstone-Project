@@ -11,7 +11,20 @@ an entry, no entry without a bump.
 
 ---
 
-## p19 · One improvement, on the record — current
+## p20 · Honest limits — current (Section C complete)
+
+**Problem:** limits unstated read as limits unknown; "works great" is
+banned. **What changed:** a Known-limitations panel in the Evals view -
+five specific limits stated as scope decisions: one loop only (no plan
+creation, no target edits, no ordering); the skip counter cannot yet
+distinguish strategic fasting from punitive skipping (the netnography
+finding, designed but not built); counters are seeded, the watch and
+pause mode are not runtime; exact data shapes required, keyword parsing
+offline; simulated delivery with safe-side double-flagging. **Verified:**
+five limits render, no marketing language, the strategic-skip limit
+present. These feed the Deploy pilot plan next phase.
+
+## p19 · One improvement, on the record
 
 **Problem:** E-1 was judged NEEDS WORK by the human — the eval spec
 demanded "each option within the tolerance band" while the design (A2/A3)
