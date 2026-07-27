@@ -262,6 +262,7 @@ input { background: var(--bg-inset); color: var(--ink); border: var(--border-w) 
   <div class="panel">
     <div class="panel-head">Cases · <button class="btn" style="padding:2px 10px" onclick="runAll()">Run All</button></div>
     <div class="panel-body">
+      <div id="demoChips" style="display:flex;flex-wrap:wrap;gap:var(--sp-1);margin-bottom:var(--sp-2)"></div>
       <div class="metaline" id="sweep"></div>
       <div id="cases" style="margin-top:var(--sp-2)"></div>
     </div>
@@ -742,7 +743,11 @@ function renderKeyState(){
   const chip = document.getElementById('statusChip');
   if (chip) chip.textContent = has ? 'live model ready · ' + MODEL : 'offline rules mode';
 }
-renderCases(); renderLog(); renderKeyState();
+function renderChips(){
+  document.getElementById('demoChips').innerHTML = EVAL_CASES.map(e =>
+    `<span class="chip" onclick="selectCase('${e.case_id}')" title="${e.case_id}">${e.name}</span>`).join('');
+}
+renderChips(); renderCases(); renderLog(); renderKeyState();
 
 </script>
 </body>
