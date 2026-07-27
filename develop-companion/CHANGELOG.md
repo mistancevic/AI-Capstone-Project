@@ -11,7 +11,24 @@ an entry, no entry without a bump.
 
 ---
 
-## p18 · The scoreboard — current
+## p19 · One improvement, on the record — current
+
+**Problem:** E-1 was judged NEEDS WORK by the human — the eval spec
+demanded "each option within the tolerance band" while the design (A2/A3)
+correctly puts only the top option in the band and labels the rest with
+honest signed gaps. The failure was in the spec, not the agent — which is
+itself a finding: the eval caught an overclaiming expectation.
+**What changed:** the smallest change addressing the cause — E-1's
+expected wording in `eval_cases.csv` corrected to "the top option landing
+within the tolerance band, the others carrying honest signed gaps". No
+system prompt, policy, threshold, or ranking weight touched. A permanent
+**Improvement card** (Before → Change → After) now sits in the Evals view.
+**Verified:** E-1 re-run matches the corrected expectation and the human
+flipped it to Pass; **all six cases re-run** — no regression (E-2 CLARIFY,
+E-3 nudge+counter, E-4 presets, E-5 stop + 07:00 flag, E-6 stop +
+immediate flag). Scoreboard: 6 Pass · 0 Needs work · 0 Fail · 6/6 run.
+
+## p18 · The scoreboard
 
 **Opportunity:** quality as numbers, permanently on screen — the "I
 tested my agent" shot for the video. **What changed:** a scoreboard strip
