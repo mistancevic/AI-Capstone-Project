@@ -25,7 +25,7 @@ from platemate.plan_parser import capture_targets, parse_plan, parse_plan_file
 
 
 ALEX_PLAN = ROOT / "data" / "plans" / "plan_alex.md"
-MAJA_PLAN = ROOT / "data" / "plans" / "plan_maja.md"
+MAYA_PLAN = ROOT / "data" / "plans" / "plan_maya.md"
 
 
 @pytest.fixture()
@@ -55,7 +55,7 @@ def test_parse_plan_with_targets(alex_plan):
 
 
 def test_parse_plan_without_targets_needs_capture():
-    plan = parse_plan_file(MAJA_PLAN)
+    plan = parse_plan_file(MAYA_PLAN)
     assert plan.needs_target_capture
     capture_targets(plan, 1800, 120)
     assert not plan.needs_target_capture
@@ -103,8 +103,8 @@ def test_budget_math_skipped_meal_not_reserved(alex_plan):
 # --------------------------------------------------------------- filtering --
 
 def test_filter_respects_restrictions_and_time(foods):
-    maja = ClientProfile(name="Maja", restrictions=["lactose"], dislikes=["jerky"])
-    picked = filter_foods(foods, maja, available=["home", "shop"], minutes_available=5,
+    maya = ClientProfile(name="Maya", restrictions=["lactose"], dislikes=["jerky"])
+    picked = filter_foods(foods, maya, available=["home", "shop"], minutes_available=5,
                           meal_type="lunch")
     assert picked, "there must always be something quick to eat"
     for food in picked:
@@ -214,7 +214,7 @@ def test_orchestrator_safety_first(alex_plan, alex, foods):
 
 
 def test_orchestrator_requires_targets(foods, alex):
-    plan = parse_plan_file(MAJA_PLAN)  # no targets
+    plan = parse_plan_file(MAYA_PLAN)  # no targets
     orch = Orchestrator(plan, alex, foods, use_llm=False)
     result = orch.handle(Situation(trigger=Trigger.MUST_SKIP))
     assert result.route == Route.CLARIFY

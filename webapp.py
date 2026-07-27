@@ -6,7 +6,7 @@ In GitHub Codespaces the port is auto-forwarded: run it, then click the
 "Open in Browser" notification (or the PORTS tab -> port 8000 -> globe icon).
 
 The page is a thin skin over the same agents the CLI and demo use:
-GET  /api/state?persona=alex|maja   -> plan summary for the persona
+GET  /api/state?persona=alex|maya   -> plan summary for the persona
 POST /api/adapt                     -> run one disrupted-day request
 """
 
@@ -268,7 +268,7 @@ INDEX_HTML = r"""<!doctype html>
         <label for="persona">client&nbsp;</label>
         <select id="persona">
           <option value="alex">Alex — lean muscle gain</option>
-          <option value="maja">Maja — fat loss, steady energy</option>
+          <option value="maya">Maya — fat loss, steady energy</option>
         </select>
       </span>
     </div>

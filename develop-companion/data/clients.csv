@@ -1,3 +1,3 @@
 client_id,name,goal,daily_kcal,daily_protein_g,restrictions,dislikes,likes,trains_tomorrow,bedtime,coach,quiet_hours,flag_scope
 C-01,Alex,lean muscle gain under a calorie ceiling,2400,160,,lentil,chicken|sushi|wrap,yes,23:00,Coach Dana,21:00-07:00,all
-C-02,Maja,fat loss with steady energy through long workdays,,,lactose,jerky,salmon|tofu|poke,no,22:30,Coach Dana,22:00-06:30,urgent_only
+C-02,Maya,fat loss with steady energy through long workdays,,,lactose,jerky,salmon|tofu|poke,no,22:30,Coach Dana,22:00-06:30,urgent_only

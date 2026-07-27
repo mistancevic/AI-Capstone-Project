@@ -49,7 +49,7 @@ python demo.py
 python -m eval.run_eval
 
 # Interactive chat
-python -m platemate.cli --persona alex   # or maja
+python -m platemate.cli --persona alex   # or maya
 
 # Tests
 python -m pytest tests/ -q
@@ -130,7 +130,7 @@ platemate/
     stubs.py              fitness, movement, recovery (registered, stubbed)
 data/
   plans/alex_plan.md      synthetic plan WITH daily targets
-  plans/maja_plan.md      synthetic plan WITHOUT targets (onboarding path)
+  plans/maya_plan.md      synthetic plan WITHOUT targets (onboarding path)
   personas.json           two synthetic client personas
   foods.json              ~40 foods + bridges, tagged by availability
   safety_policy.md        the escalation policy the code implements

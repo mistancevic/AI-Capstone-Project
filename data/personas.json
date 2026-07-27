@@ -9,14 +9,14 @@
     "usual_bedtime": "23:00",
     "plan_file": "data/plans/plan_alex.md"
   },
-  "maja": {
-    "name": "Maja",
+  "maya": {
+    "name": "Maya",
     "goal": "fat loss with steady energy through long workdays",
     "restrictions": ["lactose"],
     "dislikes": ["jerky"],
     "likes": ["salmon", "tofu", "poke"],
     "training_tomorrow": false,
     "usual_bedtime": "22:30",
-    "plan_file": "data/plans/plan_maja.md"
+    "plan_file": "data/plans/plan_maya.md"
   }
 }

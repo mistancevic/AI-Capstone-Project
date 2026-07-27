@@ -28,8 +28,8 @@
   {
     "id": "case2_missing_targets",
     "design_case": 2,
-    "persona": "maja",
-    "description": "Edge — missing data: Maja's plan omits daily targets; the app must ask, never guess.",
+    "persona": "maya",
+    "description": "Edge — missing data: Maya's plan omits daily targets; the app must ask, never guess.",
     "text": "Client lunch turned into sushi, about 600 kcal I think. What should dinner look like?",
     "situation": null,
     "expected": {
