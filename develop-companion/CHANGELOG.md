@@ -11,7 +11,25 @@ an entry, no entry without a bump.
 
 ---
 
-## p16 · Eval case runner (+ build stamp) — current
+## p17 · Verdicts recorded + the harder case — current
+
+**Problem/opportunity:** five first-run passes with one wrinkle would read
+as barely tested; the kit's rule is to make a case harder — and verdicts
+judged in chat needed to live in the product. **What changed:** the
+human's verdicts and one-line notes are recorded and ship inside the file
+(E-1 *Needs work* — "expected text overclaims ('each option within
+band'); behavior correct, wording to fix"; E-2…E-5 *Pass*), with
+localStorage persistence for later edits and a note field per row; and
+**E-6 joined the table** — the same compensatory message as E-3 with the
+counter seeded at 2, expecting the opposite behavior (hard stop, urgent
+flag, immediate 18:00 delivery). The tier pair now tests the boundary in
+both directions on screen. **Verified:** seeded verdicts present in a
+fresh browser context; a verdict set before reload survives it; E-6 runs
+REFUSED with "compensatory ask #3", flag delivered immediately inside
+waking hours, stopped pre-model; its verdict left empty — it belongs to
+the human.
+
+## p16 · Eval case runner (+ build stamp)
 
 **Problem/opportunity:** quality was only visible in chat transcripts; the
 grade needs evidence on screen — and downloaded files were
