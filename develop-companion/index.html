@@ -267,9 +267,7 @@ input { background: var(--bg-inset); color: var(--ink); border: var(--border-w) 
       <div id="cases" style="margin-top:var(--sp-2)"></div>
     </div>
   </div>
-  <div class="panel"><div class="panel-body" id="work">
-    <div class="empty"><div class="headline">Pick a case</div>Select a disruption on the left and watch it move through the five stages: input → context → decision → output → review.</div>
-  </div></div>
+  <div class="panel"><div class="panel-body" id="work"></div></div>
   <div class="panel"><div class="panel-body">
     <div class="panel-head" style="padding:0 0 var(--sp-2);border:0">Settings</div>
     <div class="metaline">Anthropic API key — stored in your browser's localStorage only; never written to this file.</div>
@@ -326,6 +324,7 @@ function saveKey(){
   if (v) { localStorage.setItem('platemate_api_key', v); }
   else { localStorage.removeItem('platemate_api_key'); }
   renderKeyState();
+  if (!SELECTED) renderEmpty();
   document.getElementById('apiKey').value = '';
 }
 
@@ -743,11 +742,24 @@ function renderKeyState(){
   const chip = document.getElementById('statusChip');
   if (chip) chip.textContent = has ? 'live model ready · ' + MODEL : 'offline rules mode';
 }
+function renderEmpty(){
+  const hasKey = !!getKey();
+  document.getElementById('work').innerHTML = `
+    <div class="empty">
+      <div class="headline">Your plan, adapted to real life</div>
+      PlateMate turns a disrupted day into 2–3 plan-compliant meal options — with the math shown,
+      a never-skip fallback, and your coach in the loop on every safety signal.<br><br>
+      Pick a <b>demo chip</b> or any case on the left to watch one disruption move through the five stages:
+      input → context → decision → output → review.
+      ${hasKey ? '' : `<div class="boundary-note" style="text-align:left;margin-top:var(--sp-4)">No API key saved — the app runs on its deterministic offline rules (fully functional).
+      For live model runs, paste your Anthropic key in <b>Settings</b> on the right; it stays in your browser only.</div>`}
+    </div>`;
+}
 function renderChips(){
   document.getElementById('demoChips').innerHTML = EVAL_CASES.map(e =>
     `<span class="chip" onclick="selectCase('${e.case_id}')" title="${e.case_id}">${e.name}</span>`).join('');
 }
-renderChips(); renderCases(); renderLog(); renderKeyState();
+renderChips(); renderCases(); renderLog(); renderKeyState(); renderEmpty();
 
 </script>
 </body>
