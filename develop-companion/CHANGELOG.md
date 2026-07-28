@@ -11,6 +11,23 @@ an entry, no entry without a bump.
 
 ---
 
+## p23 · A re-run you can actually see (user-caught)
+
+**Problem (found by the human, not by me):** pressing **Run** on an eval
+row *did* re-run the case — it switched to the console, ran it, and
+stamped the run — but nothing on screen said so. Three things hid it: the
+offline run finishes in milliseconds so the console round-trip is
+invisible; the Actual text is rewritten with *identical* text, which is
+the correct result but looks like nothing happened; and `evalRun` never
+called `renderScoreboard()`, so the one indicator that would have proved
+it — **Last run** — stayed frozen on the seeded date. A test you cannot
+watch run is a test nobody believes. **What changed:** one line —
+`renderScoreboard()` added to `evalRun`, so Last run and Cases run
+refresh with the re-run. **Verified:** with the stamp cleared, the
+scoreboard reads the seeded 2026-07-27 before the click and 2026-07-28
+after it; verdict counts unchanged (6 Pass · 0 · 0 · 6/6); no console
+errors; console loop unaffected.
+
 ## p22 · Memory, the design's way (Path B stretch — B3)
 
 **Opportunity / tension:** the kit's B3 stretch asks for memory by feeding
