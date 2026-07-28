@@ -12,13 +12,14 @@ as a cross-check: both compute identical numbers.
 Status: **Develop complete.** Stopped at the end of Develop per the kit:
 no publishing, no deployment — Deploy is phase 4 and has its own guide.
 
-## Header (PRD sheet, rows 4–7)
+## Header (PRD sheet, rows 3–6)
 
-| Field | Entry |
-|---|---|
-| **Your Name:** | Milan Stancevic |
-| **Agentic AI Product Name:** | PlateMate: macros made simple |
-| **Date:** | July 5, 2026 |
+| Row | Field | Entry |
+|---|---|---|
+| 3 | **Your Name:** | Milan Stancevic |
+| 4 | **Agentic AI Product Name:** | PlateMate: macros made simple |
+| 5 | **Workflow / Project Choice:** | A nutrition plan-adaptation workflow for a coached client who already follows a prescribed plan. When real life disrupts the day (an off-plan snack, a surprise dinner out, a meal that must be skipped), a first-step orchestrator agent reads the situation and the client's goal, then routes to a nutrition agent that computes the remaining calorie and protein budget and returns 2–3 ranked, plan-compliant meal options with the macros shown. It consults a sleep and recovery agent when a food decision such as a late dinner also affects sleep or tomorrow's training, and escalates to the human coach on any health, medical, or out-of-scope signal. |
+| 6 | **Date:** | July 5, 2026 |
 
 (Develop phase completed July 28, 2026. The sheet carries one **Date:**
 field for the whole PRD, so it stays as set at the start — the sheet is

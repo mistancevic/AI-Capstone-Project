@@ -4,7 +4,7 @@ Agentic AI Capstone, Design phase record. Builds on the approved Discovery PRD (
 
 Status: **complete and approved to proceed to Develop** (faculty review by Moe Ali, July 2026 — see Faculty Feedback at the end of this document).
 
-## Header
+## Header (PRD sheet, rows 3–6)
 
 | Field | Entry |
 |---|---|
@@ -35,11 +35,15 @@ Every Design decision for PlateMate — six choices, one or two lines each, plai
 
 ---
 
-## 1. Agent role
+## 19. Activity: Agent definition | Theme: Agent role | Topic: Job to be done
+
+**Key question(s):** What job is the agent being hired to do?
 
 The agent is hired to turn a disrupted day into 2–3 ranked, plan-compliant meal options with the remaining calorie-and-protein math shown, for a busy coached client, within advise-only boundaries — the coach's plan stays authoritative, nothing is logged without the client's confirmation, and eating less to compensate is never recommended — escalating when health, disordered-eating, or out-of-scope signals appear.
 
-## 2. Target workflow
+## 20. Activity: Workflow design | Theme: Target workflow | Topic: Future process steps
+
+**Key question(s):** How does the workflow change when the agent is introduced? List the future process as text steps.
 
 The future per-request run, from trigger to human decision:
 
@@ -54,7 +58,9 @@ The future per-request run, from trigger to human decision:
 
 **Designed but out of demo scope (future work, labeled):** a separate clock-triggered daily watch that advances the skipped-days and off-target counters, sends one gentle check-in after three silent days, and flags the coach at the same thresholds; and a client-declared pause for life events ("away until Sunday") that suspends logging expectations for a bounded window, auto-resumes, appears in the coach's digest, and never mutes the safety screen. The hard stop fires on either channel independently — tracked counter or the client's own words; if both fire, the coach receives the flag twice (deduplication is future work; over-flagging on this signal errs safe). The only watch element in demo scope is the seeded skipped-meals counter feeding the step-2 safety screen.
 
-## 3. Agent loop
+## 21. Activity: Agent behavior | Theme: Agent loop | Topic: Observe, decide, act, check
+
+**Key question(s):** What does the agent observe, reason about, produce, and check before handing work back?
 
 - **Observe:** the disruption message, the plan's targets, today's confirmed intake, the upcoming fixed commitment, available food context and time, and the seeded tracked state (skipped-meals counter, compensatory-asks counter).
 - **Decide:** fixed-order triage — safety screen (text + counters), then scope, then missing-data check, then classification into one of the five named triggers — and route to the nutrition agent.
@@ -67,7 +73,9 @@ The future per-request run, from trigger to human decision:
 
 **Summary rule:** restriction violations are discarded, tolerance failures re-rank then degrade with the gap shown, and escalation is reserved for safety signals alone — the agent never escalates because the math is hard, only because the human is at risk.
 
-## 4. Inputs and context
+## 22. Activity: Context | Theme: Inputs and context | Topic: What the agent needs
+
+**Key question(s):** What information, examples, rules, files, or user inputs does the agent need to perform well?
 
 All files are synthetic; no real personal data anywhere. Facts, rules, and examples, each traced to the loop step that consumes it:
 
@@ -92,7 +100,9 @@ All files are synthetic; no real personal data anywhere. Facts, rules, and examp
 
 Separate from runtime context: `scenarios.json` holds the eval cases — test harness, not agent input.
 
-## 5. Tools or simulated tools
+## 23. Activity: Tools | Theme: Tools or simulated tools | Topic: Actions the agent can take
+
+**Key question(s):** What tools, files, systems, or mock actions will the prototype use? Text descriptions are enough.
 
 All simulated or local — nothing external is called for real. Every tool maps to a target-workflow step.
 
@@ -115,7 +125,9 @@ All simulated or local — nothing external is called for real. Every tool maps 
 
 **Safety screen mechanism — both layers, asymmetrically:** the deterministic layer (keyword lists from `safety_policy.md` + the counter thresholds) is authoritative and always runs — the guaranteed floor, and it cannot be bypassed. On top of it, an LLM classifier scans the same message for paraphrased signals a keyword list misses ("I guess I just won't eat today" carries no keyword but is a skip-intent signal), with one hard rule: **the LLM may only add a stop, never clear one.** A deterministic hit stops the run regardless of what the model thinks; a model-only hit also stops the run; with the model off, the deterministic floor still holds every case that keyword or counter can catch. Nondeterminism is confined to the direction where its worst failure mode is an unnecessary coach flag — never a missed one.
 
-## 6. Memory decision
+## 24. Activity: Memory | Theme: Memory decision | Topic: What should persist
+
+**Key question(s):** What should the agent remember, and what should it not remember?
 
 **Principle: remember the state the loop reads; forget content once its run is over; never build a shadow profile of the client.** "No memory" was considered and rejected as impossible: the running budget and the safety counters cannot exist without state across runs. The decision is therefore the boundary, in three buckets, each with a written reason.
 
@@ -142,7 +154,9 @@ All simulated or local — nothing external is called for real. Every tool maps 
 - The triggering message of an escalation is delivered to the coach per the agreement and then dropped from app state — the app retains the stop's reason codes, not the sensitive text.
 - No behavioral profile, no inferred preferences, no location, no photos, no data retained for model training; LLM calls are logged as pass/fail flags only, never with content. Nothing exists outside the named files and the counters above.
 
-## 7. Output format
+## 25. Activity: Output | Theme: Output format | Topic: Reviewable result
+
+**Key question(s):** What should the agent produce so a human can review it quickly and confidently?
 
 Four outputs, each in labeled fields a reviewer can judge in under sixty seconds.
 
@@ -177,7 +191,9 @@ Four outputs, each in labeled fields a reviewer can judge in under sixty seconds
 
 Sixty-second test, per audience: the client reads BUDGET → OPTIONS → tap; the coach reads URGENCY → TRIGGER → WHAT THE CLIENT WAS TOLD → decides call, message, or wait. Neither ever recomputes anything.
 
-## 8. Escalation rules
+## 26. Activity: Failure handling | Theme: Escalation rules | Topic: When the agent should stop
+
+**Key question(s):** What should happen when the agent is unsure, missing data, or facing a risky case?
 
 | Trigger | Detected by | Tier | Client sees | Coach sees |
 |---|---|---|---|---|
@@ -204,7 +220,9 @@ Sixty-second test, per audience: the client reads BUDGET → OPTIONS → tap; th
 
 **Anger + skip-intent in one message:** signals are evaluated independently and the highest-severity signal governs the response — hostility never masks safety. "This app is useless, whatever, I just won't eat then" is processed as hostility (digest-level) *plus* skip-intent (compensatory-family, tier by counter); the client receives the skip-intent response — a de-escalating, warm nudge plus real options — not a complaint-handling reply. Policy rule of thumb: **anger changes the tone of the reply, never the safety verdict.**
 
-## 9. Human approval point
+## 27. Activity: Approval | Theme: Human approval point | Topic: Decision checkpoint
+
+**Key question(s):** Where does the human approve, edit, reject, or escalate the agent's work?
 
 **Gate 1 — the client gate (before the system's only write).** The gated consequence: the write to today's confirmed intake — the running budget that every later recompute reads, that becomes the day-end summary, and that feeds the counters. Formally: **no state in this system changes because the agent produced something; state changes only when the client confirms it.** The four verbs:
 
@@ -224,7 +242,9 @@ If the client confirms nothing all day, the app never invents data: an unconfirm
 3. **Transparency as the counterweight:** the client sees, on the stop message itself, exactly what the coach will see and when. Nothing is reported invisibly. The flag is not surveillance; it is a promised conversation arriving.
 4. **Proportionality:** the flag carries reason codes, not transcripts; it goes to one human the client themselves chose; and nothing else happens automatically — no plan change, no lockout, no third party. The maximum consequence of a flag is that someone who cares checks in.
 
-## 10. Initial eval plan
+## 28. Activity: Evaluation | Theme: Initial eval plan | Topic: How you will test judgment
+
+**Key question(s):** What cases will prove the agent works, respects boundaries, and handles edge cases?
 
 Seven cases (five is the floor; the faculty tier-distinction requires the 3/6 pair, and the math-never-escalates claim requires case 5). Each case carries input, seeded state, expected behavior specific enough that pass/fail is obvious, and what it tests. All cases live in `scenarios.json`.
 
