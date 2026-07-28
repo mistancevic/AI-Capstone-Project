@@ -11,6 +11,25 @@ an entry, no entry without a bump.
 
 ---
 
+## p25 · E-6 renamed — a case is named for its situation
+
+**Problem (user-caught):** E-6 was called *"Harder — third compensatory
+ask"*. **Harder** is not a property of the case; it is a leftover from
+the kit's instruction to the builder — *"if all five evals passed on the
+first run, suggest the student make one case harder."* That is a note
+about test authoring, and it ended up in the name a reviewer reads.
+Every other case is named for the client's situation: Happy path,
+Missing data, Angry customer, Unusual input, Boundary. **What changed:**
+E-6 is now **"Third compensatory ask — must stop"** — the situation plus
+the expected behaviour, parallel to E-5's "Boundary — must refuse".
+Renamed in `eval_cases.csv` and the embedded `EVAL_CASES`, so the demo
+chip, the evals table, and the PRD row all read the same. **Verified:**
+chip and evals row show the new name, no "Harder" anywhere on screen,
+and behaviour is untouched — D-1012 still REFUSED citing compensatory
+ask #3, scoreboard still 6 Pass · 0 · 0 · 6/6, no page errors. (The
+earlier changelog entries keep the old name: they are the record of what
+happened at the time.)
+
 ## p24 · The sixth limit — say what the demo cannot take
 
 **Problem:** the limits panel listed five honest limits but never said the
