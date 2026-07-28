@@ -11,6 +11,20 @@ an entry, no entry without a bump.
 
 ---
 
+## p24 · The sixth limit — say what the demo cannot take
+
+**Problem:** the limits panel listed five honest limits but never said the
+plainest one: **you cannot type a new disruption into this prototype.** It
+runs the seeded cases only; the sole typing surfaces are the API key, an
+edited option, an escalation reason, and an eval note. The PRD row's
+question is "be honest and specific", and a reviewer clicking around would
+discover this before reading it — the worst order. **What changed:** a
+sixth entry in `LIMITS`, and the matching PRD row (35) updated from five
+to six with the same fact stated. **Verified:** the panel renders six
+limits with the new one on screen; scoreboard unchanged (6 Pass · 0 · 0 ·
+6/6); console loop still green (D-1001 → remaining 150 kcal / 35 g); no
+page errors.
+
 ## p23 · A re-run you can actually see (user-caught)
 
 **Problem (found by the human, not by me):** pressing **Run** on an eval
