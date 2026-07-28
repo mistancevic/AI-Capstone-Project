@@ -11,7 +11,44 @@ an entry, no entry without a bump.
 
 ---
 
-## p20 · Honest limits — current (Section C complete)
+## p22 · Memory, the design's way (Path B stretch — B3)
+
+**Opportunity / tension:** the kit's B3 stretch asks for memory by feeding
+the human's edits back into the system prompt as learned preferences —
+but `DESIGN.md`'s memory decision explicitly rejects implicit preference
+learning (**no shadow profile**). Building B3 the shortcut way would have
+contradicted the approved design. **What changed:** memory built the
+design-faithful way — an edit is remembered for *that case, this session*
+and visibly re-offered as a "Remembered choice" field when the same case
+re-runs (never generalized across cases); a new **Memory** tab shows three
+honest buckets — *remembered this session* (decisions, edits, verdicts,
+run log), *remembered by design, as counts never texts* (the safety
+counters, the day budget), and *deliberately NOT remembered* (raw messages
+after each run; cross-case preferences — keep editing away salmon and the
+app re-offers it tomorrow on purpose, so the mismatch forces an explicit
+coach-visible profile edit, the auditable version of learning). A
+**Forget-all** button genuinely resets behavior (clears `platemate_edits`,
+`platemate_evals`, `platemate_evals_lastrun` and in-memory state).
+**Verified (Playwright, headless):** an edit on a case is recalled on that
+case's re-run; the same edit does *not* appear on a different case (no
+cross-case leak); all three buckets render with the no-shadow-profile note;
+Forget-all zeroes edits/states/log and restores E-1 to its seeded verdict,
+and the "Remembered choice" field is gone after reset. The kit's own line —
+*"note what you chose NOT to remember; that is a PRD-grade decision"* — is,
+for this product, the whole point.
+
+## p21 · Readability pass + evidence — current (Section D)
+
+**Job:** the close-out pass. **What changed:** build stamp only — the
+audit found nothing to fix: zero non-token colors in the app layer, zero
+raw pixel font sizes (all sizes ride the token scale, 13px floor), no
+leftover debug UI. Three evidence screenshots captured at 2x for video
+compression (evidence/): the console with a decided case, the refusal on
+screen, the eval scoreboard. The 8 Develop PRD rows drafted from the
+built prototype for the human's approval. **Verified:** audit output in
+the session log; screenshots on disk.
+
+## p20 · Honest limits (Section C complete)
 
 **Problem:** limits unstated read as limits unknown; "works great" is
 banned. **What changed:** a Known-limitations panel in the Evals view -
