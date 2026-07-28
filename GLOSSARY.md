@@ -12,6 +12,15 @@ an output, log row, or document cites a code, this is where it resolves.
 | **E-** | **E**val case — a test with expected behavior, pointing at a D- case | `develop-companion/data/eval_cases.csv` | E-5 = Boundary, must refuse (runs D-1005) |
 | *(Numbering)* | Starts at 1001 (cases) / 01 (clients) for even width — labels only; no logic depends on them | | |
 
+**D- ids run in date order** across the nine-day timeline (14–22 July), so
+they are a history, not a menu. E- ids are just test numbers. The two only
+look aligned by accident: E-1…E-5 use D-1001…D-1005 because those are the
+first days' cases, and then it breaks — **E-6 is D-1012, not D-1006**,
+because the third-compensatory-ask test needs a message arriving *after*
+two asks already stand in the rolling week (C-01's counter: 0 until Jul 18,
+1 on Jul 19, **2 on Jul 20** — D-1012's date — then reset). D-1006 is a
+five-minutes-for-lunch case on Jul 17, when the counter is still 0.
+
 The Python prototype's eval set uses plain case numbers (Case 1–7, from
 DESIGN.md §10) and scenario ids (`case1_happy_path` …) instead of D-/E- ids.
 Mapping: E-1→Case 1, E-2→Case 2, E-3→Case 3, E-4→Case 4, E-5→Case 7;
