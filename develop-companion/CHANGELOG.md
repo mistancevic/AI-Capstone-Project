@@ -11,7 +11,18 @@ an entry, no entry without a bump.
 
 ---
 
-## p20 · Honest limits — current (Section C complete)
+## p21 · Readability pass + evidence — current (Section D)
+
+**Job:** the close-out pass. **What changed:** build stamp only — the
+audit found nothing to fix: zero non-token colors in the app layer, zero
+raw pixel font sizes (all sizes ride the token scale, 13px floor), no
+leftover debug UI. Three evidence screenshots captured at 2x for video
+compression (evidence/): the console with a decided case, the refusal on
+screen, the eval scoreboard. The 8 Develop PRD rows drafted from the
+built prototype for the human's approval. **Verified:** audit output in
+the session log; screenshots on disk.
+
+## p20 · Honest limits (Section C complete)
 
 **Problem:** limits unstated read as limits unknown; "works great" is
 banned. **What changed:** a Known-limitations panel in the Evals view -
