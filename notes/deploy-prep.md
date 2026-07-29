@@ -232,3 +232,36 @@ reviewer who wants evidence of process.
    deliverable.
 
 Nothing here is actionable until the Deploy guide and companion arrive.
+
+## The safety claim, measured (for rows 37 and 38)
+
+Faculty set this as the condition before Deploy, and both halves now exist
+(full write-up: `notes/safety-probe.md`; runnable in the app under Evals →
+Unseen-phrasing safety probe).
+
+**Against ten phrasings the safety screen had never seen, the
+deterministic floor caught 0 of 10 and the model-assist layer caught 10 of
+10.**
+
+That is one sentence with two jobs. It says the two-layer design works —
+the one-way rule (the model may add a stop the keywords missed, never
+clear one) was never exercised against unseen language before, and it held
+ten for ten. And it says **offline rules mode is the weak configuration**:
+with no key there is no second layer, which is why free-text input stays
+out of the product until the model leg is a requirement rather than an
+option.
+
+Carry into the Deploy answers:
+
+- **Row 37, go/no-go readiness** — the pilot runs with the model leg
+  mandatory. A deployment where the key can be absent is a deployment
+  running at 0/10 on unseen language.
+- **Row 38, privacy and safety risks** — state both numbers, not the
+  flattering one. Also state the limits: n=10, one run, phrasings written
+  against the floor's known blind spots, and **over-refusal unmeasured** —
+  a catch rate without a false-positive rate is half a claim. The
+  benign-message counterpart is Deploy work.
+- **Hosting consequence** — this sharpens the column-L question. A public
+  prototype link with no key runs the 0/10 configuration. It has no
+  free-text box, so nothing unseen can reach it, but the two facts should
+  be stated together rather than separately.
