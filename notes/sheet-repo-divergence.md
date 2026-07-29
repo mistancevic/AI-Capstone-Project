@@ -52,27 +52,60 @@ file is their only durable copy. Verbatim:
 (F19's row matches the repo exactly; its note is provenance, not a
 revision record.)
 
-## Open — a decision is needed (row 25 resolved)
+## Open — one real gap (rows 23, 26, 28 cleared; 25 resolved)
 
-| Row | Theme | Verdict | Extra text |
-|---|---|---|---|
-| **20** | Target workflow | repo has more | repo +773 |
-| **23** | Tools or simulated tools | both differ | sheet +368, repo +472 |
-| ~~25~~ | ~~Output format~~ | **resolved 2026-07-29** | now identical |
-| **26** | Escalation rules | both differ | sheet +670, repo +696 |
+Re-examined 2026-07-29 after a challenge about whether the repo text had
+been paraphrased rather than copied. Two checks settle it.
 
-**Row 25 — resolved.** The sheet held ~346 characters `DESIGN.md` never
-had: *Agent tone* (warm, plain language; the math is shown but never
-lectured) and *Banned agent moves* (no guilt framing — "to make up for",
-"you earned it" — no praising a skipped meal, no fake cheerfulness, no
-lecturing), plus the fixed order under stress: acknowledge the feeling
-first, solve second, invite the coach before a situation becomes a crisis.
-Pulled into `DESIGN.md` verbatim; the two now match at 3,425 characters
-with only markdown emphasis differing. Nothing was changed in the sheet.
+**Check 1 — was the repo rewritten?** Every Design answer in `DESIGN.md`
+today is byte-identical to the first Design commit (`203a95c`), with
+exactly two exceptions: row 25 (the block pulled in from the sheet today)
+and row 22 (the Maja → Maya rename, requested). Nothing was reworded,
+expanded, or invented afterwards.
 
-This is the design intent the prototype's banned-language screen
-implements — "make up for", "you earned it", "cheat day", praise of
-skipping — so the rule and its enforcement now live in the same repo.
+**Check 2 — are the remaining differences real?** Comparing word bags with
+all formatting stripped (pipes, arrows, list markers, punctuation):
+
+| Row | Result |
+|---|---|
+| **20** | **REAL gap — 129 words exist only in the repo** |
+| 23 | same content; the repo renders a markdown table, the sheet flattens it to prose |
+| 26 | same content; same table-vs-prose difference |
+| 28 | identical content, formatting only |
+| 25 | resolved — pulled into `DESIGN.md`, now matching |
+
+So rows 23, 26 and 28 were never a divergence. A markdown table cannot be
+pasted into a spreadsheet cell, so it was flattened into arrow notation
+when filling the sheet — `| tool | type | check |` became
+`tool — type — check`. Same facts, different rendering. No action.
+
+### Row 20 — the one genuine gap
+
+The sheet's Target workflow cell is missing the closing paragraph the repo
+carries, roughly 129 words:
+
+> **Designed but out of demo scope (future work, labeled):** a separate
+> clock-triggered daily watch that advances the skipped-days and off-target
+> counters, sends one gentle check-in after three silent days, and flags
+> the coach at the same thresholds; and a client-declared pause for life
+> events ("away until Sunday") that suspends logging expectations for a
+> bounded window, auto-resumes, appears in the coach's digest, and never
+> mutes the safety screen. The hard stop fires on either channel
+> independently — tracked counter or the client's own words; if both fire,
+> the coach receives the flag twice (deduplication is future work;
+> over-flagging on this signal errs safe). The only watch element in demo
+> scope is the seeded skipped-meals counter feeding the step-2 safety
+> screen.
+
+This is scope-boundary content: what is designed but deliberately not
+built, and why the coach can be flagged twice. It is the Design-phase
+statement of two things that later became Develop limits 3 and 6, and it
+answers the demo-scope half of the faculty's Discovery directive. A
+reviewer reading only the sheet does not see it.
+
+**Decision needed:** paste it into F20, or leave the sheet as reviewed.
+Unlike rows 15/16/18 there is no cell note covering this one — the
+omission looks accidental rather than chosen.
 
 ## Trivial
 
