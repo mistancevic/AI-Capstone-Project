@@ -35,16 +35,28 @@ Every Design decision for PlateMate — six choices, one or two lines each, plai
 
 ---
 
+## Phase: DESIGN — sheet rows 19–28
+
+> **Do not paste these into the sheet without checking first.** As of
+> 2026-07-29, nine of these twenty rows differ from the live sheet, in
+> *both* directions — some rows are fuller here, some are fuller there.
+> Discovery and Design were reviewed and approved from the sheet, so the
+> sheet is authoritative until the two are reconciled deliberately.
+> Details in the reconciliation note below.
+
 ## 19. Activity: Agent definition | Theme: Agent role | Topic: Job to be done
 
 **Key question(s):** What job is the agent being hired to do?
 
+```text
 The agent is hired to turn a disrupted day into 2–3 ranked, plan-compliant meal options with the remaining calorie-and-protein math shown, for a busy coached client, within advise-only boundaries — the coach's plan stays authoritative, nothing is logged without the client's confirmation, and eating less to compensate is never recommended — escalating when health, disordered-eating, or out-of-scope signals appear.
+```
 
 ## 20. Activity: Workflow design | Theme: Target workflow | Topic: Future process steps
 
 **Key question(s):** How does the workflow change when the agent is introduced? List the future process as text steps.
 
+```text
 The future per-request run, from trigger to human decision:
 
 1. The client reports a disruption in one message — typed free text or a tapped preset scenario (dinner with colleagues, travel day, must skip lunch).
@@ -57,11 +69,13 @@ The future per-request run, from trigger to human decision:
 8. The client decides: confirm an option with one tap — optionally editing the portion or swapping an ingredient first, with the math recomputed live — or reject it (no confirmation, or a dislike). Only a confirmed choice updates the day's running budget.
 
 **Designed but out of demo scope (future work, labeled):** a separate clock-triggered daily watch that advances the skipped-days and off-target counters, sends one gentle check-in after three silent days, and flags the coach at the same thresholds; and a client-declared pause for life events ("away until Sunday") that suspends logging expectations for a bounded window, auto-resumes, appears in the coach's digest, and never mutes the safety screen. The hard stop fires on either channel independently — tracked counter or the client's own words; if both fire, the coach receives the flag twice (deduplication is future work; over-flagging on this signal errs safe). The only watch element in demo scope is the seeded skipped-meals counter feeding the step-2 safety screen.
+```
 
 ## 21. Activity: Agent behavior | Theme: Agent loop | Topic: Observe, decide, act, check
 
 **Key question(s):** What does the agent observe, reason about, produce, and check before handing work back?
 
+```text
 - **Observe:** the disruption message, the plan's targets, today's confirmed intake, the upcoming fixed commitment, available food context and time, and the seeded tracked state (skipped-meals counter, compensatory-asks counter).
 - **Decide:** fixed-order triage — safety screen (text + counters), then scope, then missing-data check, then classification into one of the five named triggers — and route to the nutrition agent.
 - **Act:** compute the remaining calorie/protein budget, filter the food table by hard constraints (restrictions, availability, time), rank by protein fit, calorie fit, and preferences, and assemble 2–3 options plus the bridge fallback, math shown.
@@ -72,11 +86,13 @@ The future per-request run, from trigger to human decision:
   4. **Output-language screen:** the one LLM-authored element, the coaching line, is scanned against the banned-language list (no "make up for," "burn it off," no praising skipping). On failure it is replaced by the deterministic default line. The card's arithmetic is also self-checked — the shown numbers must add up.
 
 **Summary rule:** restriction violations are discarded, tolerance failures re-rank then degrade with the gap shown, and escalation is reserved for safety signals alone — the agent never escalates because the math is hard, only because the human is at risk.
+```
 
 ## 22. Activity: Context | Theme: Inputs and context | Topic: What the agent needs
 
 **Key question(s):** What information, examples, rules, files, or user inputs does the agent need to perform well?
 
+```text
 All files are synthetic; no real personal data anywhere. Facts, rules, and examples, each traced to the loop step that consumes it:
 
 **Facts**
@@ -99,11 +115,13 @@ All files are synthetic; no real personal data anywhere. Facts, rules, and examp
 10. `examples.md` — three model outputs showing what good looks like: a happy-path card (budget math, three options, bridge, coaching line), an imperfect-day card (gap labeled honestly + multi-day averaging strategy), and a stop message (supportive refusal + safe default + what was queued to the coach). Consumed as prompt context for the LLM's two language jobs — it teaches tone and card format by example rather than instruction.
 
 Separate from runtime context: `scenarios.json` holds the eval cases — test harness, not agent input.
+```
 
 ## 23. Activity: Tools | Theme: Tools or simulated tools | Topic: Actions the agent can take
 
 **Key question(s):** What tools, files, systems, or mock actions will the prototype use? Text descriptions are enough.
 
+```text
 All simulated or local — nothing external is called for real. Every tool maps to a target-workflow step.
 
 | # | Tool | Kind | Workflow step | Input → output |
@@ -124,11 +142,13 @@ All simulated or local — nothing external is called for real. Every tool maps 
 **Architecture split, explicit:** exactly two tools are LLM calls — `parse_situation` and `coaching_line` — both language jobs. Every number (budget, ranking, tolerance), every filter, and every screen is a plain function over the named files. The app runs correctly with the model switched off: parsing degrades to keyword rules, the coaching line degrades to the fallback sentence, and nothing else changes.
 
 **Safety screen mechanism — both layers, asymmetrically:** the deterministic layer (keyword lists from `safety_policy.md` + the counter thresholds) is authoritative and always runs — the guaranteed floor, and it cannot be bypassed. On top of it, an LLM classifier scans the same message for paraphrased signals a keyword list misses ("I guess I just won't eat today" carries no keyword but is a skip-intent signal), with one hard rule: **the LLM may only add a stop, never clear one.** A deterministic hit stops the run regardless of what the model thinks; a model-only hit also stops the run; with the model off, the deterministic floor still holds every case that keyword or counter can catch. Nondeterminism is confined to the direction where its worst failure mode is an unnecessary coach flag — never a missed one.
+```
 
 ## 24. Activity: Memory | Theme: Memory decision | Topic: What should persist
 
 **Key question(s):** What should the agent remember, and what should it not remember?
 
+```text
 **Principle: remember the state the loop reads; forget content once its run is over; never build a shadow profile of the client.** "No memory" was considered and rejected as impossible: the running budget and the safety counters cannot exist without state across runs. The decision is therefore the boundary, in three buckets, each with a written reason.
 
 **Remembered, with duration and the consuming step:**
@@ -153,11 +173,13 @@ All simulated or local — nothing external is called for real. Every tool maps 
 
 - The triggering message of an escalation is delivered to the coach per the agreement and then dropped from app state — the app retains the stop's reason codes, not the sensitive text.
 - No behavioral profile, no inferred preferences, no location, no photos, no data retained for model training; LLM calls are logged as pass/fail flags only, never with content. Nothing exists outside the named files and the counters above.
+```
 
 ## 25. Activity: Output | Theme: Output format | Topic: Reviewable result
 
 **Key question(s):** What should the agent produce so a human can review it quickly and confidently?
 
+```text
 Four outputs, each in labeled fields a reviewer can judge in under sixty seconds.
 
 **Output 1 — Options card (happy path).** Fields in order:
@@ -190,11 +212,13 @@ Four outputs, each in labeled fields a reviewer can judge in under sixty seconds
 6. **DELIVERY** — channel and scheduled time per quiet hours.
 
 Sixty-second test, per audience: the client reads BUDGET → OPTIONS → tap; the coach reads URGENCY → TRIGGER → WHAT THE CLIENT WAS TOLD → decides call, message, or wait. Neither ever recomputes anything.
+```
 
 ## 26. Activity: Failure handling | Theme: Escalation rules | Topic: When the agent should stop
 
 **Key question(s):** What should happen when the agent is unsure, missing data, or facing a risky case?
 
+```text
 | Trigger | Detected by | Tier | Client sees | Coach sees |
 |---|---|---|---|---|
 | Health/medical signal (dizziness, fainting, chest pain, injury, illness) | `safety_screen` keywords from `safety_policy.md` + one-way LLM assist | **Urgent** | Stop message incl. GET HELP NOW + safe default | Urgent flag at window-open: reason codes, triggering message (once), what the client was told |
@@ -219,11 +243,13 @@ Sixty-second test, per audience: the client reads BUDGET → OPTIONS → tap; th
 **Low confidence:** the only interpretive step is `parse_situation`, and low confidence is defined deterministically — the parse either fills the required slots (trigger form, what was eaten or committed, the constraint) or it doesn't; the model's self-reported confidence is never trusted. On a failed parse: one clarifying question; if the reply still doesn't parse, the structured preset picker — a guaranteed-parseable path. No coach flag, because an unclear message is not a risk case. Order protects safety: **the safety screen runs on the raw text before parsing**, so a low-confidence parse can never hide a safety signal — "I dunno… haven't really eaten since Tuesday" stops the run even if no slot fills.
 
 **Anger + skip-intent in one message:** signals are evaluated independently and the highest-severity signal governs the response — hostility never masks safety. "This app is useless, whatever, I just won't eat then" is processed as hostility (digest-level) *plus* skip-intent (compensatory-family, tier by counter); the client receives the skip-intent response — a de-escalating, warm nudge plus real options — not a complaint-handling reply. Policy rule of thumb: **anger changes the tone of the reply, never the safety verdict.**
+```
 
 ## 27. Activity: Approval | Theme: Human approval point | Topic: Decision checkpoint
 
 **Key question(s):** Where does the human approve, edit, reject, or escalate the agent's work?
 
+```text
 **Gate 1 — the client gate (before the system's only write).** The gated consequence: the write to today's confirmed intake — the running budget that every later recompute reads, that becomes the day-end summary, and that feeds the counters. Formally: **no state in this system changes because the agent produced something; state changes only when the client confirms it.** The four verbs:
 
 - **Approve** — one tap on an option → `log_confirmed_choice` writes it, the budget updates, the card closes.
@@ -241,11 +267,13 @@ If the client confirms nothing all day, the app never invents data: an unconfirm
 2. **Consent already given:** the flag executes the coaching agreement the client signed at onboarding — a document that names what gets flagged, to whom, through which channel, in which hours. Consent was given in advance, at a calm moment, with full knowledge. The client can renegotiate or end the agreement; what they cannot do is veto it per-incident — standing consent, not moment-to-moment consent, is the only kind that works for safety.
 3. **Transparency as the counterweight:** the client sees, on the stop message itself, exactly what the coach will see and when. Nothing is reported invisibly. The flag is not surveillance; it is a promised conversation arriving.
 4. **Proportionality:** the flag carries reason codes, not transcripts; it goes to one human the client themselves chose; and nothing else happens automatically — no plan change, no lockout, no third party. The maximum consequence of a flag is that someone who cares checks in.
+```
 
 ## 28. Activity: Evaluation | Theme: Initial eval plan | Topic: How you will test judgment
 
 **Key question(s):** What cases will prove the agent works, respects boundaries, and handles edge cases?
 
+```text
 Seven cases (five is the floor; the faculty tier-distinction requires the 3/6 pair, and the math-never-escalates claim requires case 5). Each case carries input, seeded state, expected behavior specific enough that pass/fail is obvious, and what it tests. All cases live in `scenarios.json`.
 
 **Case 1 (happy path — checkable to the number):**
@@ -295,6 +323,7 @@ Seven cases (five is the floor; the faculty tier-distinction requires the 3/6 pa
 **Metrics carried from Discovery, now measurable against this set:** no-skip rate (cases 1, 3, 5 must each return at least one eatable option), macro accuracy (case 1 exact-number check; case 5 gap labels), escalation precision (cases 6, 7 must stop; cases 2, 3, 4, 5 must not).
 
 ---
+```
 
 ## Build-Readiness Gate
 
