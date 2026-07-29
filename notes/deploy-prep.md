@@ -181,3 +181,54 @@ parked home — no axis is orphaned:
 - **Timing** — minimal in v1 (clock, quiet hours, late-meal note); parked
   home: the QQRT-structured sleep agent and calendar integration
   (chrononutrition desk pass before any claim).
+
+## Submission requirements — from the tracker sheet (recorded 2026-07-29)
+
+The tracker is a **separate sheet from the PRD**, and it changes one thing
+we had been assuming. The PRD forbids link-outs; the tracker **asks for
+links**. Columns, with the course's suggested timing:
+
+| Col | Asks for | Suggested |
+|---|---|---|
+| H | Discovery section complete in your PRD? | Week 3 |
+| I | Design section complete in your PRD? | Week 4 |
+| J | Develop section complete in your PRD? | Week 6 |
+| K | Deploy section complete in your PRD? | Week 8 |
+| L | **Paste your prototype link** | Week 8 |
+| M | **Paste your 4-minute video link** | Week 8 |
+| N | Paste slides, data, repo, or supporting materials | Week 8 |
+| O | Will you attend Demo Day? | Demo Day |
+
+### What this settles
+
+**A prototype link is required, and it is a Week 8 / Deploy deliverable.**
+That is the concrete target the Develop kit's no-publishing rule was
+holding the line for: hosting is not forbidden, it is *scheduled*. The
+rule lifts when the Deploy companion is extracted, and column L is what it
+lifts for.
+
+**The PRD's no-link-out rule is not in tension with this.** The answers
+stay self-contained — a reviewer must understand the loop from row 36
+alone. The tracker is where the artifacts get attached. Two different
+questions: *did you explain it* vs *can we see it*.
+
+**Column N is the repo.** `mistancevic/AI-Capstone-Project` is public, so
+it can be pasted as supporting materials — the build history in
+`develop-companion/CHANGELOG.md` (p01–p25, one entry per build with what
+changed and how it was verified) is the strongest thing in there for a
+reviewer who wants evidence of process.
+
+### Consequences to plan for in Deploy
+
+1. **Hosting the one-file prototype.** It is a single self-contained
+   `index.html` with no build step, so any static host serves it. The open
+   question is the API key: the app runs fully on offline rules with no
+   key, which is the right default for a public link — a hosted demo must
+   never ship a key, and the settings field stays the only way to add one.
+2. **The 4-minute video** (col M) is the vehicle for showing the prototype
+   running — the walkthrough already drafted in PRD row 36 is its script:
+   happy path, boundary refusal, evals scoreboard, memory panel.
+3. **Demo Day attendance** (col O) is a separate decision, not a
+   deliverable.
+
+Nothing here is actionable until the Deploy guide and companion arrive.
