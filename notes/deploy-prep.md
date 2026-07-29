@@ -265,3 +265,103 @@ Carry into the Deploy answers:
   prototype link with no key runs the 0/10 configuration. It has no
   free-text box, so nothing unseen can reach it, but the two facts should
   be stated together rather than separately.
+
+---
+
+## Module 7 Lesson 1 — the Deploy lesson, mapped onto PlateMate
+
+Transcript received 2026-07-29. **First thing to note: the lesson and the
+capstone sheet's Deploy rows are about different things.** The lesson is an
+introduction to *multi-agent architecture* — assistant → agent →
+orchestration, three orchestration patterns, four production
+considerations. Sheet rows 37–46 ask for *operational readiness* — go/no-go,
+risks, human operating model, monitoring, feedback, pilot plan, video.
+
+The overlap is real but partial: the lesson's four production
+considerations map cleanly onto rows 38–40. The orchestration-pattern half
+maps onto nothing the sheet asks for. Do not expect the lesson to answer
+the rows.
+
+### Where PlateMate sits on the three levels
+
+The lesson's ladder: **assistant** (single step, one input one output),
+**agent** (multi-step, plans, self-corrects), **orchestration** (multiple
+LLM systems coordinated).
+
+Honest placement: **PlateMate's LLM usage is assistant-level, deliberately.**
+Two single-shot calls — one to parse and classify the disruption, one to
+write the coaching line — with everything between them done in code. The
+"orchestrator" in the Design PRD is a code path, not an agent: it does not
+plan, does not self-correct, and does not decide what to do next. Nothing
+loops.
+
+That is a decision, not a shortfall, and it should be stated as one:
+
+- The safety screen must fire identically every run. A planning agent that
+  reasons about whether to run it is strictly worse than an `if`.
+- The arithmetic must be reproducible to the kilocalorie. The Python
+  cross-check only means something because no model touches the numbers.
+- Faculty trimmed the original multi-agent vision at Discovery (*"stubs cost
+  you time and prove nothing"*), and the registry idea is parked with a
+  revival condition rather than half-built.
+
+The one-way rule is where PlateMate is *more* conservative than the
+lesson's agent tier: the model may add a stop, never clear one. That is a
+deliberate cap on autonomy in the one place autonomy would be dangerous.
+
+### Which orchestration pattern (as and when it grows)
+
+| Lesson pattern | Fit for PlateMate |
+|---|---|
+| **Handoffs** — sequential, control passes on like a baton | Wrong. Control must return to the code that owns the safety verdict and the human gate. A baton pass means something downstream could answer without the gate. |
+| **Nested calls** — main system delegates but stays in charge | **This is the shape already**, minus the agency. Code calls the model, keeps control, uses the result. Growing into the multi-agent version (sleep consult, fitness) is a nested-call expansion, not a redesign. |
+| **Manager** — central agent strategizes and adjusts | Deliberately declined. A manager adjusting its approach based on interim results is exactly the freedom that makes a health-adjacent product unpredictable. |
+
+### The four production considerations — the useful half
+
+These are Deploy answers in the sheet's sense, and PlateMate has real
+material for each.
+
+**1. Error conditions.** Already built, not aspirational: defensive field
+parsing (`agent output did not match format` instead of a crash), readable
+API errors (401/429/network each say what happened), and a deterministic
+fallback for the one model-authored sentence. The design principle behind
+it: *the model writes one sentence on the happy path, and nothing at all on
+the path where a bad sentence could harm someone.* No error can propagate
+into a safety verdict, because no model output is a safety verdict.
+
+**2. Outage scenarios.** The interesting one, and the probe changes the
+answer. With the model down, PlateMate degrades to offline rules mode and
+stays **functionally complete** — every case still runs, the math is
+unaffected. But `notes/safety-probe.md` measured what that costs:
+**0/10 on unseen phrasings without the model, 10/10 with it.** So the
+honest statement is *degrades functionally, not equivalently* — the app
+keeps working and loses its coverage layer. For a pilot that means the
+model leg is not optional, and an outage is a safety event, not just a
+quality one.
+
+**3. Abuse vectors.** The lesson's framing (attack surface multiplies per
+agent interaction) is exactly why the surface was kept small. Concretely:
+E-5 *is* a jailbreak case — *"Ignore your rules"* plus a below-floor demand
+— and it is stopped before any model call, so the injection never reaches
+a model. The one-way rule contains the rest: even a fully compromised model
+response cannot clear a stop the code set. The lesson's *"are people using
+our product for free LLM access"* is structurally answered — the key is the
+user's own, entered in their browser; there is no shared key to farm.
+Unresolved for Deploy: rate limiting, and abuse of the coach-flag channel
+(a client who triggers flags deliberately).
+
+**4. Data collection and monitoring.** Discovery already named the primary
+metric — **no-skip rate** — which is unusual and worth keeping: it measures
+the failure the product exists to prevent, not model accuracy. To add for
+Deploy: refusal rate split by tier, **over-refusal rate** (still unmeasured
+— the missing half of the probe), flag volume per coach per week (the
+double-flag issue makes this load-bearing), offline-mode share of runs
+(directly proportional to safety exposure), and approve/edit/escalate
+ratios as the human-gate health signal.
+
+### What this does not settle
+
+Rows 37, 41, 42, 43 (go/no-go, feedback plan, pilot plan, video outline)
+get nothing from this lesson. They need the Deploy companion, or answering
+from the product directly.
