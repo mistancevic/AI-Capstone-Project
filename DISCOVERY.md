@@ -16,11 +16,14 @@ Name note (internal): PlateMate is the working name; the planned next iteration 
 ## Phase: DISCOVERY — sheet rows 9–18
 
 > **Do not paste these into the sheet without checking first.** As of
-> 2026-07-29, nine of these twenty rows differ from the live sheet, in
-> *both* directions — some rows are fuller here, some are fuller there.
-> Discovery and Design were reviewed and approved from the sheet, so the
-> sheet is authoritative until the two are reconciled deliberately.
-> Details in the reconciliation note below.
+> 2026-07-29, ten of these twenty rows differ from the live sheet, in
+> *both* directions. Three are deliberate — the cell holds the reviewed
+> answer and a cell note records the revision (rows 15, 16, 18); three are
+> trivial; **four still need a decision (rows 20, 23, 25, 26)**, and on row
+> 25 the sheet holds design content this file does not. Discovery and
+> Design were reviewed and approved from the sheet, so the sheet is
+> authoritative until the two are reconciled deliberately. Per-row detail
+> and the cell notes verbatim: [`notes/sheet-repo-divergence.md`](notes/sheet-repo-divergence.md).
 
 ### 9. Activity: Project choice | Theme: User | Topic: Specific user
 
