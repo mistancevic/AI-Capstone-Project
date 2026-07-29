@@ -93,7 +93,7 @@ padding the cell with it would answer something nobody asked. The content
 is design record, not process steps — so it lives in `DESIGN.md` (full
 text, four labelled paragraphs) and in a cell note for provenance.
 
-Note prepared for F20:
+Note added to F20 (2026-07-29):
 
 > **F20** — Scope boundary (context, not part of the answer): the daily
 > watch (clock-triggered counter advancement, one gentle check-in after
