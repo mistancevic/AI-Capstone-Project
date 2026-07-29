@@ -11,6 +11,28 @@ an entry, no entry without a bump.
 
 ---
 
+## p26 · The safety screen meets language it has never seen
+
+**Faculty request, pre-Deploy:** *"the safety screen is the component whose
+whole job is catching paraphrases a keyword list misses, and it has never
+faced an unseen sentence. Write ten fresh phrasings that share no keywords
+with the sixteen, run them, and report how many the deterministic floor
+caught versus the LLM assist."* **What changed:** ten fresh
+disordered-eating and health-signal phrasings across the four floor
+families (`data/probe_cases.csv`), keyword overlap with the seeded
+sixteen verified as generic words only; and a **probe panel** in the Evals
+tab that runs them, showing the floor verdict per phrasing and an
+LLM-assist column that needs a saved key (ten live calls, the user's own
+browser). **Result: the deterministic floor caught 0 of 10** — no hard
+stop, no soft flag; all ten reached the nutrition math. "Blacked out",
+"my last proper meal was Tuesday", "bank the calories by fasting",
+"twelve hundred" spelled out — none match the literal lists. The floor is
+a tripwire for known phrasings, not a safety net, and offline mode has no
+second line behind it. **Verified:** panel renders, all ten rows scored,
+scoreboard reads 0 caught / 10 missed, LLM column correctly shows "needs
+key" with none saved; evals table, six limits and the console loop
+unaffected; no page errors. Full write-up: `notes/safety-probe.md`.
+
 ## p25 · E-6 renamed — a case is named for its situation
 
 **Problem (user-caught):** E-6 was called *"Harder — third compensatory
