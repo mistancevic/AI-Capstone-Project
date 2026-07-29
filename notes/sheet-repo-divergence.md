@@ -81,31 +81,31 @@ when filling the sheet — `| tool | type | check |` became
 
 ### Row 20 — the one genuine gap
 
-The sheet's Target workflow cell is missing the closing paragraph the repo
-carries, roughly 129 words:
+The sheet's Target workflow cell stops at step 8. The repo carries a
+closing paragraph after it — roughly 129 words — that the sheet does not.
+Direction confirmed: 129 words exist only in the repo, none only in the
+sheet, so F20 is a clean prefix rather than an altered version.
 
-> **Designed but out of demo scope (future work, labeled):** a separate
-> clock-triggered daily watch that advances the skipped-days and off-target
-> counters, sends one gentle check-in after three silent days, and flags
-> the coach at the same thresholds; and a client-declared pause for life
-> events ("away until Sunday") that suspends logging expectations for a
-> bounded window, auto-resumes, appears in the coach's digest, and never
-> mutes the safety screen. The hard stop fires on either channel
-> independently — tracked counter or the client's own words; if both fire,
-> the coach receives the flag twice (deduplication is future work;
-> over-flagging on this signal errs safe). The only watch element in demo
-> scope is the seeded skipped-meals counter feeding the step-2 safety
-> screen.
+The block covers three things: the **daily watch** (clock-triggered
+counter advancement, one check-in after three silent days, coach flagged
+at the same thresholds), **pause mode** (a client-declared "away until
+Sunday" that suspends logging expectations, auto-resumes, appears in the
+coach's digest, and never mutes the safety screen), and **deliberate
+double-flagging** (the hard stop fires on either channel independently; if
+both fire the coach is flagged twice — deduplication is future work, and
+over-flagging on this signal errs safe). In demo scope: only the seeded
+skipped-meals counter feeding the step-2 safety screen.
 
-This is scope-boundary content: what is designed but deliberately not
-built, and why the coach can be flagged twice. It is the Design-phase
-statement of two things that later became Develop limits 3 and 6, and it
-answers the demo-scope half of the faculty's Discovery directive. A
-reviewer reading only the sheet does not see it.
+Why it matters: this is where the Design PRD states what was designed and
+deliberately not built, which is the demo-scope half of the faculty's
+Discovery directive. It is also the origin of Develop limits 3 and 6 —
+read the sheet alone and those limits appear from nowhere in Develop.
 
-**Decision needed:** paste it into F20, or leave the sheet as reviewed.
-Unlike rows 15/16/18 there is no cell note covering this one — the
-omission looks accidental rather than chosen.
+Restructured 2026-07-29 into four labelled paragraphs, in `DESIGN.md` and
+in the text prepared for the cell, so it is not a 129-word block. Labels
+("Daily watch", "Pause mode", "Double-flagging, on purpose") and the
+closing "In demo scope:" line are the only rewording; the substance is
+unchanged.
 
 ## Trivial
 

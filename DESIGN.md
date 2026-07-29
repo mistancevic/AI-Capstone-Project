@@ -73,7 +73,15 @@ The future per-request run, from trigger to human decision:
 7. *(Conditional / stretch — not load-bearing:)* if the situation touches a late meal or tomorrow's training and the core loop is already solid, a one-line sleep note is appended; the workflow runs identically without it.
 8. The client decides: confirm an option with one tap — optionally editing the portion or swapping an ingredient first, with the math recomputed live — or reject it (no confirmation, or a dislike). Only a confirmed choice updates the day's running budget.
 
-**Designed but out of demo scope (future work, labeled):** a separate clock-triggered daily watch that advances the skipped-days and off-target counters, sends one gentle check-in after three silent days, and flags the coach at the same thresholds; and a client-declared pause for life events ("away until Sunday") that suspends logging expectations for a bounded window, auto-resumes, appears in the coach's digest, and never mutes the safety screen. The hard stop fires on either channel independently — tracked counter or the client's own words; if both fire, the coach receives the flag twice (deduplication is future work; over-flagging on this signal errs safe). The only watch element in demo scope is the seeded skipped-meals counter feeding the step-2 safety screen.
+**Designed but out of demo scope (future work, labeled):**
+
+**Daily watch** — a separate clock-triggered pass that advances the skipped-days and off-target counters, sends one gentle check-in after three silent days, and flags the coach at the same thresholds.
+
+**Pause mode** — a client-declared pause for life events ("away until Sunday") that suspends logging expectations for a bounded window, auto-resumes, appears in the coach's digest, and never mutes the safety screen.
+
+**Double-flagging, on purpose** — the hard stop fires on either channel independently, tracked counter or the client's own words; if both fire, the coach receives the flag twice. Deduplication is future work; over-flagging on this signal errs safe.
+
+**In demo scope:** only the seeded skipped-meals counter, feeding the step-2 safety screen.
 ```
 
 ## 21. Activity: Agent behavior | Theme: Agent loop | Topic: Observe, decide, act, check
