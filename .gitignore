@@ -7,3 +7,6 @@ venv/
 *.egg-info/
 dist/
 build/
+
+# Course material, not the product (Deploy companion rule)
+deploy-companion/
