@@ -2,8 +2,8 @@
 
 Found 2026-07-29 while adding copy-paste formatting to `DISCOVERY.md` and
 `DESIGN.md`; updated the same day once the sheet's cell notes were
-supplied. **Row 25 has been reconciled; nothing else has.** This note records what differs
-so the decision is made deliberately, not by an accidental paste.
+supplied. **All diverging rows are now settled** — see each section for how. This note records what differed and how each case was decided, so the
+repo and the sheet can stay deliberately different where that is correct.
 
 Method: every Student Response cell (sheet rows 9–28) compared against the
 matching answer in the repo, whitespace-normalised and with markdown `**`
@@ -52,7 +52,7 @@ file is their only durable copy. Verbatim:
 (F19's row matches the repo exactly; its note is provenance, not a
 revision record.)
 
-## Open — one real gap (rows 23, 26, 28 cleared; 25 resolved)
+## Settled — how each diverging row was resolved
 
 Re-examined 2026-07-29 after a challenge about whether the repo text had
 been paraphrased rather than copied. Two checks settle it.
@@ -79,33 +79,37 @@ pasted into a spreadsheet cell, so it was flattened into arrow notation
 when filling the sheet — `| tool | type | check |` became
 `tool — type — check`. Same facts, different rendering. No action.
 
-### Row 20 — the one genuine gap
+### Row 20 — resolved as a cell note, not cell text
 
-The sheet's Target workflow cell stops at step 8. The repo carries a
-closing paragraph after it — roughly 129 words — that the sheet does not.
-Direction confirmed: 129 words exist only in the repo, none only in the
-sheet, so F20 is a clean prefix rather than an altered version.
+The sheet's Target workflow cell stops at step 8; the repo carries a
+closing out-of-scope paragraph after it. Direction confirmed: 129 words
+exist only in the repo, none only in the sheet, so F20 is a clean prefix
+rather than an altered version.
 
-The block covers three things: the **daily watch** (clock-triggered
-counter advancement, one check-in after three silent days, coach flagged
-at the same thresholds), **pause mode** (a client-declared "away until
-Sunday" that suspends logging expectations, auto-resumes, appears in the
-coach's digest, and never mutes the safety screen), and **deliberate
-double-flagging** (the hard stop fires on either channel independently; if
-both fire the coach is flagged twice — deduplication is future work, and
-over-flagging on this signal errs safe). In demo scope: only the seeded
-skipped-meals counter feeding the step-2 safety screen.
+**Decision (2026-07-29): it stays out of the cell.** F20 asks *"How does
+the workflow change when the agent is introduced? List the future process
+as text steps."* An out-of-scope list does not answer that question, and
+padding the cell with it would answer something nobody asked. The content
+is design record, not process steps — so it lives in `DESIGN.md` (full
+text, four labelled paragraphs) and in a cell note for provenance.
 
-Why it matters: this is where the Design PRD states what was designed and
-deliberately not built, which is the demo-scope half of the faculty's
-Discovery directive. It is also the origin of Develop limits 3 and 6 —
-read the sheet alone and those limits appear from nowhere in Develop.
+Note prepared for F20:
 
-Restructured 2026-07-29 into four labelled paragraphs, in `DESIGN.md` and
-in the text prepared for the cell, so it is not a 129-word block. Labels
-("Daily watch", "Pause mode", "Double-flagging, on purpose") and the
-closing "In demo scope:" line are the only rewording; the substance is
-unchanged.
+> **F20** — Scope boundary (context, not part of the answer): the daily
+> watch (clock-triggered counter advancement, one gentle check-in after
+> three silent days, coach flagged at the same thresholds) and
+> client-declared pause mode are designed but deliberately out of demo
+> scope. The hard stop fires on either channel independently, so if a
+> tracked counter and a self-report both fire the coach is flagged twice —
+> deduplication is future work and over-flagging on this signal errs safe.
+> In demo scope: only the seeded skipped-meals counter, feeding the step-2
+> safety screen. Full text in DESIGN.md.
+
+This is the origin of Develop limits 3 and 6, which is why it is worth
+recording somewhere rather than dropping.
+
+**With this, every diverging row is settled.** The repo is the fuller
+design record by design; the sheet answers the questions as asked.
 
 ## Trivial
 

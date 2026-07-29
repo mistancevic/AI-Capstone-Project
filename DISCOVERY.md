@@ -19,10 +19,13 @@ Name note (internal): PlateMate is the working name; the planned next iteration 
 > 2026-07-29, ten of these twenty rows differ from the live sheet, in
 > *both* directions. Three are deliberate — the cell holds the reviewed
 > answer and a cell note records the revision (rows 15, 16, 18); three are
-> trivial; **one real gap remains (row 20)**. Rows 23, 26 and 28 turned out to be
-> the same content with a markdown table flattened into prose — not a
-> divergence. Row 25 was resolved on 2026-07-29 by pulling the sheet's
-> agent-tone and banned-agent-moves block into this file. Discovery and
+> trivial; all of them are now settled. Rows 23, 26 and 28 were the same content
+> with a markdown table flattened into prose — never a divergence. Row 25
+> was resolved by pulling the sheet's agent-tone and banned-agent-moves
+> block into this file. Row 20's out-of-scope paragraph stays here and in
+> a cell note, deliberately: that cell asks for process steps, not a
+> scope list. This file is the fuller design record; the sheet answers
+> the questions as asked. Discovery and
 > Design were reviewed and approved from the sheet, so the sheet is
 > authoritative until the two are reconciled deliberately. Per-row detail
 > and the cell notes verbatim: [`notes/sheet-repo-divergence.md`](notes/sheet-repo-divergence.md).
