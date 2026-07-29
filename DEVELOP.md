@@ -31,10 +31,20 @@ Row numbers, Activity / Theme / Topic, and Key Question(s) below are copied
 from the sheet verbatim so a row can be found by search in either direction.
 Each answer is byte-identical to the Student Response cell in that row.
 
+Answers sit in code blocks so they copy **verbatim** — item numbers and
+line breaks included. Rendered markdown lists look right but lose their
+numbers on copy, because the renderer generates them.
+
+To paste into the sheet: **double-click the cell first** (or select it and
+press F2) so the cursor is inside, then paste. Pasting into a merely
+selected cell splits the lines across separate rows. Set the column to
+wrap text with top vertical alignment.
+
 ### 29. Activity: Prototype | Theme: Prototype scope | Topic: One end-to-end loop
 
 **Key question(s):** What single end-to-end loop will the prototype prove?
 
+```text
 The disrupted-day recompute, as five stations on screen:
 
 1. INPUT — the client's message.
@@ -51,10 +61,13 @@ M1 — Case 1 (happy path) and Case 7 (hard stop) running end to end, exercising
 M2 — the tier pair (Cases 3 and 6) and the remaining cards, only after M1 passed.
 
 That order held in the build: the spine ran end to end before any tier logic existed.
+```
+
 ### 30. Activity: Prototype | Theme: User interaction | Topic: What the user does
 
 **Key question(s):** What will the user type, upload, click, or review in the prototype?
 
+```text
 The user clicks one of six demo chips (or any case card) to load a disruption, presses Run, and watches the case move through the five labeled stages. What they do next depends on what came back.
 
 On a normal day — they review the options card and click one of three buttons, under the permanent sentence "Nothing is sent without human approval":
@@ -68,10 +81,13 @@ On a safety case — they see the stop message, the safe default, get-help-now g
 In the Evals view — they run test cases and set the verdicts themselves.
 
 In the Memory view — they read everything the prototype is holding, and can press Forget all to clear it.
+```
+
 ### 31. Activity: Data | Theme: Synthetic data used | Topic: Demo-safe inputs
 
 **Key question(s):** List the fake data files, sample records, policies, or examples used in the prototype.
 
+```text
 All synthetic, embedded in the one-file prototype:
 
 1. disruptions.csv — 16 client messages across 9 days.
@@ -87,10 +103,13 @@ Two citable, sectioned policies:
 8. Safety policy (S1–S7) — health signals, restriction family, counters, out-of-scope, hostility rule, flag tiers, banned language.
 
 Realistic names, dates, and amounts; no real people or data anywhere.
+```
+
 ### 32. Activity: Evaluation | Theme: Eval cases | Topic: Test set
 
 **Key question(s):** List at least five test cases, including happy path, edge case, and boundary case.
 
+```text
 Six, named as they appear in the prototype's Evals table — the E- id is the test, the D- id the disruption record it runs.
 
 1. E-1 Happy path (D-1001) — off-plan snack plus surprise dinner: exact budget math, top option within the tolerance band, others carrying honest signed gaps, bridge present, no flag.
@@ -103,10 +122,13 @@ Six, named as they appear in the prototype's Evals table — the E- id is the te
 Why E-6 is D-1012 and not D-1006: the D- ids run in date order, so the third-ask test has to land on a message that arrives after two asks already stand in the week — not a counter flipped on an early case.
 
 E-3 and E-6 are the tier pair: nearly identical words, opposite correct behaviors, decided by the counter.
+```
+
 ### 33. Activity: Evaluation | Theme: Eval results | Topic: What passed and failed
 
 **Key question(s):** What happened when you tested the agent? Where did it pass, fail, or need a human?
 
+```text
 All six cases ran through the real agent and were judged by the human, not the agent.
 
 First judging: five Pass, one Needs work, zero Fail.
@@ -122,10 +144,13 @@ What held up:
 Where a human was needed: exactly and only where designed — every normal card waits for a human click, and the two safety cases hand off to the coach.
 
 Confidence check: the browser's arithmetic matches an independently built Python implementation of the same design to the exact kilocalorie.
+```
+
 ### 34. Activity: Iteration | Theme: Improvement made | Topic: What changed after testing
 
 **Key question(s):** What did you change after testing, and why?
 
+```text
 Before — the happy-path eval was judged Needs work because its expected text overclaimed: "2 to 3 options each within the tolerance band", while the design intentionally puts only the top option in the band and shows honest signed gaps on the others.
 
 Change — the smallest fix addressing the cause: the expected wording in the eval file was corrected to match the design. No system prompt, policy, threshold, or ranking weight was touched.
@@ -133,10 +158,13 @@ Change — the smallest fix addressing the cause: the expected wording in the ev
 After — the case re-ran and matched, the verdict was flipped to Pass by the human, and all five other cases were re-run with no regression. Final scoreboard: six Pass, zero Needs work, zero Fail.
 
 The episode is captured as a permanent Before/Change/After card in the prototype's Evals view: the eval caught an overclaiming test, which is the system testing its own tests.
+```
+
 ### 35. Activity: Constraints | Theme: Known limitations | Topic: What it cannot do yet
 
 **Key question(s):** What does the prototype not do yet? Be honest and specific.
 
+```text
 Six, stated as scope decisions and shown in the app itself.
 
 1. It handles exactly one loop — the disrupted-day recompute for a coached client with a plan on file; it never creates plans, never edits the coach's targets, never orders food.
@@ -145,10 +173,13 @@ Six, stated as scope decisions and shown in the app itself.
 4. It needs data in its exact shape, and offline parsing is keyword-based — unusual phrasing routes to presets rather than being understood.
 5. It runs seeded cases only — there is no box to type a new disruption into, the only typing surfaces being the API key, an edited option, an escalation reason, and an eval note, so phrasings outside the sixteen cases on file are untested.
 6. Delivery is simulated — the coach inbox is a demo queue — and when a counter and a self-report fire on the same stop the coach is flagged twice, which errs safe until deduplication is built.
+```
+
 ### 36. Activity: Demo | Theme: Prototype evidence | Topic: Working demo summary
 
 **Key question(s):** Describe what the working prototype shows. A reviewer should understand the demo loop from this text.
 
+```text
 One file opens in a browser as a light product console: a case list on the left, a work area in the middle, settings with a run log on the right.
 
 1. Happy path — the viewer clicks the chip. Alex's message (ice cream happened, team dinner coming) appears as stage one, and stage two already shows what the agent will read: his 2400-calorie, 160-gram plan, both safety counters at zero, and the named policy rules. Run: stage three shows a green OK with the trigger, the why, and citation tags; stage four shows the budget arithmetic ending in "remaining 150 kcal / 35 g", three ranked options with the top one marked within band, a bridge labeled "take this instead of skipping", and one coaching line; stage five offers Approve, Edit, Escalate — the viewer clicks Approve and the log records the actual chosen food.
@@ -157,6 +188,8 @@ One file opens in a browser as a light product console: a case list on the left,
 4. Memory tab, the one Path B stretch taken — what the app holds and what it refuses to hold: this session's decisions and edits; the safety counters as counts and never message texts; and a deliberately-not-remembered list (raw messages, dropped once a run completes; cross-case preferences, so a food edited away is re-offered tomorrow on purpose rather than hardening into a silent profile — the mismatch is what prompts an explicit, coach-visible plan change). A Forget-all button genuinely resets behavior.
 
 Same app, same client, opposite behaviors — decided by code, with a human holding the only write.
+```
+
 ## Path B stretch — B3 Memory (the long version; the sheet carries it in rows 30 and 36)
 
 Visible, inspectable, resettable memory — implemented the design's way, not the shortcut way. The kit's B3 suggests feeding the human's edits back into the system prompt as learned preferences; DESIGN.md's memory decision explicitly rejects implicit preference learning (no shadow profile). So: an edit is remembered for that case, this session, and visibly re-offered when the same case re-runs — and a Memory view shows three buckets: remembered this session (decisions, edits, verdicts, log), remembered by design as counts never texts (the safety counters), and deliberately NOT remembered (raw messages after each run; cross-case preferences — keep editing away salmon and the app re-offers it tomorrow on purpose, so the mismatch prompts an explicit coach-visible profile edit, the auditable version of learning). A Forget-all button genuinely resets behavior. The kit's own line — "note what you chose NOT to remember; that is a PRD-grade decision" — is, for this product, the whole point.
