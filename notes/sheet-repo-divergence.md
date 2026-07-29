@@ -2,7 +2,7 @@
 
 Found 2026-07-29 while adding copy-paste formatting to `DISCOVERY.md` and
 `DESIGN.md`; updated the same day once the sheet's cell notes were
-supplied. **Nothing has been reconciled.** This note records what differs
+supplied. **Row 25 has been reconciled; nothing else has.** This note records what differs
 so the decision is made deliberately, not by an accidental paste.
 
 Method: every Student Response cell (sheet rows 9–28) compared against the
@@ -13,7 +13,7 @@ emphasis ignored. Develop rows 29–36 were checked at the same time and are
 Of 20 rows, 10 match exactly and 10 differ. Of the 10 that differ, **three
 are explained** (deliberate: the cell holds the as-reviewed answer, a cell
 note records the revision), **three are trivial** (≤60 characters), and
-**four need a decision**.
+**four needed a decision — one now resolved (row 25), three open: 20, 23, 26**.
 
 ## Explained — revision recorded as a sheet cell note
 
@@ -52,21 +52,27 @@ file is their only durable copy. Verbatim:
 (F19's row matches the repo exactly; its note is provenance, not a
 revision record.)
 
-## Still unexplained — a decision is needed
+## Open — a decision is needed (row 25 resolved)
 
 | Row | Theme | Verdict | Extra text |
 |---|---|---|---|
 | **20** | Target workflow | repo has more | repo +773 |
 | **23** | Tools or simulated tools | both differ | sheet +368, repo +472 |
-| **25** | Output format | **SHEET has more** | sheet +346 |
+| ~~25~~ | ~~Output format~~ | **resolved 2026-07-29** | now identical |
 | **26** | Escalation rules | both differ | sheet +670, repo +696 |
 
-**Row 25 is the one to look at first.** The sheet carries roughly 346
-characters the repo does not: *Agent tone* (warm, plain language; the math
-is shown but never lectured) and *Banned agent moves* (no guilt framing —
-"to make up for", "you earned it" — no praising a skipped meal, no fake
-cheerfulness, no lecturing). That is real design content missing from
-`DESIGN.md`, and pasting the repo version over that cell would destroy it.
+**Row 25 — resolved.** The sheet held ~346 characters `DESIGN.md` never
+had: *Agent tone* (warm, plain language; the math is shown but never
+lectured) and *Banned agent moves* (no guilt framing — "to make up for",
+"you earned it" — no praising a skipped meal, no fake cheerfulness, no
+lecturing), plus the fixed order under stress: acknowledge the feeling
+first, solve second, invite the coach before a situation becomes a crisis.
+Pulled into `DESIGN.md` verbatim; the two now match at 3,425 characters
+with only markdown emphasis differing. Nothing was changed in the sheet.
+
+This is the design intent the prototype's banned-language screen
+implements — "make up for", "you earned it", "cheat day", praise of
+skipping — so the rule and its enforcement now live in the same repo.
 
 ## Trivial
 
