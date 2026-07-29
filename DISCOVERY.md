@@ -19,8 +19,9 @@ Name note (internal): PlateMate is the working name; the planned next iteration 
 > 2026-07-29, ten of these twenty rows differ from the live sheet, in
 > *both* directions. Three are deliberate — the cell holds the reviewed
 > answer and a cell note records the revision (rows 15, 16, 18); three are
-> trivial; **four still need a decision (rows 20, 23, 25, 26)**, and on row
-> 25 the sheet holds design content this file does not. Discovery and
+> trivial; **three still need a decision (rows 20, 23, 26)**. Row 25 was
+> resolved on 2026-07-29 by pulling the sheet's agent-tone and
+> banned-agent-moves block into this file; it now matches. Discovery and
 > Design were reviewed and approved from the sheet, so the sheet is
 > authoritative until the two are reconciled deliberately. Per-row detail
 > and the cell notes verbatim: [`notes/sheet-repo-divergence.md`](notes/sheet-repo-divergence.md).

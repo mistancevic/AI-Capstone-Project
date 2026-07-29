@@ -41,8 +41,9 @@ Every Design decision for PlateMate — six choices, one or two lines each, plai
 > 2026-07-29, ten of these twenty rows differ from the live sheet, in
 > *both* directions. Three are deliberate — the cell holds the reviewed
 > answer and a cell note records the revision (rows 15, 16, 18); three are
-> trivial; **four still need a decision (rows 20, 23, 25, 26)**, and on row
-> 25 the sheet holds design content this file does not. Discovery and
+> trivial; **three still need a decision (rows 20, 23, 26)**. Row 25 was
+> resolved on 2026-07-29 by pulling the sheet's agent-tone and
+> banned-agent-moves block into this file; it now matches. Discovery and
 > Design were reviewed and approved from the sheet, so the sheet is
 > authoritative until the two are reconciled deliberately. Per-row detail
 > and the cell notes verbatim: [`notes/sheet-repo-divergence.md`](notes/sheet-repo-divergence.md).
@@ -215,6 +216,8 @@ Four outputs, each in labeled fields a reviewer can judge in under sixty seconds
 6. **DELIVERY** — channel and scheduled time per quiet hours.
 
 Sixty-second test, per audience: the client reads BUDGET → OPTIONS → tap; the coach reads URGENCY → TRIGGER → WHAT THE CLIENT WAS TOLD → decides call, message, or wait. Neither ever recomputes anything.
+
+**Agent tone:** Warm, plain language; the math is shown but never lectured. **Banned agent moves:** no guilt framing ("to make up for," "you earned it"), no praising a skipped meal, no fake cheerfulness, no lecturing. Under stress the order is fixed — acknowledge the feeling first, solve second, and invite the coach before a situation becomes a crisis.
 ```
 
 ## 26. Activity: Failure handling | Theme: Escalation rules | Topic: When the agent should stop
