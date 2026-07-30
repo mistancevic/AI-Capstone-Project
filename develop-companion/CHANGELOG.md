@@ -11,6 +11,34 @@ an entry, no entry without a bump.
 
 ---
 
+## p30 · A retired model says so, and the way to change it is written down
+
+**Problem:** the user asked what happens *"if that model is no longer
+available on Claude side - then how to change it"*. The app already
+degraded rather than crashed - any non-OK response falls back to the
+offline rules - but a retired model surfaced as a raw `API error 404:
+{...}`, which does not tell a non-engineer that a model name has gone
+stale. And the fix, editing one constant, was documented nowhere. **What
+changed:** three things. (1) A named 404 branch: *the model "X" was not
+recognised (404) - it may have been renamed or retired. Update MODEL near
+the top of index.html. Running the offline rules meanwhile.* (2) A
+`MODEL_MISSING` chip state, for the same reason p28 existed: after a 404
+the header still read `runs use claude-sonnet-4-5`, a claim the app now
+knew to be false. It reads `model X unavailable (404) - running offline
+rules` until a call succeeds, then returns to the reported live model.
+(3) A **Changing the model** section in the product README - the constant,
+that nothing else names a model, and what a retirement looks like from the
+user's side. **Also recovered:** `PRODUCT_README.md` now lives in this
+repo. It had been written straight into the published repo, and the
+working copy was in an ephemeral directory the container reclaimed - so
+the only copy was on GitHub, and it could not be edited here. Pulled back
+from `raw.githubusercontent.com` and version-controlled; it ships to the
+product repo root as `README.md`. **Verified:** headless with a stubbed
+404 - the plain-English message renders, the run still produces a full
+card from the offline rules, and the chip flips to unavailable; then the
+same case against a 200 returns the chip to `live · claude-sonnet-4-5-
+20250929`. Zero console errors.
+
 ## p29 · The Memory tab admits it is holding a credential
 
 **Problem:** the Memory tab claims to show *"everything the prototype
