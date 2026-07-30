@@ -11,6 +11,30 @@ an entry, no entry without a bump.
 
 ---
 
+## p27 · The first frame stops being an empty API key box
+
+**Problem:** the Console's right-hand column opened with the Settings
+panel — an API key box a visitor cannot use and does not want on arrival —
+above a Run log that reads `0` until something happens. So the emptiest
+region on the page was the one a cold visitor's eye landed on first, and
+it is the opening frame of the demo video. Reported by the user on the
+live site: *"why is the settings module on the right side alone taking the
+space for that one simple use case?"* **What changed:** Settings moved
+into the Cases column as a docked footer (`.settings-dock`), with the case
+list scrolling above it (`.cases-panel` / `.cases-scroll`) so the key box
+stays put through all sixteen cases; the right column is now the Run log
+alone, opening on *"no runs yet — every human decision lands here"* — a
+sentence that explains the human gate to someone four seconds into the
+page. The empty-state pointer changed from "Settings on the right" to
+"Settings, bottom left". Layout and copy only: no JavaScript, no
+arithmetic, no safety code touched — `saveKey()` finds the field by id
+wherever it sits. **Verified:** headless at 1600×950 — three panels
+intact, key box inside the Cases column at x=17 and the Run log at
+x=1281, case selection still renders the five stages (D-1002 → Maya,
+plan C-02); and at 420×900 the dock stays visible with the panel height
+cap lifted, so the phone view still scrolls as one column. Zero console
+errors.
+
 ## p26 · The safety screen meets language it has never seen
 
 **Faculty request, pre-Deploy:** *"the safety screen is the component whose
