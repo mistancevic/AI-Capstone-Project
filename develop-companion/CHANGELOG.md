@@ -11,6 +11,35 @@ an entry, no entry without a bump.
 
 ---
 
+## p29 · The Memory tab admits it is holding a credential
+
+**Problem:** the Memory tab claims to show *"everything the prototype
+holds - and what it refuses to hold"*, and it listed decisions, edits,
+verdicts and the run log. It did not list the API key, which is the one
+genuinely sensitive thing in browser storage. Found while answering the
+user's question *"is this api key also in the log?"* - it is not (traced:
+`getKey()` has four call sites, three coerce to a boolean and one sets the
+`x-api-key` request header; `logRun` stores no key field; the other three
+localStorage entries never touch it) - but a disclosure panel that omits
+the credential is not a disclosure panel. Second defect found in the same
+pass: **`forgetAll()` did not clear the key**, so a button labelled
+"Forget all" left a credential behind. **What changed:** a *Your API key*
+row under REMEMBERED THIS SESSION, stating whether one is saved, that it
+lives in this browser only, that it travels to exactly one place - the
+request header to Anthropic - and that it is never in the run log, this
+file, or the repository. The overclaim is resolved by disclosure rather
+than by deletion: "Forget all" deliberately keeps the key so a demo is not
+interrupted, says so in its caption, and a separate **Remove key** button
+clears it and drops the app back to offline rules. **Verified:** headless
+- the field flips between saved and not-saved wording; the key's *value*
+appears nowhere in the rendered text or the DOM (searched the full HTML
+for the test key string, zero hits); the key survives Forget all; Remove
+key clears storage, the Memory row flips to "not saved", and the status
+chip returns to `offline rules mode`. Zero console errors. (A first test
+run reported a false failure - the selector `text=Remove key` matched the
+bold reference inside the disclosure sentence before the button; re-run
+with `button:has-text(...)` passed.)
+
 ## p28 · The status chip stops claiming a readiness it never checked
 
 **Problem:** the top-bar chip read `live model ready · claude-sonnet-4-5`
