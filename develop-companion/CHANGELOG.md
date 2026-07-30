@@ -11,6 +11,29 @@ an entry, no entry without a bump.
 
 ---
 
+## p28 · The status chip stops claiming a readiness it never checked
+
+**Problem:** the top-bar chip read `live model ready · claude-sonnet-4-5`
+the instant any string was saved as a key. It tested nothing. An expired
+or malformed key still produced "ready", and the user only discovered
+otherwise when a run came back 401. It also named the model the app
+*intends* to call, presented as fact. Raised by the user: *"change it if
+it will display real model behind the key."* There is no model behind a
+key — a key is an account credential — but the API does report which model
+answered, and that is knowable after a call. **What changed:** the chip
+now has four honest states instead of two. No key: `offline rules mode`.
+Key saved, nothing run yet: `key saved · runs use claude-sonnet-4-5` — a
+statement of intent, not of readiness. After a successful call: `live ·`
+plus `j.model` from the response, the full dated id, so the label is the
+model that actually answered rather than the alias requested. After a
+401: `key rejected (401) — running offline rules`. Saving a new key
+clears both flags, because an unproven key is unproven. The DECISION
+row's mode string uses the same reported id. **Verified:** headless, all
+four states driven with a stubbed API — no key, saved-not-run, a 200
+returning `claude-sonnet-4-5-20250929` (chip showed the dated id, not the
+alias), and a 401 (chip flipped to rejected, run fell back to offline
+rules). Zero console errors.
+
 ## p27 · The first frame stops being an empty API key box
 
 **Problem:** the Console's right-hand column opened with the Settings
