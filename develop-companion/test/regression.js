@@ -72,7 +72,10 @@ const runCase = async (p, id) => {
     await p.click('button:has-text("Run All")');
     await p.waitForTimeout(3000);
     check('sweep counts unchanged', await flat(p, '#sweep'),
-      'Sweep done: 7 OK · 2 REFUSED-ESCALATE · 1 out-of-scope · 6 clarify · 0 errors');
+      // 17 cases since p38. The 16 seeded outcomes are unchanged; D-1017 adds the
+      // seventh clarify - it cannot be answered from its first message by design.
+      'Sweep done: 7 OK · 2 REFUSED-ESCALATE · 1 out-of-scope · 7 clarify · 0 errors');
+    check('case count', await p.$$eval('.case-card', els => els.length), 17);
     check('sweep raised no page errors', p.errors, []);
   });
 
@@ -182,6 +185,25 @@ const runCase = async (p, id) => {
     check('Change clears the answer', /Answered by the client/.test(w), false);
     check('Change returns the case to un-run', /Stages 3–5 appear when you run the case/.test(w), true);
     check('withdrawal is logged', /answer withdrawn/.test(await flat(p, '#runlog')), true);
+  });
+
+  await section('the client answers in words', async () => {
+    const p = await page();
+    await runCase(p, 'D-1017');
+    let w = await flat(p, '#work');
+    check('D-1017 cannot be answered from the message alone', /CLARIFY/.test(w), true);
+    check('the reply is offered as well as the presets',
+      /Client replies in their own words/.test(w), true);
+
+    await p.click('#work >> button:has-text("Client replies in their own words")');
+    await p.waitForTimeout(1000);
+    w = await flat(p, '#work');
+    check('the reply is shown as client language', /the client's reply, in their own words/.test(w), true);
+    check('one round resolves it', /CLARIFY/.test(w), false);
+    check('the reply restructured the day',
+      /consumed 950 \/ 53 g/.test(w) && /reserved 350 \/ 30 g/.test(w), true);
+    check('and produced the budget it implies', /remaining 1100 kcal \/ 77 g/.test(w), true);
+    check('the reply is logged as client language', /client replied/.test(await flat(p, '#runlog')), true);
   });
 
   await section('key hygiene', async () => {

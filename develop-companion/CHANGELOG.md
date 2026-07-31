@@ -11,6 +11,43 @@ an entry, no entry without a bump.
 
 ---
 
+## p38 · A clarification that is a sentence, not a tap
+
+**Problem:** the user's example dismantled the button-based clarify —
+*"imagine the answer was: i had my lunch now instead of breakfast and took
+a small chocolate cake at a colleague's birthday."* That is not an answer
+to the question asked. It is a new message: lunch eaten, breakfast
+displaced, an off-plan item, and a meal implied — a restructuring of the
+day that no closed set of buttons can express, arriving as text that must
+be screened before any of it is believed. Today's answers enter as
+already-parsed values, which skips both the safety screen and the
+extraction; that is safe only because a button cannot say anything
+dangerous or surprising. **What changed:** a seventeenth case, **D-1017**,
+whose first message — *"today has been a write-off honestly, everything
+shifted around"* — carries no meal and no facts, and which ships with the
+client's own reply on file. The clarify card now offers *Client replies in
+their own words →* beside the presets. Taking it appends the reply to
+`d.message`, so the **safety screen and the model both read it as client
+language**, and re-runs. The `followup_*` fields are what extraction
+resolves that sentence to, used by the offline rules exactly as the seeded
+intake fields are for the other sixteen — with a key, the model does the
+reading for real. `data/disruptions.csv` and `data/state_history.csv` were
+regenerated from the arrays in `index.html` rather than hand-edited, so
+the shipped evidence cannot drift from the code. **Verified:** headless.
+Round one asks which meal and offers all four slots, because nothing is
+logged yet at 13:20. The reply resolves it in a single round: trigger
+`off_plan_extra`, and the arithmetic follows the sentence exactly —
+lunch 650/50 plus cake 300/3 gives **consumed 950 / 53 g**, snack alone
+**reserved 350 / 30 g** because breakfast is displaced and dinner is the
+gap, leaving **remaining 1100 kcal / 77 g**. The run log records *"client
+replied"* with the sentence. Sweep moves 6 clarify → 7 and 16 cases → 17,
+with the other sixteen outcomes unchanged — confirmed by running the
+sweep against p37 and p38 side by side. Suite 45/45; 37/38 against p37,
+failing on the section that does not exist there. **Honest about what it
+is:** the reply is on file, not typed. It proves the loop — a sentence,
+screened, parsed, resolving in one round — without pretending a free-text
+intake exists.
+
 ## p37 · The copy edit p35 claimed to have made
 
 **Problem:** found while tracing the question chain for the user, not by
