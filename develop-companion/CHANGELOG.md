@@ -11,6 +11,42 @@ an entry, no entry without a bump.
 
 ---
 
+## p32 · The question narrows to the meals still open
+
+**Problem:** a flaw in p31, found by the user one build later, from the
+observation that a message at 11:00 tells you nothing about whether it
+concerns breakfast or lunch. That is true — and the clock is never used to
+infer a meal anywhere in the app; its only computational role is
+`deliveryTime()` for coach quiet hours. But the clock *combined with what
+is already accounted for* does narrow the choice, and p31's presets
+ignored that: `PLANS.filter(...).map(p => p.meal_slot)` listed every meal
+on the plan. So on D-1004 — 13:00, breakfast logged — the app would have
+asked which meal to sort out and offered **breakfast** among the four. A
+bad question, asked confidently. **The product decision, taken explicitly:
+always ask, never auto-select** — even when exactly one slot remains. The
+moment the app picks the meal it is deciding what the client meant, which
+is the same silent-wrong-answer class this whole sequence has been closing;
+"ask, never guess" (A7) does not get an exception for convenience. Asking
+and offering are not opposites: the fix is an *informed* question.
+**What changed:** presets are now the plan slots minus everything closed —
+eaten as planned, or displaced — taken from the model's situation when it
+has one and the intake fields otherwise, tolerant of the blank-ish values
+in the seed data (D-1004 carries `displaced_meals: " "`). The question
+states its basis so the human can see why those options and not others,
+and the single-slot case gets its own wording that still requires a tap.
+**Verified:** headless, all three wordings. D-1004 (13:00, breakfast
+eaten) → *"It's 13:00 and breakfast is already accounted for. Which meal
+should I sort out?"* with **lunch · snack · dinner**. D-1010 (19:20,
+breakfast, lunch and snack eaten) → *"…so dinner is the only meal still
+open. Tap it to confirm — I won't assume it for you"* with **dinner**
+alone. D-1001 with everything blanked (Alex, who has targets) → *"It's
+15:00 and nothing is logged yet today"* with all four. Run All unchanged:
+7 OK · 2 REFUSED-ESCALATE · 1 out-of-scope · 6 clarify · 0 errors. Zero
+console errors. (A fourth case, D-1009, was in the first test run and
+proved nothing: Maya's plan states no targets, so it clarifies on that at
+an earlier guard and never reaches this branch. Replaced with the D-1001
+mutation rather than counted as a pass.)
+
 ## p31 · No meal named means ask, not compute
 
 **Problem:** found by the user while tracing what the agent must get right
