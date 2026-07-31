@@ -133,6 +133,9 @@ const runCase = async (p, id) => {
       await p.$$eval('#work button.chip', els => els.map(e => e.textContent.trim())),
       ['I have to skip a planned meal', 'Rebuild my day from this morning',
        "My planned meal isn't available - swap it"]);
+    check('the question does not promise a pick it cannot deliver',
+      /so they are not selectable/.test(await flat(p, '#work')) &&
+      !/If it's easier, pick a preset/.test(await flat(p, '#work')), true);
     check('the two needing a figure say so, and are not buttons',
       await p.$$eval('#work .field .chip.cite', els =>
         els.map(e => e.textContent.trim()).filter(t => /needs a number$/.test(t)).length), 2);

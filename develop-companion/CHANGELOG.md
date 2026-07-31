@@ -11,6 +11,31 @@ an entry, no entry without a bump.
 
 ---
 
+## p37 · The copy edit p35 claimed to have made
+
+**Problem:** found while tracing the question chain for the user, not by
+any check. p35's entry claims *"the question above them says so plainly
+instead of promising a pick."* It did not. The screen still read *"If it's
+easier, **pick a preset**"* above two presets that cannot be picked — the
+precise promise p35 existed to remove — and it shipped to the live site in
+that state, with a changelog entry asserting otherwise. **Cause:** the
+replacement searched for a line beginning `: "I want to get this
+right…`, but p32 had restructured that ternary and the string now sits on
+the `?` branch. It matched nothing and failed silently. Five of the six
+p35 edits carried an `assert`; this one did not, and it is the one that
+broke. **What changed:** the copy, with an assertion this time — *"Pick
+what happened. The first two need a calorie figure and there is nowhere to
+type one yet, so they are not selectable."* And a regression check on the
+sentence itself, since the suite had 36 checks on behaviour and none on
+the words, which is why a silent copy failure survived a green run and a
+publish. p35's entry above now carries the correction inline: a build
+record that overstates what it did is the same defect as an eval Actual
+that overstates what it observed, and this project has already ruled on
+that once. **Verified:** the new check passes on p37 and **fails against
+the file currently live** — pulled back from `raw.githubusercontent.com`
+and run against it: 36/37, failing exactly on the promise. Suite 37/37 on
+the fix.
+
 ## p36 · The hover stops lying, and the answer stays on screen
 
 **Problem:** two, both reported by the user. First, *"when I hover over
@@ -69,6 +94,11 @@ over its own regex guess, and `userMessage()` passes it to the model so
 both paths see the client's answer. The two that need a figure render as
 `— needs a number`, unselectable, with the reason in their tooltip. The
 question above them says so plainly instead of promising a pick.
+**Correction, recorded in p37:** that last sentence was false when it was
+written. The copy edit matched nothing and failed silently, so p35 shipped
+to the live site with *"If it's easier, pick a preset"* still on screen,
+above two presets that cannot be picked. Everything else in this entry is
+accurate; the copy claim was not.
 **Verified:** headless. D-1004 offers exactly three buttons and two
 labelled non-buttons; tapping *"I have to skip a planned meal"* clears the
 CLARIFY, sets trigger `must_skip`, and computes consumed 450 / 35 g,
