@@ -11,6 +11,39 @@ an entry, no entry without a bump.
 
 ---
 
+## p31 · No meal named means ask, not compute
+
+**Problem:** found by the user while tracing what the agent must get right
+before anything downstream can be correct - *"there are cases where it is
+not clear at all which meal it is."* The CLARIFY guard tested the trigger
+and the three fact slots; it never tested `meal_to_solve`. So a message
+with a recognisable trigger but no identifiable meal was answered rather
+than questioned, and `computeCard` then failed twice over: with an empty
+`solve`, no plan meal matches the gap, so **every uneaten meal is reserved
+instead** and the remaining budget collapses toward zero or negative; and
+the meal-type filter is written `if (solve && ...)`, so it is **skipped
+entirely** and breakfast foods become valid dinners. Both silent - a
+confident, internally consistent card off a false premise. No seeded case
+triggers it: all sixteen carry a meal, so the defect was latent, waiting
+for the first real message without an obvious one. **What changed:** a
+`noMeal` check at the point where the offline and live paths converge,
+immediately before the arithmetic - deliberately not inside
+`offlineAgent`, which would have left a live model returning `STATUS: OK`
+with a blank meal walking straight past. Because the existing CLARIFY card
+asks about the shape of the day and offers the five scenario presets -
+neither of which can surface a missing meal - the branch carries its own
+question (*"Which meal should I sort out for you? The whole calculation
+hangs on it, so I won't guess"*) and its own presets: **the client's
+actual plan meal slots**, read from PLANS. **Verified:** headless. Run All
+on p31 returns exactly the p30 sweep - 7 OK · 2 REFUSED-ESCALATE · 1
+out-of-scope · 6 clarify · 0 errors - so no seeded behaviour moved. Then
+D-1001 with its meal blanked at runtime: status CLARIFY, the reason names
+the dependency, the question is the meal question, the presets read
+breakfast / lunch / snack / dinner, and no card is computed. (One false
+alarm during verification: the card-presence check matched the word
+"budget" inside the new reason copy. Stage 4 shows the Question; OPTIONS
+is absent.)
+
 ## p30 · A retired model says so, and the way to change it is written down
 
 **Problem:** the user asked what happens *"if that model is no longer
