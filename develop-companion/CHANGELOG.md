@@ -11,6 +11,40 @@ an entry, no entry without a bump.
 
 ---
 
+## p34 · The client can actually answer the question
+
+**Problem:** p31 and p32 taught the app to ask which meal to solve, and
+p33 labelled stage 5 *the client decides* — while the answer chips stayed
+`<span>` with no click handler. Worse than inert: `.chip` carries
+`cursor: pointer` and a hover state, so they advertised themselves as
+tappable and did nothing. The app asked a question it gave no way to
+answer, on the same screen that had just declared the client decides.
+**What changed:** the meal-slot presets are real `<button>` elements.
+Tapping one calls `answerMeal()`, which records the answer, logs it as a
+human decision, re-renders the case and re-runs it. The answer is held in
+a separate `ANSWERS` map merged over the case record by a new
+`caseRecord()` helper, deliberately **not** written into `DISRUPTIONS` —
+the seeded case is evidence and an answer given during a run must not
+overwrite it. `caseRecord()` replaced the lookups in `selectCase` and
+`runCase` only; `logRun` reads just the clock and date, and `runProbe`
+builds synthetic probes from D-1001 and must never inherit an answer.
+The five scenario presets on the other CLARIFY branch cannot set a meal,
+so they are now styled `.chip.cite` — cursor default, no hover — and stop
+claiming to be interactive. **Verified:** headless. D-1001 with its meal
+blanked offers exactly one button, `snack`, because the team dinner
+displaces the planned dinner and breakfast and lunch are eaten — the
+single-slot path, landing on the case's own original answer. Tapping it
+updates the stage 1 meta line to `solve: snack`, computes the card, and
+returns **remaining 150 kcal / 35 g**: the exact seeded D-1001 figures, so
+the answered path reproduces the pre-filled one to the kilocalorie. The
+run log records *"CLARIFY · answered · meal to solve: snack"*, and the
+seed record still reads empty. Run All unchanged: 7 OK · 2
+REFUSED-ESCALATE · 1 out-of-scope · 6 clarify · 0 errors. Zero console
+errors. (Two false failures during verification, both mine: the first
+test clicked for `dinner`, which is correctly not on offer; the second
+matched `/BUDGET/` when CSS uppercases the label and the DOM text is
+`Budget`.)
+
 ## p33 · Each stage says whose view it is
 
 **Problem:** the user asked, of the CLARIFY question, *"who is asking whom
