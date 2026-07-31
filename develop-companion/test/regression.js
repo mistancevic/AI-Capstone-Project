@@ -146,6 +146,41 @@ const runCase = async (p, id) => {
     check('scenario answer logged', /what happened/.test(await flat(p, '#runlog')), true);
   });
 
+  await section('affordances match behaviour', async () => {
+    const p = await page();
+    await runCase(p, 'D-1004');
+    const hover = async sel => {
+      const el = await p.$(sel);
+      const before = await el.evaluate(e => getComputedStyle(e).borderColor);
+      await el.hover();
+      await p.waitForTimeout(150);
+      return {
+        highlights: before !== await el.evaluate(e => getComputedStyle(e).borderColor),
+        cursor: await el.evaluate(e => getComputedStyle(e).cursor),
+      };
+    };
+    check('inert chip does not highlight or point', await hover('#work .chip.cite'),
+      { highlights: false, cursor: 'default' });
+    check('live chip highlights and points', await hover('#work button.chip'),
+      { highlights: true, cursor: 'pointer' });
+  });
+
+  await section('the answer stays visible and reversible', async () => {
+    const p = await page();
+    await runCase(p, 'D-1004');
+    await p.click('#work >> button.chip:has-text("skip a planned meal")');
+    await p.waitForTimeout(900);
+    check('answer shown on the case',
+      /Answered by the client: what happened → I have to skip a planned meal/
+        .test(await flat(p, '#work')), true);
+    await p.click('#work >> button:has-text("Change")');
+    await p.waitForTimeout(600);
+    const w = await flat(p, '#work');
+    check('Change clears the answer', /Answered by the client/.test(w), false);
+    check('Change returns the case to un-run', /Stages 3–5 appear when you run the case/.test(w), true);
+    check('withdrawal is logged', /answer withdrawn/.test(await flat(p, '#runlog')), true);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();

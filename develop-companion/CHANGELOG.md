@@ -11,6 +11,37 @@ an entry, no entry without a bump.
 
 ---
 
+## p36 · The hover stops lying, and the answer stays on screen
+
+**Problem:** two, both reported by the user. First, *"when I hover over
+chips that seems like clickable and selectable but nothing happening
+after."* The CSS was `.chip:hover { border-color: var(--accent) }` with
+`.chip.cite` overriding only `cursor`. So citation chips and the two
+`needs a number` presets kept their hover highlight: the cursor said
+inert, the border said live. p34 fixed the cursor half of this and missed
+the hover half — the affordance was still half-true. Second, *"for the
+case of D-1004, we need to display that selected answer."* Tapping a
+preset resolved the clarify and computed a card, and then the answer
+disappeared: it survived only in the run log, so the case itself gave no
+account of why it was now answerable. **What changed:** the hover rule is
+scoped to `.chip:not(.cite)`, so only elements that do something respond
+to the pointer. And stage 1 carries an *Answered by the client* line under
+the meta line, naming what was supplied — the preset's own label, not its
+internal trigger id — for both kinds of answer, scenario and meal.
+**Added unasked, and worth saying so:** a **Change** button beside it,
+which withdraws the answer, drops the cached result, logs the withdrawal
+and returns the case to its un-run state. Without it a mis-tap was
+permanent for the session — the same dead end this sequence has been
+closing since p31, and it would have been odd to display an answer while
+offering no way to correct it. **Verified:** headless, by measuring
+computed style either side of a real hover — the `.cite` chip changes
+neither border nor cursor, the button chip changes both. Answering
+D-1004 renders *"Answered by the client: what happened → I have to skip a
+planned meal"*; Change removes it, restores *"Stages 3–5 appear when you
+run the case"*, and writes *answer withdrawn* to the log. Suite extended
+to 36 checks, all passing, and re-run against p35 to confirm it detects
+the absence: 31/34 there.
+
 ## p35 · The scenario picker becomes a picker
 
 **Problem:** reported by the user — *"chips clicking is not working: rules
