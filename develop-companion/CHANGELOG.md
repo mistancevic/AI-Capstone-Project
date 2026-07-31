@@ -11,6 +11,42 @@ an entry, no entry without a bump.
 
 ---
 
+## p35 · The scenario picker becomes a picker
+
+**Problem:** reported by the user — *"chips clicking is not working: rules
+read, presets."* Two different things. The RULES READ chips are citations,
+not controls, and correctly carry `cursor: default`; they were never
+interactive. The scenario presets were the real fault, and mine: p34
+styled them `.chip.cite` so they stopped *pretending* to be clickable, but
+left the sentence *"If it's easier, pick a preset"* above five things that
+could not be picked. E-4's Expected — cleared by faculty — promises *"one
+clarifying question plus the structured preset picker,"* so the honest
+direction was to build up to the design rather than walk the design back.
+**Why they had never been wired:** a preset names *what kind* of
+disruption this is, and for two of the five that is not enough. "Something
+off-plan happened" and "a big meal is coming" both need a calorie figure
+before any subtraction can happen, and there is nowhere to type a number —
+wiring those would land the client on a second question with no way to
+answer it, which is the exact trap p31–p34 closed. The other three are
+complete on their own: skip, swap and rebuild need no figure, because the
+missing fact is a meal, and that is a short list the client can tap.
+**What changed:** `PRESETS` now carries each label's trigger and whether
+it is answerable. The three answerable ones are `<button>`s calling
+`answerScenario()`, which records the trigger in `ANSWERS`, logs it as a
+human decision, and re-runs; `offlineAgent` honours an answered trigger
+over its own regex guess, and `userMessage()` passes it to the model so
+both paths see the client's answer. The two that need a figure render as
+`— needs a number`, unselectable, with the reason in their tooltip. The
+question above them says so plainly instead of promising a pick.
+**Verified:** headless. D-1004 offers exactly three buttons and two
+labelled non-buttons; tapping *"I have to skip a planned meal"* clears the
+CLARIFY, sets trigger `must_skip`, and computes consumed 450 / 35 g,
+reserved 1100 / 75 g, **remaining 850 kcal** for lunch — Alex's plan
+arithmetic with breakfast eaten and lunch as the gap. The run log records
+*"answered · what happened: must_skip."* Regression suite extended to 30
+checks, all passing, and re-run against p34 to confirm it detects the
+absence: 24/27 there, the three new checks failing.
+
 ## p34 · The client can actually answer the question
 
 **Problem:** p31 and p32 taught the app to ask which meal to solve, and

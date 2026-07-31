@@ -126,6 +126,26 @@ const runCase = async (p, id) => {
       await p.evaluate(() => DISRUPTIONS.find(x => x.case_id === 'D-1001').meal_to_solve), '');
   });
 
+  await section('scenario presets', async () => {
+    const p = await page();
+    await runCase(p, 'D-1004');
+    check('only the answerable scenarios are buttons',
+      await p.$$eval('#work button.chip', els => els.map(e => e.textContent.trim())),
+      ['I have to skip a planned meal', 'Rebuild my day from this morning',
+       "My planned meal isn't available - swap it"]);
+    check('the two needing a figure say so, and are not buttons',
+      await p.$$eval('#work .field .chip.cite', els =>
+        els.map(e => e.textContent.trim()).filter(t => /needs a number$/.test(t)).length), 2);
+
+    await p.click('#work >> button.chip:has-text("skip a planned meal")');
+    await p.waitForTimeout(900);
+    const w = await flat(p, '#work');
+    check('answering resolves the clarify', /CLARIFY/.test(w), false);
+    check('answered trigger is used', /must_skip/.test(w), true);
+    check('answered scenario computes the card', /remaining 850 kcal/.test(w), true);
+    check('scenario answer logged', /what happened/.test(await flat(p, '#runlog')), true);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();
