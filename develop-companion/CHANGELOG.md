@@ -11,6 +11,33 @@ an entry, no entry without a bump.
 
 ---
 
+## p33 · Each stage says whose view it is
+
+**Problem:** the user asked, of the CLARIFY question, *"who is asking whom
+and who decides what to click and why?"* — and the screen had no answer.
+The console shows the client's app and the inspection layer interleaved on
+one surface, and the reader switches roles between stage 4 and stage 5
+without being told: stage 4 speaks to the client (*"Which meal should I
+sort out for you?"*), stage 5 speaks to a reviewer (*"pending review —
+nothing is logged without one of these"*). Nothing labels either. This is
+the coach-versus-client ambiguity the user raised earlier, in a specific
+place rather than as a general unease. **What changed:** a role tag on
+every stage heading — 1 *from the client*, 2 and 3 *not shown to the
+client*, 4 *what the client sees*, 5 *the client decides* — plus one line
+above stage 1 naming who the operator is standing in for: *"You are
+running this as Alex, the client."* The tag lives in the `stage()` helper
+keyed by stage number, so one edit covers all twenty-three call sites
+across the six branches (deterministic stop, model-added stop, no-targets
+clarify, slot clarify, out-of-scope, and the OK card) rather than
+twenty-three separate edits that could drift apart. **Verified:** headless
+— tags render before a run (stages 1–2), after an OK run (all five), and
+on the D-1005 hard-stop branch (all five), so no branch renders an
+unlabelled stage. Run All unchanged: 7 OK · 2 REFUSED-ESCALATE · 1
+out-of-scope · 6 clarify · 0 errors. Zero console errors. **Not fixed
+here:** the CLARIFY preset chips are still `<span>` with no click handler
+— the app now says clearly that the client decides, while still offering
+an answer the client cannot tap. That is the next step.
+
 ## p32 · The question narrows to the meals still open
 
 **Problem:** a flaw in p31, found by the user one build later, from the
