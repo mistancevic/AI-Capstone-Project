@@ -11,6 +11,41 @@ an entry, no entry without a bump.
 
 ---
 
+## p40 · Where the client usually eats is something the app knows
+
+**Problem:** p39 removed an invented constraint and swung too far. With no
+place stated, D-1017's top option became *Steak with green beans
+(restaurant)* — and the user named the real objection: *"recommending
+restaurants to clients is not the safe option, especially if someone is on
+budget… to eat steak in a restaurant will be very expensive for just
+regular meal planning."* Correct, and it exposes something the product has
+never modelled at all: **cost.** The foods table carries kilocalories,
+protein, prep time, availability and tags — no price. "Restaurant" was
+serving as an accidental proxy for expensive, and p39 removed the thing
+that had been filtering it out by accident. **What changed:** a
+`typical_venues` field on the client profile — `home|shop` for both Alex
+and Maya — and a three-level precedence in the food filter: **what the
+client said about today, then where this client habitually eats, then no
+filter.** That respects the rule this thread established without
+overshooting it: a per-situation fact must never be invented, but a
+client-level fact the app legitimately holds is not an invention. Where
+someone normally eats belongs with their restrictions and their plan, not
+with today's unknowns. The meta line names which level was used —
+*"home|shop — usual for Alex, not stated today"* — so a fallback is never
+silent, and Maya's restaurant cases still work because a stated place
+wins. **Verified:** by measuring the eligible pool rather than reading the
+rendered top three, which is a weak proxy — ranking can hide a filter
+change behind an unrelated best option, and did twice while I was
+checking. Of 42 foods: stated `home|shop` leaves 36, stated `restaurant`
+leaves 16, an unstated place with Alex's profile leaves 36, and a blank
+profile leaves all 42. D-1017 now offers Alex no restaurant-only dish, and
+its budget is untouched at **remaining 1100 kcal / 77 g** — the venue rule
+changes what is offered, never the arithmetic. Suite 50/50; 48/50 against
+p39. **Not fixed here:** cost is still unmodelled. A restaurant meal is
+excluded for Alex because of where he eats, not because of what it costs,
+and nothing stops an expensive shop item. That is a real gap, and it wants
+a price or tier on the foods table rather than a venue proxy.
+
 ## p39 · Unknown stops meaning strictest
 
 **Problem:** the last open item from the triage thread, and the user asked

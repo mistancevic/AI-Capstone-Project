@@ -210,21 +210,35 @@ const runCase = async (p, id) => {
     const p = await page();
     await p.click('text=D-1017');
     await p.waitForTimeout(250);
-    check('a missing limit is named, not rendered blank',
-      /no time limit given · anywhere — no location given/.test(await flat(p, '#work')), true);
+    check('an unstated time is named, not rendered blank',
+      /no time limit given/.test(await flat(p, '#work')), true);
+    check('an unstated place falls back to the profile, and says so',
+      /home\|shop — usual for Alex, not stated today/.test(await flat(p, '#work')), true);
 
-    await p.click('#work >> button:has-text("Run")');
-    await p.waitForTimeout(700);
+    // Measure the eligible pool directly: a rendered top-three is a weak proxy,
+    // since ranking can hide a filter change behind an unrelated best option.
+    check('precedence: stated place, then the client profile, then no filter',
+      await p.evaluate(() => {
+        const split = v => String(v || '').split('|').map(s => s.trim()).filter(Boolean);
+        const pool = (where, venues) => {
+          const stated = split(where), wheres = stated.length ? stated : split(venues);
+          return FOODS.filter(x => !wheres.length ||
+            x.availability.split('|').some(a => wheres.includes(a))).length;
+        };
+        return [FOODS.length, pool('home|shop', 'home|shop'), pool('restaurant', 'home|shop'),
+                pool('', 'home|shop'), pool('', '')];
+      }), [42, 36, 16, 36, 42]);
+  });
+
+  await section('a home cook is not sent to a restaurant', async () => {
+    const p = await page();
+    await runCase(p, 'D-1017');
     await p.click('#work >> button:has-text("Client replies in their own words")');
     await p.waitForTimeout(1000);
-    check('no location stated leaves restaurant food eligible',
-      /\(restaurant\)/.test(await flat(p, '#work')), true);
-
-    // and a case that DOES state them must still be filtered by them
-    const q = await page();
-    await runCase(q, 'D-1001');
-    const w = await flat(q, '#work');
-    check('a stated location still filters', /home\|shop/.test(w) && !/\(restaurant\)/.test(w), true);
+    check('D-1017 states no place, so Alex gets none of the restaurant-only dishes',
+      /\(restaurant\)|restaurant portion/.test(await flat(p, '#work')), false);
+    check('and the budget is unaffected by the venue rule',
+      /remaining 1100 kcal \/ 77 g/.test(await flat(p, '#work')), true);
   });
 
   await section('key hygiene', async () => {
