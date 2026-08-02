@@ -11,6 +11,38 @@ an entry, no entry without a bump.
 
 ---
 
+## p39 · Unknown stops meaning strictest
+
+**Problem:** the last open item from the triage thread, and the user asked
+the question that exposed how uneven it was — *"40 min: based on what is
+this timing? home|shop: why is this here anyway?"* Neither has ever been
+derived from a message, in any case. Both were seeded and then applied as
+if stated. And they were applied by converting absence into the narrowest
+possible value: `(d.where || 'home')` turned no location into home-only,
+and `+d.minutes_available` turned an empty string into `0`, dropping every
+food that needs any preparation. Missing information was making the answer
+*more* constrained, which is backwards. Measured while answering: the
+40-minute limit on D-1017 excluded **nothing** — the longest prep time in
+the table is 35 minutes — while `home|shop` silently removed **6 of 42
+foods**, every restaurant dish. The field that looked precise did nothing;
+the field nobody noticed deleted a seventh of the menu. **What changed:**
+an absent place applies no place filter and an absent time applies no time
+filter, rather than defaulting. The stage 1 meta line names the absence
+instead of rendering a gap — *"no time limit given · anywhere — no
+location given"* — so a wider option set is explained where the reader
+already looks. And **D-1017's own `minutes_available` and `where` are now
+blank**, because its client never stated either; they were mine, invented
+when the case was written yesterday, and the user was right to ask where
+they came from. **Consequence, stated rather than buried:** D-1017's top
+option is now *Steak with green beans (restaurant)*, which the invented
+`home|shop` had been excluding. That is the honest result of not knowing
+where the client is — wider, disclosed, and correctable by the human at
+the review gate — but it is a real change in what the client is shown, not
+a silent internal tidy-up. **Verified:** headless. D-1017 names both
+absences and admits restaurant food; D-1001, which *does* state
+`home|shop`, still excludes it. The sixteen seeded cases all carry both
+values, so the sweep is unchanged. Suite 48/48; 46/48 against p38.
+
 ## p38 · A clarification that is a sentence, not a tap
 
 **Problem:** the user's example dismantled the button-based clarify —

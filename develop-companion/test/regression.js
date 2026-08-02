@@ -206,6 +206,27 @@ const runCase = async (p, id) => {
     check('the reply is logged as client language', /client replied/.test(await flat(p, '#runlog')), true);
   });
 
+  await section('unknown is not a constraint', async () => {
+    const p = await page();
+    await p.click('text=D-1017');
+    await p.waitForTimeout(250);
+    check('a missing limit is named, not rendered blank',
+      /no time limit given · anywhere — no location given/.test(await flat(p, '#work')), true);
+
+    await p.click('#work >> button:has-text("Run")');
+    await p.waitForTimeout(700);
+    await p.click('#work >> button:has-text("Client replies in their own words")');
+    await p.waitForTimeout(1000);
+    check('no location stated leaves restaurant food eligible',
+      /\(restaurant\)/.test(await flat(p, '#work')), true);
+
+    // and a case that DOES state them must still be filtered by them
+    const q = await page();
+    await runCase(q, 'D-1001');
+    const w = await flat(q, '#work');
+    check('a stated location still filters', /home\|shop/.test(w) && !/\(restaurant\)/.test(w), true);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();
