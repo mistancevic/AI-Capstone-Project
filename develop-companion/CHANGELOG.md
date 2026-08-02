@@ -11,6 +11,46 @@ an entry, no entry without a bump.
 
 ---
 
+## p41 · Cost enters the ranking, and the reply gets its own clock
+
+**Two fixes the user asked for together.**
+
+**The timestamp.** With a reply on screen the case still carried one
+`clock`, printed under both messages, so a single time appeared to belong
+to a two-message exchange. Each message now shows its own — 13:20 for the
+first, 13:26 for the reply — and the reply's time becomes the case clock,
+because that is the moment an escalation from this run would be delivered
+against. Not cosmetic: `deliveryTime()` reads that value for quiet hours.
+
+**Cost.** Named in p40 as unmodelled and unfixed. The user's objection was
+concrete — *"to eat steak in a restaurant will be very expensive for just
+regular meal planning"* — and p40's venue rule only handled it sideways,
+by where the client eats rather than what a thing costs. Every food now
+carries a `cost_tier` of low / med / high, assigned by stated rule rather
+than by feel: restaurant-only is high, premium proteins (steak, salmon,
+cod, shrimp, sushi, poke, halloumi, souvlaki, jerky) are high, shop-only
+ready-made and protein supplements are med, everything else low — with an
+explicit carve-out so cookable staples like lentil soup and tofu curry
+stay low even though they are also available out, which the first pass got
+wrong. **It is a ranking preference, never a filter**, which keeps it
+inside A3 as written (*"preferences and dislikes affect ranking only"*) —
+no policy text changed. The penalty is 0 / 2 / 5, deliberately small: a
+protein gap is scored at 3 points per gram, so 5 points is worth under two
+grams and a better-fitting option still wins on merit. Every option line
+now states its tier, so the ranking is auditable rather than asserted.
+**Verified, and measured rather than eyeballed** — the first check showed
+cost changing the top pick in **0 of 11** computable cases, which would
+have made it another decorative field like the 40-minute limit p39 killed.
+Measuring the whole shortlist instead: the top pick is still unchanged in
+all 11 — nutrition is never overridden — but **3 of 11 shortlists reorder,
+and every one of those demotes or drops a high-tier item**: salmon out of
+D-1005, halloumi demoted in D-1010, halloumi out of D-1017. That is
+exactly the intended behaviour, and both numbers are now assertions in the
+suite so neither can drift. Suite 55/55; 50/55 against p40. **Still not
+modelled:** an actual price. Tiers rank, they do not budget — the app
+cannot answer "keep me under ten euros," and a client-level cost
+sensitivity remains a coach-set field that does not exist.
+
 ## p40 · Where the client usually eats is something the app knows
 
 **Problem:** p39 removed an invented constraint and swung too far. With no

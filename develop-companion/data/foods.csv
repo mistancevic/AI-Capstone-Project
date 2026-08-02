@@ -1,43 +1,43 @@
-name,kcal,protein_g,prep_minutes,availability,meal_types,tags
-Grilled chicken breast with rice and broccoli,550,48,25,home,lunch|dinner,
-"Chicken wrap (whole-wheat tortilla, chicken, veg)",480,38,10,home|shop,lunch|dinner,quick
-Tuna salad with beans and olive oil,420,36,10,home|shop,lunch|dinner,quick|fish
-Canned tuna on rice cakes,300,30,5,home|shop,lunch|snack,quick|fish
-Salmon fillet with potatoes and salad,620,42,30,home|restaurant,lunch|dinner,fish
-Turkey and avocado sandwich,450,32,8,home|shop,lunch,quick
-Lean beef stir-fry with vegetables and noodles,600,44,25,home,lunch|dinner,
-"Beef burrito bowl (rice, beans, salsa)",650,40,0,restaurant,lunch|dinner,
-"Grilled chicken salad (restaurant, dressing on the side)",420,38,0,restaurant,lunch|dinner,
-"Sushi set (12 pieces, mixed nigiri)",550,30,0,restaurant|shop,lunch|dinner,fish
-Chicken souvlaki with pita and tzatziki,620,45,0,restaurant,lunch|dinner,dairy
-Omelette (3 eggs) with toast,420,28,12,home,breakfast|lunch|dinner,vegetarian|quick
-Scrambled eggs (2) with cottage cheese on toast,380,30,10,home,breakfast|lunch,vegetarian|dairy|lactose|quick
-Oats with whey protein and berries,430,35,6,home,breakfast|snack,vegetarian|dairy|quick
-Tofu and vegetable curry with rice,520,26,25,home|restaurant,lunch|dinner,vegetarian|vegan
-Lentil soup with wholegrain bread,400,22,10,home|shop|restaurant,lunch|dinner,vegetarian|vegan
-Chickpea and quinoa bowl with tahini,520,22,15,home|shop,lunch|dinner,vegetarian|vegan
-Turkey chili with rice,560,42,30,home,lunch|dinner,
-Chicken noodle soup (large),380,28,5,shop|restaurant,lunch|dinner,quick
-Shrimp and vegetable rice bowl,480,34,20,home|restaurant,lunch|dinner,fish
-Pork tenderloin with roasted vegetables,540,46,35,home,dinner,
-Cod with mashed potatoes and peas,460,38,25,home|restaurant,lunch|dinner,fish
-Grilled halloumi salad with couscous,520,24,15,home|restaurant,lunch|dinner,vegetarian|dairy|lactose
-Ready-made grilled chicken pieces (deli pack),250,35,0,shop,lunch|dinner|snack,quick
-"Supermarket poke bowl (salmon, rice, edamame)",520,30,0,shop,lunch|dinner,fish|quick
-Supermarket chicken caesar salad box,430,30,0,shop,lunch,dairy|quick
-Rotisserie chicken quarter with bread roll,500,45,0,shop,lunch|dinner,quick
-Egg and spinach breakfast burrito,400,24,8,home|shop,breakfast|lunch,vegetarian|quick
-Greek yogurt (500 g) with honey and granola,450,40,2,home|shop,breakfast|lunch|snack,bridge|vegetarian|dairy|lactose|quick
-Skyr (450 g) with banana,380,42,2,home|shop,breakfast|lunch|snack,bridge|vegetarian|dairy|quick
-Protein bar (60 g),220,20,0,home|shop,snack|lunch,bridge|vegetarian|quick
-Whey protein shake (2 scoops in water),240,48,2,home,snack|lunch|dinner,bridge|vegetarian|dairy|quick
-Ready-to-drink protein shake (bottle),200,30,0,shop,snack|lunch|dinner,bridge|vegetarian|quick
-Vegan pea-protein shake (2 scoops in water),230,40,2,home|shop,snack|lunch|dinner,bridge|vegetarian|vegan|quick
-Cottage cheese (300 g) with rye crackers,350,36,2,home|shop,breakfast|lunch|snack,bridge|vegetarian|dairy|lactose|quick
-Beef jerky (80 g) with an apple,280,28,0,shop,snack|lunch,bridge|quick
-"Edamame (250 g, salted)",300,28,3,shop|restaurant,snack|lunch,bridge|vegetarian|vegan|quick
-Hard-boiled eggs (3) with fruit,290,20,2,home|shop,breakfast|snack|lunch,bridge|vegetarian|quick
-Steak (200 g) with green beans (restaurant),580,50,0,restaurant,dinner|lunch,
-Grilled fish of the day with vegetables (restaurant),480,40,0,restaurant,dinner|lunch,fish
-Margherita pizza (whole),850,30,0,restaurant|shop,lunch|dinner,vegetarian|dairy|lactose
-Chicken pesto pasta (restaurant portion),750,38,0,restaurant,lunch|dinner,dairy
+name,kcal,protein_g,prep_minutes,availability,meal_types,tags,cost_tier
+Grilled chicken breast with rice and broccoli,550,48,25,home,lunch|dinner,,low
+"Chicken wrap (whole-wheat tortilla, chicken, veg)",480,38,10,home|shop,lunch|dinner,quick,low
+Tuna salad with beans and olive oil,420,36,10,home|shop,lunch|dinner,quick|fish,low
+Canned tuna on rice cakes,300,30,5,home|shop,lunch|snack,quick|fish,low
+Salmon fillet with potatoes and salad,620,42,30,home|restaurant,lunch|dinner,fish,high
+Turkey and avocado sandwich,450,32,8,home|shop,lunch,quick,low
+Lean beef stir-fry with vegetables and noodles,600,44,25,home,lunch|dinner,,low
+"Beef burrito bowl (rice, beans, salsa)",650,40,0,restaurant,lunch|dinner,,high
+"Grilled chicken salad (restaurant, dressing on the side)",420,38,0,restaurant,lunch|dinner,,high
+"Sushi set (12 pieces, mixed nigiri)",550,30,0,restaurant|shop,lunch|dinner,fish,high
+Chicken souvlaki with pita and tzatziki,620,45,0,restaurant,lunch|dinner,dairy,high
+Omelette (3 eggs) with toast,420,28,12,home,breakfast|lunch|dinner,vegetarian|quick,low
+Scrambled eggs (2) with cottage cheese on toast,380,30,10,home,breakfast|lunch,vegetarian|dairy|lactose|quick,low
+Oats with whey protein and berries,430,35,6,home,breakfast|snack,vegetarian|dairy|quick,med
+Tofu and vegetable curry with rice,520,26,25,home|restaurant,lunch|dinner,vegetarian|vegan,low
+Lentil soup with wholegrain bread,400,22,10,home|shop|restaurant,lunch|dinner,vegetarian|vegan,low
+Chickpea and quinoa bowl with tahini,520,22,15,home|shop,lunch|dinner,vegetarian|vegan,low
+Turkey chili with rice,560,42,30,home,lunch|dinner,,low
+Chicken noodle soup (large),380,28,5,shop|restaurant,lunch|dinner,quick,med
+Shrimp and vegetable rice bowl,480,34,20,home|restaurant,lunch|dinner,fish,high
+Pork tenderloin with roasted vegetables,540,46,35,home,dinner,,low
+Cod with mashed potatoes and peas,460,38,25,home|restaurant,lunch|dinner,fish,high
+Grilled halloumi salad with couscous,520,24,15,home|restaurant,lunch|dinner,vegetarian|dairy|lactose,high
+Ready-made grilled chicken pieces (deli pack),250,35,0,shop,lunch|dinner|snack,quick,med
+"Supermarket poke bowl (salmon, rice, edamame)",520,30,0,shop,lunch|dinner,fish|quick,high
+Supermarket chicken caesar salad box,430,30,0,shop,lunch,dairy|quick,med
+Rotisserie chicken quarter with bread roll,500,45,0,shop,lunch|dinner,quick,med
+Egg and spinach breakfast burrito,400,24,8,home|shop,breakfast|lunch,vegetarian|quick,low
+Greek yogurt (500 g) with honey and granola,450,40,2,home|shop,breakfast|lunch|snack,bridge|vegetarian|dairy|lactose|quick,low
+Skyr (450 g) with banana,380,42,2,home|shop,breakfast|lunch|snack,bridge|vegetarian|dairy|quick,low
+Protein bar (60 g),220,20,0,home|shop,snack|lunch,bridge|vegetarian|quick,med
+Whey protein shake (2 scoops in water),240,48,2,home,snack|lunch|dinner,bridge|vegetarian|dairy|quick,med
+Ready-to-drink protein shake (bottle),200,30,0,shop,snack|lunch|dinner,bridge|vegetarian|quick,med
+Vegan pea-protein shake (2 scoops in water),230,40,2,home|shop,snack|lunch|dinner,bridge|vegetarian|vegan|quick,med
+Cottage cheese (300 g) with rye crackers,350,36,2,home|shop,breakfast|lunch|snack,bridge|vegetarian|dairy|lactose|quick,low
+Beef jerky (80 g) with an apple,280,28,0,shop,snack|lunch,bridge|quick,high
+"Edamame (250 g, salted)",300,28,3,shop|restaurant,snack|lunch,bridge|vegetarian|vegan|quick,med
+Hard-boiled eggs (3) with fruit,290,20,2,home|shop,breakfast|snack|lunch,bridge|vegetarian|quick,low
+Steak (200 g) with green beans (restaurant),580,50,0,restaurant,dinner|lunch,,high
+Grilled fish of the day with vegetables (restaurant),480,40,0,restaurant,dinner|lunch,fish,high
+Margherita pizza (whole),850,30,0,restaurant|shop,lunch|dinner,vegetarian|dairy|lactose,med
+Chicken pesto pasta (restaurant portion),750,38,0,restaurant,lunch|dinner,dairy,high

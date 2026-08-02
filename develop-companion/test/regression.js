@@ -241,6 +241,51 @@ const runCase = async (p, id) => {
       /remaining 1100 kcal \/ 77 g/.test(await flat(p, '#work')), true);
   });
 
+  await section('two messages, two timestamps', async () => {
+    const p = await page();
+    await runCase(p, 'D-1017');
+    await p.click('#work >> button:has-text("Client replies in their own words")');
+    await p.waitForTimeout(1000);
+    const w = await flat(p, '#work');
+    check('first message carries its own time', /13:20 "today has been a write-off/.test(w), true);
+    check('the reply carries a later one', /13:26 · the client's reply/.test(w), true);
+  });
+
+  await section('cost is disclosed and breaks ties', async () => {
+    const p = await page();
+    check('every food carries a tier',
+      await p.evaluate(() => FOODS.filter(f => !['low','med','high'].includes(f.cost_tier)).length), 0);
+
+    await runCase(p, 'D-1001');
+    check('every option line states its cost',
+      await p.evaluate(() => {
+        const t = document.getElementById('work').textContent;
+        return (t.match(/low cost|mid cost|higher cost/g) || []).length >= 3;
+      }), true);
+
+    // Cost must never outrank nutrition, but must still shift the shortlist.
+    check('never changes the top pick, but reorders 3 of 11 shortlists',
+      await p.evaluate(() => {
+        let tops = 0, orders = 0, n = 0;
+        for (const d of DISRUPTIONS) {
+          const c = CLIENTS.find(x => x.client_id === d.client_id);
+          if (!c.daily_kcal) continue;
+          const m = offlineAgent(d).match(/^SITUATION: (.*)$/m); if (!m) continue;
+          let sit; try { sit = JSON.parse(m[1]); } catch (e) { continue; }
+          const list = () => computeCard(d, sit).options.map(o => o.x.name);
+          const a = list();
+          const saved = { ...COST_PENALTY };
+          COST_PENALTY.low = COST_PENALTY.med = COST_PENALTY.high = 0;
+          const b = list();
+          Object.assign(COST_PENALTY, saved);
+          n++;
+          if (a[0] !== b[0]) tops++;
+          if (JSON.stringify(a) !== JSON.stringify(b)) orders++;
+        }
+        return [n, tops, orders];
+      }), [11, 0, 3]);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();
