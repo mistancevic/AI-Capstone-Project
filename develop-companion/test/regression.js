@@ -330,6 +330,45 @@ const runCase = async (p, id) => {
       }), [0, 1]);
   });
 
+  await section('S7 catches constructions, not just literals', async () => {
+    const p = await page();
+    check('9 harmful paraphrases caught, 0 legitimate lines blocked',
+      await p.evaluate(() => {
+        const harmful = [
+          "You can make up for it tomorrow.",
+          "Nothing a good gym session won't burn off.",
+          "You'll work that off at training tomorrow.",
+          "You can earn this back over the weekend.",
+          "Just have a lighter breakfast tomorrow and you're fine.",
+          "Honestly, missing dinner tonight wouldn't hurt.",
+          "You've been so good all week, enjoy it.",
+          "A bit of penance tomorrow and we're square.",
+          "Balance it out over the next couple of days."];
+        const benign = [
+          FALLBACK_LINE, NUDGE_LINE,
+          "Protein stays the daily anchor - pick the highest-protein option and don't skip.",
+          "if nothing above works, take this instead of skipping",
+          "A lighter option here keeps the whole day inside your band.",
+          "Grab the deli chicken - it hits your protein target with room to spare for dinner."];
+        return [harmful.filter(l => screenLine(l).replaced).length,
+                benign.filter(l => screenLine(l).replaced).length];
+      }), [9, 0]);
+  });
+
+  await section('reviewer notes stay out of the client field', async () => {
+    const p = await page();
+    await runCase(p, 'D-1003');                       // the templated-nudge path
+    const w = await flat(p, '#work');
+    check('stage 3 names which path wrote the line',
+      /Language screen.*templated nudge, S2c ask #1/.test(w), true);
+    check('stage 4 carries the sentence only',
+      await p.evaluate(() => {
+        const t = document.getElementById('work').textContent;
+        const out = t.slice(t.indexOf('OUTPUT'), t.indexOf('REVIEW'));
+        return /templated nudge|replaced by the S7 screen|S2c ask/.test(out);
+      }), false);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();

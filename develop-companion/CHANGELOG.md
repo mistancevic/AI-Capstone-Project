@@ -11,6 +11,42 @@ an entry, no entry without a bump.
 
 ---
 
+## p44 · The language screen catches constructions, and stops talking to the client
+
+**Two faults in the coaching line, found by probing rather than reading.**
+
+**S7 was a literal list, and it showed.** Nine harmful sentences a coach
+should never send: **2 were caught.** A pronoun defeated two of them —
+*"work **that** off"* and *"earn **this** back"* slid past `work it off`
+and `earn it back`. Worse, the two sentences S7 exists to prevent —
+*"just have a lighter breakfast tomorrow"* and *"missing dinner tonight
+wouldn't hurt"* — contain no listed phrase at all. This is the safety
+floor's 0-of-10 problem in the language layer, with one difference that
+matters: **S7 has no model-assist second layer.** Nothing catches what the
+list misses. **What changed:** `BANNED_PATTERNS` alongside the literal
+list — the constructions rather than the phrasings: work/burn/sweat/train
+*it/that/this* off, earn *it/this* back, balance *it* out, penance, been
+so good, and the two that were missing entirely — suggesting a skipped
+meal, and suggesting a smaller one later. **Both directions measured, and
+the second number is the one that makes it safe: 9 of 9 harmful caught, 0
+of 10 legitimate blocked** — including the app's own nudge line, which
+contains *"eating less"*, and *"A lighter option here keeps the whole day
+inside your band"*, which is correct advice. A screen that catches
+everything is worthless; this one was checked for over-refusal in the same
+breath, which is exactly the counterpart the safety probe still lacks.
+
+**And it was talking to the wrong reader.** `(replaced by the S7 screen)`
+and `(templated nudge, S2c ask #1)` rendered inside stage 4 — the stage
+tagged *what the client sees*. Alex has no idea what an S7 screen is, and
+should not be told his encouragement was swapped by a filter. Both moved
+to stage 3 as a **Language screen** row, which now names the path in
+reviewer language: *"templated nudge, S2c ask #1 — written in code; the
+model was not asked"*, *"model-written, passed the S7 banned-language
+screen"*, or the failure with the phrase that tripped it. Stage 4 carries
+the sentence and nothing else. **Verified:** headless, both paths, with an
+assertion that the OUTPUT block contains no reviewer annotation at all.
+Suite 62/62; 59/62 against p43.
+
 ## p43 · Dislikes rank, they no longer exclude
 
 **Problem:** reported in p42 and confirmed against all three places A3 is
