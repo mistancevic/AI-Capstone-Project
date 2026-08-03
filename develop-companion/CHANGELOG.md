@@ -11,6 +11,37 @@ an entry, no entry without a bump.
 
 ---
 
+## p43 · Dislikes rank, they no longer exclude
+
+**Problem:** reported in p42 and confirmed against all three places A3 is
+written. `policies/adaptation_policy.md`: *"Hard filters first:
+restrictions and intolerances are never tradeable… **Preferences and
+dislikes affect ranking only.**"* `GLOSSARY.md:38` agrees, naming
+restrictions — not dislikes — as the hard filter. The code did both with
+the same statement: `if (dislikes.some(...)) return false`, sitting one
+line below the restrictions filter and indistinguishable from it. Likes
+were already correct as a ranking bonus, which is what made the asymmetry
+a bug rather than a design choice. **A correction to p42's entry:** it
+said A3 was *"a policy DESIGN.md quotes."* DESIGN.md does not mention A3
+or ranking at all — it references the policy file by name in its data and
+tools lists. The deviation was against the policy file and the glossary,
+never against anything in the sheet. **What changed:** dislikes moved out
+of the filter into the score. **Magnitude is a judgment A3 does not
+make**, and the first attempt got it wrong: a ±5 penalty, symmetric with
+the likes bonus, put *Lentil soup* second on Alex's D-1010 shortlist —
+technically compliant, and something no coach would ever send to someone
+who dislikes lentils. The penalty is now large but finite, so a disliked
+option sinks below every acceptable one yet still surfaces when nothing
+else qualifies. That is the real difference from a filter, which hides it
+even when it is the only food that fits. **Verified, after the first check
+was worthless:** it re-implemented the filter inside the assertion and so
+tested its own copy — it passed against p42, where the bug still existed.
+Rewritten to drive `computeCard` directly: across every computable case no
+disliked food reaches a shortlist, and with the food table reduced to the
+disliked item alone the card still offers it. Suite 59/59; **58/59 against
+p42**, which is the number that makes the first two claims worth
+anything.
+
 ## p42 · The context panel stops under-showing and over-claiming
 
 **Two faults in stage 2, found while walking it with the user.**

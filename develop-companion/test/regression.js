@@ -299,6 +299,37 @@ const runCase = async (p, id) => {
       /all enforced in code/.test(w) && /policy files themselves are not sent/.test(w), true);
   });
 
+  await section('A3: dislikes rank, they do not exclude', async () => {
+    const p = await page();
+    // Drive computeCard itself. Re-implementing the filter here would only test the copy.
+    check('sinks below every acceptable option, but is still reachable as a last resort',
+      await p.evaluate(() => {
+        const card = id => {
+          const d = DISRUPTIONS.find(x => x.case_id === id);
+          const sit = JSON.parse(offlineAgent(d).match(/^SITUATION: (.*)$/m)[1]);
+          return computeCard(d, sit);
+        };
+        // 1. with the full table, Alex is never offered the thing he dislikes
+        let offered = 0;
+        for (const d of DISRUPTIONS) {
+          const c = CLIENTS.find(x => x.client_id === d.client_id);
+          if (!c.daily_kcal) continue;
+          const m = offlineAgent(d).match(/^SITUATION: (.*)$/m); if (!m) continue;
+          let sit; try { sit = JSON.parse(m[1]); } catch (e) { continue; }
+          const dis = (c.dislikes || '').split('|').filter(Boolean);
+          offered += computeCard(d, sit).options
+            .filter(o => dis.some(k => o.x.name.toLowerCase().includes(k))).length;
+        }
+        // 2. when it is the ONLY candidate, it must still be offered - a filter would hide it
+        const all = FOODS.slice();
+        FOODS.length = 0;
+        FOODS.push(all.find(x => x.name.toLowerCase().includes('lentil')));
+        const lastResort = card('D-1010').options.length;
+        FOODS.length = 0; all.forEach(f => FOODS.push(f));
+        return [offered, lastResort];
+      }), [0, 1]);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();
