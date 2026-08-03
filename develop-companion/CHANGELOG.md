@@ -75,9 +75,11 @@ hard-filters dislikes — `if (dislikes.some(k => x.name.includes(k)))
 return false` — excluding them outright rather than ranking them down.
 Likes are handled correctly as a ranking bonus. So Alex's dislike of
 lentils removes lentil soup from consideration entirely, where the policy
-says it should merely rank lower. This is code contradicting a policy the
-faculty cleared and DESIGN.md quotes, and fixing it changes what the app
-recommends — so it is reported rather than quietly changed.
+says it should merely rank lower. This is code contradicting the policy
+file and the glossary — **not** DESIGN.md, which never mentions A3 or
+ranking; that phrase was wrong when written and is corrected in p43 — and
+fixing it changes what the app recommends, so it is reported rather than
+quietly changed. **Fixed in p43.**
 
 ## p41 · Cost enters the ranking, and the reply gets its own clock
 
