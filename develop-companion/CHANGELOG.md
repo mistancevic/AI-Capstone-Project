@@ -11,6 +11,43 @@ an entry, no entry without a bump.
 
 ---
 
+## p42 · The context panel stops under-showing and over-claiming
+
+**Two faults in stage 2, found while walking it with the user.**
+
+**It hid four fields that decide the answer.** The client profile holds
+nine fields; CONTEXT displayed four of them, and `restrictions`,
+`dislikes`, `likes` and `typical_venues` were not among them — yet all
+four reach `computeCard`. So if Maya's lactose restriction removed an
+option, the panel whose entire job is *what the agent knows* did not show
+the thing that removed it, and a reviewer could not tell a filtered card
+from a wrong one. A **Profile filters** row now carries all four.
+
+**And it claimed a file read that never happens.** The row said *"Rules
+read: adaptation A1–A7 · safety S1–S7 · foods.csv ×42"*. The `POLICIES`
+constant — the full policy text — is loaded into the page and **sent
+nowhere**: the system prompt names it, never interpolates it. What is true
+is more sensible than the chip suggested, and is now what the row says.
+It reads **Rules applied**, with: all enforced in code; the agent's
+instructions restate the boundary and escalation rules by section so it
+can classify and write within them; the policy files themselves are not
+sent to the model; and the arithmetic rules A1–A5 never leave the code at
+all. Only `foods.csv ×42` was ever literally read at runtime.
+
+**Verified:** headless — D-1002 shows *restrictions: lactose · dislikes:
+jerky · likes: salmon, tofu, poke · usually eats: home, shop*, the row is
+relabelled, and the disclaimer renders. Suite 58/58; 55/58 against p41.
+
+**Found while doing this, not fixed — a genuine policy violation.** A3
+states: *"Preferences and dislikes affect ranking only."* The code
+hard-filters dislikes — `if (dislikes.some(k => x.name.includes(k)))
+return false` — excluding them outright rather than ranking them down.
+Likes are handled correctly as a ranking bonus. So Alex's dislike of
+lentils removes lentil soup from consideration entirely, where the policy
+says it should merely rank lower. This is code contradicting a policy the
+faculty cleared and DESIGN.md quotes, and fixing it changes what the app
+recommends — so it is reported rather than quietly changed.
+
 ## p41 · Cost enters the ranking, and the reply gets its own clock
 
 **Two fixes the user asked for together.**

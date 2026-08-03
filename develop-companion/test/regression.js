@@ -286,6 +286,19 @@ const runCase = async (p, id) => {
       }), [11, 0, 3]);
   });
 
+  await section('context shows what shapes the card', async () => {
+    const p = await page();
+    await p.click('text=D-1002');
+    await p.waitForTimeout(250);
+    const w = await flat(p, '#work');
+    check('the four decision-shaping profile fields are on screen',
+      /restrictions: lactose · dislikes: jerky · likes: salmon, tofu, poke · usually eats: home, shop/.test(w), true);
+    check('the rules row no longer claims the policy files are read',
+      /Rules applied/.test(w) && !/Rules read/.test(w), true);
+    check('and says where each rule actually lives',
+      /all enforced in code/.test(w) && /policy files themselves are not sent/.test(w), true);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();
