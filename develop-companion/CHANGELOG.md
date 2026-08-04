@@ -11,6 +11,21 @@ an entry, no entry without a bump.
 
 ---
 
+## p52 · The ribbon is a moment, not a fixture
+
+**Problem:** *"but now this is there whole time."* The p51 ribbon was
+cleared only by selecting a case, so after **Back to Evals** and a click
+back to Console it was still sitting there — a banner saying *"E-5 just
+ran here"* about a run from ten minutes ago, permanently occupying the
+top of the workspace. **What changed:** leaving the console clears it.
+The ribbon now lives exactly as long as the moment it describes: it
+appears when an eval run puts you in the console and disappears the
+instant you navigate away. Come back to Console and the run is still
+there, without a stale banner over it. **Verified:** suite **95/95** —
+two new checks, one that the ribbon is gone after leaving, one that
+returning shows the card with no banner. Negative control against p51
+fails exactly those two (93/95).
+
 ## p51 · The eval run stays on screen, and loses the "re-"
 
 **Problem:** the user said they never see the console flip during an eval

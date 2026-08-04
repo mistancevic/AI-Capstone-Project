@@ -499,8 +499,12 @@ const runCase = async (p, id) => {
     check('the row was recorded while you were looking at the run',
       /run \d{4}-\d{2}-\d{2} \d{2}:\d{2}/.test(await flat(p, '#actual-E-1')), true);
 
+    check('leaving the console ends the "just ran" moment', await flat(p, '#evalribbon'), '');
     await p.click('#tab-console');
-    await p.waitForTimeout(200);
+    await p.waitForTimeout(300);
+    check('and coming back shows the run without a stale banner',
+      await flat(p, '#evalribbon') === '' && /Budget/.test(await flat(p, '#work')), true);
+
     await p.click('text=D-1003');
     await p.waitForTimeout(300);
     check('picking any case clears the ribbon', await flat(p, '#evalribbon'), '');
