@@ -11,6 +11,28 @@ an entry, no entry without a bump.
 
 ---
 
+## p49 · The verdict notes are readable without scrolling sideways
+
+**Problem:** each eval row carries a one-line note explaining the human's
+verdict, and the box holding it was a single-line `<input>`. E-3's note
+runs 320 characters; the column is 260 pixels wide. Everything past the
+first few words existed but could only be reached by dragging inside the
+box — the reasoning behind a verdict, which is the whole point of the
+note, was effectively hidden on the page that exists to show it.
+**What changed:** the note is a `<textarea>` that wraps and sizes itself
+to its content, so the full text is on screen at rest and the box grows
+as you type. The verdict column widened 260 → 300px. Nothing about how
+notes are stored or restored changed: still per-eval in `localStorage`,
+still returned to the shipped text by **Forget all**. **Verified:** all
+six boxes measured in the browser — content height and width now match
+the visible box exactly (`scrollHeight - clientHeight = 0`, same for the
+horizontal pair), where the old input clipped every note longer than the
+column. A 320-character note typed live grows the box and survives a
+reload. Suite at **86/86**; negative control against p48 fails exactly
+the three new checks (82/85), including one that counts the six boxes —
+without it, `.every()` over an empty list would have passed p48 for the
+wrong reason.
+
 ## p48 · The scoreboard counts what you ran, not what shipped
 
 **Problem:** the user pressed **Forget all** expecting a blank slate and

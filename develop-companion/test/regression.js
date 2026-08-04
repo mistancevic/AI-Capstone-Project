@@ -474,6 +474,31 @@ const runCase = async (p, id) => {
       await p.evaluate(() => Object.keys(localStorage).length), 0);
   });
 
+  await section('every verdict note is readable without scrolling', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    const boxes = () => p.$$eval('#evalsTable textarea', els => els.map(t => ({
+      clipY: t.scrollHeight - t.clientHeight, clipX: t.scrollWidth - t.clientWidth })));
+    const shipped = await boxes();
+    // .every() on an empty list is true, so count them first - otherwise a build with no
+    // wrapping note field at all would pass this check for the wrong reason.
+    check('every case has a wrapping note field', shipped.length, 6);
+    check('the longest shipped note is not clipped in either direction',
+      shipped.length === 6 && shipped.every(b => b.clipY <= 1 && b.clipX <= 1), true);
+
+    await p.fill('#evalsTable tr:nth-child(2) textarea', 'x '.repeat(160));
+    await p.waitForTimeout(200);
+    check('a note typed now grows its box too',
+      (await boxes())[0].clipY <= 1, true);
+    await p.click('#evalsTable th');
+    await p.reload();
+    await p.waitForTimeout(400);
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    check('and survives a reload', await p.$eval('#evalsTable textarea', t => t.value.length), 320);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();
