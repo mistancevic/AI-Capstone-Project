@@ -11,6 +11,36 @@ an entry, no entry without a bump.
 
 ---
 
+## p51 · The eval run stays on screen, and loses the "re-"
+
+**Problem:** the user said they never see the console flip during an eval
+run and did not believe it happened. They were right. Logging every
+painted frame during a run gave: *console was never painted — the switch
+happened inside one frame.* In offline rules mode the whole run completes
+before the browser gets a chance to draw, so `showView('console')` and
+`showView('evals')` both landed in the same frame and the screen never
+changed. **Zero frames, not "too fast to notice."** The code comment on
+that line read `// run visibly in the console` and had been false since
+it was written. Second problem, same root: the tile said **Re-run here**,
+where the "re-" only makes sense once you know a shipped run exists —
+the word was carrying an explanation instead of a label. **What changed:**
+the app no longer switches back. Click Run and it takes you to the
+Console with that case's five stages filled in, under a ribbon naming
+which eval put you there and stating there is no test mode — the eval
+calls the same `runCase` a human click does. **Back to Evals** returns;
+picking any case clears the ribbon. The tile is now **Run in this
+browser**. **Verified:** suite **93/93** — new checks assert the console
+is the visible view after a Run, that the card is on screen, that the
+ribbon names the eval and case, that the row was stamped while you were
+looking at the run, and that selecting a case clears the ribbon.
+Negative control against p50 fails exactly the five affected checks
+(86/91). Two older sections needed a fix, not a rewrite: they clicked
+Run six times in a row and had been relying on the flip-back to land
+them on the Evals tab. Column geometry measured before and after a run
+(`16 / 333 / 1181`) to confirm the ribbon did not disturb the console
+grid — the first attempt made it a fourth grid child and pushed the work
+panel into the run-log column.
+
 ## p50 · The verdict leads the row instead of concluding it
 
 **Problem:** the verdict sat in the last column, after Expected and

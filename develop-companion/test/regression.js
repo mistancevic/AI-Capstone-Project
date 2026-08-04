@@ -414,9 +414,13 @@ const runCase = async (p, id) => {
     const seeded = await p.evaluate(() =>
       Object.fromEntries(Object.entries(EVAL_SEED).map(([k, v]) => [k, v.actual])));
     for (const id of ['E-1', 'E-2', 'E-3', 'E-4', 'E-5', 'E-6']) {
+      await p.click('#tab-evals');           // a run now leaves you in the console, on the run
+      await p.waitForTimeout(200);
       await p.click(`#evalsTable >> tr:has-text("${id}") >> button:has-text("Run")`);
       await p.waitForTimeout(1400);
     }
+    await p.click('#tab-evals');
+    await p.waitForTimeout(200);
     const fresh = await p.evaluate(() =>
       Object.fromEntries(Object.entries(EVAL_STATE).map(([k, v]) => [k, v.actual || ''])));
     check('stored Actuals match a live re-run',
@@ -437,8 +441,12 @@ const runCase = async (p, id) => {
 
     await p.click('#evalsTable >> tr:has-text("E-1") >> button:has-text("Run")');
     await p.waitForTimeout(1400);
+    await p.click('#tab-evals');
+    await p.waitForTimeout(200);
     await p.click('#evalsTable >> tr:has-text("E-5") >> button:has-text("Run")');
     await p.waitForTimeout(1400);
+    await p.click('#tab-evals');
+    await p.waitForTimeout(200);
     const after = await stamps();
     check('only the cases actually re-run are stamped',
       after.map(t => /^run /.test(t)), [true, false, false, false, true, false]);
@@ -455,12 +463,12 @@ const runCase = async (p, id) => {
     await p.click('#tab-evals');
     await p.waitForTimeout(300);
     const board = async () => (await flat(p, '#scoreboard'));
-    check('a fresh browser has re-run nothing', /0\/6Re-run here/.test(await board()), true);
+    check('a fresh browser has re-run nothing', /0\/6Run in this browser/.test(await board()), true);
     check('shipped verdicts still count as recorded judgements', /6Pass/.test(await board()), true);
 
     await p.click('#evalsTable >> tr:has-text("E-1") >> button:has-text("Run")');
     await p.waitForTimeout(1400);
-    check('running one moves the count', /1\/6Re-run here/.test(await board()), true);
+    check('running one moves the count', /1\/6Run in this browser/.test(await board()), true);
 
     await p.click('#tab-memory');
     await p.waitForTimeout(300);
@@ -469,9 +477,33 @@ const runCase = async (p, id) => {
     await p.click('#tab-evals');
     await p.waitForTimeout(400);
     check('Forget all returns the table to the shipped state',
-      /0\/6Re-run here/.test(await board()) && /2026-07-27 \(shipped\)/.test(await board()), true);
+      /0\/6Run in this browser/.test(await board()) && /2026-07-27 \(shipped\)/.test(await board()), true);
     check('and clears browser storage entirely',
       await p.evaluate(() => Object.keys(localStorage).length), 0);
+  });
+
+  await section('an eval run is left on screen, not flashed past', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    await p.click('#evalsTable tr:nth-child(2) button:has-text("Run")');
+    await p.waitForTimeout(1400);
+    check('the app stays in the console, where the run is',
+      await p.$eval('#view-console', el => el.offsetParent !== null), true);
+    check('the run itself is on screen', /Budget/.test(await flat(p, '#work')), true);
+    check('and it says which eval put it there',
+      /E-1 just ran here, on D-1001/.test(await flat(p, '#evalribbon')), true);
+
+    await p.click('#evalribbon >> button:has-text("Back to Evals")');
+    await p.waitForTimeout(400);
+    check('the row was recorded while you were looking at the run',
+      /run \d{4}-\d{2}-\d{2} \d{2}:\d{2}/.test(await flat(p, '#actual-E-1')), true);
+
+    await p.click('#tab-console');
+    await p.waitForTimeout(200);
+    await p.click('text=D-1003');
+    await p.waitForTimeout(300);
+    check('picking any case clears the ribbon', await flat(p, '#evalribbon'), '');
   });
 
   await section('the verdict leads the row, it does not conclude it', async () => {
