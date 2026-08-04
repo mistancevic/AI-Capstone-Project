@@ -474,6 +474,17 @@ const runCase = async (p, id) => {
       await p.evaluate(() => Object.keys(localStorage).length), 0);
   });
 
+  await section('the verdict leads the row, it does not conclude it', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    check('column order reads verdict, case, expected, actual',
+      await p.$$eval('#evalsTable th', th => th.map(x => x.textContent.trim())),
+      ['Verdict (human)', 'Case', 'Expected behavior (PRD)', 'Actual']);
+    check('the badge sits in the first cell of the row',
+      await p.$eval('#evalsTable tr:nth-child(2) td:first-child', td => td.textContent.trim().startsWith('Pass')), true);
+  });
+
   await section('every verdict note is readable without scrolling', async () => {
     const p = await page();
     await p.click('#tab-evals');

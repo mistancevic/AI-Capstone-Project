@@ -11,6 +11,27 @@ an entry, no entry without a bump.
 
 ---
 
+## p50 · The verdict leads the row instead of concluding it
+
+**Problem:** the verdict sat in the last column, after Expected and
+Actual. Read left to right, a green `Pass` at the end of the row looks
+like the outcome of the run you just read about — so on a browser that
+had run nothing, six of them read as *"all six just passed."* They are
+nothing of the sort: they are standing judgements recorded on
+2026-07-27 and shipped inside the file (`EVAL_SEED`), which is why they
+survive **Forget all** — clearing them would delete the test record, not
+reset a session. **What changed:** column order is now **Verdict · Case ·
+Expected behavior (PRD) · Actual**. The row now reads as a sentence in
+the right order: *this eval passed — here is the case, and you can run it
+— here is what was expected — here is what happened.* The verdict is a
+label on the record, sitting where a label belongs, and Actual lands last
+where the eye finishes. Nothing about the verdicts themselves changed:
+same source, same storage, same **change** link to re-judge.
+**Verified:** header order and first-cell content asserted in the suite;
+**88/88**, negative control against p49 fails exactly the two new checks
+(86/88). Screenshot check confirms every note still sits fully visible in
+the new leading column, no horizontal scroll anywhere.
+
 ## p49 · The verdict notes are readable without scrolling sideways
 
 **Problem:** each eval row carries a one-line note explaining the human's
