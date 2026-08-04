@@ -11,6 +11,39 @@ an entry, no entry without a bump.
 
 ---
 
+## p46 · The eval table stops quietly reporting less than the app does
+
+**Problem:** opening the Evals tab and re-running all six showed **three
+of the Actuals had drifted** — and not because behaviour changed. The
+Actual column is produced by `summarizeResult`, which reads the *rendered
+card* and pattern-matches prose. Two of my own edits broke it. p45 renamed
+the bridge field to *never-skip fallback*, so `/bridge/i` stopped matching
+and **E-1 and E-3 lost "bridge present"** while the fallback was still
+being offered. p35 replaced *"pick a preset"* with *"not selectable"*, so
+**E-4 lost "one question + preset picker"** and reported a bare `CLARIFY`.
+In every case the verdict still read **Pass**. The evidence surface
+silently understated the product, which is worse than overstating it,
+because nothing looks wrong. **What changed:** the summariser reads
+**structure where structure exists** — the fallback comes from
+`CARD_CACHE[caseId].bridge`, the option and preset counts from counting
+buttons — so renaming a label can no longer delete a fact. And the stored
+Actuals were re-derived from real runs, so a cold page load now shows
+exactly what pressing Run produces. **The false claim is finally gone.**
+E-3's Actual read *"templated nudge, counter → 1"*, and its note said
+*"counter 0 to 1"*. It was reported as found-not-fixed in p42, parked, and
+had survived four builds since. `compensatory_asks_week` is **never
+written anywhere** — the only line resembling an assignment is a template
+interpolation into the model prompt. It now reads *"templated nudge, S2c
+ask #1 of the rolling week"*, which is true, and the note says plainly
+that the tiering is demonstrated by the seeded pair E-3/E-6 rather than
+produced by the app. **Verified:** headless — all six stored Actuals now
+equal a live re-run, and the suite asserts that equality from now on, so
+the next wording change fails a test instead of quietly shrinking the
+evidence. Suite 72/72; 69/72 against p45. **Still open:** S2c's policy
+says the counter increments on the first and second ask. It does not.
+That is a real code-versus-policy gap, now described honestly rather than
+papered over by an Actual that claimed otherwise.
+
 ## p45 · Choosing is editing — the option list becomes the decision
 
 **Problem:** the user could not see what Edit was for — *"why is it not
