@@ -11,6 +11,29 @@ an entry, no entry without a bump.
 
 ---
 
+## p48 · The scoreboard counts what you ran, not what shipped
+
+**Problem:** the user pressed **Forget all** expecting a blank slate and
+got `6/6 Cases run`. Forget all was working — verdicts, Actuals, stamps
+and storage all returned to the shipped state — but the tile still counted
+the seeded results as runs. So the scoreboard read *"6/6 Cases run"* while
+every row directly beneath it read *"shipped result — not re-run in this
+browser."* **The tile and the table contradicted each other on the same
+screen**, and p47 caused it: making the rows honest about their origin
+without making the count honest about the same thing. **What changed:**
+the tile counts entries carrying a run stamp rather than entries carrying
+a result, and is relabelled **Re-run here** to match the row wording
+exactly. A fresh browser now reads `0/6`, it moves to `1/6` on the first
+Run, and Forget all takes it back to `0/6`. **Pass / Needs work / Fail
+deliberately still show the shipped verdicts**, because those are
+recorded judgements — the evidence of testing performed, part of what was
+submitted — not activity in this session. `6 Pass · 0/6 re-run here` is
+now a coherent sentence: six were judged and recorded, none have been
+re-verified by the person currently looking. **Verified:** headless
+across the whole cycle — fresh `0/6`, one run `1/6`, two runs `2/6`,
+Forget all back to `0/6` with `localStorage` empty and `Last run` showing
+`2026-07-27 (shipped)`. Suite 82/82; 79/82 against p47.
+
 ## p47 · Every eval says when it ran, and in which mode
 
 **Problem:** the user, after re-running all six on the live site — *"if I

@@ -450,6 +450,30 @@ const runCase = async (p, id) => {
       /· offline rules|· live model/.test(after[0]), true);
   });
 
+  await section('the scoreboard counts this session, not the shipped seed', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    const board = async () => (await flat(p, '#scoreboard'));
+    check('a fresh browser has re-run nothing', /0\/6Re-run here/.test(await board()), true);
+    check('shipped verdicts still count as recorded judgements', /6Pass/.test(await board()), true);
+
+    await p.click('#evalsTable >> tr:has-text("E-1") >> button:has-text("Run")');
+    await p.waitForTimeout(1400);
+    check('running one moves the count', /1\/6Re-run here/.test(await board()), true);
+
+    await p.click('#tab-memory');
+    await p.waitForTimeout(300);
+    await p.click('button:has-text("Forget all")');
+    await p.waitForTimeout(500);
+    await p.click('#tab-evals');
+    await p.waitForTimeout(400);
+    check('Forget all returns the table to the shipped state',
+      /0\/6Re-run here/.test(await board()) && /2026-07-27 \(shipped\)/.test(await board()), true);
+    check('and clears browser storage entirely',
+      await p.evaluate(() => Object.keys(localStorage).length), 0);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();
