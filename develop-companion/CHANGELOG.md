@@ -11,6 +11,36 @@ an entry, no entry without a bump.
 
 ---
 
+## p47 · Every eval says when it ran, and in which mode
+
+**Problem:** the user, after re-running all six on the live site — *"if I
+ran it in the morning and we change something in the afternoon it will not
+be clear there."* Correct. `Last run` was **one global date** in a single
+key, with no time and no attribution: `stampRun()` wrote today's date
+whenever *any* eval ran, so six cases verified across a day of edits
+collapsed into one number that identified none of them. A scoreboard
+reading `6/6 cases run` beside a stale date is the kind of evidence that
+looks rigorous and proves nothing. **What changed:** each eval carries its
+own stamp — date **and time**, to the minute, in local time — written
+into `EVAL_STATE` when that case is run. The scoreboard's `Last run` is
+now *derived* from the newest of them rather than kept separately, so the
+two can no longer disagree. **And each stamp records the mode**, which
+matters more than the timestamp: *"6/6 Pass"* means something different
+with the model off than with it on, and until now the table did not say
+which. Three values appear — `offline rules (no key saved)`, `live model:
+<id>`, and **`no model call`** for the cases stopped by the deterministic
+screen before the agent was ever reached. That last one is not
+bookkeeping; on E-5 it is the evidence, printed next to the result: the
+refusal happened without a model in the loop. **Shipped results now admit
+what they are.** Before any local run, every row reads *"shipped result —
+not re-run in this browser"* and the scoreboard reads `2026-07-27
+(shipped)`. The recorded Actuals are real observations, but they are mine,
+not the reader's — and a reader clicking Run should be able to see which
+rows they have verified themselves. **Verified:** headless — all six read
+*shipped* on load; running only E-1 and E-5 stamps exactly those two;
+E-1 records `offline rules (no key saved)` and E-5 records `no model
+call`. Suite 77/77; 73/77 against p46.
+
 ## p46 · The eval table stops quietly reporting less than the app does
 
 **Problem:** opening the Evals tab and re-running all six showed **three

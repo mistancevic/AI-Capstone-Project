@@ -427,6 +427,29 @@ const runCase = async (p, id) => {
       /S2c ask #1 of the rolling week/.test(fresh['E-3']) && !/counter →/.test(fresh['E-3']), true);
   });
 
+  await section('every eval carries its own run stamp', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    const stamps = () => p.$$eval('#evalsTable td[id^="actual-"] .metaline', e => e.map(x => x.textContent.trim()));
+    check('a shipped result says so, and is not passed off as a local run',
+      (await stamps()).every(t => /shipped result/.test(t)), true);
+
+    await p.click('#evalsTable >> tr:has-text("E-1") >> button:has-text("Run")');
+    await p.waitForTimeout(1400);
+    await p.click('#evalsTable >> tr:has-text("E-5") >> button:has-text("Run")');
+    await p.waitForTimeout(1400);
+    const after = await stamps();
+    check('only the cases actually re-run are stamped',
+      after.map(t => /^run /.test(t)), [true, false, false, false, true, false]);
+    check('the stamp carries a time, not just a date',
+      /^run \d{4}-\d{2}-\d{2} \d{2}:\d{2} · /.test(after[0]), true);
+    check('a pre-model stop records that no model was called',
+      /· no model call$/.test(after[4]), true);
+    check('a run that reached the agent records which mode it used',
+      /· offline rules|· live model/.test(after[0]), true);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();
