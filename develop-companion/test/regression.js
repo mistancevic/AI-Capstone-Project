@@ -369,6 +369,41 @@ const runCase = async (p, id) => {
       }), false);
   });
 
+  await section('the client picks the option, and the app does the maths', async () => {
+    const p = await page();
+    await runCase(p, 'D-1017');
+    await p.click('#work >> button:has-text("Client replies in their own words")');
+    await p.waitForTimeout(1000);
+
+    check('every option and the bridge are selectable',
+      await p.$$eval('#choice-D-1017 > button', els => els.length), 4);
+    check('option 1 is selected by default',
+      await p.$$eval('#choice-D-1017 > button', els => els[0].className.includes('primary')), true);
+
+    const line = async () => (await flat(p, '#work')).match(/Your choice(.{0,110})/)[1];
+    await p.click('#choice-D-1017 > button >> nth=1');
+    await p.waitForTimeout(300);
+    check('picking option 2 recomputes against it',
+      /Pork tenderloin.*540 kcal, 46 g protein . day-end -560 kcal \/ -31 g/.test(await line()), true);
+
+    await p.click('#work >> button:has-text("1\u00bc")');
+    await p.waitForTimeout(300);
+    check('a portion scales food and day-end together',
+      /1\u00bc Pork tenderloin.*675 kcal, 58 g protein . day-end -425 kcal \/ -19 g/.test(await line()), true);
+
+    await p.click('#work >> button:has-text("Approve this choice")');
+    await p.waitForTimeout(400);
+    check('approve records the actual choice, not option 1',
+      /confirmed: 1\u00bc Pork tenderloin.*675 kcal, 58 g protein, day-end -425 kcal \/ -19 g/
+        .test(await flat(p, '#work')), true);
+    check('the review gate offers two actions, not three',
+      await p.$$eval('#gate-D-1017 button', els => els.map(e => e.textContent.trim())),
+      ['Approve this choice', 'Escalate to coach']);
+    check('no free-text edit box exists anywhere',
+      await p.evaluate(() => typeof window.editCase === 'function' ||
+                             !!document.querySelector('[id^="edit-"]')), false);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();

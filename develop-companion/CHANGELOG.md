@@ -11,6 +11,42 @@ an entry, no entry without a bump.
 
 ---
 
+## p45 · Choosing is editing — the option list becomes the decision
+
+**Problem:** the user could not see what Edit was for — *"why is it not
+solved earlier and then to go to approve or escalate?"* Tracing it found
+something larger than Edit. **`TOP_OPTION` was always `card.options[0]`.**
+Approve logged option 1 whatever the client wanted; **there was no way to
+select option 2 or 3 at all.** Free-text Edit was not a weak feature, it
+was the escape hatch for a missing one — the only way to say *"I'll have
+the pork"* was to type it into a box that stored a string, recomputed
+nothing, and reached no arithmetic anywhere. `DESIGN.md` step 8 had
+specified the real behaviour all along: *"optionally editing the portion
+or swapping an ingredient first, **with the math recomputed live**."*
+**What changed:** the options — and the bridge — became the decision.
+Each is a button; one is selected; a portion row (½ ¾ 1× 1¼ 1½) scales
+it; and a **Your choice** line recomputes food and day-end together as you
+click. Approve records exactly that. **Edit is gone as a button**, along
+with `editCase`, `saveEdit`, and the free-text box, because choosing *is*
+editing. The review gate now offers two actions, which is the honest
+count: accept a bounded choice, or hand it to the coach. **Why bounded
+rather than validated:** an index into options the app computed and a
+fixed portion factor cannot express a number the app did not calculate.
+The arithmetic stays A1's, the choice stays A6's. Free text let a human
+author a decision the system never computed and could not verify — the
+gap the user found. **Verified on D-1017:** four selectable rows, option 1
+default; picking option 2 gives *540 kcal, 46 g → day-end −560 / −31*;
+1¼ portion gives *675 kcal, 58 g → day-end −425 / −19*; Approve logs *"1¼
+Pork tenderloin… day-end −425 kcal / −19 g"* rather than the chicken.
+Suite 69/69; 62/64 against p44. **Carried across:** `CHOICES` replaces
+`EDITS` in storage and in the Memory tab, which now reads *Your approved
+choices*; `Forget all` clears both, including the legacy key. **Not
+fixed:** the app still offers one item per meal. Every D-1017 option is
+400–600 kcal short of the 1100 available because no single dinner in the
+table is that large, and it cannot propose two items together. A portion
+adjuster narrows that — 1½× chicken is 825 kcal — but combinations remain
+a real gap.
+
 ## p44 · The language screen catches constructions, and stops talking to the client
 
 **Two faults in the coaching line, found by probing rather than reading.**
