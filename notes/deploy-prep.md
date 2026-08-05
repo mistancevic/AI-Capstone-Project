@@ -57,9 +57,18 @@ disclosures over third-party chat platforms is a serious question).
 > model-on mode (it is currently proven in model-off mode); the stop and
 > nudge wording is reviewed by a clinically qualified professional,
 > because the disordered-eating boundary must not rest on a product
-> team's judgment alone; and the daily watch and pause mode are built,
-> since counters that only exist as seeded data cannot protect anyone
-> between sessions.
+> team's judgment alone; and the safety counters are actually written at
+> runtime, not merely read. That last one is specific and self-found:
+> policy S2c tiers the response to a compensatory ask by a rolling-week
+> counter — first and second ask get food and a nudge, the third gets a
+> hard stop — and the prototype reads that counter but never increments
+> it. The tiering is proven by two seeded cases sitting either side of the
+> threshold (E-3 at zero gets food, E-6 at two gets the stop), which
+> demonstrates the boundary without producing it. On seeded counters a
+> client's third ask in a week would reach them as a first, so no pilot
+> can run until the counter is written and persisted — together with the
+> daily watch and pause mode, which are designed and not runtime for the
+> same reason.
 
 **Privacy and safety risks — what could go wrong?**
 
@@ -107,9 +116,13 @@ disclosures over third-party chat platforms is a serious question).
 > the banned-language replacement rate (a rise means model drift); the
 > clarify rate (a rise means parsing degradation); option acceptance rate
 > (a fall means ranking drift); counter distributions across the roster
-> (sudden shifts mean detection drift); and coach-reported misses — cases
-> the coach believes should have been flagged and weren't, the one signal
-> no automatic metric can produce.
+> (sudden shifts mean detection drift); **counter integrity** — every
+> compensatory ask and skipped day increments exactly once and survives a
+> session, alarmed on both failure directions, an ask that does not count
+> (a third ask arriving as a first) and an event counted twice (the known
+> flag-deduplication gap); and coach-reported misses — cases the coach
+> believes should have been flagged and weren't, the one signal no
+> automatic metric can produce.
 
 **User feedback plan — how do you learn after launch?**
 

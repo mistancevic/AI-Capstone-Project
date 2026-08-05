@@ -199,3 +199,50 @@ Visible, inspectable, resettable memory — implemented the design's way, not th
 Develop is complete. Rows 29–36 above are in the capstone sheet, verified
 identical to what is filed here. Stopped at the end of Develop — no
 publishing, no deploying. Waiting for the Deploy guide.
+
+---
+
+## Note added after the check — not part of the submitted answers
+
+Recorded 2026-08-05, during the Deploy-phase walkthrough of the app.
+**Rows 29–36 above are left exactly as they passed the check.** This note
+exists so the finding is not lost, and so a future reader of row 32 knows
+it has been superseded.
+
+**The finding.** Row 32, case 3 reads *"…the run continues with real food
+and a templated de-escalating nudge, counter rises to one, no urgent
+flag."* The counter does not rise. Safety policy S2c does say it should —
+the expectation was a correct reading of the policy — but
+`compensatory_asks_week` is read and never written. The E-3/E-6 pair
+proves the tiering by sitting either side of the threshold in seeded
+data (E-3 at zero, E-6 at two), which **demonstrates** the boundary
+without **producing** it. Row 35, limitation 3 already states the true
+position — *"counters and history are seeded data"* — so the submission
+contains the correction; the two rows simply disagree.
+
+**How it surfaced, which is the interesting part.** The eval passed
+because the Actual column was built by reading the words the app printed
+on the card, and the card printed *"counter → 1"* as templated prose. So
+the eval compared two sentences the build had authored — the expectation
+and the UI's own text — and they agreed, while the behaviour underneath
+never happened. p42 found it and parked it; p46 rebuilt the summariser to
+read **structure** (object fields, button counts) instead of prose so a
+label change can no longer delete or invent a fact, corrected the Actual
+to *"S2c ask #1 of the rolling week"*, and made E-3's note say plainly
+that the counter is seeded; p55 cleared the same sentence from the
+Improvement panel. The app's own evidence surface is now correct
+everywhere.
+
+**Where it is carried forward.** Not by amending graded rows. It is a
+**Deploy readiness item** (row 37 — the counter must be written and
+persisted before any pilot; on seeded counters a client's third ask in a
+week reaches them as a first) and a **monitoring signal** (row 40 —
+counter integrity, alarmed in both directions: an ask that fails to
+count, and an event counted twice via the known deduplication gap).
+Drafts are in `notes/deploy-prep.md`.
+
+**Left open on purpose:** E-3's verdict is still Pass, with its note
+carrying the explanation. Re-judging it as Needs work against this
+limitation is a defensible alternative and would arguably read stronger,
+since an all-pass table invites the question this note answers. Not
+changed, because the recorded judgement belongs to the day it was made.
