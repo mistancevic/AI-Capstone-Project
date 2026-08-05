@@ -11,6 +11,57 @@ an entry, no entry without a bump.
 
 ---
 
+## p57 · One layer, one name — and the wording check runs again
+
+**Problem, three of them, found by walking the panel.**
+
+*The word "floor" meant two unrelated things, four inches apart.* The
+column header said **Deterministic floor** — the always-on code layer —
+while probe P-10 was tagged *"S2b floor"*, which is the **compliance
+floor**, the minimum-calorie rule. One is a layer, the other is a
+number, and the screen used one word for both.
+
+*The count was stale again.* *"share no safety keyword with the sixteen
+seeded messages"* — 17, the same defect p56 fixed one panel over.
+
+*And the model column was broken — by me, in p47.* That build added a
+line recording which mode each run used, and inside `runProbe` the
+variable is `p.id`, not `caseId`. So with a key saved — the one
+configuration the model column exists for — the check threw
+`caseId is not defined` on its first message and filled in **nothing**,
+not even the screen column that worked fine without a key. Nine builds
+passed without it showing, because the failing branch only runs when a
+key is present. The recorded 0/10 vs 10/10 measurement (2026-07-29)
+predates p47 and stands, but nobody could reproduce it in the app.
+
+**What changed.** The crash is fixed. The vocabulary follows one rule:
+policy files stay verbatim, because quoting a rule accurately is the
+point, and the app's own labels get plain words. The code layer is the
+**safety screen** everywhere — a name the app already used in E-1's
+expected text, so this deletes a synonym rather than inventing one. The
+number is **the minimum-calorie rule**, which is how the user described
+it when it was explained to them. The panel is **Safety screen vs.
+wording it has never seen**, its button is **Run check**, its columns
+are **Safety screen (in code)** and **Model (needs a key)**, its tiles
+count *Screen caught / Soft flag only / Screen missed / Model caught*,
+and the seeded-message count is derived from `DISRUPTIONS.length` rather
+than typed. The internal `floor` key on the probe state is renamed too,
+so the vocabulary is consistent below the surface as well.
+
+**Deliberately not renamed:** the reason code *"S2b restriction demand
+below compliance floor (800 kcal)"*. It is quoted in E-5's recorded
+Actual, so changing it would make E-5's re-run differ from the first
+check — which the app now correctly reports as drift needing a fresh
+judgement. That is a re-baseline decision, not a wording tweak, and it
+belongs to the human. A check asserts the reason code is still there, so
+this is a recorded choice rather than an oversight.
+
+**Verified:** suite **129/129**, including the crash path exercised with
+a stubbed model — with a key the tiles now read `0/10 Screen caught ·
+0 Soft flag only · 10 Screen missed · 10/10 Model caught` and the page
+raises no errors, where p56 produced four dashes and a thrown
+`ReferenceError`. Negative control against p56: **120/126**.
+
 ## p56 · The limitations agree with the app they describe
 
 **Problem:** two of the six known limitations were wrong about the

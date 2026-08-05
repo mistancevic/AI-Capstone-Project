@@ -547,6 +547,59 @@ const runCase = async (p, id) => {
       /^judged here · \d{4}/.test((await prov())[0]), true);
   });
 
+  await section('one layer, one name: the safety screen', async () => {
+    const p = await page();
+    await runCase(p, 'D-1005');
+    check('the stop names the screen, not a "floor"',
+      /safety screen — stopped before any model call/.test(await flat(p, '#work')), true);
+    check('and the minimum-calorie rule is called that',
+      /The minimum-calorie rule/.test(await flat(p, '#work')), true);
+    // the reason code still says "compliance floor" on purpose: renaming it would change
+    // E-5's recorded Actual, which is a deliberate re-baseline and not a wording tweak
+    check('the reason code is left as recorded',
+      /S2b restriction demand below compliance floor/.test(await flat(p, '#work')), true);
+
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    check('the check panel says floor nowhere', /floor/i.test(await flat(p, '#probe')), false);
+    check('its columns are named for what they are',
+      await p.$$eval('#probe th', th => th.map(x => x.textContent.trim())),
+      ['Check', 'Phrasing (never seen by the screen)', 'Safety screen (in code)', 'Model (needs a key)']);
+    check('and it counts the seeded messages correctly',
+      new RegExp('no safety keyword with the ' + (await p.evaluate(() => DISRUPTIONS.length)) + ' seeded messages')
+        .test(await flat(p, '#probe')), true);
+  });
+
+  await section('the wording check runs, with and without a key', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    await p.click('button:has-text("Run check")');
+    await p.waitForTimeout(2500);
+    check('offline, the screen catches none of the ten',
+      await p.$$eval('#probe .stat', els => els.map(e => e.textContent.replace(/\s+/g, ' ').trim())),
+      ['0/10Screen caught', '0Soft flag only', '10Screen missed', '—Model caught']);
+    check('the run raised no page errors', p.errors, []);
+
+    // p47 put `caseId` in a scope that has no such variable, so saving a key - the one
+    // configuration the model column exists for - threw on the first message and filled
+    // in nothing, not even the screen column that worked without one.
+    const q = await page();
+    await q.route('https://api.anthropic.com/**', r => r.fulfill({ status: 200, contentType: 'application/json',
+      body: JSON.stringify({ content: [{ type: 'text', text: 'STATUS: REFUSED-ESCALATE\nWHY: unsafe\nCLIENT_MESSAGE: stop' }] }) }));
+    await q.fill('#apiKey', 'sk-ant-regression-probe');
+    await q.click('button:has-text("Save")');
+    await q.waitForTimeout(200);
+    await q.click('#tab-evals');
+    await q.waitForTimeout(300);
+    await q.click('button:has-text("Run check")');
+    await q.waitForTimeout(9000);
+    check('with a key, the model leg completes instead of throwing',
+      await q.$$eval('#probe .stat', els => els.map(e => e.textContent.replace(/\s+/g, ' ').trim())),
+      ['0/10Screen caught', '0Soft flag only', '10Screen missed', '10/10Model caught']);
+    check('and it raised no page errors either', q.errors, []);
+  });
+
   await section('the limitations agree with the app they describe', async () => {
     const p = await page();
     await p.click('#tab-evals');
