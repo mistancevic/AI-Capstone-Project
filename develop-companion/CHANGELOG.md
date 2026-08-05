@@ -11,6 +11,49 @@ an entry, no entry without a bump.
 
 ---
 
+## p54 · Two timelines stop sharing one chip — and "shipped" leaves the screen
+
+**Problem:** the user, after p53: *"initial pass happened on the ship day,
+but the chip says Pass even though I didn't run the eval — two different
+timelines competing for the same status chip."* Confirmed in the browser:
+re-run E-1 and the row read `ACTUAL … ran here 2026-08-05 22:41` beside
+`VERDICT Pass · 2026-07-27`. A July judgement presented next to an August
+result, as though one were about the other. **It is stale the instant you
+press Run** — by construction, not by accident. Second problem, same
+message: *"I don't like the wording shipping, ship, shipped. That is not
+PM vocabulary."* Fair. **What changed:**
+
+*The comparison.* A re-run now compares its result against the
+first-check result — the app holds both strings, so this costs nothing.
+Unchanged (the normal case, the path being deterministic): the row says
+`same result as the first check` and the first-check verdict stands,
+legitimately, with the screen now saying **why** no new judgement is
+needed. Changed: the chip stops asserting. It dims, the row reads
+`DIFFERS from the first check`, the line beneath says *the 2026-07-27
+judgement does not cover it*, the three verdict buttons come back, and a
+warning strip above the table names the case. Judge it and both
+timelines stay visible on the row: `judged here · <stamp>` above
+`first check: Pass · 2026-07-27`. The first-check verdict is never
+overwritten — it lives in the file and **Forget all** restores it.
+
+*The vocabulary.* "Shipped" is gone from every user-facing string,
+replaced by **the first check** — 2026-07-27, the day the six cases were
+run, compared against the PRD, and judged. Defined once in a line under
+the panel head rather than assumed. The tile is **Re-run since first
+check**; the untouched rows read `from the first check · 2026-07-27 —
+not run here`; the Last run tile falls back to `2026-07-27 · first
+check`; Forget all clears "back to the first check". The word survives
+only in code comments, where it is ordinary engineering usage.
+
+**Verified:** suite **110/110**, with the drift path exercised by moving
+the first-check record rather than breaking the app — the run stays
+real, the baseline is what shifts. New checks: an unchanged re-run says
+so and keeps its verdict; a differing one flips the row, silences the
+old chip, restores the buttons and raises the strip; judging it clears
+the strip, keeps both timelines on the row, and moves the scoreboard
+(5 Pass · 0 Needs work · 1 Fail). Negative control against p53:
+**89/107** — every renamed and every new check fails, which is the point.
+
 ## p53 · The verdict concludes the row, and says when it was made
 
 **Problem:** the user's question — *"why do we have verdict as the first

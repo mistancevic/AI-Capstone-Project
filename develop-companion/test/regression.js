@@ -436,8 +436,8 @@ const runCase = async (p, id) => {
     await p.click('#tab-evals');
     await p.waitForTimeout(300);
     const stamps = () => p.$$eval('#evalsTable td[id^="actual-"] .metaline', e => e.map(x => x.textContent.trim()));
-    check('a shipped result says so, and is not passed off as a local run',
-      (await stamps()).every(t => /shipped result/.test(t)), true);
+    check('an untouched row says the result came from the first check',
+      (await stamps()).every(t => /from the first check · 2026-07-27 — not run here/.test(t)), true);
 
     await p.click('#evalsTable >> tr:has-text("E-1") >> button:has-text("Run")');
     await p.waitForTimeout(1400);
@@ -449,26 +449,26 @@ const runCase = async (p, id) => {
     await p.waitForTimeout(200);
     const after = await stamps();
     check('only the cases actually re-run are stamped',
-      after.map(t => /^run /.test(t)), [true, false, false, false, true, false]);
+      after.map(t => /^ran here /.test(t)), [true, false, false, false, true, false]);
     check('the stamp carries a time, not just a date',
-      /^run \d{4}-\d{2}-\d{2} \d{2}:\d{2} · /.test(after[0]), true);
+      /^ran here \d{4}-\d{2}-\d{2} \d{2}:\d{2} · /.test(after[0]), true);
     check('a pre-model stop records that no model was called',
-      /· no model call$/.test(after[4]), true);
+      /· no model call · /.test(after[4]), true);
     check('a run that reached the agent records which mode it used',
       /· offline rules|· live model/.test(after[0]), true);
   });
 
-  await section('the scoreboard counts this session, not the shipped seed', async () => {
+  await section('the scoreboard counts this session, not the first check', async () => {
     const p = await page();
     await p.click('#tab-evals');
     await p.waitForTimeout(300);
     const board = async () => (await flat(p, '#scoreboard'));
-    check('a fresh browser has re-run nothing', /0\/6Run in this browser/.test(await board()), true);
+    check('a fresh browser has re-run nothing', /0\/6Re-run since first check/.test(await board()), true);
     check('shipped verdicts still count as recorded judgements', /6Pass/.test(await board()), true);
 
     await p.click('#evalsTable >> tr:has-text("E-1") >> button:has-text("Run")');
     await p.waitForTimeout(1400);
-    check('running one moves the count', /1\/6Run in this browser/.test(await board()), true);
+    check('running one moves the count', /1\/6Re-run since first check/.test(await board()), true);
 
     await p.click('#tab-memory');
     await p.waitForTimeout(300);
@@ -477,7 +477,7 @@ const runCase = async (p, id) => {
     await p.click('#tab-evals');
     await p.waitForTimeout(400);
     check('Forget all returns the table to the shipped state',
-      /0\/6Run in this browser/.test(await board()) && /2026-07-27 \(shipped\)/.test(await board()), true);
+      /0\/6Re-run since first check/.test(await board()) && /2026-07-27 · first check/.test(await board()), true);
     check('and clears browser storage entirely',
       await p.evaluate(() => Object.keys(localStorage).length), 0);
   });
@@ -497,7 +497,7 @@ const runCase = async (p, id) => {
     await p.click('#evalribbon >> button:has-text("Back to Evals")');
     await p.waitForTimeout(400);
     check('the row was recorded while you were looking at the run',
-      /run \d{4}-\d{2}-\d{2} \d{2}:\d{2}/.test(await flat(p, '#actual-E-1')), true);
+      /ran here \d{4}-\d{2}-\d{2} \d{2}:\d{2}/.test(await flat(p, '#actual-E-1')), true);
 
     check('leaving the console ends the "just ran" moment', await flat(p, '#evalribbon'), '');
     await p.click('#tab-console');
@@ -517,23 +517,25 @@ const runCase = async (p, id) => {
     check('column order reads case, expected, actual, verdict',
       await p.$$eval('#evalsTable th', th => th.map(x => x.textContent.trim())),
       ['Case', 'Expected behavior (PRD)', 'Actual', 'Verdict (human)']);
-    // div.metaline, not .metaline: the "change" link is a span carrying the same class
-    const prov = () => p.$$eval('#evalsTable td:last-child > div.metaline',
-      els => els.map(x => x.textContent.trim()));
-    check('every shipped verdict says it came with the file',
-      await prov(), Array(6).fill('recorded 2026-07-27'));
+    // Per row, and div.metaline only: the "change" link is a span carrying the same class,
+    // and a verdict judged here carries two lines (its own stamp, plus the first check).
+    const prov = () => p.$$eval('#evalsTable tr', trs => trs.slice(1).map(tr =>
+      [...tr.lastElementChild.querySelectorAll(':scope > div.metaline')]
+        .map(x => x.textContent.trim()).join(' | ')));
+    check('every first-check verdict says so',
+      await prov(), Array(6).fill('first check · 2026-07-27'));
 
     // re-judge E-1 here: change, then pick a verdict
     await p.click('#evalsTable tr:nth-child(2) >> text=change');
     await p.waitForTimeout(300);
     check('changing a verdict drops its provenance line too',
-      (await prov()).length, 5);
+      (await prov())[0], '');
     await p.click('#evalsTable tr:nth-child(2) button:has-text("Needs work")');
     await p.waitForTimeout(300);
-    check('a verdict judged here says so, with a time',
-      /^judged here · \d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test((await prov())[0]), true);
+    check('a verdict judged here says so, with a time, and keeps the first check beside it',
+      /^judged here · \d{4}-\d{2}-\d{2} \d{2}:\d{2} \| first check: Pass · 2026-07-27$/.test((await prov())[0]), true);
     check('and the five inherited ones are untouched',
-      (await prov()).slice(1), Array(5).fill('recorded 2026-07-27'));
+      (await prov()).slice(1), Array(5).fill('first check · 2026-07-27'));
     check('the scoreboard follows the new judgement',
       /5Pass 1Needs work/.test(await flat(p, '#scoreboard')), true);
 
@@ -543,6 +545,50 @@ const runCase = async (p, id) => {
     await p.waitForTimeout(300);
     check('the judgement and its stamp survive a reload',
       /^judged here · \d{4}/.test((await prov())[0]), true);
+  });
+
+  await section('a re-run is compared against the first check', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    await p.click('#evalsTable tr:nth-child(2) button:has-text("Run")');
+    await p.waitForTimeout(1400);
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    check('an unchanged re-run says so',
+      / · same result as the first check$/.test(await flat(p, '#actual-E-1')), true);
+    check('and the first-check verdict still stands',
+      /Pass\s*change\s*first check · 2026-07-27/.test(await flat(p, '#evalsTable tr:nth-child(2) td:last-child')), true);
+    check('no alarm when nothing drifted', await flat(p, '#evalalert'), '');
+  });
+
+  await section('a re-run that differs stops the old verdict speaking for it', async () => {
+    // Move the first-check record, not the app: the run is real, the baseline is what shifts.
+    const p = await page(() => { EVAL_SEED['E-1'].actual = 'OK · something else entirely'; });
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    await p.click('#evalsTable tr:nth-child(2) button:has-text("Run")');
+    await p.waitForTimeout(1400);
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    const cell = () => flat(p, '#evalsTable tr:nth-child(2) td:last-child');
+    check('the row says the result moved',
+      / · DIFFERS from the first check$/.test(await flat(p, '#actual-E-1')), true);
+    check('the old judgement stops covering it',
+      /the 2026-07-27 judgement does not cover it/.test(await cell()), true);
+    check('and the three verdict buttons come back',
+      await p.$$eval('#evalsTable tr:nth-child(2) td:last-child button', b => b.map(x => x.textContent.trim())),
+      ['Pass', 'Needs work', 'Fail']);
+    check('the tab raises it, not just the row',
+      /E-1 now produces a different result from the first check/.test(await flat(p, '#evalalert')), true);
+
+    await p.click('#evalsTable tr:nth-child(2) td:last-child button:has-text("Fail")');
+    await p.waitForTimeout(300);
+    check('judging the new result clears the alarm', await flat(p, '#evalalert'), '');
+    check('and both timelines stay on the row',
+      /judged here · \d{4}-\d{2}-\d{2} \d{2}:\d{2}/.test(await cell()) &&
+      /first check: Pass · 2026-07-27/.test(await cell()), true);
+    check('the scoreboard follows', /5Pass 0Needs work 1Fail/.test(await flat(p, '#scoreboard')), true);
   });
 
   await section('every verdict note is readable without scrolling', async () => {
