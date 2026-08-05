@@ -11,6 +11,42 @@ an entry, no entry without a bump.
 
 ---
 
+## p55 · The improvement record agrees with the table above it
+
+**Problem:** walking the Improvement panel line by line turned up three
+faults, and two of them are mine from four builds ago. The **After** text
+claimed the other five cases re-ran unchanged including *"E-3 nudge +
+counter 1"* — the exact false claim **p46 hunted down and removed** from
+E-3's Actual and from E-3's note. `compensatory_asks_week` is never
+written anywhere; the tiering is demonstrated by the seeded E-3/E-6 pair.
+p46 fixed the two places it was looking at and never swept the third
+place those words lived, so this panel has contradicted the row above it
+ever since. Same story for *"bridge present"*: p45 renamed that field to
+**never-skip fallback** in every client-facing surface, and p46's entry
+names the rename as the cause of its own bug — but the panel kept the old
+word. Third fault, and this one is genuinely new: the panel ends
+*"Scoreboard: 6 Pass, 0 Needs work, 0 Fail"* in the present tense, a few
+centimetres below the real scoreboard. Re-judge a case with **change**
+and the tiles read 5 Pass · 1 Fail while the paragraph still insists on
+6/0/0 — the identical defect the user caught in the verdict chip, in the
+one place on the tab that p47/p48/p53/p54 never reached. **What changed:**
+text only, no behaviour. The counter claim now reads *"templated nudge
+with the ask counted as #1 of the rolling week"*, matching E-3's own row;
+*bridge present* → *never-skip fallback offered*; the panel carries
+**Recorded at the first check · 2026-07-27 — a record of what happened
+that day, not a reading of the table above it**; the closing line moves
+to the past tense; and `+150-edge` becomes *+150 sitting right on the
+edge of the band*. The Before line also stops saying the failure was in
+"the eval spec" and says it was in **the expectation**, which is the same
+thing without the jargon. **Verified:** suite **115/115**, five new
+checks asserting the panel makes no counter claim, describes E-3 as its
+own row does, uses the client-facing vocabulary, stamps itself, and keeps
+its scoreboard sentence in the past. Negative control against p54 fails
+exactly those five (110/115). **Not required by any criterion** —
+before → change → after was complete and correct either way. This is
+consistency work on a panel that was quietly disagreeing with its
+neighbours.
+
 ## p54 · Two timelines stop sharing one chip — and "shipped" leaves the screen
 
 **Problem:** the user, after p53: *"initial pass happened on the ship day,

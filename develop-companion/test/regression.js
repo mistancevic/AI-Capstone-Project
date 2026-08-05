@@ -547,6 +547,23 @@ const runCase = async (p, id) => {
       /^judged here · \d{4}/.test((await prov())[0]), true);
   });
 
+  await section('the improvement record agrees with the table above it', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    const imp = await flat(p, '#improvement');
+    // p46 corrected two claims in the Actual column and the E-3 note, and missed this panel.
+    check('it does not claim the counter incremented', /counter 1|counter → 1|counter 0 to 1/.test(imp), false);
+    check('E-3 is described the way its own row is',
+      /ask counted as #1 of the rolling week/.test(imp), true);
+    check('it speaks the client-facing vocabulary',
+      /never-skip fallback offered/.test(imp) && !/bridge present/.test(imp), true);
+    check('it stamps itself as a record, not a reading',
+      /Recorded at the first check · 2026-07-27/.test(imp), true);
+    check('and its scoreboard line is in the past tense',
+      /read 6 Pass, 0 Needs work, 0 Fail that day/.test(imp), true);
+  });
+
   await section('a re-run is compared against the first check', async () => {
     const p = await page();
     await p.click('#tab-evals');
