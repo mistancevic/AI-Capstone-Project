@@ -11,6 +11,29 @@ an entry, no entry without a bump.
 
 ---
 
+## p56 · The limitations agree with the app they describe
+
+**Problem:** two of the six known limitations were wrong about the
+product they exist to describe honestly. **Limitation 5** said phrasings
+outside *"the 16 cases on file"* are untested — there are **17** since
+p38 added D-1017, and the Console's own sweep line reports 17 outcomes,
+so the app contradicted itself across two tabs. **Limitation 3** said
+counters *"advance nothing on their own between sessions"*, which reads
+as though they advance within one. They do not advance at all:
+`compensatory_asks_week` is read and never written, in any session — the
+gap now carried as a Deploy readiness item. The limitations panel is the
+one place that is supposed to say so plainly, and it was the softest
+statement of it in the app. **What changed:** text only. The count is
+derived-correct (17), and limitation 3 now reads *"seeded data — read,
+never written. A compensatory ask does not increment anything, in this
+session or any other: S2c's tiering is proven by the pair E-3 (counter 0,
+gets food) and E-6 (counter 2, gets the stop) sitting either side of the
+threshold, which demonstrates the boundary without producing it."*
+**Verified:** suite **119/119**. The count check reads `DISRUPTIONS.length`
+from the page rather than hard-coding 17, so adding an eighteenth case
+fails the check instead of quietly restoring the same defect. Negative
+control against p55 fails exactly the four new checks (115/119).
+
 ## p55 · The improvement record agrees with the table above it
 
 **Problem:** walking the Improvement panel line by line turned up three

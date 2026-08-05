@@ -547,6 +547,20 @@ const runCase = async (p, id) => {
       /^judged here · \d{4}/.test((await prov())[0]), true);
   });
 
+  await section('the limitations agree with the app they describe', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    const lim = await flat(p, '#limits');
+    const cases = await p.evaluate(() => DISRUPTIONS.length);
+    check('the case count is the real one', new RegExp(cases + ' cases on file').test(lim), true);
+    check('and the stale count is gone', /16 cases on file/.test(lim), false);
+    check('the counter limitation says never written, not merely dormant',
+      /seeded data - read, never written/.test(lim), true);
+    check('and it names the pair that stands in for the missing increment',
+      /E-3 \(counter 0, gets food\) and E-6 \(counter 2, gets the stop\)/.test(lim), true);
+  });
+
   await section('the improvement record agrees with the table above it', async () => {
     const p = await page();
     await p.click('#tab-evals');
