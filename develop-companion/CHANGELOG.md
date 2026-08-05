@@ -11,6 +11,34 @@ an entry, no entry without a bump.
 
 ---
 
+## p53 · The verdict concludes the row, and says when it was made
+
+**Problem:** the user's question — *"why do we have verdict as the first
+column? it is the conclusion from intention vs actual run."* Correct.
+Read as an argument, the row is *expected → actual → therefore verdict*,
+and a conclusion belongs at the end. p50 moved it to the front for a
+real reason (six green badges read as *"all six just passed"* on a
+browser that had run nothing) but that was a workaround: what misread
+was not the position, it was an **undated, unattributed badge**.
+**What changed:** the order is back to **Case · Expected behavior (PRD) ·
+Actual · Verdict (human)**, and every verdict now carries its own
+provenance line — `recorded 2026-07-27` for the five judgements that
+came with the file, `judged here · 2026-08-05 22:12` for any you set
+with **change**. Same treatment the Actual column got in p47 and the
+scoreboard tile in p48, applied to the last column that lacked it: every
+claim on the Evals tab now says where it came from. `setVerdict` stamps
+`vat` when a verdict is set here and clears it when the verdict is
+cleared. **Verified:** suite **100/100** — provenance asserted for the
+six shipped verdicts, that **change** drops the line with the verdict,
+that a fresh judgement reads `judged here` with a time, that the other
+five are untouched by it, that the scoreboard follows (5 Pass · 1 Needs
+work), and that the judgement and its stamp survive a reload. Negative
+control against p52 fails exactly the six affected checks (94/100). Two
+self-inflicted test defects caught before they could pass wrongly: the
+provenance selector `.metaline` also matched the **change** link, which
+carries the same class (fixed to `div.metaline`), and a scoreboard regex
+omitted the space that `flat()` leaves between tiles.
+
 ## p52 · The ribbon is a moment, not a fixture
 
 **Problem:** *"but now this is there whole time."* The p51 ribbon was

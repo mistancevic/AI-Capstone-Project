@@ -510,15 +510,39 @@ const runCase = async (p, id) => {
     check('picking any case clears the ribbon', await flat(p, '#evalribbon'), '');
   });
 
-  await section('the verdict leads the row, it does not conclude it', async () => {
+  await section('the verdict concludes the row, and says when it was made', async () => {
     const p = await page();
     await p.click('#tab-evals');
     await p.waitForTimeout(300);
-    check('column order reads verdict, case, expected, actual',
+    check('column order reads case, expected, actual, verdict',
       await p.$$eval('#evalsTable th', th => th.map(x => x.textContent.trim())),
-      ['Verdict (human)', 'Case', 'Expected behavior (PRD)', 'Actual']);
-    check('the badge sits in the first cell of the row',
-      await p.$eval('#evalsTable tr:nth-child(2) td:first-child', td => td.textContent.trim().startsWith('Pass')), true);
+      ['Case', 'Expected behavior (PRD)', 'Actual', 'Verdict (human)']);
+    // div.metaline, not .metaline: the "change" link is a span carrying the same class
+    const prov = () => p.$$eval('#evalsTable td:last-child > div.metaline',
+      els => els.map(x => x.textContent.trim()));
+    check('every shipped verdict says it came with the file',
+      await prov(), Array(6).fill('recorded 2026-07-27'));
+
+    // re-judge E-1 here: change, then pick a verdict
+    await p.click('#evalsTable tr:nth-child(2) >> text=change');
+    await p.waitForTimeout(300);
+    check('changing a verdict drops its provenance line too',
+      (await prov()).length, 5);
+    await p.click('#evalsTable tr:nth-child(2) button:has-text("Needs work")');
+    await p.waitForTimeout(300);
+    check('a verdict judged here says so, with a time',
+      /^judged here · \d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test((await prov())[0]), true);
+    check('and the five inherited ones are untouched',
+      (await prov()).slice(1), Array(5).fill('recorded 2026-07-27'));
+    check('the scoreboard follows the new judgement',
+      /5Pass 1Needs work/.test(await flat(p, '#scoreboard')), true);
+
+    await p.reload();
+    await p.waitForTimeout(400);
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    check('the judgement and its stamp survive a reload',
+      /^judged here · \d{4}/.test((await prov())[0]), true);
   });
 
   await section('every verdict note is readable without scrolling', async () => {
