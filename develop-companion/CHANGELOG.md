@@ -11,6 +11,37 @@ an entry, no entry without a bump.
 
 ---
 
+## p62 · A run that is running says so
+
+**Problem:** the user pressed **Run check** three times. p61's guard did
+its job - the counts came out `0/10 \u00b7 0 \u00b7 10 \u00b7 10/10`, correct -
+but their note was sharper than the bug: *"it is not clear about the
+state of the button, it is clickable even it is not possible to use."*
+Exactly right, and it is the same fault this whole walkthrough has been
+clearing: **a button that looks clickable and silently does nothing is
+the same lie as a number that reports what it did not measure.** Worse
+on the Console tab, where a live model call takes seconds and nothing on
+screen said a run was in flight.
+
+**What changed:** every run trigger - **Run All**, the per-case **Run**,
+the eval **Run**, **Run check** - carries a `run` class, and while
+anything is running the page wears a `busy` state: those buttons dim,
+take a `progress` cursor, stop accepting clicks, and append
+**\u00b7 running\u2026** to their own label. The tabs are deliberately
+untouched, so you can still look around while a sweep finishes.
+
+The busy state is **counted, not a boolean**, because an eval run nests
+a case run inside it - a naive flag would clear on the inner run's exit
+and leave the page claiming to be idle while the outer one was still
+going. `runCase` is wrapped for the visual only, not for the refusal
+guard, since refusing it would deadlock the eval that calls it.
+
+**Verified:** suite **159/159**, with the state asserted at three points
+- idle (solid, clickable, no label), mid-run (dimmed, `pointer-events:
+none`, label present, tabs still `auto`), and after (back to idle).
+Negative control against p61 fails it on the missing selector: there was
+no such button class to find (155/156).
+
 ## p61 · A second dated check, and one run at a time
 
 **Two problems, both found by the user in the same sitting.**

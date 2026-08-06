@@ -780,6 +780,39 @@ const runCase = async (p, id) => {
       /DIFFERS — REFUSED - model-added stop \(one-way rule\)/.test(await flat(p, '#actual-E-3')), true);
   });
 
+  await section('a run says it is running', async () => {
+    const p = await page();
+    await p.route('https://api.anthropic.com/**', async r => {
+      await new Promise(res => setTimeout(res, 400));
+      r.fulfill({ status: 200, contentType: 'application/json',
+        body: JSON.stringify({ content: [{ type: 'text', text: 'STATUS: OK\nWHY: x\nCOACHING_LINE: y' }] }) });
+    });
+    await p.fill('#apiKey', 'sk-ant-regression-busy');
+    await p.click('button:has-text("Save")');
+    await p.waitForTimeout(200);
+    await p.click('text=D-1001');
+    await p.waitForTimeout(250);
+    const runBtn = () => p.$eval('#work button.run', b => ({
+      dimmed: +getComputedStyle(b).opacity < 1,
+      clickable: getComputedStyle(b).pointerEvents !== 'none',
+      says: getComputedStyle(b, '::after').content }));
+    check('idle: solid, clickable, no running label',
+      await runBtn(), { dimmed: false, clickable: true, says: 'none' });
+
+    p.click('#work >> button:has-text("Run")').catch(() => {});
+    await p.waitForTimeout(150);
+    const during = await runBtn();
+    check('while running: dimmed, not clickable, and says so',
+      { dimmed: during.dimmed, clickable: during.clickable, running: /running/.test(during.says) },
+      { dimmed: true, clickable: false, running: true });
+    check('the tabs stay usable throughout',
+      await p.$eval('#tab-evals', b => getComputedStyle(b).pointerEvents), 'auto');
+
+    await p.waitForTimeout(1200);
+    check('and it goes back to normal when the run ends',
+      await runBtn(), { dimmed: false, clickable: true, says: 'none' });
+  });
+
   await section('nothing that accumulates can be started twice', async () => {
     // Offline the whole loop is synchronous, so a double start cannot interleave and a
     // test run without a key passes on the buggy build too. The bug needs the awaits:
