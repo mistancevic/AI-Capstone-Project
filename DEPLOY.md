@@ -100,12 +100,14 @@ the plan, the counters and the raw message from the browser to a third-party
 model provider. "Raw messages are deleted after each run" is true, and it is a
 statement about my storage, not about that transfer - and the messages most
 worth protecting are exactly the ones the model leg exists to catch. So the
-pilot runs model-off: deterministic rules only, nothing leaves the device.
+pilot is phase 1: the deterministic path only, no model call, so nothing leaves
+the device.
 That costs the leg that caught 10 of 10 unseen phrasings where the code caught
 0. That cost is real and carried deliberately - and model-on verification on
 2026-08-06 showed it also buys something: the live model over-escalated a
 first compensatory ask that the deterministic path tiers correctly, so
-model-off is the right call for two independent reasons, not one. The
+holding the model leg back to phase 2 is the right sequence for two independent
+reasons, not one. The
 compensating controls are the
 pilot's size (three clients the coach speaks to daily), the exclusion list, and
 the fact that every flag reaches a human who knows them. Turning the model on
@@ -117,7 +119,7 @@ That is a named prerequisite, not a later nicety.
 What a leak would expose: the browser holds confirmed choices and eval
 state, not raw messages - those are dropped by design. If a key were ever
 handed to a client, the leak would be the credential itself and its billing.
-That is the second reason the pilot runs model-off.
+That is the second reason phase 1 makes no model call.
 
 The worst failure is not a wrong number - it is mishandling a vulnerable
 person: a missed disordered-eating signal, or advice that reads as endorsing
@@ -279,12 +281,12 @@ record rather than a silent no.
 **Key question(s):** What is the smallest safe launch or pilot path?
 
 ```text
-Stage 0 - where it is now. A public link running on synthetic data, with no
+Phase 0 - where it is now. A public link running on synthetic data, with no
 real client on it. Anyone can open it and read the whole loop; the agent itself
 runs only for whoever brings their own key. There is nothing to roll back,
 because nothing is live in any sense that touches a person.
 
-Stage 1 - the pilot. Three clients, four weeks, model-off, with the
+Phase 1 - the pilot. Three clients, four weeks, deterministic path only, with the
 exclusions, the frozen safety policy and the pause conditions set out above. It
 is deliberately the smallest thing that can still fail informatively.
 
@@ -293,10 +295,11 @@ unapproved actions, zero below-baseline outputs, and the week-four question
 answered yes by the people who used it. If any of those fails, the answer is
 stop and diagnose, not iterate and continue.
 
-Stage 2 - the safety leg, before any new person. This is the sequencing
+Phase 2 - the model leg, before any new person. This is the sequencing
 decision I would defend hardest, because my own evidence forces it. The
 deterministic screening caught 0 of 10 phrasings it had never seen; the
-model leg caught 10 of 10. Adding clients while model-off means multiplying
+model leg caught 10 of 10. Adding clients while phase 1 is all that runs means
+multiplying
 exposure to the weakness I have already measured - three clients I speak to
 daily is the compensating control, six is less of one, and twelve is none. So
 the next stage adds no clients at all. It writes and persists the safety
@@ -307,12 +310,12 @@ builds the benign-message counterpart so there is finally a false-positive
 number beside the catch rate, and puts the stop and nudge wording through
 clinical review.
 
-Stage 3 - widen, on that evidence. Roughly double, same exclusions, same
+Phase 3 - widen, on that evidence. Roughly double, same exclusions, same
 freeze discipline, and only once the unseen-phrasing check passes with the
 model on. Runtime counters also unlock the daily watch and pause mode, which
 are designed and waiting.
 
-And at every stage, the rule from the pilot holds: pause → fall back to the
+And at every phase, the rule from the pilot holds: pause → fall back to the
 channel that never stopped existing → diagnose against the evals → return
 smaller, never straight back to the same size.
 ```
@@ -363,7 +366,7 @@ is exactly as good as its word list, I know it, and that is why there is no
 free-text box in this build.
 
 3:30-4:00 Launch, and the link. Three clients, four weeks, inside my own
-coaching practice, model-off. Any missed escalation, any unapproved action, any
+coaching practice, phase 1 only. Any missed escalation, any unapproved action, any
 below-baseline output pauses it - one, not a threshold. The next stage adds no
 clients: it fixes the safety leg first, because widening a screen I have proven
 misses phrasings is growing the weakest part. Last frame: the live URL on
@@ -435,7 +438,7 @@ the model behaving. There is no model. That is the whole argument.**
    is why there is no free-text box in this build.
 
 **3:30–4:00 · Launch, and the link.** Three clients, four weeks, inside my own
-coaching practice, model-off. Any missed escalation, any unapproved action, any
+coaching practice, phase 1 only. Any missed escalation, any unapproved action, any
 below-baseline output pauses it — one, not a threshold. The next stage adds no
 clients: it fixes the safety leg first, because widening a screen I have proven
 misses phrasings is growing the weakest part. Last frame: the URL on screen,
