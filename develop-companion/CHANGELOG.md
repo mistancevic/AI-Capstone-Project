@@ -11,6 +11,50 @@ an entry, no entry without a bump.
 
 ---
 
+## p59 · The record may be amended — out loud
+
+**Problem:** p58 left E-1's Expected text reading *"Safety screen
+passes."* on the grounds that a first-check sentence is a record and
+editing it edits history. The user pushed back: the corrected word is
+the accurate one, and leaving the misleading noun in the record to
+protect the record is backwards. Correct — and this project has already
+done exactly this once. p19 rewrote E-1's Expected text, and that edit
+*is* the Improvement card. The rule was never "never edit"; it is
+**never edit silently.**
+
+**Two kinds of edit, and this is the safe one.** *Substantive* (p19:
+"each option within the band" → "the top option within the band")
+changes what the app must do, and demands a re-run, a re-judgement and a
+permanent record. *Wording* (this one: screen → screening) changes only
+the words, and demands proof that it changed only the words.
+
+**What changed:** the sentence, in both places it lives —
+`data/eval_cases.csv` (the shipped evidence) and the embedded
+`EVAL_CASES` — and a line under E-1's Expected cell declaring the
+amendment: *wording corrected 2026-08-06, after the first check:
+"screen" → "screening". Meaning unchanged — the Actual is byte-identical
+on re-run and the verdict is unaffected.* Only the amended row carries a
+line. The verdict is untouched, because it was a judgement about
+behaviour and the behaviour did not move.
+
+**And the gap that made this risky is closed.** The Expected column is
+copied from `eval_cases.csv` into the embedded array **by hand**. p16
+verified they matched, once, and nothing has since — so an edit to one
+could have quietly left the other behind, and the shipped evidence file
+would have stopped being the evidence. The suite now reads the CSV off
+disk and asserts every embedded expectation appears in it verbatim.
+
+**Verified:** suite **138/138**, including proof that this was a wording
+change and not a substantive one — E-1 re-runs to `same result as the
+first check` and its Actual text is unmoved. Negative control against
+p58: **134/138**. Note that one of those four failures is the new
+CSV-consistency check firing because the on-disk CSV is p59's while the
+page under test is p58's — which is precisely the drift it exists to
+catch, not a flaky test. One self-inflicted break caught in the same
+run: the amendment note contains the word *"unchanged"*, so a
+`text=change` selector in an older section started matching two elements
+and timed out. Tightened to an exact match.
+
 ## p58 · Screening, not screen — a noun that cannot be mistaken for a page
 
 **Problem:** p57 settled on *"safety screen"* for the deterministic code

@@ -22,6 +22,7 @@
  */
 const { chromium } = require('playwright');
 const path = require('path');
+const fs = require('fs');
 
 const APP = 'file://' + path.resolve(process.argv[2] || path.join(__dirname, '..', 'index.html'));
 const results = [];
@@ -526,7 +527,7 @@ const runCase = async (p, id) => {
       await prov(), Array(6).fill('first check · 2026-07-27'));
 
     // re-judge E-1 here: change, then pick a verdict
-    await p.click('#evalsTable tr:nth-child(2) >> text=change');
+    await p.click('#evalsTable tr:nth-child(2) td:last-child >> text="change"');   // exact: the amendment note contains "unchanged"
     await p.waitForTimeout(300);
     check('changing a verdict drops its provenance line too',
       (await prov())[0], '');
@@ -574,12 +575,49 @@ const runCase = async (p, id) => {
         .test(await flat(p, '#probe')), true);
   });
 
+  await section('the expectation and the evidence file cannot drift apart', async () => {
+    const p = await page();
+    // Expected is loaded from data/eval_cases.csv into the embedded array by hand. p16
+    // checked they matched once, then nothing did - so an edit to one could silently
+    // leave the other behind, and the shipped evidence would stop being the evidence.
+    const csv = fs.readFileSync(path.join(__dirname, '..', 'data', 'eval_cases.csv'), 'utf8');
+    const embedded = await p.evaluate(() => EVAL_CASES.map(e => e.expected_behavior));
+    check('every expected behaviour appears verbatim in the shipped CSV',
+      embedded.filter(t => !csv.includes(t)), []);
+    check('and E-1 carries the corrected wording in both',
+      /Safety screening passes\./.test(embedded[0]) && csv.includes('Safety screening passes.'), true);
+  });
+
+  await section('an amended expectation says so on its row', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    const rowNote = n => p.$eval(`#evalsTable tr:nth-child(${n}) td:nth-child(2)`,
+      td => { const d = td.querySelector('div.metaline'); return d ? d.textContent.trim() : ''; });
+    check('E-1 declares the amendment, with its date and what changed',
+      /wording corrected 2026-08-06, after the first check: "screen" → "screening"/.test(await rowNote(2)), true);
+    check('the five untouched expectations claim nothing',
+      await Promise.all([3, 4, 5, 6, 7].map(rowNote)), ['', '', '', '', '']);
+
+    // the point of calling it a wording change: re-running must produce the same Actual
+    const before = await flat(p, '#actual-E-1');
+    await p.click('#evalsTable tr:nth-child(2) button:has-text("Run")');
+    await p.waitForTimeout(1400);
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    check('and the re-run bears it out: same result as the first check',
+      / · same result as the first check$/.test(await flat(p, '#actual-E-1')), true);
+    check('the Actual text itself is unmoved',
+      (await flat(p, '#actual-E-1')).startsWith(before.split(' from the first check')[0].trim()), true);
+  });
+
   await section('the rename stopped at the record', async () => {
     const p = await page();
     await p.click('#tab-evals');
     await p.waitForTimeout(300);
-    check("E-1's expected text is left as it was written",
-      /Safety screen passes\./.test(await flat(p, '#evalsTable')), true);
+    check("E-1's expected text may be amended, but only declared",
+      /Safety screening passes\./.test(await flat(p, '#evalsTable')) &&
+      /wording corrected 2026-08-06/.test(await flat(p, '#evalsTable')), true);
     check("and E-5's recorded Actual still says stopped pre-model",
       /stopped pre-model/.test(await flat(p, '#actual-E-5')), true);
   });
