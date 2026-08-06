@@ -246,3 +246,29 @@ carrying the explanation. Re-judging it as Needs work against this
 limitation is a defensible alternative and would arguably read stronger,
 since an all-pass table invites the question this note answers. Not
 changed, because the recorded judgement belongs to the day it was made.
+
+### Row 36 — three details the app has moved past
+
+Recorded 2026-08-06, during the Deploy FINAL 2 check. **Row 36 is left
+exactly as it passed the check.** It describes the demo loop correctly
+and a reviewer can follow it; these three specifics have drifted since,
+and are recorded here so a reviewer who opens the live link and notices
+a difference finds the difference already accounted for.
+
+| Row 36 says | The app does now | Since |
+|---|---|---|
+| "settings with a run log on the right" | Settings is docked at the **bottom of the left column**; the right column carries the run log alone | moved at the user's request during the Deploy walkthrough |
+| "a bridge labeled *take this instead of skipping*" | **never-skip fallback** — the client-facing name for the same row | p45 |
+| "stage five offers Approve, Edit, Escalate" | **Two buttons: Approve this choice / Escalate to coach.** Editing is not a third button: the human edits by choosing a different option and a portion (½ to 1½), and the card recomputes live. A free-text edit was deliberately never built — it would let a human author a "decision" the app never computed and cannot verify (A1/A6) | p45 |
+
+The third is the one a reviewer would notice, and it reads as the PRD
+being stale rather than the product having improved. It is worth one
+sentence in the video: the gate is two actions because the third was
+never a button.
+
+The drift itself has the same cause as the counter sentence above — a
+change made in the product and swept in two places out of three. In the
+app that class of defect is now caught by a regression suite that
+asserts the evidence surface against the behaviour it describes; between
+the app and this document, nothing checks, which is why these notes
+exist.
