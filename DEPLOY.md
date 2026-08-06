@@ -52,10 +52,17 @@ disrupted day per client that ends in a chosen meal instead of a skip. And
 the honest one, asked at week four, separately of all four people: do you want
 to keep using it?
 
-The pilot runs model-off: deterministic rules only, no model call, for the
-reasons set out in the privacy row.
+The rollout is phased by capability, not by headcount. Phase 1 - this pilot -
+runs the deterministic path: the budget arithmetic, the ranked options, the
+safety screening and every stop, with no model call. Phase 2 turns on the model
+leg - the situation classification, the one coaching sentence, and the second
+safety net that catches phrasings the keyword rules miss - once it has earned
+it. Both phases are the same product; phase 2 has more of it switched on. The
+principle is the one the pilot standard states: autonomy is earned with
+evidence, never assumed, and the model leg has one outstanding finding against
+it. The privacy row gives the second reason for the same sequence.
 
-What must be true before the pilot starts. The safety counters must be written
+What must be true before phase 1 starts. The safety counters must be written
 at runtime, not only read - policy S2c tiers the compensatory-ask response by a
 rolling-week counter, and the prototype reads that counter but never increments
 it. The tiering is proven by two seeded cases sitting either side of the
@@ -68,8 +75,8 @@ judgement alone. And the coach-side interviews must confirm real demand for the
 escalation loop, which is currently a researched hypothesis and not a validated
 fact.
 
-What must be true before the model call is ever turned on for a real client -
-a later stage, not this pilot. All six eval cases green in model-on mode. That
+What must be true before phase 2 reaches a real client. All six eval cases
+green in model-on mode. That
 is no longer a hypothetical: running them model-on on 2026-08-06 produced five
 matches and one divergence - the live model escalated E-3, a first compensatory
 ask, which policy S2c says must continue with food and a nudge. Judged Needs
