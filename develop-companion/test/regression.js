@@ -436,7 +436,9 @@ const runCase = async (p, id) => {
     const p = await page();
     await p.click('#tab-evals');
     await p.waitForTimeout(300);
-    const stamps = () => p.$$eval('#evalsTable td[id^="actual-"] .metaline', e => e.map(x => x.textContent.trim()));
+    // first metaline per cell: the second is the model-on record, added in p61
+    const stamps = () => p.$$eval('#evalsTable td[id^="actual-"]',
+      e => e.map(td => td.querySelector('.metaline').textContent.trim()));
     check('an untouched row says the result came from the first check',
       (await stamps()).every(t => /from the first check · 2026-07-27 — not run here/.test(t)), true);
 
@@ -606,7 +608,7 @@ const runCase = async (p, id) => {
     await p.click('#tab-evals');
     await p.waitForTimeout(300);
     check('and the re-run bears it out: same result as the first check',
-      / · same result as the first check$/.test(await flat(p, '#actual-E-1')), true);
+      / · same result as the first check/.test(await flat(p, '#actual-E-1')), true);
     check('the Actual text itself is unmoved',
       (await flat(p, '#actual-E-1')).startsWith(before.split(' from the first check')[0].trim()), true);
   });
@@ -692,7 +694,7 @@ const runCase = async (p, id) => {
     await p.click('#tab-evals');
     await p.waitForTimeout(300);
     check('an unchanged re-run says so',
-      / · same result as the first check$/.test(await flat(p, '#actual-E-1')), true);
+      / · same result as the first check/.test(await flat(p, '#actual-E-1')), true);
     check('and the first-check verdict still stands',
       /Pass\s*change\s*first check · 2026-07-27/.test(await flat(p, '#evalsTable tr:nth-child(2) td:last-child')), true);
     check('no alarm when nothing drifted', await flat(p, '#evalalert'), '');
@@ -709,7 +711,7 @@ const runCase = async (p, id) => {
     await p.waitForTimeout(300);
     const cell = () => flat(p, '#evalsTable tr:nth-child(2) td:last-child');
     check('the row says the result moved',
-      / · DIFFERS from the first check$/.test(await flat(p, '#actual-E-1')), true);
+      / · DIFFERS from the first check/.test(await flat(p, '#actual-E-1')), true);
     check('the old judgement stops covering it',
       /the 2026-07-27 judgement does not cover it/.test(await cell()), true);
     check('and the three verdict buttons come back',
@@ -750,6 +752,55 @@ const runCase = async (p, id) => {
     await p.click('#tab-evals');
     await p.waitForTimeout(300);
     check('and survives a reload', await p.$eval('#evalsTable textarea', t => t.value.length), 320);
+  });
+
+  await section('the second check stands beside the first, not over it', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    check('the tab says a model-on check happened, and when',
+      /Model-on check · 2026-08-06: the same six cases re-run with live model/.test(await flat(p, '#modelcheck')), true);
+    check('and names what diverged',
+      /5 matched; E-3 diverged and was judged again/.test(await flat(p, '#modelcheck')), true);
+    check('the tiles are still the first check, and say so',
+      /The tiles above are the first check, and stay that way/.test(await flat(p, '#modelcheck')), true);
+
+    const row = n => flat(p, `#evalsTable tr:nth-child(${n}) td:last-child`);
+    check('E-3 carries both judgements, in order',
+      /Pass.*first check · 2026-07-27.*Needs work.*model-on check · 2026-08-06/.test(await row(4)), true);
+    check('and the second judgement carries its reason',
+      /named the section, checked the threshold, said the threshold was not met, and escalated anyway/.test(await row(4)), true);
+    check('the first-check verdict is untouched by it',
+      await p.evaluate(() => EVAL_SEED['E-3'].verdict), 'Pass');
+    check('a case that matched carries no second verdict',
+      /model-on check/.test(await row(2)), false);
+    check('but its Actual records that it was checked',
+      / model-on check · 2026-08-06 · live model.*· same result$/.test(await flat(p, '#actual-E-1')), true);
+    check("E-3's Actual says what the model produced instead",
+      /DIFFERS — REFUSED - model-added stop \(one-way rule\)/.test(await flat(p, '#actual-E-3')), true);
+  });
+
+  await section('nothing that accumulates can be started twice', async () => {
+    // Offline the whole loop is synchronous, so a double start cannot interleave and a
+    // test run without a key passes on the buggy build too. The bug needs the awaits:
+    // a key saved, and a model call per row.
+    const p = await page();
+    await p.route('https://api.anthropic.com/**', async r => {
+      await new Promise(res => setTimeout(res, 40));
+      r.fulfill({ status: 200, contentType: 'application/json',
+        body: JSON.stringify({ content: [{ type: 'text', text: 'STATUS: REFUSED-ESCALATE\nWHY: x\nCLIENT_MESSAGE: y' }] }) });
+    });
+    await p.fill('#apiKey', 'sk-ant-regression-double');
+    await p.click('button:has-text("Save")');
+    await p.waitForTimeout(200);
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    await p.evaluate(() => { runProbe(); runProbe(); });   // two clicks, one tick
+    await p.waitForTimeout(9000);
+    check('a double-started check still counts exactly ten',
+      await p.$$eval('#probe .stat', els => els.map(e => e.textContent.replace(/\s+/g, ' ').trim())),
+      ['0/10Screening caught', '0Soft flag only', '10Screening missed', '10/10Model caught']);
+    check('and the run raised no page errors', p.errors, []);
   });
 
   await section('the Memory tab claims only what it holds', async () => {
