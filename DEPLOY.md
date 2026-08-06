@@ -102,11 +102,11 @@ statement about my storage, not about that transfer - and the messages most
 worth protecting are exactly the ones the model leg exists to catch. So the
 pilot is phase 1: the deterministic path only, no model call, and nothing
 leaves the device. That costs the leg that caught 10 of 10 unseen phrasings
-where the code caught 0 - a real cost, carried deliberately. Model-on
-verification on 2026-08-06 showed the same sequence also buys something: the
-live model over-escalated a first compensatory ask that the deterministic path
-tiers correctly, so holding the model leg back to phase 2 is right for two
-independent reasons, not one. The compensating controls in phase 1 are its size
+where the code caught 0 - a real cost, carried deliberately, and the same
+sequence also buys something, because verification against a live model showed
+it over-escalating a case the deterministic path tiers correctly. Two
+independent reasons for one order of work. The compensating controls in phase 1
+are its size
 (three clients the coach speaks to daily), the exclusion list, and the fact that
 every flag reaches a human who knows them. Phase 2 - the model leg with real
 clients - additionally requires a key-holding backend, a data-processing
