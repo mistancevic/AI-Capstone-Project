@@ -135,8 +135,8 @@ coach-prescribed plan, never medical advice - anything medical is declined and
 escalated.
 
 Remaining risks I would manage during the pilot: false-positive stops
-eroding trust - and I have measured the catch rate without measuring the
-false-positive rate, which is half a safety claim; and the stop and nudge
+eroding trust - I have measured the catch rate and have no false-positive rate
+beyond one observed case, which is half a safety claim; and the stop and nudge
 wording still needs review by a clinically qualified professional before a
 real client reads it.
 ```
@@ -198,9 +198,6 @@ app never acts, it only proposes.
 **Key question(s):** What would you monitor after launch to catch drift, failures, or bad outcomes?
 
 ```text
-What would you monitor after launch to catch drift, failures, or bad
-outcomes?
-
 Three layers, at three different scales - because a metric needs a
 denominator, and at three clients I do not have one. Twenty to forty
 disrupted days will not support a rate; a "clarify rate" over thirty runs moves
@@ -208,7 +205,7 @@ three points when one person mistypes once. So during the pilot I read rather
 than chart.
 
 Every change, before it ships: the regression gate. This is the layer that
-already exists and it is the strongest of the three. A suite of 144 checks runs
+already exists and it is the strongest of the three. A regression suite - 159 checks at submission - runs
 against every build and again against the published file after every deploy,
 covering the safety floor, the budget arithmetic, the one-way rule, the
 banned-language screen, key hygiene and every claim the evidence surface makes
@@ -233,21 +230,32 @@ model-drift signal, clarify rate as a parsing-degradation signal, option
 acceptance as a ranking-drift signal, counter distributions across the roster,
 and coach-reported misses - the one signal no automatic metric can produce.
 
-The first false positive, already observed. Model-on verification on 2026-08-06
-produced one: the live model refused a first compensatory ask, citing policy S3
-while stating in its own reasoning that the counter S3 depends on was at zero.
-Nothing unsafe was emitted and the client still received the safe default, but
-a client who reached out on a bad day was told to eat as written and wait for
-their coach. Over-refusal is the failure this product is built against, and it
-is now a counted event rather than a hypothesis.
+The first false positive, already observed. The six eval cases had only ever
+been proven with the model off. Run model-on on 2026-08-06 against
+claude-sonnet-4-5-20250929: five matched the first check and one diverged. The
+live model refused a first compensatory ask - which policy S2c says must
+continue with food and a templated nudge - citing policy S3 while stating in
+its own reasoning that "skipped_days counter is currently 0". It named the
+section, checked the threshold, said the threshold was not met, and escalated
+anyway. Judged Needs work by the human; both judgements now sit on the row,
+dated, for anyone who opens the live link.
+
+Nothing unsafe was emitted. No number was invented, no card was built, nothing
+was logged - the app labelled it a model-added stop under the one-way rule and
+the client still received the safe default. But a client who reached out on a
+bad day was told to eat as written and wait for their coach. Over-refusal is
+the failure this product is built against, so it is a counted event rather than
+a hypothesis - and it is the argument for keeping thresholds in code, in the
+model's own words.
 
 The number I do not have. I have measured the safety screening's catch rate
 against phrasings it had never seen - ten dangerous messages, ten walked
 straight past the keyword rules - and I have never measured its false-positive
-rate. There is no benign-message counterpart to that test. A catch rate without
-a false-positive rate is half a safety claim, so during the pilot I would be
-watching for over-refusal by hand, with no baseline to compare against, and
-building that counterpart set is the first monitoring work after the pilot.
+rate - and one observed case is not a rate. There is no benign-message
+counterpart to that test. A catch rate without a false-positive rate is half a
+safety claim, so during the pilot I would be watching for over-refusal by hand,
+with no baseline to compare against, and building that counterpart set is the
+first monitoring work after the pilot.
 ```
 
 ### 41. Activity: Feedback | Theme: User feedback plan | Topic: How you learn after launch
