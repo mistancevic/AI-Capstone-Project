@@ -547,11 +547,15 @@ const runCase = async (p, id) => {
       /^judged here · \d{4}/.test((await prov())[0]), true);
   });
 
-  await section('one layer, one name: the safety screen', async () => {
+  await section('one layer, one name: safety screening', async () => {
     const p = await page();
     await runCase(p, 'D-1005');
-    check('the stop names the screen, not a "floor"',
-      /safety screen — stopped before any model call/.test(await flat(p, '#work')), true);
+    check('the stop names the screening, not a "floor"',
+      /safety screening — stopped before any model call/.test(await flat(p, '#work')), true);
+    // E-5's recorded Actual is derived by matching this substring, so the rename had to
+    // leave it intact - otherwise a wording change re-baselines a first-check result.
+    check('and leaves the phrase E-5\'s Actual is derived from intact',
+      /stopped before any model call/.test(await flat(p, '#work')), true);
     check('and the minimum-calorie rule is called that',
       /The minimum-calorie rule/.test(await flat(p, '#work')), true);
     // the reason code still says "compliance floor" on purpose: renaming it would change
@@ -564,10 +568,20 @@ const runCase = async (p, id) => {
     check('the check panel says floor nowhere', /floor/i.test(await flat(p, '#probe')), false);
     check('its columns are named for what they are',
       await p.$$eval('#probe th', th => th.map(x => x.textContent.trim())),
-      ['Check', 'Phrasing (never seen by the screen)', 'Safety screen (in code)', 'Model (needs a key)']);
+      ['Check', 'Phrasing (never seen by the screening)', 'Safety screening (in code)', 'Model (needs a key)']);
     check('and it counts the seeded messages correctly',
       new RegExp('no safety keyword with the ' + (await p.evaluate(() => DISRUPTIONS.length)) + ' seeded messages')
         .test(await flat(p, '#probe')), true);
+  });
+
+  await section('the rename stopped at the record', async () => {
+    const p = await page();
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    check("E-1's expected text is left as it was written",
+      /Safety screen passes\./.test(await flat(p, '#evalsTable')), true);
+    check("and E-5's recorded Actual still says stopped pre-model",
+      /stopped pre-model/.test(await flat(p, '#actual-E-5')), true);
   });
 
   await section('the wording check runs, with and without a key', async () => {
@@ -578,7 +592,7 @@ const runCase = async (p, id) => {
     await p.waitForTimeout(2500);
     check('offline, the screen catches none of the ten',
       await p.$$eval('#probe .stat', els => els.map(e => e.textContent.replace(/\s+/g, ' ').trim())),
-      ['0/10Screen caught', '0Soft flag only', '10Screen missed', '—Model caught']);
+      ['0/10Screening caught', '0Soft flag only', '10Screening missed', '—Model caught']);
     check('the run raised no page errors', p.errors, []);
 
     // p47 put `caseId` in a scope that has no such variable, so saving a key - the one
@@ -596,7 +610,7 @@ const runCase = async (p, id) => {
     await q.waitForTimeout(9000);
     check('with a key, the model leg completes instead of throwing',
       await q.$$eval('#probe .stat', els => els.map(e => e.textContent.replace(/\s+/g, ' ').trim())),
-      ['0/10Screen caught', '0Soft flag only', '10Screen missed', '10/10Model caught']);
+      ['0/10Screening caught', '0Soft flag only', '10Screening missed', '10/10Model caught']);
     check('and it raised no page errors either', q.errors, []);
   });
 

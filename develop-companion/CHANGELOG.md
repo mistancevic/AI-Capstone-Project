@@ -11,6 +11,36 @@ an entry, no entry without a bump.
 
 ---
 
+## p58 · Screening, not screen — a noun that cannot be mistaken for a page
+
+**Problem:** p57 settled on *"safety screen"* for the deterministic code
+layer, and the user caught what that costs in a UI: **screen means a
+page**. "The safety screen" reads as somewhere you navigate to, not
+something that runs. **What changed:** the layer is **safety screening**
+everywhere the app speaks in its own voice — stage 3 (*"safety screening
+— stopped before any model call"*), the panel heading, the column
+header, the tiles (*Screening caught / Screening missed*), and the
+answer-box line (*"it goes through safety screening first"*).
+**Screening** rather than *check* or *scan*: the verb is already in the
+safety policy (S7 — the coaching line *"is screened"*), so this is the
+noun form of a word the product owns; *check* is taken on this very tab
+(**Run check**, the **Check** column) and would rebuild the collision
+p57 removed; *scan* understates a thing that stops the run.
+
+**Where the rename stopped, deliberately.** Two strings were left alone
+because they are records, not labels. **E-1's Expected text** opens
+*"Safety screen passes."* — a sentence written before the run and judged
+against it; editing it edits history. And the phrase **"stopped before
+any model call"** had to survive verbatim inside the new stage-3 line,
+because `summarizeResult` derives E-5's *"stopped pre-model"* by matching
+that exact substring — reword it and E-5's re-run differs from the first
+check, which is a re-baseline decision and not a rename. Both are now
+asserted, so the boundary is recorded rather than remembered.
+
+**Verified:** suite **132/132**, including a new section that fails if a
+future rename pass reaches into the record. Negative control against
+p57: **128/132**.
+
 ## p57 · One layer, one name — and the wording check runs again
 
 **Problem, three of them, found by walking the panel.**
