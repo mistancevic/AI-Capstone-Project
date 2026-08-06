@@ -169,9 +169,21 @@ So the safety policy is frozen for the whole pilot. No change to S1–S7
 wording or thresholds for four weeks, however many false positives I judge.
 Every flag I disagree with becomes a logged note rather than an edit, and those
 notes are the evidence for a change after the pilot, reviewed with the
-clinically qualified reviewer - who is the second pair of eyes on anything
-safety-shaped. Adaptation-side changes - ranking, option wording, the coaching
-line - stay mine to make freely. Safety is the frozen half.
+clinically qualified professional who signs off the stop and nudge wording
+before it starts. Engaging that person is a precondition, not a courtesy:
+without them the freeze has no second pair of eyes behind it, and the
+concentration above is unmitigated. Adaptation-side changes - ranking, option
+wording, the coaching line - stay mine to make freely. Safety is the frozen
+half.
+
+Cover is one person, and I say so to the three clients before they start.
+Flags reach me inside a stated window; outside it the app queues them and
+delivers at window-open, marked urgent, exactly as the quiet-hours rule already
+does. This is a supervised pilot, not a monitored service, and every stop
+already carries get-help-now guidance naming a medical professional rather than
+me - because I am not an emergency channel and the app says so on screen. The
+readiness row excludes any client whose coach cannot be reached inside the
+window they agreed to; that standard applies to me as much as to anyone.
 
 On "every output reviewed at first": it cannot be reviewed before the
 client acts, because the client is standing in a shop deciding what to eat. So
