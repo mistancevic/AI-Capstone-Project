@@ -95,26 +95,24 @@ restrictions and preferences, two safety counters as counts, and the client's
 own words about a disrupted day. In the capstone it is synthetic end to end
 - no real person's data has ever been through this.
 
-Where it goes. With the model on, every run sends the full client record,
+Where it goes. With the model leg on, every run sends the full client record,
 the plan, the counters and the raw message from the browser to a third-party
 model provider. "Raw messages are deleted after each run" is true, and it is a
 statement about my storage, not about that transfer - and the messages most
 worth protecting are exactly the ones the model leg exists to catch. So the
-pilot is phase 1: the deterministic path only, no model call, so nothing leaves
-the device.
-That costs the leg that caught 10 of 10 unseen phrasings where the code caught
-0. That cost is real and carried deliberately - and model-on verification on
-2026-08-06 showed it also buys something: the live model over-escalated a
-first compensatory ask that the deterministic path tiers correctly, so
-holding the model leg back to phase 2 is the right sequence for two independent
-reasons, not one. The
-compensating controls are the
-pilot's size (three clients the coach speaks to daily), the exclusion list, and
-the fact that every flag reaches a human who knows them. Turning the model on
-for real clients requires a key-holding backend, a data-processing agreement,
-explicit per-client consent naming what leaves their device and to whom, and -
-for any EU client - a formal review under special-category health data rules.
-That is a named prerequisite, not a later nicety.
+pilot is phase 1: the deterministic path only, no model call, and nothing
+leaves the device. That costs the leg that caught 10 of 10 unseen phrasings
+where the code caught 0 - a real cost, carried deliberately. Model-on
+verification on 2026-08-06 showed the same sequence also buys something: the
+live model over-escalated a first compensatory ask that the deterministic path
+tiers correctly, so holding the model leg back to phase 2 is right for two
+independent reasons, not one. The compensating controls in phase 1 are its size
+(three clients the coach speaks to daily), the exclusion list, and the fact that
+every flag reaches a human who knows them. Phase 2 - the model leg with real
+clients - additionally requires a key-holding backend, a data-processing
+agreement, explicit per-client consent naming what leaves their device and to
+whom, and, for any EU client, a formal review under special-category health
+data rules. Named prerequisites, not later niceties.
 
 What a leak would expose: the browser holds confirmed choices and eval
 state, not raw messages - those are dropped by design. If a key were ever
