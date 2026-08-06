@@ -251,7 +251,7 @@ model's own words.
 The number I do not have. I have measured the safety screening's catch rate
 against phrasings it had never seen - ten dangerous messages, ten walked
 straight past the keyword rules - and I have never measured its false-positive
-rate - and one observed case is not a rate. There is no benign-message
+rate. One observed case is not a rate. There is no benign-message
 counterpart to that test. A catch rate without a false-positive rate is half a
 safety claim, so during the pilot I would be watching for over-refusal by hand,
 with no baseline to compare against, and building that counterpart set is the
