@@ -59,7 +59,7 @@ Remaining risks I would manage during the pilot: false-positive stops eroding tr
 ```text
 The product's authority model is three ownerships. The client owns every consequential action: nothing is logged without their tap, and they see every flag their coach sees, including its delivery time. The coach owns the plan, the adaptation rules and the escalation contract - channel, quiet hours, flag scope - receives every safety flag, and owns every escalated case end to end; the app never resolves a safety case itself. The app owns nothing with consequences: it advises, computes and stops. The stops are code, and every ambiguity routes to a human.
 
-In this pilot, all three operating roles are me. I am the coach, so I am the operator who watches the queue daily, the escalation owner who takes the hard cases, and the decision owner who can change prompts, policies and scope. That concentration is the biggest governance risk in the plan, and it is worth naming precisely: an urgent flag fires, I judge it a false positive, and because I also own the policy the cheapest fix is to loosen the rule. Nobody is positioned to tell me I should not have. Over four weeks and a handful of flags, a safety floor can erode one reasonable decision at a time, and every step looks defensible from the inside.
+In this pilot, all three operating roles are me. I am the coach, so I am the operator who watches the queue daily, the escalation owner who takes the hard cases, and the decision owner who can change prompts, policies and scope. That concentration is the biggest governance risk in the plan, and it is worth naming precisely: an urgent flag fires, I judge it a false positive, and because I also own the policy the cheapest fix is to loosen the rule. Nobody is positioned to tell me I should not have. Over four weeks and a handful of flags, a safety boundary can erode one reasonable decision at a time, and every step looks defensible from the inside.
 
 So the safety policy is frozen for the whole pilot. No change to S1–S7 wording or thresholds for four weeks, however many false positives I judge. Every flag I disagree with becomes a logged note rather than an edit, and those notes are the evidence for a change after the pilot, reviewed with the clinically qualified professional who signs off the stop and nudge wording before it starts. Engaging that person is a precondition, not a courtesy: without them the freeze has no second pair of eyes behind it, and the concentration above is unmitigated. Adaptation-side changes - ranking, option wording, the coaching line - stay mine to make freely. Safety is the frozen half.
 
@@ -75,7 +75,7 @@ On "every output reviewed at first": it cannot be reviewed before the client act
 ```text
 Three layers, at three different scales - because a metric needs a denominator, and at three clients I do not have one. Twenty to forty disrupted days will not support a rate; a "clarify rate" over thirty runs moves three points when one person mistypes once. So during the pilot I read rather than chart.
 
-Every change, before it ships: the regression gate. This is the layer that already exists and it is the strongest of the three. A regression suite - 159 checks at submission - runs against every build and again against the published file after every deploy, covering the safety floor, the budget arithmetic, the one-way rule, the banned-language screen, key hygiene and every claim the evidence surface makes about itself. On top of it, the app compares each eval re-run against the first-check result: an identical result says so, a divergent one dims the old verdict, says the previous judgement does not cover the new result, and puts it back in front of a human. Drift detection built into the evidence, not bolted beside it.
+Every change, before it ships: the regression gate. This is the layer that already exists and it is the strongest of the three. A regression suite - 159 checks at submission - runs against every build and again against the published file after every deploy, covering the safety screening, the budget arithmetic, the one-way rule, the banned-language screen, key hygiene and every claim the evidence surface makes about itself. On top of it, the app compares each eval re-run against the first-check result: an identical result says so, a divergent one dims the old verdict, says the previous judgement does not cover the new result, and puts it back in front of a human. Drift detection built into the evidence, not bolted beside it.
 
 Every day of the pilot: four counts and one automated alarm. Flags raised, with my judgement of each - warranted, tone, timing. Stops that fired, and whether the client agreed they should have. Runs that ended in a chosen meal rather than a skip. And any case where the app said something I would not have said. The automated one is counter integrity: every compensatory ask and skipped day increments exactly once and survives a session, alarmed in both directions - an ask that fails to count, so a client's third ask arrives as a first, and an event counted twice through the known flag-deduplication gap.
 
@@ -126,7 +126,7 @@ And at every phase, the rule from the pilot holds: pause → fall back to the ch
 **Key question(s):** How will your video cover intro, problem, discovery, solution demo, eval rigor, impact, and launch plan?
 
 ```text
-Spine: the safety floor is code, not a prompt. Four minutes, five beats.
+Spine: the safety limits are code, not a prompt. Four minutes, five beats.
 
 0:00-0:30 Open on the claim. The live site on screen. Name the product, say it is live, and plant the claim the demo will pay off: its safety limits are not instructions to a model, they are code that runs before the model is called - and I will prove it on screen, not describe it.
 
@@ -143,7 +143,7 @@ Spine: the safety floor is code, not a prompt. Four minutes, five beats.
 
 ## Video production notes (working material, not the sheet cell)
 
-**Spine: the safety floor is code, not a prompt.**
+**Spine: the safety limits are code, not a prompt.**
 
 Word budgets assume ~145 words per minute, which is a realistic on-camera pace.
 
