@@ -52,24 +52,30 @@ disrupted day per client that ends in a chosen meal instead of a skip. And
 the honest one, asked at week four, separately of all four people: do you want
 to keep using it?
 
-What must be true before it starts. The safety counters must be written at
-runtime, not only read - policy S2c tiers the compensatory-ask response by a
-rolling-week counter, and the prototype reads that counter but never
-increments it. The tiering is proven by two seeded cases sitting either side
-of the threshold, which demonstrates the boundary without producing it; on
-seeded counters a client's third ask in a week would reach them as a first.
-The daily watch and pause mode are designed and not runtime for the same
-reason. The two model calls must run against a real model with all six eval
-cases green in model-on mode. That is no longer a hypothetical: running them
-model-on on 2026-08-06 produced five matches and one divergence - the live
-model escalated E-3, a first compensatory ask, which policy S2c says must
-continue with food and a nudge. Judged Needs work. Until that is resolved the
-model leg is not pilot-ready on its own. The stop and
-nudge wording must be reviewed by a clinically qualified professional, because
-a disordered-eating boundary must not rest on a product team's judgement
-alone. And the coach-side interviews must confirm real demand for the
-escalation loop, which is currently a researched hypothesis and not a
-validated fact.
+The pilot runs model-off: deterministic rules only, no model call, for the
+reasons set out in the privacy row.
+
+What must be true before the pilot starts. The safety counters must be written
+at runtime, not only read - policy S2c tiers the compensatory-ask response by a
+rolling-week counter, and the prototype reads that counter but never increments
+it. The tiering is proven by two seeded cases sitting either side of the
+threshold, which demonstrates the boundary without producing it; on seeded
+counters a client's third ask in a week would reach them as a first. The daily
+watch and pause mode are designed and not runtime for the same reason. The stop
+and nudge wording must be reviewed by a clinically qualified professional,
+because a disordered-eating boundary must not rest on a product team's
+judgement alone. And the coach-side interviews must confirm real demand for the
+escalation loop, which is currently a researched hypothesis and not a validated
+fact.
+
+What must be true before the model call is ever turned on for a real client -
+a later stage, not this pilot. All six eval cases green in model-on mode. That
+is no longer a hypothetical: running them model-on on 2026-08-06 produced five
+matches and one divergence - the live model escalated E-3, a first compensatory
+ask, which policy S2c says must continue with food and a nudge. Judged Needs
+work. (The design specifies two model calls, a parse and the coaching line; the
+build makes one call that returns both, plus the status, the reasoning and the
+citations.)
 ```
 
 ### 38. Activity: Risk | Theme: Privacy and safety risks | Topic: What could go wrong
