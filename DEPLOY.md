@@ -286,8 +286,12 @@ Every hard stop reviewed jointly with the client afterwards - the one that most
 needs a voice rather than a rating. And at week four, separately of each of the
 three and of me as coach: do you want to keep using it?
 
-How I decide what to improve. Safety findings are fixed immediately and
-re-run against the eval suite before the next release. Adherence findings feed
+How I decide what to improve. A safety defect - the app failing to do what
+the frozen policy already says, a stop that does not fire, a flag that does not
+deliver, a counter that does not increment - is fixed immediately and re-run
+against the eval suite before the next release. A disagreement with the policy
+itself is not a defect: it becomes a logged note and waits for the post-pilot
+review, per the freeze in the operating model. Adherence findings feed
 the no-skip metric. Feature requests go to the parked list unless they block
 the loop - the list already exists, with each idea carrying where it came from
 and what would bring it back, so declining something is a decision on the
