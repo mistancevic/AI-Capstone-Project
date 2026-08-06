@@ -11,6 +11,48 @@ an entry, no entry without a bump.
 
 ---
 
+## p60 · The Memory tab claims only what it holds
+
+**Problem:** the tab whose whole premise is *"this panel shows everything
+the prototype holds"* was wrong about what it holds, in three ways.
+
+*It claimed six memories it does not have.* **Eval verdicts** read
+*"6 recorded (persist across reload in this browser)"* on a browser that
+had judged nothing — the six arrive inside the file. The identical
+defect the scoreboard carried until p48 and the verdict chip until p53,
+in a third place, and on the one screen that exists to be precise about
+this.
+
+*It described a day close that does not exist.* **Today's budget** —
+*"confirmed intake within the day only; at day close it collapses to
+totals"*. There is no day close. Nothing advances between sessions, as
+limitation 3 says. Design intent stated as current state, the same
+family as *"counter rises to one"*.
+
+*And its heading was wrong about lifetime.* Section 1 said **remembered
+this session** over rows that survive a reload — and its own verdicts
+row said so in the next breath. Checked against the code: decisions and
+the run log are session-only; approved choices, eval verdicts and the
+key persist. Three of five rows outlived the heading above them.
+
+**What changed:** the heading is **remembered in this browser**, and each
+row carries its own lifetime — *this session only - a reload clears
+them* on decisions and the run log, *kept in this browser until Forget
+all* on choices. Eval verdicts split the two origins: *"6 from the first
+check (2026-07-27) - none judged in this browser yet"*, becoming
+*"5 from the first check, 1 judged in this browser"* the moment you
+judge one. Today's budget moves from **remembered by design** to
+**deliberately not remembered**, where it belongs, and says what is
+true: *not held at all - recomputed from the plan and the seeded day
+every time a case runs. The design closes the day and collapses it to
+totals; the prototype has no day close, so there is nothing to
+collapse.* The intent stays visible as intent. Also `1 entries` → `1
+entry`.
+
+**Verified:** suite **144/144**, including the split counter before and
+after judging a verdict in the browser. Negative control against p59
+fails exactly the six new checks (138/144).
+
 ## p59 · The record may be amended — out loud
 
 **Problem:** p58 left E-1's Expected text reading *"Safety screen

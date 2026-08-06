@@ -752,6 +752,35 @@ const runCase = async (p, id) => {
     check('and survives a reload', await p.$eval('#evalsTable textarea', t => t.value.length), 320);
   });
 
+  await section('the Memory tab claims only what it holds', async () => {
+    const p = await page();
+    await p.click('#tab-memory');
+    await p.waitForTimeout(300);
+    const m = await flat(p, '#view-memory');
+    check('a browser that judged nothing says so',
+      /6 from the first check \(2026-07-27\) - none judged in this browser yet/.test(m), true);
+    check('the heading names the browser, not the session',
+      /REMEMBERED IN THIS BROWSER/.test(m), true);
+    check('the session-only rows are marked as such',
+      (m.match(/this session only/g) || []).length, 2);
+    check('there is no claim of a day close that does not happen',
+      /at day close it collapses to totals/.test(m), false);
+    check('and the budget is listed as not held',
+      /not held at all - recomputed from the plan and the seeded day/.test(m), true);
+
+    // judge one here, and only that one becomes something this browser remembers
+    await p.click('#tab-evals');
+    await p.waitForTimeout(300);
+    await p.click('#evalsTable tr:nth-child(2) td:last-child >> text="change"');
+    await p.waitForTimeout(250);
+    await p.click('#evalsTable tr:nth-child(2) td:last-child button:has-text("Pass")');
+    await p.waitForTimeout(250);
+    await p.click('#tab-memory');
+    await p.waitForTimeout(300);
+    check('a verdict judged here is counted apart from the five that came with the file',
+      /5 from the first check \(2026-07-27\), 1 judged in this browser/.test(await flat(p, '#view-memory')), true);
+  });
+
   await section('key hygiene', async () => {
     const CANARY = 'sk-ant-regression-canary-value';
     const p = await page();
