@@ -49,7 +49,7 @@ disclosures over third-party chat platforms is a serious question).
 > **Superseded 2026-08-06.** These drafts predate the D08 grilling, which
 > gave the pilot a shape (three clients, four weeks, model-off) and changed
 > several answers. The final rows are in
-> [`deploy-prd-rows.md`](deploy-prd-rows.md) — where the two disagree, that
+> [`DEPLOY.md`](../DEPLOY.md) — where the two disagree, that
 > file wins. These are kept for the reasoning, not for pasting.
 
 **Pilot readiness — would you pilot this? What must be true first?**
