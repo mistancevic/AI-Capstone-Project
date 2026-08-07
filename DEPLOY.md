@@ -141,6 +141,50 @@ Spine: the safety limits are code, not a prompt. Four minutes, five beats, timed
 
 ---
 
+## Note after faculty feedback - not part of the reviewed rows
+
+Recorded 2026-08-07. **Rows 37 to 43 are left exactly as they were reviewed.**
+This note records the one change faculty asked for, so it is on the record
+without rewriting answers that have already been read.
+
+### What was asked
+
+Widen the fail-safe for phase 1 only. Free text the keyword rules cannot
+confidently tier should route to the coach as a clarify-and-flag rather than
+proceeding. Accept the higher false-positive rate as the price of the weaker
+net. Three clients seen daily can absorb over-flagging; they cannot absorb a
+miss.
+
+### Why it holds
+
+The exclusion list only keeps out people who have disclosed an eating-disorder
+history. S1 to S7 exist for the person who has not told anyone. Phase 1 runs
+that screening at the sensitivity already measured and reported: zero of ten on
+wording it had never seen. The two protect different people, and neither can
+stand in for the other.
+
+### What changes in the pilot
+
+If the rules cannot confidently tier a message, the app does not answer it. The
+client gets a clarifying question and the coach gets a flag. No card.
+
+Some flagged clients will have been fine. That is the accepted cost, and it
+becomes a fifth thing counted each day: flags raised that were judged
+unwarranted afterwards. Those counts are the over-refusal baseline the
+monitoring row says is missing - produced by the pilot rather than waited for.
+
+If clients type their own messages, that input path has to be built with this
+default from the start, not fitted afterwards. It joins the counters on the
+list of things that must be true before phase 1 begins.
+
+The default narrows again in phase 2, once the model leg that caught ten of ten
+is switched on and re-checked. The fail-safe is wide because the net is weak.
+
+### What did not change
+
+Nothing was built. The prototype is unchanged, still runs predefined cases, and
+"no free-text entry" remains one of its stated limitations.
+
 ## The three FINAL checks - sheet rows 44, 45, 46
 
 Paste-ready, same rules as the rows above.
