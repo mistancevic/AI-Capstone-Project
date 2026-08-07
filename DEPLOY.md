@@ -141,22 +141,43 @@ Spine: the safety limits are code, not a prompt. Four minutes, five beats, timed
 
 ---
 
-## The three FINAL checks (D10)
+## The three FINAL checks - sheet rows 44, 45, 46
 
-**FINAL 1 - PRD check:** every grading-critical decision is written in the
-sheet, zero required link-outs. **Fix pending** - rows 37-43 are written and
-self-contained, but not yet pasted into the sheet.
+Paste-ready, same rules as the rows above.
 
-**FINAL 2 - Prototype check:** a reviewer can understand the working demo loop
-from the PRD and video alone. **Pass**, with three stale details in Develop row
-36 recorded as a note in [`DEVELOP.md`](DEVELOP.md) rather than edited: the
-settings dock moved to the left column, "bridge" became "never-skip fallback"
-(p45), and the review gate is two buttons rather than three (p45) because
-editing is the option-and-portion picker and a free-text edit was deliberately
-never built.
+### 44. Activity: Submission | Theme: Final PRD check | Topic: Self-contained review
 
-**FINAL 3 - Video check:** four minutes; problem, demo, evidence, launch.
-**Fix pending** - outline written and timed, nothing recorded.
+**Key question(s):** Is every grading-critical decision written directly in this sheet with no required link-outs?
+
+```text
+Yes. Every decision that carries a grade is written in these cells - the user and workflow, the stop conditions and escalation tiers, the eval cases with expected behaviour, the results and the human verdicts, the improvement, the limitations, and all seven Deploy answers. Nothing needed to assess the work sits behind a link.
+
+Two disclosures, because a careful reader will find both and I would rather they find them here.
+
+First, one earlier answer is superseded by a later one inside this same sheet. The Develop test-set row describes the angry-customer case as continuing with food and a nudge while the compensatory counter rises from zero to one. The run continues and the nudge is correct; the counter does not rise. It is seeded state that is read and never written, so the tiering is proven by two cases sitting either side of the threshold rather than produced at runtime. The Develop limitations row already states that counters are seeded data, and the Deploy readiness and monitoring rows treat writing them as a precondition for any pilot. I have left the graded Develop answers exactly as they were assessed rather than editing them after the fact.
+
+Second, the live prototype link is the only thing outside this sheet, and nothing here depends on opening it. Every claim about the product is described in text; the link is evidence a reviewer may check, not a decision they must go and read.
+```
+
+### 45. Activity: Submission | Theme: Prototype check | Topic: Demo clarity
+
+**Key question(s):** Can a reviewer understand the working prototype loop from the PRD and video?
+
+```text
+Yes. The Develop demo row walks the loop end to end in text - the five labelled stages, the happy path with its arithmetic, the boundary case that refuses before any nutrition maths, the evals tab and the memory tab - and the video shows the same two runs on screen in its second minute. A reviewer who reads the row and watches the minute has seen the whole loop, twice, in two forms.
+
+One honest note, since the prototype has kept improving since the Develop phase was assessed and three details in that row have drifted. The settings panel now sits at the foot of the left column rather than on the right. The never-skip option is labelled "never-skip fallback" rather than "take this instead of skipping". And the review gate offers two actions, not three: approve or escalate. Editing is not a third button - the human edits by choosing a different option and a portion, and the card recomputes live. A free-text edit was deliberately never built, because it would let a person author a decision the app never computed and cannot verify. None of these change the loop; they are the wording and layout a reviewer will see if they open the link.
+```
+
+### 46. Activity: Submission | Theme: Video check | Topic: Four-minute story
+
+**Key question(s):** Does the 4-minute video show the product clearly, concisely, and persuasively?
+
+```text
+Yes, and it is built around one claim rather than a feature tour: the safety limits are code, not a prompt. Five beats in four minutes - the claim, the problem and the discovery behind it, two live runs, the eval evidence, and the launch plan - scripted against a realistic speaking pace with room for the clicks.
+
+It is persuasive because it proves rather than asserts. The refusal runs with a live model configured and working, and the decision line still reads "stopped before any model call": the model was available and was never asked. And the evidence minute leads with a failure rather than a scoreboard - four days before submitting I ran all six eval cases against the live model for the first time, and one diverged. The model refused a case that policy says must continue with food, citing a rule while noting in its own reasoning that the counter that rule depends on was at zero. Nothing was sent, no number was invented, and the app labelled it a model-added stop. The model broke a rule my code enforces and the architecture held. That is the strongest thing I have to show, and it is thirty seconds long.
+```
 
 ## Submission
 
