@@ -112,7 +112,7 @@ screen either way.
 
 ---
 
-## 5 · Launch and the link — 3:35–3:55 · target ~55 words
+## 5 · Launch and the link — 3:35–4:00 · target ~70 words
 
 > Launch is three clients, four weeks, in my own coaching practice.
 >
@@ -146,8 +146,8 @@ piloted under human review, live at this link.**
 
 ## Total
 
-~505 spoken words ≈ 3:29 at 145 wpm, leaving ~30 seconds for clicks, page
-changes and the two deliberate silences. Tighter than before, because the demo
+542 spoken words ≈ 3:44 at 145 wpm, leaving only ~15 seconds for clicks, page
+changes and the two deliberate silences. Time it before recording. Tighter than before, because the demo
 beat grew to carry the live model call the judges grade. Over four minutes is a
 scored penalty — if a rehearsal comes in long, the fix is fewer words, not
 faster talking, and the launch beat gives them up first.
