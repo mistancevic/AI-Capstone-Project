@@ -141,6 +141,17 @@ Spine: the safety limits are code, not a prompt. Four minutes, five beats, timed
 
 ---
 
+## Sheet vs this file - one known difference
+
+Recorded 2026-08-07. Row 43 in the sheet is one sentence shorter than row 43
+here. The sheet does not have the sentence beginning "Then I point at what the
+model did do on that same run". Everything else in rows 37 to 43 matches.
+
+Left that way on purpose. The sheet version already says the demo runs with a
+live model configured throughout and that the status chip shows it running, so
+it meets the faculty instruction that the video must show real model calls. The
+extra sentence is an improvement, not a correction.
+
 ## Note after faculty feedback - not part of the reviewed rows
 
 Recorded 2026-08-07. **Rows 37 to 43 are left exactly as they were reviewed.**
