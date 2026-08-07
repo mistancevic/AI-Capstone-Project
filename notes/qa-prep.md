@@ -53,6 +53,20 @@ a confident wrong answer costs more than an admitted gap.
 > coverage of phrasing, and I measured that separately — ten messages worded in
 > ways the screening had never seen, and it caught none of them.
 
+**"Did testing actually change the product, or just the test?"**
+
+> Both, and the product changes are the bigger ones. The improvement card is a
+> spec fix - my expected text overclaimed and the eval caught me. But re-running
+> all six later showed three results had quietly shrunk: the column that reports
+> what happened was matching prose, so renaming a label deleted a fact from my
+> own evidence. I rebuilt it to read structure instead of words, so a rename can
+> no longer make the product look like it did less than it did. Separately,
+> running the unseen-phrasing check with a key saved crashed it - a line added
+> nine builds earlier referenced something that did not exist on that path, and
+> only running it found that. And the live-model divergence has a specified fix:
+> narrow the rule so the model can escalate on signals the code cannot see, but
+> not on a threshold the code has already checked.
+
 **"Your evals all passed. Did you make them too easy?"**
 
 > They did not. One failed in July because my expected text overclaimed — the
