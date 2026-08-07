@@ -80,8 +80,10 @@ cut "a live model is configured and running" — that line is the spine.)*
 
 ## 4 · Evidence — 2:30–3:30 · target ~145 words
 
-> Six eval cases. For each one: what I predicted before the run, what actually
-> happened, and my verdict. The app can't write that column — only a person can.
+> Six eval cases. Expected behaviour written before the run, the actual captured
+> from a real run, and a human verdict on the gap — the app can't write that
+> column, only a person can. Underneath it, a regression suite on every build,
+> and a comparison that flags any case whose result has moved.
 >
 > Four days ago I ran all six against the live model for the first time. Five
 > matched. One didn't.
