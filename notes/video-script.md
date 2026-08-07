@@ -114,20 +114,24 @@ screen either way.
 
 ## 5 · Launch and the link — 3:35–3:55 · target ~55 words
 
-> Launch is three clients, four weeks, in my own coaching practice, phase one:
-> the deterministic path.
+> Launch is three clients, four weeks, in my own coaching practice.
 >
-> One missed escalation, one unapproved action, one below-baseline output — any
-> single one pauses it.
+> In that pilot I'm the coach, I watch the queue, I take the escalations, and I
+> own the rules. All four. So I freeze the safety policy for the four weeks. If
+> I disagree with a flag, I write a note — I don't edit the rule.
 >
-> The next phase adds no clients. It fixes the model leg first, because widening
-> something I've proven has a hole is growing the weakest part.
+> Any missed escalation, any unapproved action, any below-baseline output —
+> one, not a threshold — and it pauses.
 >
 > It's live, here.
 
-*(58 words. Last frame: the URL on screen, held, in silence. The launch plan is
-not a scored rubric category — if the rehearsal runs long, this beat gives up
-words before the demo or the evidence does.)*
+*(70 words. Last frame: the URL on screen, held, in silence.*
+
+*The freeze replaced the "next phase adds no clients" sentence. Faculty called
+the freeze the strongest thing in the whole submission — a rule aimed at my own
+judgement rather than at the system — and it was nowhere in the video. If the
+rehearsal runs long, this beat still gives up words before the demo or the
+evidence does.)*
 
 ---
 
