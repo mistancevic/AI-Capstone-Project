@@ -10,9 +10,9 @@ again without Milan saying so.
 |---|---|---|---|---|
 | 1 | The afternoon | 0:00–1:09 | One person, one bad day, no product | approved |
 | 2 | The pattern, the guide, the tool | 1:09–2:01 | Zoom out, you enter, PlateMate named | approved |
-| 3 | Demo | 1:35–2:45 | D-1001 live, then D-1005 refusing | not started |
-| 4 | Evidence | 2:45–3:35 | Eval method, the one that failed | not started |
-| 5 | The pilot | 3:35–4:00 | Three clients, the freeze, the link | not started |
+| 3 | Demo | 2:01–3:05 | D-1001 live, then D-1005 refusing | not started |
+| 4 | Evidence | 3:05–3:40 | Eval method, the one that failed | not started |
+| 5 | The pilot | 3:40–4:00 | Three clients, the freeze, the link | not started |
 
 Rubric mapping: beats 1–2 are Problem & Discovery (5 pts). Beats 3–4 are AI
 Solution & Evaluation (5 pts). Delivery across all five is the third 5 pts,
@@ -183,4 +183,8 @@ Not written yet.
 
 145 words a minute is the honest on-camera pace. Four minutes is 580 words
 absolute, and clicks and pauses eat 30–40 seconds of that. **Target 500 spoken
-words.** Beat 1 is currently ~140.
+words.**
+
+Spent: beat 1 is 166 words / 69s, beat 2 is 125 words / 52s. **121 seconds
+gone, 119 left** for beats 3-5 including every click and pause. Beat 3 needs
+the most of that because the screen has to change while Milan talks.
