@@ -29,35 +29,23 @@ coach won't answer today. Ends on: they buy nothing.
 Milan is not in this beat. The product is not in this beat. Nothing on screen
 but him talking.
 
-### APPROVED
+### APPROVED — the drop, the plan, the but
 
 > It's somewhere around three in the afternoon. You know the feeling. The
 > meetings have taken all your energy and you need to be ready for the next one.
 >
-> The meal plan knows that. There's a snack in it, right here, to carry you to
+> Your meal plan knows that. There's a snack in it on purpose, to carry you to
 > dinner.
-
-### DRAFT — the "but"
-
-> But not today. It was somebody's birthday at lunch and you had a scoop of ice
-> cream. And after work there's a team dinner you want to join. The plan doesn't
-> know about either of them.
-
-Alternates:
-
-> Except today has two things in it the plan never saw. There was a birthday at
-> lunch and you had a scoop of ice cream, and after work there's a team dinner
-> you want to join.
-
-> Today is not that day, though. Somebody had a birthday at lunch and there was
-> ice cream and you had a scoop, and tonight there's a team dinner you want to
-> join. Neither of those is in the plan.
+>
+> But not today. It was a teammate's birthday at lunch and you had a scoop of
+> delicious ice cream. And after work there's a team dinner you want to join.
+> Your meal plan doesn't know about either of them.
 
 ### DRAFT — the store, and what most people do
 
-> So you're in the store by the office, and five minutes in, the same thing has
-> gone into your hand twice and back on the shelf. Half hungry, and the basket
-> is empty.
+> So you're standing in the store by the office. Five minutes in, the same thing
+> has gone into your hand twice and back onto the shelf. Half hungry, and the
+> basket is still empty.
 >
 > The snack that normally goes here is wrong now, and nothing on the shelf is
 > obviously right. The one person who could figure it out is your coach, but he
