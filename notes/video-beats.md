@@ -76,10 +76,28 @@ coach here is not Dana and nobody expects the names to match the demo.
 3. What he built. A plan is a route. Nothing in it reroutes. PlateMate
    reroutes — the coach still owns the destination, the client still drives.
 
-Ends by pointing at the screen. About 80 words, because beat 1 runs a full
-minute.
+Ends by pointing at the screen.
 
-Not written yet.
+### APPROVED — the pattern
+
+> Most of the time it won't be ice cream and a team dinner. It'll be something
+> else.
+>
+> That used to leave you with two options. Buy nothing, or grab whatever's
+> available and go way over the plan without meaning to.
+
+40 words, 17 seconds. "Used to" is doing the work — it puts the whole problem
+in the past before the product has been named, so the turn is already coming.
+
+### DRAFT — the guide, then the tool
+
+> I coach nutrition. Most people who come to me have just quit a plan somebody
+> else wrote, and they use two words about it. Boring, and exhausting. The
+> boring part is the food, and that one's on the coach. The exhausting part is
+> being left alone with afternoons like that.
+>
+> A plan is a route, and no plan reroutes. That's what PlateMate does. The coach
+> still sets the destination. You're still the one driving.
 
 ---
 
