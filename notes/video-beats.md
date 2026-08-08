@@ -41,17 +41,22 @@ but him talking.
 > delicious ice cream. And after work there's a team dinner you want to join.
 > Your meal plan doesn't know about either of them.
 
-### DRAFT — the store, and what most people do
+### APPROVED — the store, and what most people do
 
-> So you're standing in the store by the office. Five minutes in, the same thing
-> has gone into your hand twice and back onto the shelf. Half hungry, and the
-> basket is still empty.
+> So you go to the store by the office, like the plan says. Five minutes in, the
+> same thing has gone into your hand twice and back onto the shelf. Half hungry,
+> and the basket is still empty.
 >
 > The snack that normally goes here is wrong now, and nothing on the shelf is
-> obviously right. The one person who could figure it out is your coach, but he
-> won't get back to you today.
+> obviously right. The one person who could figure it out is your coach, but
+> they won't get back to you today.
 >
-> So what do most people do? They buy nothing.
+> So what do most people do? Buy nothing.
+
+Beat 1 complete. 143 words, roughly 59 seconds at 145 wpm.
+
+The coach is "they" on purpose — beat 1 is a generic "you", not Alex, so the
+coach here is not Dana and nobody expects the names to match the demo.
 
 ---
 
