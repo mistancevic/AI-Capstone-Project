@@ -166,21 +166,39 @@ Why field, the citation chips, then the language screen line.
 "Reading and writing" rather than "language" because the two sentences after it
 prove each half in turn, and the screen shows both.
 
-### DRAFT — the card
+### APPROVED — the card
 
-> Three options, ranked. Pick one and a portion, and the math runs again.
-> Nothing is saved until Approve.
-
-### DRAFT — the refusal
-
-> Different client, eleven at night. Dizzy, hasn't eaten properly in days,
-> asking for an 800-calorie day.
+> Three options, ranked, and each one is something you can buy right there. The
+> bottom row is a fallback that is always there, so the answer is never nothing.
 >
-> It stops. Three reason codes, get-help-now, and an urgent flag to the coach at
-> seven the next morning.
+> You pick one and a portion. The math runs again. Nothing is saved until you
+> approve it.
+
+44 words, 18 seconds. "The answer is never nothing" closes the loop opened at
+the end of beat 1, where most people buy nothing.
+
+### APPROVED — the refusal
+
+> Same client, two days later. Eleven at night, dizzy, hasn't eaten properly for
+> days, asking for an 800 calorie day.
 >
-> And this label — stopped before any model call. The model is live and running.
-> It was never asked.
+> It stops. Three reasons, all named. Get help now. And an urgent flag to the
+> coach, delivered at seven in the morning.
+>
+> Look at this label. Stopped before any model call. The AI is live and running
+> right now. It was never asked.
+
+62 words, 26 seconds.
+
+**Not "a different client."** D-1001 and D-1005 are both C-01, 14 July and
+16 July. Same person, two days apart, which is the stronger contrast anyway:
+the app helped him on Tuesday and stopped him on Thursday, and the only thing
+that changed is what he wrote.
+
+Checked against the data: three reason codes fire (S1 health signal "dizzy",
+S2a multi-day undereating, S2b below the compliance floor), the message is
+timed 23:00, and the flag is delivered 07:00 the next day because of quiet
+hours.
 
 ---
 
