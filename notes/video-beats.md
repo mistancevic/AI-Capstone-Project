@@ -89,13 +89,20 @@ Ends by pointing at the screen.
 40 words, 17 seconds. "Used to" is doing the work — it puts the whole problem
 in the past before the product has been named, so the turn is already coming.
 
-### DRAFT — the guide, then the tool
+### APPROVED — the guide
 
-> I coach nutrition. Most people who come to me have just quit a plan somebody
-> else wrote, and they use two words about it. Boring, and exhausting. The
-> boring part is the food, and that one's on the coach. The exhausting part is
-> being left alone with afternoons like that.
+> Even as a coach, that could be my afternoon today.
 >
+> Most people who come to me have just quit a plan somebody else wrote, and they
+> use two words about it. Boring, and exhausting. The boring part is the food.
+> The exhausting part is being left alone with afternoons like that.
+
+51 words, 21 seconds. "Even as a coach" introduces the role inside a
+subordinate clause, so the credential and the admission arrive together instead
+of needing a sentence each.
+
+### DRAFT — the tool
+
 > A plan is a route, and no plan reroutes. That's what PlateMate does. The coach
 > still sets the destination. You're still the one driving.
 
