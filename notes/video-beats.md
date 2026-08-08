@@ -4,7 +4,7 @@ Working file. Two things live here: what each beat is *for*, and the exact
 words once they are signed off. Anything marked APPROVED does not get touched
 again without Milan saying so.
 
-**Five beats. Four minutes, hard cap — over is a scored penalty.**
+**Six beats. Four minutes, hard cap — over is a scored penalty.**
 
 | # | Beat | Time | Scope | Status |
 |---|---|---|---|---|
@@ -13,6 +13,7 @@ again without Milan saying so.
 | 3 | Demo | 2:01–3:50 | D-1001 live, then D-1005 refusing | approved |
 | 4 | Evidence | 3:50–4:36 | Eval method, the one that failed | approved |
 | 5 | The pilot | 4:36–5:07 | Three clients, the freeze, the link | approved |
+| 6 | The close | 5:07–5:29 | Back to the client, the outcome, the link | approved |
 
 Rubric mapping: beats 1–2 are Problem & Discovery (5 pts). Beats 3–4 are AI
 Solution & Evaluation (5 pts). Delivery across all five is the third 5 pts,
@@ -308,6 +309,33 @@ URL, held, in silence.
   beat stays about them.
 - The word **freeze** never appears. "For those four weeks I can't touch it" is
   the same claim in language a person would use.
+
+---
+
+## Beat 6 — the close
+
+**Scope.** Return to the client. The story opens on a person in a store and has
+to end with them, not with governance. This is StoryBrand's Success element and
+Hall's new normal, and neither was in the script until now.
+
+### APPROVED
+
+> The goal is a plan you can stay on while you still have a life. Birthdays,
+> team dinners, days that fall apart. PlateMate handles those, from your coach's
+> plan, in the moment you're standing there. Do that enough times and the plan
+> is still there in six months, and so are you.
+
+*[the URL is already on screen while this is said. Then silence.]*
+
+53 words, 22 seconds.
+
+- Forward-facing, not built on negation. Earlier drafts all ran "X was never
+  the problem, the real problem is Y, and here is the fix", which is a tell.
+- "While you still have a life" and "team dinners" call back to beat 1's dinner
+  he wanted to join, so the close lands on the same person the video opened on.
+- **Claims nothing measured.** "Still there in six months" is stated as the
+  goal, not as a result. There are no real users and no outcome data, so a
+  result claim here would not survive a judge's question.
 
 ---
 
