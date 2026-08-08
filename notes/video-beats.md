@@ -8,8 +8,8 @@ again without Milan saying so.
 
 | # | Beat | Time | Scope | Status |
 |---|---|---|---|---|
-| 1 | The afternoon | 0:00–1:00 | One person, one bad day, no product | in progress |
-| 2 | The pattern, the guide, the tool | 1:00–1:35 | Zoom out, you enter, PlateMate named | not started |
+| 1 | The afternoon | 0:00–1:09 | One person, one bad day, no product | approved |
+| 2 | The pattern, the guide, the tool | 1:09–2:01 | Zoom out, you enter, PlateMate named | approved |
 | 3 | Demo | 1:35–2:45 | D-1001 live, then D-1005 refusing | not started |
 | 4 | Evidence | 2:45–3:35 | Eval method, the one that failed | not started |
 | 5 | The pilot | 3:35–4:00 | Three clients, the freeze, the link | not started |
@@ -101,10 +101,20 @@ in the past before the product has been named, so the turn is already coming.
 subordinate clause, so the credential and the admission arrive together instead
 of needing a sentence each.
 
-### DRAFT — the tool
+### APPROVED — the tool
 
-> A plan is a route, and no plan reroutes. That's what PlateMate does. The coach
-> still sets the destination. You're still the one driving.
+> A plan tells you what to eat on a normal day. Nothing tells you what to do
+> when the day isn't normal. That's PlateMate. The coach still owns the plan,
+> and you still choose.
+
+34 words, 14 seconds.
+
+**Beat 2 complete. 125 words, 52 seconds.** Running total 2:01.
+
+The navigation metaphor is not spoken anywhere. It stayed a thinking tool —
+useful for deciding what the product is, not needed to say it. Keep it in
+reserve for judges' Q&A, where "the coach sets the route, the client drives,
+the app reroutes" answers "what does the AI actually decide" in one line.
 
 ---
 
