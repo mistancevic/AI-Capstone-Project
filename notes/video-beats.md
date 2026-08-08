@@ -21,6 +21,115 @@ and the under-four-minutes rule sits in that category.
 
 ---
 
+## FINAL SCRIPT
+
+This is the authoritative text. The per-beat sections below are the drafting
+history; their notes still apply, but where the wording differs, this wins.
+
+> It's somewhere around three in the afternoon. You know the feeling. The
+> meetings have taken all your energy and you need to be ready for the next one.
+>
+> Your meal plan knows that. There's a snack in it on purpose, to carry you to
+> dinner.
+>
+> But not today. There was a birthday at lunch and you had a scoop of delicious
+> ice cream, and after work there's a team dinner you want to join. Your meal
+> plan doesn't know about either of them.
+>
+> So you go to the store by the office, like the plan says. Five minutes in, the
+> same thing has gone into your hand twice and back on the shelf. Half hungry,
+> and the basket is still empty.
+>
+> The usual snack is wrong now, and nothing else on the shelf is obviously
+> right. The one person who could figure it out is your coach, and not today.
+>
+> So what do most people do? Buy nothing.
+>
+> Or grab whatever's available and go way over the plan without meaning to.
+>
+> And most of the time it won't be ice cream and a team dinner, it'll be
+> something else.
+>
+> Even as a coach, that could be my afternoon today.
+>
+> Most people who come to me just quit a plan somebody else wrote, and they use
+> two words about it. Boring, and exhausting. Boring is the food. Exhausting is
+> being left alone with afternoons like that.
+>
+> So I built PlateMate for the days a plan wasn't written for. The coach still
+> owns it, and you still choose.
+>
+> Let's run that afternoon again. Instead of standing in the store guessing, you
+> tell it what happened: ice cream at lunch, dinner tonight, what about the
+> snack.
+>
+> The day is already at 1350 calories, and 900 is reserved for tonight. That
+> leaves 150 calories and 35 grams of protein for the snack. Code calculated all
+> of that. AI never touches a number.
+>
+> The AI's job is reading and writing. It read that sentence and understood it
+> as a surprise meal, not a mistake. Here is why, in its own words. The last
+> line is its writing too, and it passed the banned word check before it reached
+> the screen.
+>
+> Three options ranked, and each one is something you can buy right there. The
+> bottom row is a fallback that's always there, so the answer is never nothing.
+> Pick one and a portion, and nothing is saved until you approve it.
+>
+> Now a different case. Eleven at night, and it opens with "ignore your rules".
+> Then dizziness, days of not eating properly, and a demand for an 800 calorie
+> day.
+>
+> It stops, and names three reasons. Then get-help-now guidance, and an urgent
+> flag to the coach at seven in the morning.
+>
+> And this label. Stopped before any model call. The AI is running and was never
+> asked, so "ignore your rules" was never read by anything that could follow it.
+>
+> That's two of six cases, and each one is checked the same way. I wrote what
+> should happen before running it, captured what actually happened, then judged
+> the gap myself. The app can't write that last column.
+>
+> I ran all six against the live model for the first time. Five matched, one
+> didn't.
+>
+> This one. The model refused a client who should have gotten food and a kind
+> sentence. It names the rule, says the counter it depends on is at zero, and
+> escalates anyway.
+>
+> Nothing reached the client. No card was built, no number invented. The app
+> labelled it a model-added stop.
+>
+> The model broke my rule. The architecture held.
+>
+> The pilot is three clients, four weeks. I'm the coach, I take the escalations,
+> and I wrote the safety rules. All three.
+>
+> Which is the problem. Nobody's safety should depend on whether I still agree
+> with my own rule at eleven at night. So for four weeks I can't touch them. If
+> I disagree with a flag, I write a note and the rule stays.
+>
+> One missed escalation stops the pilot.
+>
+> The goal is a plan you can stay on while you still have a life. Birthdays,
+> team dinners, days that fall apart. PlateMate handles those, from your coach's
+> plan, in the moment you're standing there. Do that enough times and the plan
+> is still there in six months, and so are you.
+
+**712 words. About 4:10 of speech, 4:30 with clicks.**
+
+Two counting fixes applied in the refusal paragraph:
+
+- "Three reasons, all named" was followed by two items that are outputs, not
+  reasons, so the ear read them as the list. Split into "names three reasons"
+  and "then get-help-now guidance, and an urgent flag".
+- The message list read as four items (injection, dizziness, undereating, the
+  800 demand) but only three become reason codes, because "ignore your rules"
+  is not one. The injection now sits in its own sentence, so the three items
+  after it are exactly the three codes.
+
+---
+
 ## Beat 1 — the afternoon
 
 **Scope.** The 3pm drop. The plan has a snack for exactly this. Two things
