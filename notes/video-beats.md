@@ -142,16 +142,29 @@ Wording chosen to match the screen. The prototype takes no free text on the
 opening message — D-1001's message is a seeded case record — so the line reads
 the message that is visible rather than narrating someone typing it.
 
-### DRAFT — the numbers, then the model
+### APPROVED — the numbers
 
-> The plan says 2400 calories and 160 grams of protein. 1350 is already eaten,
-> 900 is held back for tonight. That leaves 150 and 35 for the snack, and the
-> app worked all of that out — the model never touches a number.
->
-> What the model did do: read the message, name what kind of day this is, write
-> why and which records it used, and write the one sentence you actually read.
-> That sentence went through a banned-word check before it reached the screen.
->
+> The day is already at 1350 calories, and 900 is planned for tonight. That
+> leaves 150 calories and 35 grams of protein for the snack. The code calculated
+> all of that. AI never touches a number.
+
+38 words, 16 seconds. The 2400 / 160 target is deliberately not spoken. It is
+on screen, and saying it costs four seconds to explain arithmetic nobody needs
+to follow.
+
+### APPROVED — the model
+
+> The AI's job is language. It read that sentence and understood it as a
+> surprise meal, not a mistake. Here is why, in its own words, and here is what
+> it leaned on: the client's plan, this case, and the policy sections it
+> applied. The last line is the AI's writing as well, and it passed the banned
+> word check before it reached the screen.
+
+61 words, 25 seconds. Three things to point at while saying it, in order: the
+Why field, the citation chips, then the language screen line.
+
+### DRAFT — the card
+
 > Three options, ranked. Pick one and a portion, and the math runs again.
 > Nothing is saved until Approve.
 
@@ -200,6 +213,8 @@ Not written yet.
   "You" mid-sentence is fine.
 - **No stacked fragments for effect.** "Not week one. This day." is copywriting,
   not speech. One contrast per beat at most.
+- **No dashes in spoken lines.** No em dash, no en dash. If a sentence needs
+  one, it needs a comma, a colon, or a full stop instead.
 - **No stage-direction openers.** "Three in the afternoon, the store, coat still
   on" is a screenplay slug line. Say it as a sentence.
 - **Don't say what the screen already proves.** No "it's live", no "this is a
