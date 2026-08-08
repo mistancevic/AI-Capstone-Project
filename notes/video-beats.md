@@ -53,7 +53,10 @@ but him talking.
 >
 > So what do most people do? Buy nothing.
 
-Beat 1 complete. 143 words, roughly 59 seconds at 145 wpm.
+Beat 1 complete. **166 words, 69 seconds** at 145 wpm — 29% of the video.
+That is a deliberate spend and it constrains everything after it. What is left:
+240 seconds total, minus 69, minus ~30 for clicks and pauses, leaves ~141
+seconds of speech for beats 2–5. About **340 words for four beats.**
 
 The coach is "they" on purpose — beat 1 is a generic "you", not Alex, so the
 coach here is not Dana and nobody expects the names to match the demo.
