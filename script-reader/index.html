@@ -101,8 +101,13 @@ button,input,select,textarea{font:inherit;color:inherit}
   font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink-3);white-space:nowrap;
 }
+.topbar-end{display:flex;align-items:center;gap:14px;margin-left:auto}
+.hint-back{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;color:var(--ink-3);white-space:nowrap;
+}
 .tally{
-  display:flex;align-items:center;gap:7px;margin-left:auto;
+  display:flex;align-items:center;gap:7px;
   font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
 }
 .dot{width:8px;height:8px;border-radius:50%;background:var(--line-strong)}
@@ -126,18 +131,30 @@ button,input,select,textarea{font:inherit;color:inherit}
 }
 .pane-head{
   display:flex;align-items:center;gap:10px;
-  padding:11px 14px;border-bottom:1px solid var(--line);
+  padding:9px 14px;border-bottom:1px solid var(--line);
 }
 .label{
   font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
 }
-.pane-head .label{margin-right:auto}
-textarea{
-  flex:1;min-height:220px;width:100%;resize:none;border:0;background:transparent;
-  padding:16px 18px;font-size:15.5px;line-height:1.65;
+.fmt{display:flex;gap:4px;margin-right:auto;padding-left:4px}
+.fmt button{
+  width:27px;height:25px;padding:0;border:1px solid var(--line);border-radius:6px;
+  background:transparent;color:var(--ink-2);cursor:pointer;font-size:12.5px;line-height:1;
+  display:grid;place-items:center;
 }
-textarea::placeholder{color:var(--ink-3)}
-textarea:focus{outline:none}
+.fmt button:hover{border-color:var(--line-strong);color:var(--ink)}
+.fmt button b{font-weight:800}
+
+#editor{
+  flex:1;min-height:220px;overflow-y:auto;outline:none;
+  padding:16px 18px;font-size:15.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word;
+}
+#editor.is-empty::before{
+  content:attr(data-placeholder);color:var(--ink-3);white-space:pre-wrap;pointer-events:none;
+}
+#editor div{min-height:1.65em}
+#editor b{font-weight:700}
+
 .pane-foot{
   display:flex;align-items:center;gap:14px;flex-wrap:wrap;
   padding:10px 14px;border-top:1px solid var(--line);
@@ -158,7 +175,7 @@ textarea:focus{outline:none}
   font-variant-numeric:tabular-nums;line-height:1;
 }
 .readout .unit{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
-.readout .hint{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.readout .hint{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-2)}
 
 input[type=range]{width:100%;accent-color:var(--accent);background:transparent}
 .steps{display:flex;gap:6px}
@@ -231,12 +248,17 @@ kbd{
 .w{color:var(--past);transition:color .12s linear;cursor:pointer;border-radius:.12em}
 .w.ahead{color:var(--ink)}
 .w.now{background:var(--hl-bg);color:var(--hl-fg);box-shadow:0 0 0 .1em var(--hl-bg)}
+.w.sb,.seg.sb{font-weight:800}
+.w.si,.seg.si{font-style:italic}
+.w.su,.seg.su{text-decoration:underline;text-underline-offset:.14em}
 @media (prefers-reduced-motion:reduce){.w{transition:none}}
 
 .transport{
   flex:0 0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
   padding:12px 18px;border-top:1px solid var(--line);background:var(--surface);
 }
+.tgroup{display:flex;align-items:center;gap:8px}
+.tgroup.end{margin-left:auto;gap:14px}
 .tc{
   font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--ink-2);
   white-space:nowrap;
@@ -251,15 +273,36 @@ kbd{
 .ctrl.play{width:46px;height:46px;background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .ctrl.play svg{width:19px;height:19px}
 .ctrl.play:hover{background:var(--accent-quiet)}
-.pace{display:flex;align-items:center;gap:8px;margin-left:auto}
-.pace input[type=range]{width:130px}
-.pace .val{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;min-width:62px;text-align:right}
-@media (max-width:640px){
+.ctrl[aria-pressed=true]{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.knob{display:flex;align-items:center;gap:8px}
+.knob .label{white-space:nowrap}
+.knob input[type=range]{width:120px}
+.knob .val{
+  font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;
+  color:var(--ink-2);min-width:58px;text-align:right;white-space:nowrap;
+}
+.knob .val.narrow{min-width:34px;text-align:center}
+.step{
+  width:28px;height:28px;padding:0;border:1px solid var(--line-strong);border-radius:7px;
+  background:var(--surface-2);cursor:pointer;display:grid;place-items:center;
+  font-size:14px;line-height:1;font-family:var(--mono);color:var(--ink-2);
+}
+.step:hover{border-color:var(--accent-quiet);color:var(--ink)}
+.btn-back{gap:8px;padding:9px 12px;font-size:13px}
+.btn-back kbd{background:transparent}
+
+@media (max-width:900px){
+  .knob.pace input[type=range]{width:90px}
+}
+@media (max-width:760px){
   .transport{gap:8px;padding:10px 12px}
-  .pace{margin-left:0;width:100%;order:5}
-  .pace input[type=range]{flex:1;width:auto}
-  .pace .val{min-width:0}
+  .tgroup.end{margin-left:0;width:100%;order:5;flex-wrap:wrap;gap:10px}
+  .knob.pace{flex:1 1 100%;min-width:0}
+  .knob.pace input[type=range]{flex:1;width:auto;min-width:0}
+  .btn-back{margin-left:auto}
+  .btn-back kbd{display:none}
   .tc{margin-left:auto;font-size:11.5px}
+  .hint-back{display:none}
   .stage{padding:26vh 18px}
 }
 [hidden]{display:none !important}
@@ -273,7 +316,10 @@ kbd{
       <b>Cue</b>
       <span>script reader</span>
     </div>
-    <div class="tally"><i class="dot"></i><span id="tallyText">standby</span></div>
+    <div class="topbar-end">
+      <span class="hint-back" id="backHint" hidden><kbd>Esc</kbd> edit script &amp; settings</span>
+      <div class="tally"><i class="dot"></i><span id="tallyText">standby</span></div>
+    </div>
   </header>
 
   <!-- ======== COMPOSE ======== -->
@@ -281,12 +327,20 @@ kbd{
     <div class="pane">
       <div class="pane-head">
         <span class="label">Your script</span>
+        <div class="fmt">
+          <button type="button" id="boldBtn" title="Bold (Ctrl+B)" aria-label="Bold"><b>B</b></button>
+          <button type="button" id="italBtn" title="Italic (Ctrl+I)" aria-label="Italic"><i>I</i></button>
+        </div>
         <button class="link" id="sampleBtn" type="button">Load sample</button>
         <button class="link" id="clearBtn" type="button">Clear</button>
       </div>
-      <textarea id="script" spellcheck="false" placeholder="Type or paste your script here.
+      <div id="editor" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true"
+           aria-label="Script"
+           data-placeholder="Type or paste your script here.
 
-Blank lines become a longer pause. Commas, periods and question marks are read with the pauses you'd expect."></textarea>
+Bold survives the paste, and stays bold while you read. Select any text and press Ctrl+B, or type **like this**.
+
+Blank lines become a longer pause. Commas, periods and question marks are read with the pauses you'd expect."></div>
       <div class="pane-foot">
         <span><b id="wordCount">0</b> words</span>
         <span><b id="estTime">0:00</b> at <b id="estWpm">150</b> wpm</span>
@@ -332,8 +386,8 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
       <button class="btn btn-primary" id="startBtn" type="button" disabled>Start reading</button>
 
       <p class="note">
-        <kbd>Space</kbd> play or pause · <kbd>←</kbd> <kbd>→</kbd> jump a sentence ·
-        <kbd>↑</kbd> <kbd>↓</kbd> nudge the pace · <kbd>Esc</kbd> back to the script
+        While reading: <kbd>Space</kbd> play or pause · <kbd>←</kbd> <kbd>→</kbd> jump a sentence ·
+        <kbd>↑</kbd> <kbd>↓</kbd> nudge the pace · <kbd>Esc</kbd> back here
       </p>
     </div>
   </section>
@@ -345,24 +399,39 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
       <div class="script" id="scriptOut"></div>
     </div>
     <div class="transport">
-      <button class="ctrl" id="restartBtn" type="button" title="Back to the top" aria-label="Back to the top">
-        <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7Z"/></svg>
-      </button>
-      <button class="ctrl" id="prevBtn" type="button" title="Previous sentence" aria-label="Previous sentence">
-        <svg viewBox="0 0 24 24"><path d="M7 6h2v12H7zM19 6v12l-9-6z"/></svg>
-      </button>
-      <button class="ctrl play" id="playBtn" type="button" title="Play or pause" aria-label="Play or pause">
-        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-      <button class="ctrl" id="nextBtn" type="button" title="Next sentence" aria-label="Next sentence">
-        <svg viewBox="0 0 24 24"><path d="M15 6h2v12h-2zM5 6v12l9-6z"/></svg>
-      </button>
+      <div class="tgroup">
+        <button class="ctrl" id="restartBtn" type="button" title="Back to the top" aria-label="Back to the top">
+          <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7Z"/></svg>
+        </button>
+        <button class="ctrl" id="prevBtn" type="button" title="Previous sentence" aria-label="Previous sentence">
+          <svg viewBox="0 0 24 24"><path d="M7 6h2v12H7zM19 6v12l-9-6z"/></svg>
+        </button>
+        <button class="ctrl play" id="playBtn" type="button" title="Play or pause" aria-label="Play">
+          <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="ctrl" id="nextBtn" type="button" title="Next sentence" aria-label="Next sentence">
+          <svg viewBox="0 0 24 24"><path d="M15 6h2v12h-2zM5 6v12l9-6z"/></svg>
+        </button>
+      </div>
+
       <span class="tc"><b id="tcNow">0:00</b> / <span id="tcTotal">0:00</span> · <span id="wordPos">0 of 0</span></span>
-      <div class="pace">
-        <span class="label">Pace</span>
-        <input type="range" id="wpmRun" min="60" max="400" step="5" value="150" aria-label="Words per minute" />
-        <span class="val" id="wpmRunVal">150 wpm</span>
-        <button class="btn btn-ghost" id="exitBtn" type="button">Edit script</button>
+
+      <div class="tgroup end">
+        <div class="knob pace">
+          <span class="label">Pace</span>
+          <input type="range" id="wpmRun" min="60" max="400" step="5" value="150" aria-label="Words per minute" />
+          <span class="val" id="wpmRunVal">150 wpm</span>
+        </div>
+        <div class="knob">
+          <span class="label">Size</span>
+          <button class="step" id="sizeDown" type="button" title="Smaller text" aria-label="Smaller text">−</button>
+          <span class="val narrow" id="sizeRunVal">40</span>
+          <button class="step" id="sizeUp" type="button" title="Larger text" aria-label="Larger text">+</button>
+        </div>
+        <button class="ctrl" id="aloudRun" type="button" aria-pressed="false" title="Read aloud" aria-label="Read aloud">
+          <svg id="aloudIcon" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z"/></svg>
+        </button>
+        <button class="btn btn-ghost btn-back" id="exitBtn" type="button">Edit script &amp; settings <kbd>Esc</kbd></button>
       </div>
     </div>
   </section>
@@ -372,19 +441,19 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
 (function(){
   "use strict";
 
-  var SAMPLE = [
-    "Welcome back to the workshop. Today we're doing the one thing everyone puts off:",
-    "reading your own words out loud, at the pace you actually want to hit.",
-    "",
-    "Here's the drill. Paste a page. Set the meter. Read along with the highlight.",
-    "When you drift, you'll see it before you hear it.",
-    "",
-    "Most people speak between one hundred and forty and one hundred and sixty words a",
-    "minute. An audiobook sits near one fifty. A news read pushes past one eighty.",
-    "Pick a number, hold it for a page, then push it up by ten.",
-    "",
-    "Ready? Set the pace on the right, and press start."
-  ].join("\n");
+  var SAMPLE_LINES = [
+    [{t:"COLD OPEN.", s:1}, {t:" The workshop, mid-morning.", s:0}],
+    [],
+    [{t:"Welcome back. Today we're doing the one thing everyone puts off: reading your own words out loud, at the pace you actually want to hit.", s:0}],
+    [],
+    [{t:"Here's the drill. Paste a page. Set the meter. Read along with the highlight. ", s:0}, {t:"When you drift, you'll see it before you hear it.", s:1}],
+    [],
+    [{t:"Most people speak between ", s:0}, {t:"140", s:1}, {t:" and ", s:0}, {t:"160", s:1}, {t:" words a minute. An audiobook sits near one fifty. A news read pushes past one eighty.", s:0}],
+    [],
+    [{t:"Pick a number, hold it for a page, then push it up by ten.", s:0}],
+    [],
+    [{t:"Ready? Set the pace, and press start.", s:0}]
+  ];
 
   var PACE_NOTES = [
     [0,   90,  "deliberate"],
@@ -395,14 +464,19 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     [280, 999, "speed reading"]
   ];
 
+  var BOLD = 1, ITAL = 2, UNDER = 4;
+
   var $ = function(id){ return document.getElementById(id); };
   var el = {
-    app:$("app"), compose:$("compose"), run:$("run"),
-    script:$("script"), wordCount:$("wordCount"), estTime:$("estTime"), estWpm:$("estWpm"),
+    app:$("app"), compose:$("compose"), run:$("run"), backHint:$("backHint"),
+    editor:$("editor"), boldBtn:$("boldBtn"), italBtn:$("italBtn"),
+    wordCount:$("wordCount"), estTime:$("estTime"), estWpm:$("estWpm"),
     wpm:$("wpm"), wpmBig:$("wpmBig"), paceHint:$("paceHint"),
-    aloud:$("aloud"), voice:$("voice"), voiceWrap:$("voiceWrap"), voiceNote:$("voiceNote"),
-    size:$("size"), sizeVal:$("sizeVal"), startBtn:$("startBtn"),
-    sampleBtn:$("sampleBtn"), clearBtn:$("clearBtn"),
+    aloud:$("aloud"), aloudRun:$("aloudRun"), aloudIcon:$("aloudIcon"),
+    voice:$("voice"), voiceWrap:$("voiceWrap"), voiceNote:$("voiceNote"),
+    size:$("size"), sizeVal:$("sizeVal"), sizeRunVal:$("sizeRunVal"),
+    sizeUp:$("sizeUp"), sizeDown:$("sizeDown"),
+    startBtn:$("startBtn"), sampleBtn:$("sampleBtn"), clearBtn:$("clearBtn"),
     stage:$("stage"), scriptOut:$("scriptOut"), bar:$("bar"),
     playBtn:$("playBtn"), playIcon:$("playIcon"), prevBtn:$("prevBtn"), nextBtn:$("nextBtn"),
     restartBtn:$("restartBtn"), exitBtn:$("exitBtn"),
@@ -415,17 +489,169 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var state = {
-    text:"", words:[], spans:[], sentenceStarts:[], avgLen:5,
+    text:"", styles:[], words:[], spans:[], sentenceStarts:[], avgLen:5,
     cur:0, acc:0, elapsed:0, playing:false, finished:false,
     wpm:150, size:40, aloud:false, voiceURI:"",
     chunks:[], chunkIdx:0, speakToken:0, boundaryFired:false, lastBoundary:-1, watchdog:0,
     desiredScroll:0, lastFrame:0
   };
 
+  /* ================= rich text: read, sanitize, write =================
+     Everything the reader needs is a plain string plus one style byte per
+     character. Pasted HTML never reaches the page — it is walked, reduced to
+     styled runs, and rebuilt from scratch as b/i/u inside plain divs. */
+
+  var BLOCK = /^(ADDRESS|ARTICLE|ASIDE|BLOCKQUOTE|DD|DIV|DL|DT|FIGURE|FOOTER|FORM|H1|H2|H3|H4|H5|H6|HEADER|HR|LI|MAIN|NAV|OL|P|PRE|SECTION|TABLE|TD|TH|TR|UL)$/;
+  var SKIP  = /^(SCRIPT|STYLE|HEAD|NOSCRIPT|TEMPLATE|IFRAME|OBJECT|EMBED|LINK|META)$/;
+
+  function styleOfElement(node, inherited){
+    var tag = node.tagName, s = inherited;
+    var css = (node.getAttribute && node.getAttribute("style")) || "";
+    function apply(bit, onTag, declared){
+      // an explicit CSS declaration wins over the inherited bit in both
+      // directions — Google Docs wraps whole pastes in
+      // <b style="font-weight:normal">, which must not bold the document
+      if(declared === true) return s | bit;
+      if(declared === false) return s & ~bit;
+      return onTag ? (s | bit) : s;
+    }
+    var m = /font-weight\s*:\s*([^;]+)/i.exec(css), d;
+    if(m){
+      var v = m[1].trim().toLowerCase();
+      d = (v === "bold" || v === "bolder" || parseInt(v, 10) >= 600);
+    }
+    s = apply(BOLD, tag === "B" || tag === "STRONG", d);
+
+    d = undefined;
+    m = /font-style\s*:\s*([^;]+)/i.exec(css);
+    if(m) d = /italic|oblique/i.test(m[1]);
+    s = apply(ITAL, tag === "I" || tag === "EM", d);
+
+    d = undefined;
+    m = /text-decoration(?:-line)?\s*:\s*([^;]+)/i.exec(css);
+    if(m) d = /underline/i.test(m[1]);
+    s = apply(UNDER, tag === "U", d);
+
+    return s;
+  }
+
+  // DOM (ours or pasted) -> array of lines, each an array of {t, s} runs
+  function readRuns(root){
+    var lines = [[]];
+    function line(){ return lines[lines.length - 1]; }
+    function push(text, s){
+      if(!text) return;
+      var parts = text.split("\n");
+      for(var i = 0; i < parts.length; i++){
+        if(i) lines.push([]);
+        if(parts[i]) line().push({ t:parts[i], s:s });
+      }
+    }
+    function rec(node, s){
+      if(node.nodeType === 3){ push(node.nodeValue.replace(/\r/g, "").replace(/\u00a0/g, " "), s); return; }
+      if(node.nodeType !== 1) return;
+      var tag = node.tagName;
+      if(SKIP.test(tag)) return;
+      if(tag === "BR"){ lines.push([]); return; }
+      var block = BLOCK.test(tag);
+      if(block && line().length) lines.push([]);
+      var ns = styleOfElement(node, s);
+      for(var c = node.firstChild; c; c = c.nextSibling) rec(c, ns);
+      if(block && line().length) lines.push([]);
+    }
+    for(var c = root.firstChild; c; c = c.nextSibling) rec(c, 0);
+    while(lines.length && !lines[lines.length - 1].length) lines.pop();
+    return lines;
+  }
+
+  // **bold** in plain text becomes real bold, so markdown pastes carry over
+  function runsFromPlainLine(text){
+    var out = [], i = 0, re = /\*\*([^*\n]+)\*\*/g, m;
+    while((m = re.exec(text)) !== null){
+      if(m.index > i) out.push({ t:text.slice(i, m.index), s:0 });
+      out.push({ t:m[1], s:BOLD });
+      i = re.lastIndex;
+    }
+    if(i < text.length) out.push({ t:text.slice(i), s:0 });
+    return out;
+  }
+  function runsFromPlain(text){
+    var lines = text.replace(/\r\n?/g, "\n").split("\n"), out = [];
+    for(var i = 0; i < lines.length; i++) out.push(runsFromPlainLine(lines[i]));
+    while(out.length && !out[out.length - 1].length) out.pop();
+    return out;
+  }
+
+  function esc(s){
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function runsToHtml(lines){
+    var html = "";
+    for(var i = 0; i < lines.length; i++){
+      var runs = lines[i], inner = "";
+      for(var j = 0; j < runs.length; j++){
+        var t = esc(runs[j].t), s = runs[j].s;
+        if(s & UNDER) t = "<u>" + t + "</u>";
+        if(s & ITAL)  t = "<i>" + t + "</i>";
+        if(s & BOLD)  t = "<b>" + t + "</b>";
+        inner += t;
+      }
+      html += "<div>" + (inner || "<br>") + "</div>";
+    }
+    return html || "<div><br></div>";
+  }
+
+  // lines -> the flat model the reader runs on
+  function modelFromRuns(lines){
+    var text = "", styles = [];
+    for(var i = 0; i < lines.length; i++){
+      if(i){ text += "\n"; styles.push(0); }
+      var runs = lines[i];
+      for(var j = 0; j < runs.length; j++){
+        text += runs[j].t;
+        for(var k = 0; k < runs[j].t.length; k++) styles.push(runs[j].s);
+      }
+    }
+    return { text:text, styles:styles };
+  }
+
+  function readEditor(){ return modelFromRuns(readRuns(el.editor)); }
+
+  function setEditorHtml(html){
+    el.editor.innerHTML = html;
+    markEmpty();
+  }
+  function setEditorRuns(lines){ setEditorHtml(runsToHtml(lines)); }
+  function markEmpty(){
+    el.editor.classList.toggle("is-empty", el.editor.textContent.trim() === "");
+  }
+
+  function insertHtmlAtCaret(html){
+    if(document.queryCommandSupported && document.queryCommandSupported("insertHTML")){
+      document.execCommand("insertHTML", false, html);
+      return;
+    }
+    var sel = window.getSelection();
+    if(!sel || !sel.rangeCount) return;
+    var range = sel.getRangeAt(0);
+    range.deleteContents();
+    var tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    var frag = document.createDocumentFragment(), node, last = null;
+    while((node = tmp.firstChild)){ last = frag.appendChild(node); }
+    range.insertNode(frag);
+    if(last){
+      range.setStartAfter(last);
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+  }
+
   /* ---------------- storage ---------------- */
   function save(){
     try{
-      localStorage.setItem("cue.script", el.script.value);
+      localStorage.setItem("cue.html", el.editor.innerHTML);
       localStorage.setItem("cue.wpm", String(state.wpm));
       localStorage.setItem("cue.size", String(state.size));
       localStorage.setItem("cue.aloud", state.aloud ? "1" : "0");
@@ -434,8 +660,16 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
   }
   function load(){
     try{
-      var t = localStorage.getItem("cue.script");
-      if(t !== null) el.script.value = t;
+      var html = localStorage.getItem("cue.html");
+      if(html !== null){
+        // re-sanitize on the way in: only our own b/i/u/div survive
+        var holder = document.createElement("div");
+        holder.innerHTML = html;
+        setEditorRuns(readRuns(holder));
+      }else{
+        var legacy = localStorage.getItem("cue.script");   // plain text from an earlier version
+        if(legacy) setEditorRuns(runsFromPlain(legacy));
+      }
       var w = parseInt(localStorage.getItem("cue.wpm"), 10);
       if(w >= 60 && w <= 400) state.wpm = w;
       var s = parseInt(localStorage.getItem("cue.size"), 10);
@@ -463,9 +697,10 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
 
   function endsSentence(s){ return /[.!?…:][")'\]]*$/.test(s); }
 
-  function build(text){
-    var t = tokenize(text);
-    state.text = text;
+  function build(model){
+    var t = tokenize(model.text);
+    state.text = model.text;
+    state.styles = model.styles;
     state.words = t.words;
 
     var total = 0;
@@ -486,22 +721,50 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     return t;
   }
 
+  function styleClasses(s){
+    return (s & BOLD ? " sb" : "") + (s & ITAL ? " si" : "") + (s & UNDER ? " su" : "");
+  }
+
   function render(lines){
     var frag = document.createDocumentFragment();
+    var st = state.styles;
     state.spans = new Array(state.words.length);
     var pendingGap = false;
+
     for(var l = 0; l < lines.length; l++){
       if(!lines[l].length){ pendingGap = true; continue; }
       var p = document.createElement("p");
       if(pendingGap){ p.className = "gap"; pendingGap = false; }
+
       for(var i = 0; i < lines[l].length; i++){
         var w = lines[l][i];
-        var s = document.createElement("span");
-        s.className = "w ahead";
-        s.textContent = w.text;
-        s.dataset.i = String(w.i);
-        state.spans[w.i] = s;
-        p.appendChild(s);
+        var a = w.start, b = a + w.text.length;
+        var s0 = st[a] || 0, uniform = true;
+        for(var q = a + 1; q < b; q++){ if((st[q] || 0) !== s0){ uniform = false; break; } }
+
+        var span = document.createElement("span");
+        span.className = "w ahead" + (uniform ? styleClasses(s0) : "");
+        span.dataset.i = String(w.i);
+
+        if(uniform){
+          span.textContent = w.text;
+        }else{
+          // style changes mid-word (e.g. **bold**word) — split into segments
+          var segStart = a, cur = s0;
+          for(var r = a + 1; r <= b; r++){
+            var sv = r < b ? (st[r] || 0) : -1;
+            if(sv !== cur){
+              var seg = document.createElement("span");
+              seg.className = "seg" + styleClasses(cur);
+              seg.textContent = state.text.slice(segStart, r);
+              span.appendChild(seg);
+              segStart = r; cur = sv;
+            }
+          }
+        }
+
+        state.spans[w.i] = span;
+        p.appendChild(span);
         if(i < lines[l].length - 1) p.appendChild(document.createTextNode(" "));
       }
       frag.appendChild(p);
@@ -553,18 +816,19 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
 
   /* ---------------- compose view ---------------- */
   function refreshCompose(){
-    var text = el.script.value;
-    var n = (text.match(/\S+/g) || []).length;
+    var model = readEditor();
+    var n = (model.text.match(/\S+/g) || []).length;
     el.wordCount.textContent = String(n);
     el.estWpm.textContent = String(state.wpm);
     if(n){
-      build(text);
+      build(model);
       el.estTime.textContent = clock(totalDuration());
     }else{
       el.estTime.textContent = "0:00";
     }
     el.startBtn.disabled = n === 0;
     el.startBtn.textContent = n ? "Start reading" : "Add a script to start";
+    markEmpty();
   }
 
   function setWpm(v, from){
@@ -579,11 +843,8 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     for(var i = 0; i < chips.length; i++){
       chips[i].setAttribute("aria-pressed", String(parseInt(chips[i].dataset.wpm, 10) === state.wpm));
     }
-    if(el.compose.hidden){
-      el.tcTotal.textContent = clock(totalDuration());
-    }else{
-      refreshCompose();
-    }
+    if(el.compose.hidden) el.tcTotal.textContent = clock(totalDuration());
+    else refreshCompose();
     if(state.playing && state.aloud && from !== "speech") restartSpeech();
     save();
   }
@@ -592,7 +853,9 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     state.size = Math.min(96, Math.max(22, Math.round(v)));
     el.size.value = String(state.size);
     el.sizeVal.textContent = state.size + " px";
+    el.sizeRunVal.textContent = String(state.size);
     document.documentElement.style.setProperty("--reader-size", state.size + "px");
+    if(!el.run.hidden) recenter();
     save();
   }
 
@@ -632,6 +895,11 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
   function setAloud(on){
     state.aloud = !!on && !!synth;
     el.aloud.setAttribute("aria-checked", String(state.aloud));
+    el.aloudRun.setAttribute("aria-pressed", String(state.aloud));
+    el.aloudRun.title = state.aloud ? "Read aloud: on" : "Read aloud: off";
+    el.aloudIcon.innerHTML = state.aloud
+      ? '<path d="M4 9v6h4l5 4V5L8 9H4Zm11.5 3a4 4 0 0 0-2-3.46v6.92A4 4 0 0 0 15.5 12Zm-2 -7.9v2.06A6 6 0 0 1 13.5 18.8v2.06a8 8 0 0 0 0-15.7Z"></path>'
+      : '<path d="M4 9v6h4l5 4V5L8 9H4Zm16.5-1.4L19.1 6.2 16.8 8.5 14.5 6.2l-1.4 1.4 2.3 2.3-2.3 2.3 1.4 1.4 2.3-2.3 2.3 2.3 1.4-1.4-2.3-2.3 2.3-2.3Z"></path>';
     el.voiceWrap.hidden = !state.aloud;
     el.voiceNote.textContent = !synth
       ? "This browser has no built-in speech. The script still scrolls and highlights."
@@ -640,6 +908,11 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
         : "Off — the script scrolls and highlights silently. Turn on to hear it in your browser's voice.";
     if(state.aloud) fillVoices();
     save();
+  }
+  function toggleAloud(){
+    if(!synth){ setAloud(false); return; }
+    setAloud(!state.aloud);
+    if(state.playing){ state.aloud ? speakFrom(state.cur) : stopSpeech(); }
   }
 
   /* ---------------- speech ---------------- */
@@ -719,8 +992,7 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     u.onerror = function(e){
       if(token !== state.speakToken) return;
       if(e && (e.error === "interrupted" || e.error === "canceled")) return;
-      // fall back to silent scrolling rather than stalling
-      setAloud(false);
+      setAloud(false);   // fall back to silent scrolling rather than stalling
     };
     try{ synth.speak(u); }catch(err){ setAloud(false); }
   }
@@ -731,6 +1003,15 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
   }
 
   /* ---------------- playback ---------------- */
+  function scrollTargetFor(span){
+    var top = span.offsetTop - el.stage.clientHeight * 0.42 + span.offsetHeight / 2;
+    return Math.max(0, Math.min(top, el.stage.scrollHeight - el.stage.clientHeight));
+  }
+  function recenter(){
+    var s = state.spans[state.cur];
+    if(s) state.desiredScroll = scrollTargetFor(s);
+  }
+
   function setCur(i){
     i = Math.max(0, Math.min(state.words.length, i));
     var old = state.spans[state.cur];
@@ -740,8 +1021,7 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     if(s){
       s.classList.add("now");
       s.classList.remove("ahead");
-      var top = s.offsetTop - el.stage.clientHeight * 0.42 + s.offsetHeight / 2;
-      state.desiredScroll = Math.max(0, Math.min(top, el.stage.scrollHeight - el.stage.clientHeight));
+      state.desiredScroll = scrollTargetFor(s);
     }
     updateMeters();
   }
@@ -758,8 +1038,7 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
 
   function updateMeters(){
     var n = state.words.length || 1;
-    var frac = Math.min(1, state.cur / n);
-    el.bar.style.width = (frac * 100).toFixed(2) + "%";
+    el.bar.style.width = (Math.min(1, state.cur / n) * 100).toFixed(2) + "%";
     el.wordPos.textContent = Math.min(state.cur + 1, n) + " of " + n;
     el.tcNow.textContent = clock(state.elapsed);
   }
@@ -811,11 +1090,7 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     repaintFrom(i);
     state.cur = i;
     state.lastBoundary = i;
-    var s = state.spans[i];
-    if(s){
-      var top = s.offsetTop - el.stage.clientHeight * 0.42 + s.offsetHeight / 2;
-      state.desiredScroll = Math.max(0, Math.min(top, el.stage.scrollHeight - el.stage.clientHeight));
-    }
+    recenter();
     updateMeters();
     if(was){ setPlaying(true); if(state.aloud) speakFrom(i); }
     else setPlaying(false);
@@ -871,19 +1146,19 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
 
   /* ---------------- views ---------------- */
   function openRun(){
-    var text = el.script.value;
-    if(!(text.match(/\S+/g) || []).length) return;
-    var t = build(text);
+    var model = readEditor();
+    if(!(model.text.match(/\S+/g) || []).length) return;
+    var t = build(model);
     render(t.lines);
     state.cur = 0; state.acc = 0; state.elapsed = 0; state.finished = false;
     state.lastBoundary = 0; state.boundaryFired = false;
     repaintFrom(0);
     el.compose.hidden = true;
     el.run.hidden = false;
+    el.backHint.hidden = false;
     el.tcTotal.textContent = clock(totalDuration());
     el.stage.scrollTop = 0;
     state.desiredScroll = 0;
-    updateMeters();
     setCur(0);
     el.stage.scrollTop = state.desiredScroll;
     play();
@@ -892,19 +1167,64 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
   function openCompose(){
     pause();
     el.run.hidden = true;
+    el.backHint.hidden = true;
     el.compose.hidden = false;
     el.tallyText.textContent = "standby";
     el.app.classList.remove("is-live");
     refreshCompose();
+    el.editor.focus();
   }
 
-  /* ---------------- wiring ---------------- */
-  el.script.addEventListener("input", function(){ refreshCompose(); save(); });
+  /* ---------------- wiring: editor ---------------- */
+  el.editor.addEventListener("input", function(){ refreshCompose(); save(); });
+
+  el.editor.addEventListener("paste", function(e){
+    var dt = e.clipboardData || window.clipboardData;
+    if(!dt) return;
+    e.preventDefault();
+    var html = dt.getData("text/html");
+    var lines;
+    if(html){
+      var holder = document.createElement("div");
+      holder.innerHTML = html;
+      lines = readRuns(holder);
+    }else{
+      lines = runsFromPlain(dt.getData("text/plain") || "");
+    }
+    insertHtmlAtCaret(runsToHtml(lines));
+    refreshCompose();
+    save();
+  });
+
+  // drops carry formatting too — route them through the same sanitizer
+  el.editor.addEventListener("drop", function(e){
+    var dt = e.dataTransfer;
+    if(!dt) return;
+    e.preventDefault();
+    var html = dt.getData("text/html");
+    var lines = html ? readRuns((function(){ var d = document.createElement("div"); d.innerHTML = html; return d; })())
+                     : runsFromPlain(dt.getData("text/plain") || "");
+    el.editor.focus();
+    insertHtmlAtCaret(runsToHtml(lines));
+    refreshCompose();
+    save();
+  });
+
+  function fmt(cmd){
+    el.editor.focus();
+    try{ document.execCommand(cmd, false, null); }catch(e){}
+    refreshCompose();
+    save();
+  }
+  el.boldBtn.addEventListener("click", function(){ fmt("bold"); });
+  el.italBtn.addEventListener("click", function(){ fmt("italic"); });
+
+  /* ---------------- wiring: controls ---------------- */
   el.sampleBtn.addEventListener("click", function(){
-    el.script.value = SAMPLE; refreshCompose(); save(); el.script.focus();
+    setEditorRuns(SAMPLE_LINES); refreshCompose(); save(); el.editor.focus();
   });
   el.clearBtn.addEventListener("click", function(){
-    el.script.value = ""; refreshCompose(); save(); el.script.focus();
+    setEditorHtml("<div><br></div>"); refreshCompose(); save(); el.editor.focus();
   });
 
   el.wpm.addEventListener("input", function(){ setWpm(+el.wpm.value); });
@@ -914,12 +1234,11 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     chips[c].addEventListener("click", function(){ setWpm(+this.dataset.wpm); });
   }
   el.size.addEventListener("input", function(){ setSize(+el.size.value); });
+  el.sizeUp.addEventListener("click", function(){ setSize(state.size + 4); });
+  el.sizeDown.addEventListener("click", function(){ setSize(state.size - 4); });
 
-  el.aloud.addEventListener("click", function(){
-    if(!synth){ setAloud(false); return; }
-    setAloud(el.aloud.getAttribute("aria-checked") !== "true");
-    if(state.playing){ state.aloud ? speakFrom(state.cur) : stopSpeech(); }
-  });
+  el.aloud.addEventListener("click", toggleAloud);
+  el.aloudRun.addEventListener("click", toggleAloud);
   el.voice.addEventListener("change", function(){
     state.voiceURI = el.voice.value; save();
     if(state.playing && state.aloud) speakFrom(state.cur);
@@ -933,16 +1252,18 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
   el.restartBtn.addEventListener("click", function(){ state.elapsed = 0; seek(0); });
 
   el.scriptOut.addEventListener("click", function(e){
-    var target = e.target;
-    if(target && target.classList && target.classList.contains("w")){
-      seek(parseInt(target.dataset.i, 10));
-    }
+    var node = e.target;
+    while(node && node !== el.scriptOut && !(node.classList && node.classList.contains("w"))) node = node.parentNode;
+    if(node && node.classList && node.classList.contains("w")) seek(parseInt(node.dataset.i, 10));
   });
 
   document.addEventListener("keydown", function(e){
-    var typing = document.activeElement === el.script;
-    if(e.key === "Escape" && !el.run.hidden){ openCompose(); return; }
-    if(typing) return;
+    if(e.key === "Escape" && !el.run.hidden){ e.preventDefault(); openCompose(); return; }
+    if(el.editor.contains(document.activeElement) || document.activeElement === el.editor) return;
+    var tag = document.activeElement ? document.activeElement.tagName : "";
+    if(tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA"){
+      if(e.key !== " " && e.code !== "Space") return;
+    }
     if(e.key === " " || e.code === "Space"){
       e.preventDefault();
       if(el.run.hidden) openRun(); else toggle();
@@ -952,6 +1273,7 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     else if(e.key === "ArrowDown"){ e.preventDefault(); setWpm(state.wpm - 10); }
   });
 
+  window.addEventListener("resize", function(){ if(!el.run.hidden) recenter(); });
   window.addEventListener("beforeunload", stopSpeech);
   document.addEventListener("visibilitychange", function(){
     if(document.hidden && state.playing && state.aloud) pause();
@@ -962,6 +1284,7 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     if(typeof synth.onvoiceschanged !== "undefined") synth.addEventListener("voiceschanged", fillVoices);
   }
 
+  try{ document.execCommand("styleWithCSS", false, false); }catch(e){}
   load();
   setWpm(state.wpm);
   setSize(state.size);
