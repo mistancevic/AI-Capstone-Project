@@ -237,7 +237,44 @@ plus the regression suite, plus the first-check comparison. Then the one that
 failed against the live model, in its own words, and the fact that nothing
 reached the client.
 
-Not written yet.
+### APPROVED
+
+> Six cases. For each one I wrote what should happen before running it, then
+> captured what actually happened, then judged the gap myself. The app can't
+> write that last column.
+>
+> I ran all six against the live model for the first time. Five matched. One
+> didn't.
+>
+> This one. The model refused a client who should have gotten food and a kind
+> sentence. And it tells you why: it names the rule, states that the counter
+> that rule depends on is at zero, and escalates anyway.
+>
+> Nothing reached the client. No card was built, no number invented. The app
+> labelled it a model-added stop.
+>
+> The model broke my rule. The architecture held.
+
+105 words, 43 seconds.
+
+No date on the run. "Four days ago" is true on 8 August and false by Demo Day
+on 20 September, when the same recording gets shown again.
+
+Checked against `MODEL_CHECK` in `index.html`, dated 2026-08-06, live model
+claude-sonnet-4-5-20250929. The model cited **S3**, the skipped-days rule,
+while writing *"skipped_days counter is currently 0"* in its own reasoning, and
+escalated regardless. It also added rule text S3 does not contain, and cited S7
+as grounds to refuse when S7 only screens the sentence it writes. The offline
+rules tier the same input correctly.
+
+Two things deliberately left out:
+
+- **The 159-check regression suite.** One clause would add it: "Under all of
+  that, 159 automated checks on every build." Six seconds, and credibility the
+  rubric does not specifically ask for.
+- **"Over-refusal, not an unsafe output."** The honest frame, and it invites
+  "so how often does it over-refuse?", which has no measured answer yet. Better
+  in Q&A than in the video.
 
 ---
 
