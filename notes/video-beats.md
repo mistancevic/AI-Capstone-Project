@@ -10,9 +10,9 @@ again without Milan saying so.
 |---|---|---|---|---|
 | 1 | The afternoon | 0:00–1:09 | One person, one bad day, no product | approved |
 | 2 | The pattern, the guide, the tool | 1:09–2:01 | Zoom out, you enter, PlateMate named | approved |
-| 3 | Demo | 2:01–3:05 | D-1001 live, then D-1005 refusing | not started |
-| 4 | Evidence | 3:05–3:40 | Eval method, the one that failed | not started |
-| 5 | The pilot | 3:40–4:00 | Three clients, the freeze, the link | not started |
+| 3 | Demo | 2:01–3:50 | D-1001 live, then D-1005 refusing | approved |
+| 4 | Evidence | 3:50–4:36 | Eval method, the one that failed | approved |
+| 5 | The pilot | 4:36–5:07 | Three clients, the freeze, the link | approved |
 
 Rubric mapping: beats 1–2 are Problem & Discovery (5 pts). Beats 3–4 are AI
 Solution & Evaluation (5 pts). Delivery across all five is the third 5 pts,
@@ -285,7 +285,29 @@ the escalations, and wrote the rules — which is why the safety policy is
 frozen for the four weeks. One missed escalation stops it. Last frame is the
 URL, held, in silence.
 
-Not written yet.
+### APPROVED
+
+> The pilot is three clients for four weeks, in my own practice. I'm the coach,
+> I take the escalations, and I wrote the safety rules. All three.
+>
+> Which is the problem. Nobody's safety should depend on whether I still agree
+> with my own rule at eleven at night. So for those four weeks I can't touch it.
+> If I disagree with a flag, I write a note, and the rule stays.
+>
+> One missed escalation stops the pilot.
+
+*[last frame: the URL on screen, held, in silence. Do not narrate it.]*
+
+77 words, 32 seconds.
+
+- **"All three."** The conflict named in two words: Milan benefits from a flag
+  being wrong, decides whether it is wrong, and can edit the rule. Naming it is
+  what makes the freeze mean anything.
+- **"At eleven at night."** Echoes D-1005 from the demo, so the freeze points at
+  a client in a specific state rather than at a governance principle, and the
+  beat stays about them.
+- The word **freeze** never appears. "For those four weeks I can't touch it" is
+  the same claim in language a person would use.
 
 ---
 
@@ -321,6 +343,20 @@ Not written yet.
 absolute, and clicks and pauses eat 30–40 seconds of that. **Target 500 spoken
 words.**
 
-Spent: beat 1 is 166 words / 69s, beat 2 is 125 words / 52s. **121 seconds
-gone, 119 left** for beats 3-5 including every click and pause. Beat 3 needs
-the most of that because the screen has to change while Milan talks.
+**All five beats approved. 743 words, 5:07 of speech.**
+
+| Beat | Words | Time |
+|---|---|---|
+| 1 The afternoon | 166 | 1:09 |
+| 2 The pattern, the guide, the tool | 125 | 0:52 |
+| 3 Demo | 264 | 1:49 |
+| 4 Evidence | 111 | 0:46 |
+| 5 The pilot | 77 | 0:32 |
+| **Total** | **743** | **5:07** |
+
+**Over the cap by 67 seconds of speech, before a single click.** Clicks, page
+changes and the two deliberate silences need 30 to 40 seconds on top, so the
+real gap is roughly 100 seconds, and 580 words is the absolute ceiling.
+
+Optimization has not started. Nothing above gets cut without Milan deciding
+which.
