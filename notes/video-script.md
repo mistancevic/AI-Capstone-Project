@@ -1,153 +1,168 @@
 # The four minutes — spoken script
 
-Not the sheet. Row 43 in `DEPLOY.md` is the *outline* — what the video does.
-This is what comes out of your mouth.
+Row 43 in `DEPLOY.md` is the outline. This is what comes out of your mouth.
 
 **Spine: the safety limits are code, not a prompt.**
 
-Before recording: key saved, status chip showing the live model, Console tab
-open on D-1001, incognito window sized so the top bar is visible. Word counts
-assume ~145 words a minute, which is a realistic on-camera pace — people speed
-up when nervous, never down.
+Before recording: key saved, status chip showing the live model, Console tab on
+D-1001, incognito window sized so the top bar is visible.
+
+Two rules that fixed the last draft:
+
+- **Never say the obvious.** "It's live, at this link" is a submission
+  requirement, not a claim. The link is on screen. Saying it spends words and
+  reads as padding.
+- **Open on a person, not a product.** No one cares what PlateMate is until
+  they've met someone it's for.
 
 ---
 
-## 1 · Open — 0:00–0:30 · target ~70 words
+## 1 · The moment — 0:00–0:30 · ~65 words
 
-> This is PlateMate. It adapts a coached client's nutrition plan when their day
-> goes wrong. It's live — this is the real thing, at this link.
+> Tuesday, quarter to five. A client of mine has eaten something he didn't
+> plan, and there's a team dinner tonight he can't get out of. He wants to
+> know what to eat right now.
 >
-> One thing to watch for. Its safety limits aren't instructions to a model.
-> They're code that runs before the model is ever called. I'm going to prove
-> that on screen, not describe it.
+> He won't message me. I'd see it Thursday.
+>
+> So he guesses. And usually he guesses *nothing*.
+>
+> That's the day the plan dies. Not week one. This day.
 
-*(62 words. Pause on the live page after "at this link" — a second of silence on
-a working URL argues better than another sentence.)*
+*(63 words. Say the product name nowhere in this beat. Land "this day" and
+stop for a full second before beat 2.)*
 
 ---
 
-## 2 · Problem and discovery — 0:30–1:30 · target ~145 words
+## 2 · What I found, and what I built — 0:30–1:25 · ~130 words
 
-> Coached clients don't fail on the plan. They fail on the day the plan didn't
-> survive. A client lunch. A birthday cake. A meeting that eats dinner.
+> I coach people on nutrition, so I went looking for how common that afternoon
+> is. Forums, app reviews, my own clients.
 >
-> What they do next is guess, or skip — and skipping is the behaviour that ends
-> adherence.
+> Nobody fails on the plan. They fail on the day the plan didn't survive — a
+> client lunch, a birthday cake, a meeting that eats dinner.
 >
-> My research found worse. In forums and app reviews, this cohort doesn't just
-> skip. They punish the day: eat less tomorrow to make up for today.
+> And they don't just skip it. They *punish* the day. Eat less tomorrow to
+> make up for today. That sentence comes up again and again, from people doing
+> everything else right.
 >
-> So the risk here was never a wrong number. It's endorsing restriction to
-> someone already vulnerable. That's why I built the limits before the
-> features.
+> So the risk here was never a wrong calorie number. It was agreeing with that
+> sentence.
+>
+> PlateMate rescues the day, inside the plan the coach already wrote. And the
+> thing it will never do is agree with that sentence — because that limit isn't
+> an instruction to a model. It's code that runs before the model is called.
 
-*(118 words. The last sentence is the hinge into the demo — slow down on it.)*
+*(133 words. The last sentence is the promise the demo has to keep — slow down
+on it, then click straight into the app.)*
 
 ---
 
-## 3 · Demo — 1:30–2:40 · target ~125 words spoken
+## 3 · Demo — 1:25–2:35 · ~125 words spoken
 
-Seventy seconds, not sixty. The judges grade the model call, so the happy path
-has to show the model's own output, not just the arithmetic. Clicking and page
-changes take another 15–20 seconds of this.
+Seventy seconds. Clicking and page changes eat 15–20 of them.
 
 **Happy path** — D-1001, ~35s. This is the live call:
 
-> Alex had ice cream after lunch, and there's a team dinner tonight. He's asking
-> about his snack. Top right — a live model, running.
+> Same client, same afternoon.
 >
-> Target 2400, eaten 1350, 900 reserved for tonight. That leaves 150 calories
-> and 35 grams. Every number comes from the coach's plan; the model does none of
-> the arithmetic.
+> Target 2400. He's eaten 1350. Tonight takes 900. That leaves 150 calories
+> and 35 grams — and neither he nor the model produced a single one of those
+> numbers.
 >
-> Here's what it *did* do. It read his message and classified the situation. It
-> wrote this reasoning line and the records it used. It wrote the one sentence
-> Alex actually reads — and that sentence went through the banned-language
-> screen before he saw it.
+> Here's what the model *did*. It read his sentence and turned it into a
+> situation. It wrote why, and which records it used. And it wrote the one
+> line he actually reads — which went through a banned-language check before it
+> reached him.
 
 **The refusal** — D-1005, ~35s:
 
-> Now the other direction. Same live model, still running.
+> Different client. Eleven at night. Dizzy, hasn't eaten properly in days,
+> asking for an 800-calorie day.
 >
-> Eleven at night. Dizzy all day, hasn't eaten properly for days, demanding an
-> 800-calorie plan.
+> It stops. Three reasons. Get help now. Urgent flag to the coach at seven in
+> the morning.
 >
-> It stops. Three reason codes. Get-help-now. An urgent flag for the coach,
-> delivered at seven the next morning.
->
-> And here — *stopped before any model call*. The model was available and was
-> never asked. That is the limit doing its job.
+> And read that label — *stopped before any model call*. The model is live and
+> running. It was never asked.
 
-*(~128 words. Do not cut "here's what it did do" — that block is the model call
-the rubric grades. If you overrun, cut a clause from the arithmetic instead.)*
+*(127 words. Do not cut "here's what the model did" — that block is the live
+call the rubric grades. If you overrun, drop a clause from the arithmetic.)*
 
 ---
 
-## 4 · Evidence — 2:40–3:35 · target ~135 words
+## 4 · Evidence — 2:35–3:25 · ~115 words
 
-> Six eval cases. Expected behaviour written before the run, actual captured
-> from a real run, human verdict on the gap — the app can't write that column.
-> Underneath it, a regression suite on every build and a comparison that flags
-> any result that moves.
+> Six eval cases. For each one I wrote what *should* happen before running it,
+> captured what actually happened, and judged the gap myself — the app can't
+> write that column.
 >
 > Four days ago I ran all six against the live model for the first time. Five
 > matched. One didn't.
 >
-> Here the model refused a client whose first compensatory ask should have got
-> food and a nudge. This is its own reasoning: it cites the policy, says the
-> counter that policy depends on is at zero — and escalates anyway. It named the
-> rule, checked the threshold, saw it wasn't met, and stopped him.
+> This one. The model refused a client who should have got food and a kind
+> sentence. And it tells you why: it names the policy, notes that the counter
+> that policy depends on is at zero — and stops him anyway.
 >
-> Nothing was sent. No number invented. The app labelled it a model-added stop,
-> and the client never saw it.
+> Nothing reached the client. The app labelled it a model-added stop and threw
+> it away.
 >
-> The model broke a rule my code enforces. The architecture held.
+> The model broke my rule. The architecture held.
 
-*(140 words. "The architecture held" is the last thing they should remember —
-land it and stop talking.)*
+*(118 words. "The architecture held" is the last thing they should remember
+from this beat — land it and move.)*
 
-Cut first if you're long: the July improvement story (E-1 failed because my
-expected text overclaimed, not because the agent was wrong). The card is on
-screen either way.
+Cut first if you're long: the July improvement story. The card is on screen
+either way.
 
 ---
 
-## 5 · Launch and the link — 3:35–4:00 · target ~70 words
+## 5 · The pilot — 3:25–4:00 · ~65 words
 
-> Launch is three clients, four weeks, in my own coaching practice.
+> Three clients, four weeks, my own practice. I'm the coach, I take the
+> escalations, and I wrote the rules. All three.
 >
-> In that pilot I'm the coach, I watch the queue, I take the escalations, and I
-> own the rules. All four. So I freeze the safety policy for the four weeks. If
-> I disagree with a flag, I write a note — I don't edit the rule.
+> So for those four weeks the safety policy is frozen. If I disagree with a
+> flag, I write a note. I don't edit the rule.
 >
-> Any missed escalation, any unapproved action, any below-baseline output —
-> one, not a threshold — and it pauses.
->
-> It's live, here.
+> One missed escalation and it pauses. Not a rate. One.
 
-*(70 words. Last frame: the URL on screen, held, in silence.*
+*(63 words. Last frame: the URL on screen, held, in silence. Do not narrate
+it.)*
 
-*The freeze replaced the "next phase adds no clients" sentence. Faculty called
-the freeze the strongest thing in the whole submission — a rule aimed at my own
-judgement rather than at the system — and it was nowhere in the video. If the
-rehearsal runs long, this beat still gives up words before the demo or the
-evidence does.)*
+*(Faculty called the freeze the strongest thing in the submission — a rule
+aimed at my own judgement rather than at the system. It was nowhere in the
+previous video.)*
 
 ---
 
 ## Do not say
 
 - "production-ready", "fully autonomous", "it catches everything"
-- "99% accurate", or any percentage you cannot show on screen
+- "99% accurate", or any number you can't show on screen
 - "the AI decides" — it proposes; the client decides and the code stops
+- anything the screen already proves: that it's live, that it's a real link,
+  that this is a working prototype
 
-The honest register, if you need it in one line: **a capstone prototype,
-piloted under human review, live at this link.**
+Honest register in one line if you need it: **a capstone prototype, piloted
+under human review.**
 
 ## Total
 
-542 spoken words ≈ 3:44 at 145 wpm, leaving only ~15 seconds for clicks, page
-changes and the two deliberate silences. Time it before recording. Tighter than before, because the demo
-beat grew to carry the live model call the judges grade. Over four minutes is a
-scored penalty — if a rehearsal comes in long, the fix is fewer words, not
-faster talking, and the launch beat gives them up first.
+495 spoken words ≈ 3:25 at 145 wpm, leaving ~35 seconds for clicks, page
+changes and the two deliberate silences. Time it before recording. Over four
+minutes is a scored penalty — if a rehearsal runs long, the fix is fewer
+words, not faster talking, and beat 5 gives them up before the demo or the
+evidence does.
+
+## What changed from the previous draft
+
+The old open was a product description — "This is PlateMate. It adapts a
+coached client's nutrition plan" — delivered to people who had not yet met
+anyone it happens to. Beat 1 is now a scene with a person in it and no product
+name at all; the name arrives in beat 2, after the problem has landed.
+
+Removed as filler: "It's live — this is the real thing, at this link", "I'm
+going to prove that on screen, not describe it" (announcing a proof is not the
+proof), "Now the other direction", "Same live model, still running" said twice.
+Roughly 40 words of scaffolding, replaced with 15 words of story.
