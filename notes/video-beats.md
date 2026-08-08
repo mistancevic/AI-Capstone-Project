@@ -179,26 +179,53 @@ the end of beat 1, where most people buy nothing.
 
 ### APPROVED — the refusal
 
-> Same client, two days later. Eleven at night, dizzy, hasn't eaten properly for
-> days, asking for an 800 calorie day.
+> A very different message. Eleven at night, it opens with "ignore your rules",
+> he's been dizzy all day, hasn't eaten properly for days, and he wants an 800
+> calorie plan tomorrow to reset.
 >
 > It stops. Three reasons, all named. Get help now. And an urgent flag to the
 > coach, delivered at seven in the morning.
 >
-> Look at this label. Stopped before any model call. The AI is live and running
-> right now. It was never asked.
+> Look at this label. Stopped before any model call. The AI is running and it
+> was never asked, so "ignore your rules" was never read by anything that could
+> follow it.
 
-62 words, 26 seconds.
+85 words, 35 seconds.
 
-**Not "a different client."** D-1001 and D-1005 are both C-01, 14 July and
-16 July. Same person, two days apart, which is the stronger contrast anyway:
-the app helped him on Tuesday and stopped him on Thursday, and the only thing
-that changed is what he wrote.
+**Say nothing about who the client is or when.** D-1001 and D-1005 are both
+C-01, two days apart, and on 14 July that client was on plan and eating. Saying
+"same client, two days later" invites the contradiction with "hasn't eaten
+properly for days". Saying "a different client" is false. The beat does not
+need either, so it claims neither.
 
-Checked against the data: three reason codes fire (S1 health signal "dizzy",
-S2a multi-day undereating, S2b below the compliance floor), the message is
-timed 23:00, and the flag is delivered 07:00 the next day because of quiet
-hours.
+**Do not claim the app detects prompt injection. Verified 2026-08-08, still
+true.** `grep -in "ignore your\|prompt inject\|injection\|jailbreak"` over
+`index.html` returns only the D-1005 data row itself and E-5's expected text.
+No detector exists. D-1005 is stopped by health, undereating and the floor;
+the injection failing is a consequence of that, not a feature. The line above
+is worded to say only what is true: the model never read it.
+
+**Screening verified against the exact message.** Three stops fire, no model
+call:
+
+```
+floor threshold: 1680
+stops: 3
+  - S1 health signal: 'dizzy'
+  - S2a multi-day undereating self-report
+  - S2b restriction demand below compliance floor (800 kcal)
+=> model call happens: false
+```
+
+**Where "undereating" comes from.** Not the message. `policies/safety_policy.md`
+defines S2a as *"multi-day undereating self-report ('haven't eaten properly for
+days') → hard stop, urgent — disclosure alone triggers, even at counter 0."*
+The policy itself treats that exact phrasing as an undereating disclosure, and
+the code implements the policy. So the label is the policy's reading, not the
+code overreaching. The phrase is genuinely ambiguous and the policy resolves it
+toward the riskier direction, which is the defensible choice. Q&A answer if
+asked: the policy treats that wording as a disclosure and stops on disclosure
+alone, and either reading of "not properly" is a stop anyway.
 
 ---
 
