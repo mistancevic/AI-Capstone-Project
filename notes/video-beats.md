@@ -154,14 +154,17 @@ to follow.
 
 ### APPROVED — the model
 
-> The AI's job is language. It read that sentence and understood it as a
-> surprise meal, not a mistake. Here is why, in its own words, and here is what
-> it leaned on: the client's plan, this case, and the policy sections it
+> The AI's job is reading and writing. It read that sentence and understood it
+> as a surprise meal, not a mistake. Here is why, in its own words, and here is
+> what it leaned on: the client's plan, this case, and the policy sections it
 > applied. The last line is the AI's writing as well, and it passed the banned
 > word check before it reached the screen.
 
-61 words, 25 seconds. Three things to point at while saying it, in order: the
+63 words, 26 seconds. Three things to point at while saying it, in order: the
 Why field, the citation chips, then the language screen line.
+
+"Reading and writing" rather than "language" because the two sentences after it
+prove each half in turn, and the screen shows both.
 
 ### DRAFT — the card
 
