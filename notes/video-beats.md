@@ -128,7 +128,50 @@ flag, and the label saying it stopped before any model call.
 Must show a real model call. Faculty said so explicitly, and the rubric grades
 "demonstrate the LLM-powered prototype".
 
-Not written yet.
+### APPROVED — back to the store
+
+> Back to that afternoon. Same store, same empty basket, except this time you
+> don't have to work it out alone. You write down what happened — ice cream at
+> lunch, team dinner tonight, what about my snack.
+
+38 words, 16 seconds.
+
+**Open question on this paragraph.** "You write down what happened" says the
+client types the message. The prototype does not take free text on the opening
+message — D-1001's message is a seeded case record, and free-text intake is a
+documented known limitation, parked pending safety coverage. On screen Milan
+clicks a case and the message appears. Two ways to close the gap:
+
+- change the line to describe what the screen actually does, e.g. "The message
+  is already there: ice cream at lunch, team dinner tonight, what about my
+  snack";
+- or keep it, and say plainly in beat 4 that intake is scripted in this build.
+
+Leave as-is until Milan decides.
+
+### DRAFT — the numbers, then the model
+
+> The plan says 2400 calories and 160 grams of protein. 1350 is already eaten,
+> 900 is held back for tonight. That leaves 150 and 35 for the snack, and the
+> app worked all of that out — the model never touches a number.
+>
+> What the model did do: read the message, name what kind of day this is, write
+> why and which records it used, and write the one sentence you actually read.
+> That sentence went through a banned-word check before it reached the screen.
+>
+> Three options, ranked. Pick one and a portion, and the math runs again.
+> Nothing is saved until Approve.
+
+### DRAFT — the refusal
+
+> Different client, eleven at night. Dizzy, hasn't eaten properly in days,
+> asking for an 800-calorie day.
+>
+> It stops. Three reason codes, get-help-now, and an urgent flag to the coach at
+> seven the next morning.
+>
+> And this label — stopped before any model call. The model is live and running.
+> It was never asked.
 
 ---
 
