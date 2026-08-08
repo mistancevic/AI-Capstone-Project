@@ -130,24 +130,17 @@ Must show a real model call. Faculty said so explicitly, and the rubric grades
 
 ### APPROVED — back to the store
 
-> Back to that afternoon. Same store, same empty basket, except this time you
-> don't have to work it out alone. You write down what happened — ice cream at
-> lunch, team dinner tonight, what about my snack.
+> Let's run that afternoon again, with PlateMate. Instead of standing in the
+> store guessing, you tell it what happened: ice cream at lunch, dinner tonight,
+> what about the snack.
 
-38 words, 16 seconds.
+*[screen: D-1001 open, the client's message visible]*
 
-**Open question on this paragraph.** "You write down what happened" says the
-client types the message. The prototype does not take free text on the opening
-message — D-1001's message is a seeded case record, and free-text intake is a
-documented known limitation, parked pending safety coverage. On screen Milan
-clicks a case and the message appears. Two ways to close the gap:
+30 words, 12 seconds.
 
-- change the line to describe what the screen actually does, e.g. "The message
-  is already there: ice cream at lunch, team dinner tonight, what about my
-  snack";
-- or keep it, and say plainly in beat 4 that intake is scripted in this build.
-
-Leave as-is until Milan decides.
+Wording chosen to match the screen. The prototype takes no free text on the
+opening message — D-1001's message is a seeded case record — so the line reads
+the message that is visible rather than narrating someone typing it.
 
 ### DRAFT — the numbers, then the model
 
