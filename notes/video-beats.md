@@ -116,7 +116,7 @@ history; their notes still apply, but where the wording differs, this wins.
 > plan, in the moment you're standing there. Do that enough times and the plan
 > is still there in six months, and so are you.
 
-**712 words. About 4:10 of speech, 4:30 with clicks.**
+**719 words. About 4:14 of speech, 4:35 with clicks.**
 
 Two counting fixes applied in the refusal paragraph:
 
