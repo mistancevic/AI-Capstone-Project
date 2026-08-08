@@ -295,16 +295,78 @@ kbd{
   .knob.pace input[type=range]{width:90px}
 }
 @media (max-width:760px){
-  .transport{gap:8px;padding:10px 12px}
-  .tgroup.end{margin-left:0;width:100%;order:5;flex-wrap:wrap;gap:10px}
-  .knob.pace{flex:1 1 100%;min-width:0}
-  .knob.pace input[type=range]{flex:1;width:auto;min-width:0}
-  .btn-back{margin-left:auto}
-  .btn-back kbd{display:none}
-  .tc{margin-left:auto;font-size:11.5px}
+  .app:not(.strip) .transport{gap:8px;padding:10px 12px}
+  .app:not(.strip) .tgroup.end{margin-left:0;width:100%;order:5;flex-wrap:wrap;gap:10px}
+  .app:not(.strip) .knob.pace{flex:1 1 100%;min-width:0}
+  .app:not(.strip) .knob.pace input[type=range]{flex:1;width:auto;min-width:0}
+  .app:not(.strip) .btn-back{margin-left:auto}
+  .app:not(.strip) .btn-back kbd{display:none}
+  .app:not(.strip) .tc{margin-left:auto;font-size:11.5px}
   .hint-back{display:none}
-  .stage{padding:26vh 18px}
+  .app:not(.strip) .stage{padding:26vh 18px}
 }
+
+/* ---------- strip: one line, address-bar tall, for parking under a webcam ---------- */
+.strip-only{display:none !important}
+.away{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  height:100dvh;text-align:center;padding:24px;
+}
+.away p{margin:0;color:var(--ink-2);max-width:32ch}
+
+.app.strip{height:100dvh;overflow:hidden}
+.app.strip .topbar{display:none}
+.app.strip .compose{display:none}
+.app.strip.empty .script{width:100%;text-align:center;transform:none !important}
+.app.strip .script p.empty{font-size:14px;color:var(--ink-3);font-weight:400}
+.app.strip .strip-only{display:grid !important}
+.app.strip .run{flex-direction:row;align-items:stretch;position:relative}
+.app.strip .progress{position:absolute;left:0;right:0;bottom:0;height:2px;background:transparent;z-index:2}
+
+.app.strip .stage{
+  padding:0;overflow:hidden;display:flex;align-items:center;width:100%;
+}
+.app.strip .script{
+  max-width:none;margin:0;width:max-content;white-space:nowrap;
+  line-height:1.15;will-change:transform;
+}
+.app.strip .script p{display:inline;margin:0}
+.app.strip .script p::before{content:"";display:inline-block;width:1.1em}
+.app.strip .script p:first-child::before{width:0}
+.app.strip .script p.gap::before{width:2.4em}
+
+/* controls float over the right edge so the lane — and the pinned word — stay centred */
+.app.strip .transport{
+  position:absolute;top:0;right:0;bottom:0;z-index:3;
+  padding:0 8px 0 48px;gap:6px;border:0;flex-wrap:nowrap;background:none;
+  opacity:0;pointer-events:none;transition:opacity .18s ease;
+}
+.app.strip .transport::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(90deg,transparent 0,var(--stage) 48px);
+}
+.app.strip.ui .transport{opacity:1;pointer-events:auto}
+@media (prefers-reduced-motion:reduce){.app.strip .transport{transition:none}}
+
+.app.strip .tgroup{gap:5px}
+.app.strip .tgroup.end{margin-left:0;gap:8px}
+.app.strip .tgroup .ctrl:not(.play){display:none}
+.app.strip .tc,
+.app.strip .knob .label,
+.app.strip .knob input[type=range],
+.app.strip #aloudRun,
+.app.strip .btn-back,
+.app.strip .u{display:none}
+.app.strip .ctrl.play{width:30px;height:30px;border-radius:7px}
+.app.strip .ctrl.play svg{width:13px;height:13px}
+.app.strip .ctrl.strip-only{width:30px;height:30px;border-radius:7px}
+.app.strip .step{width:24px;height:24px;border-radius:6px;font-size:13px}
+.app.strip .knob .val{min-width:24px;font-size:11.5px;text-align:center}
+.app.strip .tgroup.end{flex-wrap:nowrap}
+/* a strip this narrow gives its width to the script, not to read-outs */
+@media (max-width:760px){ .app.strip .knob .val{display:none} }
+@media (max-width:470px){ .app.strip .knob.pace{display:none} }
+
 [hidden]{display:none !important}
 </style>
 </head>
@@ -383,6 +445,18 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
         <input type="range" id="size" min="22" max="96" step="2" value="40" aria-label="Text size" />
       </div>
 
+      <div class="card">
+        <div class="row"><span class="label">Reading window</span></div>
+        <div class="steps">
+          <button class="chip" type="button" data-layout="auto">Auto</button>
+          <button class="chip" type="button" data-layout="page">Page</button>
+          <button class="chip" type="button" data-layout="strip">Strip</button>
+        </div>
+        <button class="btn" id="floatBtn" type="button">Open floating strip</button>
+        <p class="note" id="windowNote">Strip is a single line about as tall as the address bar — park it just under your
+          webcam and your eyes stay on the lens. On <b>Auto</b> it appears by itself whenever the window is short.</p>
+      </div>
+
       <button class="btn btn-primary" id="startBtn" type="button" disabled>Start reading</button>
 
       <p class="note">
@@ -420,7 +494,9 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
         <div class="knob pace">
           <span class="label">Pace</span>
           <input type="range" id="wpmRun" min="60" max="400" step="5" value="150" aria-label="Words per minute" />
-          <span class="val" id="wpmRunVal">150 wpm</span>
+          <button class="step strip-only" id="wpmDown" type="button" title="Slower" aria-label="Slower">−</button>
+          <span class="val" id="wpmRunVal">150<span class="u"> wpm</span></span>
+          <button class="step strip-only" id="wpmUp" type="button" title="Faster" aria-label="Faster">+</button>
         </div>
         <div class="knob">
           <span class="label">Size</span>
@@ -432,9 +508,17 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
           <svg id="aloudIcon" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z"/></svg>
         </button>
         <button class="btn btn-ghost btn-back" id="exitBtn" type="button">Edit script &amp; settings <kbd>Esc</kbd></button>
+        <button class="ctrl strip-only" id="stripExit" type="button" title="Leave the strip" aria-label="Leave the strip">
+          <svg viewBox="0 0 24 24"><path d="M3 11h8V3H9v4.6L4.4 3 3 4.4 7.6 9H3v2Zm10 2v8h2v-4.6l4.6 4.6 1.4-1.4-4.6-4.6H21v-2h-8Z"/></svg>
+        </button>
       </div>
     </div>
   </section>
+</div>
+
+<div class="away" id="away" hidden>
+  <p>Reading in the floating strip. Drag it under your webcam — it stays on top of your other windows.</p>
+  <button class="btn" id="awayBack" type="button">Bring it back here</button>
 </div>
 
 <script>
@@ -477,6 +561,8 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     size:$("size"), sizeVal:$("sizeVal"), sizeRunVal:$("sizeRunVal"),
     sizeUp:$("sizeUp"), sizeDown:$("sizeDown"),
     startBtn:$("startBtn"), sampleBtn:$("sampleBtn"), clearBtn:$("clearBtn"),
+    wpmDown:$("wpmDown"), wpmUp:$("wpmUp"), stripExit:$("stripExit"),
+    floatBtn:$("floatBtn"), windowNote:$("windowNote"), away:$("away"), awayBack:$("awayBack"),
     stage:$("stage"), scriptOut:$("scriptOut"), bar:$("bar"),
     playBtn:$("playBtn"), playIcon:$("playIcon"), prevBtn:$("prevBtn"), nextBtn:$("nextBtn"),
     restartBtn:$("restartBtn"), exitBtn:$("exitBtn"),
@@ -491,7 +577,8 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
   var state = {
     text:"", styles:[], words:[], spans:[], sentenceStarts:[], avgLen:5,
     cur:0, acc:0, elapsed:0, playing:false, finished:false,
-    wpm:150, size:40, aloud:false, voiceURI:"",
+    wpm:150, size:40, stripSize:30, aloud:false, voiceURI:"",
+    layout:"auto", stripOn:false, stripEmpty:false, x:0, desiredX:0, pipWin:null, uiTimer:0,
     chunks:[], chunkIdx:0, speakToken:0, boundaryFired:false, lastBoundary:-1, watchdog:0,
     desiredScroll:0, lastFrame:0
   };
@@ -654,6 +741,8 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
       localStorage.setItem("cue.html", el.editor.innerHTML);
       localStorage.setItem("cue.wpm", String(state.wpm));
       localStorage.setItem("cue.size", String(state.size));
+      localStorage.setItem("cue.stripSize", String(state.stripSize));
+      localStorage.setItem("cue.layout", state.layout);
       localStorage.setItem("cue.aloud", state.aloud ? "1" : "0");
       localStorage.setItem("cue.voice", state.voiceURI || "");
     }catch(e){ el.saveNote.textContent = "Not saved (storage blocked)"; }
@@ -674,6 +763,10 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
       if(w >= 60 && w <= 400) state.wpm = w;
       var s = parseInt(localStorage.getItem("cue.size"), 10);
       if(s >= 22 && s <= 96) state.size = s;
+      var ss = parseInt(localStorage.getItem("cue.stripSize"), 10);
+      if(ss >= 16 && ss <= 96) state.stripSize = ss;
+      var lay = localStorage.getItem("cue.layout");
+      if(lay === "auto" || lay === "page" || lay === "strip") state.layout = lay;
       state.aloud = localStorage.getItem("cue.aloud") === "1";
       state.voiceURI = localStorage.getItem("cue.voice") || "";
     }catch(e){ /* private mode — run without persistence */ }
@@ -836,7 +929,7 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     el.wpm.value = String(state.wpm);
     el.wpmRun.value = String(state.wpm);
     el.wpmBig.textContent = String(state.wpm);
-    el.wpmRunVal.textContent = state.wpm + " wpm";
+    el.wpmRunVal.innerHTML = state.wpm + '<span class="u"> wpm</span>';
     el.estWpm.textContent = String(state.wpm);
     el.paceHint.textContent = paceNote(state.wpm);
     var chips = document.querySelectorAll(".chip[data-wpm]");
@@ -849,15 +942,29 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     save();
   }
 
-  function setSize(v){
-    state.size = Math.min(96, Math.max(22, Math.round(v)));
+  function roots(){
+    var r = [document.documentElement];
+    if(state.pipWin) r.push(state.pipWin.document.documentElement);
+    return r;
+  }
+  function applySize(){
+    var px = (state.stripOn ? state.stripSize : state.size) + "px";
+    var rs = roots();
+    for(var i = 0; i < rs.length; i++) rs[i].style.setProperty("--reader-size", px);
     el.size.value = String(state.size);
     el.sizeVal.textContent = state.size + " px";
-    el.sizeRunVal.textContent = String(state.size);
-    document.documentElement.style.setProperty("--reader-size", state.size + "px");
+    el.sizeRunVal.textContent = String(state.stripOn ? state.stripSize : state.size);
+  }
+  // the strip and the page keep their own text size — one wants a line that fits,
+  // the other wants a page you can read from across the desk
+  function setSize(v){
+    if(state.stripOn) state.stripSize = Math.min(96, Math.max(16, Math.round(v)));
+    else state.size = Math.min(96, Math.max(22, Math.round(v)));
+    applySize();
     if(!el.run.hidden) recenter();
     save();
   }
+  function activeSize(){ return state.stripOn ? state.stripSize : state.size; }
 
   /* ---------------- voices ---------------- */
   function fillVoices(){
@@ -1007,9 +1114,24 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     var top = span.offsetTop - el.stage.clientHeight * 0.42 + span.offsetHeight / 2;
     return Math.max(0, Math.min(top, el.stage.scrollHeight - el.stage.clientHeight));
   }
-  function recenter(){
+  function recenter(instant){
     var s = state.spans[state.cur];
-    if(s) state.desiredScroll = scrollTargetFor(s);
+    if(!s) return;
+    if(state.stripOn){
+      // both rects carry the same transform, so their difference is a stable
+      // offset inside the line no matter where the slide currently sits
+      var lane = el.stage.getBoundingClientRect();
+      var line = el.scriptOut.getBoundingClientRect();
+      var word = s.getBoundingClientRect();
+      state.desiredX = lane.width / 2 - ((word.left - line.left) + word.width / 2);
+      if(instant){
+        state.x = state.desiredX;
+        el.scriptOut.style.transform = "translateX(" + state.x.toFixed(2) + "px)";
+      }
+    }else{
+      state.desiredScroll = scrollTargetFor(s);
+      if(instant) el.stage.scrollTop = state.desiredScroll;
+    }
   }
 
   function setCur(i){
@@ -1021,7 +1143,7 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     if(s){
       s.classList.add("now");
       s.classList.remove("ahead");
-      state.desiredScroll = scrollTargetFor(s);
+      recenter();
     }
     updateMeters();
   }
@@ -1045,6 +1167,7 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
 
   function setPlaying(on){
     state.playing = on;
+    if(!on) el.app.classList.add("ui"); else if(state.stripOn) showUi();
     el.app.classList.toggle("is-live", on);
     el.tallyText.textContent = on ? "reading" : (state.finished ? "end of script" : "paused");
     el.playIcon.innerHTML = on
@@ -1136,18 +1259,42 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     }
 
     if(!el.run.hidden){
-      var cur = el.stage.scrollTop;
-      var diff = state.desiredScroll - cur;
-      if(Math.abs(diff) > 0.5){
-        el.stage.scrollTop = reduceMotion ? state.desiredScroll : cur + diff * 0.16;
+      if(state.stripOn){
+        var dx = state.desiredX - state.x;
+        if(Math.abs(dx) > 0.2){
+          state.x = reduceMotion ? state.desiredX : state.x + dx * 0.16;
+          el.scriptOut.style.transform = "translateX(" + state.x.toFixed(2) + "px)";
+        }
+      }else{
+        var cur = el.stage.scrollTop;
+        var diff = state.desiredScroll - cur;
+        if(Math.abs(diff) > 0.5){
+          el.stage.scrollTop = reduceMotion ? state.desiredScroll : cur + diff * 0.16;
+        }
       }
     }
   }
 
+  // the loop runs on whichever window is actually painting, so a floating
+  // strip keeps reading even when the tab behind it is not on screen
+  var rafGen = 0;
+  function startLoop(){
+    var gen = ++rafGen;
+    var host = state.pipWin || window;
+    state.lastFrame = 0;
+    (function step(t){
+      if(gen !== rafGen) return;
+      frame(t);
+      host.requestAnimationFrame(step);
+    })(performance.now());
+  }
+
   /* ---------------- views ---------------- */
-  function openRun(){
+  function openRun(autoplay){
     var model = readEditor();
     if(!(model.text.match(/\S+/g) || []).length) return;
+    state.stripEmpty = false;
+    el.app.classList.remove("empty");
     var t = build(model);
     render(t.lines);
     state.cur = 0; state.acc = 0; state.elapsed = 0; state.finished = false;
@@ -1159,9 +1306,133 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     el.tcTotal.textContent = clock(totalDuration());
     el.stage.scrollTop = 0;
     state.desiredScroll = 0;
+    state.x = state.desiredX = 0;
     setCur(0);
-    el.stage.scrollTop = state.desiredScroll;
-    play();
+    recenter(true);
+    if(autoplay !== false) play();
+    else setPlaying(false);
+  }
+
+  /* ---------------- layout: page or strip ---------------- */
+  function stripWanted(){
+    if(state.pipWin) return true;
+    if(state.layout === "strip") return true;
+    if(state.layout === "page") return false;
+    return window.innerHeight <= 260;   // auto: a window this short is a strip
+  }
+
+  function applyLayout(){
+    var strip = stripWanted();
+    var changed = strip !== state.stripOn;
+    state.stripOn = strip;
+    el.app.classList.toggle("strip", strip);
+    if(!strip) el.scriptOut.style.transform = "";
+
+    var chips = document.querySelectorAll(".chip[data-layout]");
+    for(var i = 0; i < chips.length; i++){
+      chips[i].setAttribute("aria-pressed", String(chips[i].dataset.layout === state.layout));
+    }
+
+    // a strip is too short to edit in, so it always shows the reader
+    if(strip){
+      if(!(readEditor().text.match(/\S+/g) || []).length) showStripEmpty();
+      else if(!el.compose.hidden || state.stripEmpty) openRun(false);
+    }else if(state.stripEmpty){
+      state.stripEmpty = false;
+      el.app.classList.remove("empty");
+      openCompose();
+    }
+    applySize();
+    if(!el.run.hidden) recenter(changed);
+    if(strip) showUi();
+  }
+
+  // nothing to read and no room to paste it — say so instead of showing an
+  // editing page squeezed into an address-bar-tall window
+  function showStripEmpty(){
+    state.stripEmpty = true;
+    state.words = []; state.spans = []; state.cur = 0;
+    el.compose.hidden = true;
+    el.run.hidden = false;
+    el.app.classList.add("empty");
+    el.scriptOut.style.transform = "";
+    el.scriptOut.textContent = "";
+    var note = document.createElement("p");
+    note.className = "empty";
+    note.textContent = "No script yet — make this window taller to paste one.";
+    el.scriptOut.appendChild(note);
+    setPlaying(false);
+    el.bar.style.width = "0%";
+  }
+
+  function setLayout(mode){
+    state.layout = mode;
+    save();
+    applyLayout();
+  }
+
+  // controls fade out of the strip while reading, so the line owns the window
+  function showUi(){
+    el.app.classList.add("ui");
+    if(state.uiTimer) clearTimeout(state.uiTimer);
+    state.uiTimer = setTimeout(function(){
+      if(state.playing && state.stripOn) el.app.classList.remove("ui");
+    }, 2200);
+  }
+
+  /* ---------------- floating strip ---------------- */
+  function canFloat(){ return "documentPictureInPicture" in window; }
+
+  function openFloat(){
+    if(!canFloat()) return openPopup();
+    var opts = { width:900, height:Math.max(96, state.stripSize * 2 + 40) };
+    window.documentPictureInPicture.requestWindow(opts).then(function(w){
+      var styles = document.querySelectorAll("style");
+      for(var i = 0; i < styles.length; i++) w.document.head.appendChild(styles[i].cloneNode(true));
+      w.document.title = "Cue";
+      w.document.body.style.margin = "0";
+      w.document.body.appendChild(el.app);
+      state.pipWin = w;
+      el.away.hidden = false;
+      w.document.addEventListener("keydown", onKey);
+      w.document.addEventListener("mousemove", showUi);
+      w.addEventListener("pagehide", closeFloat);
+      applyLayout();
+      startLoop();
+    }).catch(function(){ openPopup(); });
+  }
+
+  function closeFloat(){
+    var w = state.pipWin;
+    if(!w) return;
+    state.pipWin = null;
+    document.body.insertBefore(el.app, el.away);
+    el.away.hidden = true;
+    try{ w.close(); }catch(e){}
+    applyLayout();
+    startLoop();
+  }
+
+  function openPopup(){
+    var url = location.href.split("#")[0] + "#strip";
+    var w = null;
+    try{
+      w = window.open(url, "cue-strip", "popup=yes,width=900,height=140,left=200,top=0");
+    }catch(e){ w = null; }
+    if(!w){
+      el.windowNote.textContent =
+        "Your browser blocked the pop-up. Allow pop-ups for this page, or just drag this window short — " +
+        "on Auto the strip appears by itself below 260px tall.";
+      return;
+    }
+    try{ w.focus(); }catch(e){}
+  }
+
+  function stripExit(){
+    if(state.pipWin) return closeFloat();
+    if(window.name === "cue-strip"){ try{ window.close(); }catch(e){} return; }
+    setLayout("page");
+    openCompose();
   }
 
   function openCompose(){
@@ -1176,7 +1447,10 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
   }
 
   /* ---------------- wiring: editor ---------------- */
-  el.editor.addEventListener("input", function(){ refreshCompose(); save(); });
+  el.editor.addEventListener("input", function(){
+    refreshCompose(); save();
+    if(state.stripEmpty) applyLayout();
+  });
 
   el.editor.addEventListener("paste", function(e){
     var dt = e.clipboardData || window.clipboardData;
@@ -1234,8 +1508,18 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     chips[c].addEventListener("click", function(){ setWpm(+this.dataset.wpm); });
   }
   el.size.addEventListener("input", function(){ setSize(+el.size.value); });
-  el.sizeUp.addEventListener("click", function(){ setSize(state.size + 4); });
-  el.sizeDown.addEventListener("click", function(){ setSize(state.size - 4); });
+  el.sizeUp.addEventListener("click", function(){ setSize(activeSize() + 4); });
+  el.sizeDown.addEventListener("click", function(){ setSize(activeSize() - 4); });
+  el.wpmUp.addEventListener("click", function(){ setWpm(state.wpm + 10); });
+  el.wpmDown.addEventListener("click", function(){ setWpm(state.wpm - 10); });
+
+  var layoutChips = document.querySelectorAll(".chip[data-layout]");
+  for(var q = 0; q < layoutChips.length; q++){
+    layoutChips[q].addEventListener("click", function(){ setLayout(this.dataset.layout); });
+  }
+  el.floatBtn.addEventListener("click", openFloat);
+  el.awayBack.addEventListener("click", closeFloat);
+  el.stripExit.addEventListener("click", stripExit);
 
   el.aloud.addEventListener("click", toggleAloud);
   el.aloudRun.addEventListener("click", toggleAloud);
@@ -1244,7 +1528,7 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     if(state.playing && state.aloud) speakFrom(state.cur);
   });
 
-  el.startBtn.addEventListener("click", openRun);
+  el.startBtn.addEventListener("click", function(){ openRun(true); });
   el.exitBtn.addEventListener("click", openCompose);
   el.playBtn.addEventListener("click", toggle);
   el.prevBtn.addEventListener("click", function(){ sentenceStep(-1); });
@@ -1257,26 +1541,35 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
     if(node && node.classList && node.classList.contains("w")) seek(parseInt(node.dataset.i, 10));
   });
 
-  document.addEventListener("keydown", function(e){
-    if(e.key === "Escape" && !el.run.hidden){ e.preventDefault(); openCompose(); return; }
-    if(el.editor.contains(document.activeElement) || document.activeElement === el.editor) return;
-    var tag = document.activeElement ? document.activeElement.tagName : "";
+  function onKey(e){
+    if(e.key === "Escape" && !el.run.hidden){
+      e.preventDefault();
+      if(state.stripOn) stripExit(); else openCompose();
+      return;
+    }
+    var doc = (e.target && e.target.ownerDocument) || document;
+    var active = doc.activeElement;
+    if(el.editor.contains(active) || active === el.editor) return;
+    var tag = active ? active.tagName : "";
     if(tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA"){
       if(e.key !== " " && e.code !== "Space") return;
     }
     if(e.key === " " || e.code === "Space"){
       e.preventDefault();
-      if(el.run.hidden) openRun(); else toggle();
+      if(el.run.hidden) openRun(true); else toggle();
     }else if(e.key === "ArrowRight" && !el.run.hidden){ e.preventDefault(); sentenceStep(1); }
     else if(e.key === "ArrowLeft" && !el.run.hidden){ e.preventDefault(); sentenceStep(-1); }
     else if(e.key === "ArrowUp"){ e.preventDefault(); setWpm(state.wpm + 10); }
     else if(e.key === "ArrowDown"){ e.preventDefault(); setWpm(state.wpm - 10); }
-  });
+  }
+  document.addEventListener("keydown", onKey);
 
-  window.addEventListener("resize", function(){ if(!el.run.hidden) recenter(); });
+  window.addEventListener("resize", applyLayout);
+  document.addEventListener("mousemove", function(){ if(state.stripOn) showUi(); });
   window.addEventListener("beforeunload", stopSpeech);
   document.addEventListener("visibilitychange", function(){
-    if(document.hidden && state.playing && state.aloud) pause();
+    // a floating strip is still on screen even when this tab is not
+    if(document.hidden && state.playing && state.aloud && !state.pipWin) pause();
   });
 
   if(synth){
@@ -1286,11 +1579,15 @@ Blank lines become a longer pause. Commas, periods and question marks are read w
 
   try{ document.execCommand("styleWithCSS", false, false); }catch(e){}
   load();
+  // opened as the pop-out strip: come up as a strip, cued but not running
+  if(window.name === "cue-strip" || /(^|[#&])strip\b/.test(location.hash)) state.layout = "strip";
+  if(!canFloat()) el.floatBtn.textContent = "Open strip in a small window";
   setWpm(state.wpm);
-  setSize(state.size);
   setAloud(state.aloud);
   refreshCompose();
-  requestAnimationFrame(frame);
+  applyLayout();
+  el.app.classList.add("ui");
+  startLoop();
 })();
 </script>
 </body>
