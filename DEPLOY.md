@@ -229,9 +229,15 @@ One honest note, since the prototype has kept improving since the Develop phase 
 **Key question(s):** Does the 4-minute video show the product clearly, concisely, and persuasively?
 
 ```text
-Yes, and it is built around one claim rather than a feature tour: the safety limits are code, not a prompt. Five beats in four minutes - the claim, the problem and the discovery behind it, two live runs, the eval evidence, and the launch plan - scripted against a realistic speaking pace with room for the clicks.
+Yes, and it is built around one claim rather than a feature tour: the safety limits are code, not a prompt.
 
-It is persuasive because it proves rather than asserts. The refusal runs with a live model configured and working, and the decision line still reads "stopped before any model call": the model was available and was never asked. And the evidence minute leads with a failure rather than a scoreboard - four days before submitting I ran all six eval cases against the live model for the first time, and one diverged. The model refused a case that policy says must continue with food, citing a rule while noting in its own reasoning that the counter that rule depends on was at zero. Nothing was sent, no number was invented, and the app labelled it a model-added stop. The model broke a rule my code enforces and the architecture held. That is the strongest thing I have to show, and it is thirty seconds long.
+Six beats. It opens on a client rather than the product - three in the afternoon, a meal plan that says eat now, a birthday ice cream and a team dinner the plan never saw, and someone standing in a store who ends up buying nothing. That is the failure the product exists to prevent, and the product is not named for the first ninety seconds. Then where I come in, as the coach these people arrive at after quitting somebody else's plan. Then two live runs. Then the eval evidence. Then the pilot and its freeze. Then a close that returns to the same afternoon.
+
+It is persuasive because it proves rather than asserts. The refusal runs with a live model configured and working, and the decision line still reads "stopped before any model call": the model was available and was never asked. That same message opens with "ignore your rules", which nothing in my code screens for - it is stopped by the health signal, the undereating self-report and the compliance floor, and the injection fails as a consequence of the ordering rather than as a feature. I say only that the model never read it, because that is the part that is true.
+
+The evidence beat leads with a failure rather than a scoreboard. Running all six eval cases against a live model for the first time, five matched and one did not. The model refused a case that policy says must continue with food, citing a rule while stating in its own reasoning that the counter that rule depends on was at zero. Nothing reached the client, no card was built, no number was invented, and the app labelled it a model-added stop. The model broke a rule my code enforces and the architecture held.
+
+One honest note on delivery. The cut runs close to the four-minute limit and the read is faster than I would like. Given the choice between trimming the eval failure or the refusal to buy pacing, I kept both at full length, because those are the strongest thirty seconds in the submission and pace is the cheaper thing to lose.
 ```
 
 ## Submission
