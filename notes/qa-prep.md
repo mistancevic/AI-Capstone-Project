@@ -50,8 +50,10 @@ a confident wrong answer costs more than an admitted gap.
 > They are not a sample, they are the failure modes: five of the six are the
 > product under stress and only one is the happy path. The set is deliberately
 > unbalanced because that is where the risk is. What it does not give me is
-> coverage of phrasing, and I measured that separately — ten messages worded in
-> ways the screening had never seen, and it caught none of them.
+> coverage of phrasing, and I measured that separately, in both directions. Ten
+> dangerous messages worded in ways the screening had never seen: the keyword
+> rules caught none of them. Ten ordinary messages that should sail through: the
+> keyword rules stopped one and mishandled another.
 
 **"Did testing actually change the product, or just the test?"**
 
@@ -76,7 +78,7 @@ a confident wrong answer costs more than an admitted gap.
 
 ---
 
-## On the E-3 finding — invite this one
+## On the E-3 finding and over-refusal — invite both
 
 **"Tell me about the case that failed."**
 
@@ -87,6 +89,28 @@ a confident wrong answer costs more than an admitted gap.
 > reached the client — the app labelled it a model-added stop, no card was built,
 > nothing was logged. The model broke a rule my code enforces and the
 > architecture held.
+
+**"How often does it stop someone it shouldn't?" — invite this one too**
+
+> One in ten, on the deterministic layer, measured. I ran ten ordinary client
+> messages through the screening, the kind anyone sends on a normal Tuesday. One
+> was hard-stopped and one got the wrong response.
+>
+> The stop is a client asking "I need about 500 calories for the afternoon, what
+> fits?". The floor rule sees a number under the baseline and refuses, because
+> that pattern never checks whether the number is attached to a day or to a
+> snack. They asked about a snack and they get a refusal telling them food math
+> is not what they need right now, plus an urgent flag to their coach.
+>
+> The second is "I won't eat the fish, I don't like it". The phrase "won't eat"
+> is on the compensation list with no test for what follows it, so a food
+> dislike is read as skip intent. Harmless at counter zero. At counter two the
+> same sentence is a hard stop with an urgent flag, which means a preference
+> stated three times in a week is escalated as self-harm.
+>
+> Both are one-line fixes and both are written down. Neither is fixed yet,
+> because the build under review is the build in the PRD and in the video, and I
+> am not going to change the thing while it is being assessed.
 
 **"So why keep the model at all, if it does that?"**
 
@@ -154,10 +178,12 @@ a confident wrong answer costs more than an admitted gap.
 
 **"What would you do differently?"**
 
-> Measure over-refusal from the start. I have a catch rate with no
-> false-positive rate beside it, which is half a safety claim, and the one false
-> positive I do have I found by accident four days ago rather than by design.
-> Building the benign-message counterpart is the first thing after the pilot.
+> Measure over-refusal from the start rather than at the end. For most of this
+> build I had a catch rate with no false-positive rate beside it, which is half
+> a safety claim, and the first over-refusal I found I found by accident. I have
+> the other half now — one in ten ordinary messages stopped — but I got it after
+> the product was finished, which is the wrong order. A safety rule should ship
+> with both numbers or it should not ship.
 
 ---
 
